@@ -21,6 +21,11 @@ class Disturbance:
         self.magnitude = magnitude
         self.rng = rng
         self.fired = False
+        # True only if firing ACTUALLY changed the world for the target (e.g. a
+        # "drop" is a no-op when the target isn't held). This is the honest
+        # signal for "did the disturbance create a real recovery opportunity",
+        # rather than crediting recovery whenever the episode eventually succeeds.
+        self.perturbed = False
 
     def __call__(self, s: SimState, info: StepInfo) -> None:
         if self.fired or s.t < self.at_step or self.target in s.fallen:
@@ -33,6 +38,7 @@ class Disturbance:
             # knock the held object out of the gripper.
             s.grasped = None
             s.gripper_closed = 0.0
+            self.perturbed = True
             info.events.append(f"disturbance:drop:{self.target}")
         elif self.kind == "displace":
             direction = self.rng.normal(0, 1, size=2)
@@ -40,9 +46,11 @@ class Disturbance:
             obj.pose[:2] += direction * self.magnitude
             if s.grasped == self.target:
                 s.grasped = None
+            self.perturbed = True
             info.events.append(f"disturbance:displace:{self.target}")
-        else:  # nudge: small planar shove
+        elif self.kind == "nudge":  # small planar shove
             obj.pose[:2] += self.rng.normal(0, self.magnitude, size=2)
+            self.perturbed = True
             info.events.append(f"disturbance:nudge:{self.target}")
 
 

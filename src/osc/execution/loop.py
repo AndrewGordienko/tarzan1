@@ -59,8 +59,10 @@ class AgentTrace:
     steps: int = 0
     autonomous_replans: int = 0
     replan_steps: list = field(default_factory=list)   # control-step index of each replan
+    corrective_action_steps: list = field(default_factory=list)  # step of first motor
+                                                       # action AFTER a reactive replan
     plan_latencies_ms: list = field(default_factory=list)   # per planning CALL
-    step_latencies_ms: list = field(default_factory=list)   # per control step (sensor->action)
+    step_latencies_ms: list = field(default_factory=list)   # observation-ready -> action-dispatch
     events: list = field(default_factory=list)
     correspondence: dict = field(default_factory=dict)
     corr_history: list = field(default_factory=list)   # correspondence at each plan call
@@ -161,6 +163,7 @@ class ClosedLoopExecutor:
         plan, verifier = self._plan(belief, tr)
 
         idx = 0
+        pending_corrective = False   # a reactive replan is awaiting its first action
         while idx < len(plan):
             si = plan[idx]
             try:
@@ -188,17 +191,25 @@ class ClosedLoopExecutor:
                     if si.done(belief):
                         break
                     action = si.act(belief)
+                    # sensor->action latency: observation-ready (t0) -> action
+                    # dispatched. Simulator stepping and state estimation below are
+                    # the NEXT observation's acquisition, not part of this latency.
+                    tr.step_latencies_ms.append(1000 * (time.perf_counter() - t0))
                 except KeyError:                    # track referenced by skill is gone
                     if self.cfg.allow_recovery and tr.autonomous_replans < self.cfg.max_replans:
                         plan, verifier = self._replan(belief, tr, "lost-track"); idx = 0
-                        restart = True
+                        pending_corrective = True; restart = True
                     break
                 prev = belief
                 belief = self.est.update(self.env.step(action))
                 if self.cfg.adapt:
                     self.ctx.update(prev, action.target, belief)
                 tr.steps += 1; sk_steps += 1
-                tr.step_latencies_ms.append(1000 * (time.perf_counter() - t0))
+                # first motor action dispatched after a reactive replan is the
+                # corrective action -- distinct from the replan itself.
+                if pending_corrective:
+                    tr.corrective_action_steps.append(tr.steps)
+                    pending_corrective = False
 
                 event = verifier.detect_failure(prev, belief, expected)
                 if event:
@@ -207,7 +218,7 @@ class ClosedLoopExecutor:
                         tr.first_failure_step = tr.steps
                     if self.cfg.allow_recovery and tr.autonomous_replans < self.cfg.max_replans:
                         plan, verifier = self._replan(belief, tr, event.split(":")[0])
-                        idx = 0; restart = True
+                        idx = 0; pending_corrective = True; restart = True
                     break
                 if tr.steps >= self.cfg.max_total_steps:
                     idx = len(plan); break

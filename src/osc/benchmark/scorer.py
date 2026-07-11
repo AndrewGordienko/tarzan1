@@ -70,7 +70,8 @@ class EpisodeRecord:
     irreversible_failures: int = 0
     timeout: bool = False
     failure_category: str = ""         # "" if success
-    disturbance_to_correction_steps: int | None = None
+    disturbance_to_correction_steps: int | None = None   # -> first corrective MOTOR action
+    disturbance_to_replan_steps: int | None = None       # -> first replan (planner reaction)
     plan_latencies_ms: list = field(default_factory=list)
     step_latencies_ms: list = field(default_factory=list)
     context_error: dict = field(default_factory=dict)
@@ -112,18 +113,25 @@ class Scorer:
         timeout = (not success) and trace.steps >= 0 and \
             trace.steps >= (self.task_max_steps() - 1)
 
-        # a genuine recovery opportunity = the disturbance actually perturbed a
-        # task-relevant object (fired and moved/knocked it), judged from ground truth.
-        opp = bool(disturbance and disturbance.fired
-                   and disturbance.target in self.task_relevant(final_state))
+        # a genuine recovery opportunity = the disturbance actually PERTURBED the
+        # world (e.g. a "drop" that found nothing held is a no-op and does not
+        # count) for a task-relevant object -- judged from ground truth, not from
+        # whether the episode happened to succeed.
+        perturbed = bool(disturbance and getattr(disturbance, "perturbed", disturbance.fired))
+        opp = bool(perturbed and disturbance.target in self.task_relevant(final_state))
         recovered = opp and success
 
-        # disturbance -> first corrective action latency (in control steps)
-        d2c = None
-        if disturbance and disturbance.fired:
-            after = [s for s in trace.replan_steps if s >= disturbance.at_step]
-            if after:
-                d2c = after[0] - disturbance.at_step
+        # disturbance -> first corrective MOTOR ACTION (steps), distinct from the
+        # planner's first replan reaction. Both measured only over reactions that
+        # occur after the disturbance actually fired.
+        d2c = d2r = None
+        if perturbed:
+            acts = [s for s in trace.corrective_action_steps if s >= disturbance.at_step]
+            if acts:
+                d2c = acts[0] - disturbance.at_step
+            reps = [s for s in trace.replan_steps if s >= disturbance.at_step]
+            if reps:
+                d2r = reps[0] - disturbance.at_step
 
         rbc = self.role_binding_correct(trace, final_state)
         cat = "" if success else self._categorize(final_state, trace, irrev, timeout, rbc,
@@ -143,6 +151,7 @@ class Scorer:
             recovery_opportunity=opp, recovered=recovered,
             collisions=collisions, force_violations=forces, irreversible_failures=irrev,
             timeout=timeout, failure_category=cat, disturbance_to_correction_steps=d2c,
+            disturbance_to_replan_steps=d2r,
             plan_latencies_ms=list(trace.plan_latencies_ms),
             step_latencies_ms=list(trace.step_latencies_ms),
             context_error=context.error_vs(*true_params) if context else {})

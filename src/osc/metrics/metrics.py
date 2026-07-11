@@ -50,7 +50,8 @@ class Report:
     human_interventions_total: int
     plan_latency_ms: dict            # p50/p95/p99/mean over pooled calls
     step_latency_ms: dict            # sensor->action, pooled
-    disturbance_to_correction_steps: dict
+    disturbance_to_correction_steps: dict   # -> first corrective motor action
+    disturbance_to_replan_steps: dict       # -> first replan
     mean_completion_steps: float
     mean_completion_seconds: float
     collisions_per_ep: float
@@ -82,7 +83,11 @@ class Report:
              f"{self.plan_latency_ms['p95']:.1f} / {self.plan_latency_ms['p99']:.1f}",
              f"  sensor->action ms p50/p95     : {self.step_latency_ms['p50']:.2f} / "
              f"{self.step_latency_ms['p95']:.2f}",
-             f"  disturbance->correction steps : p50={self.disturbance_to_correction_steps.get('p50',0):.0f}",
+             f"  disturbance->correction steps : action p50="
+             f"{self.disturbance_to_correction_steps.get('p50',0):.0f} "
+             f"(n={self.disturbance_to_correction_steps.get('n',0)}) / "
+             f"replan p50={self.disturbance_to_replan_steps.get('p50',0):.0f} "
+             f"(n={self.disturbance_to_replan_steps.get('n',0)})",
              f"  completion  steps / sim-sec   : {self.mean_completion_steps:.0f} / "
              f"{self.mean_completion_seconds:.2f}",
              f"  collisions / ep               : {self.collisions_per_ep:.2f}",
@@ -119,6 +124,8 @@ def _agg(records: list[EpisodeRecord], seed=0) -> dict:
     steps = [x for r in records for x in r.step_latencies_ms]
     d2c = [r.disturbance_to_correction_steps for r in records
            if r.disturbance_to_correction_steps is not None]
+    d2r = [r.disturbance_to_replan_steps for r in records
+           if getattr(r, "disturbance_to_replan_steps", None) is not None]
     opps = [r for r in records if r.recovery_opportunity]
     rec = [r for r in opps if r.recovered]
     fails = [r for r in records if not r.success]
@@ -145,6 +152,7 @@ def _agg(records: list[EpisodeRecord], seed=0) -> dict:
                          "p99": _pct(plans, 99), "mean": float(np.mean(plans)) if plans else 0.0},
         step_latency_ms={"p50": _pct(steps, 50), "p95": _pct(steps, 95)},
         disturbance_to_correction_steps={"p50": _pct(d2c, 50), "n": len(d2c)},
+        disturbance_to_replan_steps={"p50": _pct(d2r, 50), "n": len(d2r)},
         mean_completion_steps=float(np.mean([r.steps for r in records])),
         mean_completion_seconds=float(np.mean([r.sim_seconds for r in records])),
         collisions_per_ep=float(np.mean([r.collisions for r in records])),

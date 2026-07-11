@@ -107,10 +107,14 @@ class ToyTabletopSim:
                 # push the struck object; heavier/higher-friction slides less.
                 resist = o.mass * (1.0 + o.friction)
                 push = max(0.0, speed_xy - 0.002) / (1.0 + resist)
-                if push < 1e-4 and speed_xy > 0.01:
-                    # commanded laterally into an ~immovable object -> reaction force.
-                    if speed_xy * (1.0 + resist) * 40.0 > FORCE_LIMIT:
-                        info.force_violation = True
+                # contact reaction force ~ commanded speed into the object scaled
+                # by how much it resists. Fires on ANY hard collision -- the old
+                # `push < 1e-4` gate made this unreachable for every configured
+                # mass (min push ~0.004), so the zero rate was structural, not
+                # earned. A gentle agent (speed<0.02) still stays well under the
+                # limit; only driving hard into a heavy object violates.
+                if speed_xy * (1.0 + resist) * 40.0 > FORCE_LIMIT:
+                    info.force_violation = True
                 direction = (o.pose[:2] - ref[:2])
                 n = np.linalg.norm(direction)
                 if n > 1e-6:
