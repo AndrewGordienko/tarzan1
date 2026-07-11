@@ -1,0 +1,27 @@
+# Config for the STACK vertical-slice benchmark.
+# (Loaded informally for now; run_demo.py exposes the same knobs as CLI flags.
+#  This file documents the intended experiment surface as the benchmark grows.)
+task: stack
+demos_required: 1            # the core constraint: exactly one demonstration
+episodes: 30
+seed: 0
+
+randomization:               # every knob the benchmark requires, per episode
+  randomize_instances: true  # object size / shape / color swap
+  pose_jitter: 0.08          # initial pose + layout change (metres)
+  mass_range: [0.05, 0.40]
+  friction_range: [0.30, 0.90]
+  actuator_delay_range: [0.10, 0.45]
+  lighting_range: [0.20, 1.00]      # -> perception noise
+  camera_jitter_range: [0.0, 0.01]
+
+disturbance:
+  enabled: true              # one recoverable disturbance per episode
+  kinds: [nudge, displace, drop]
+
+execution:
+  no_gradient_after_demo: true   # hard constraint
+  max_replans: 4
+  control_hz: 20             # steps -> physical seconds for the rate metrics
+
+backend: toy                 # toy (CPU, runs now) | maniskill (GPU, later)
