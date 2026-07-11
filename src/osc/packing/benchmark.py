@@ -5,7 +5,8 @@ from dataclasses import dataclass
 import json
 import numpy as np
 
-from .compiler import compile_packing_demo
+from .compiler import compile_packing_demo, compile_with_inferred_posterior, infer_program_posterior
+from .demonstration import PackingEvent
 from .domain import Container, PackItem, PackingState, Placement
 from .executor import PackingExecutor
 from .planner import PackingPlanner
@@ -67,6 +68,37 @@ def scenarios(seed=0):
     return out
 
 
+def policy_sensitive_scenario():
+    """One fixed inventory used to visualize different customer policies."""
+    return PackingScenario(
+        "policy_sensitive_same_order", Container("box_policy", (8.0, 8.0, 6.0), 30.0),
+        {"heavy": PackItem("heavy", (3.0, 3.0, 2.0), 8.0, load_limit=50.0),
+         "fragile": PackItem("fragile", (3.0, 3.0, 1.5), 1.0, fragile=True, load_limit=1.0),
+         "ordinary": PackItem("ordinary", (2.0, 2.0, 2.0), 2.0),
+         "long": PackItem("long", (5.0, 1.5, 1.5), 2.0)},
+        ["ordinary", "long", "heavy", "fragile"], description="same inventory, policy changes")
+
+
+def policy_demos():
+    return {
+        "correct_heavy_bottom": [PackingEvent("place_inside", "heavy", properties={"policy": "heavy_bottom_fragile_top"}),
+                                 PackingEvent("place_inside", "fragile"),
+                                 PackingEvent("place_inside", "ordinary")],
+        "different_max_volume": [PackingEvent("place_inside", "long", properties={"fill": "high"}),
+                                  PackingEvent("place_inside", "ordinary"),
+                                  PackingEvent("place_inside", "heavy"),
+                                  PackingEvent("place_inside", "fragile")],
+        "minimize_rehandling": [PackingEvent("place_inside", "ordinary", properties={"rehandling": "low"}),
+                                PackingEvent("place_inside", "long"),
+                                PackingEvent("place_inside", "heavy"),
+                                PackingEvent("place_inside", "fragile")],
+        "conflicting": [PackingEvent("place_inside", "fragile"),
+                         PackingEvent("place_inside", "heavy"),
+                         PackingEvent("rearrange", "heavy"),
+                         PackingEvent("place_inside", "ordinary")],
+    }
+
+
 def _belief_scenario(s, seed):
     rng = np.random.default_rng(seed)
     items = {}
@@ -103,9 +135,9 @@ def greedy_next_fit(s):
     return state, verify_final_pack(state, s.arrivals)[0]
 
 
-def run_episode(s, perception="oracle", seed=0, render_path=None):
+def run_episode(s, perception="oracle", seed=0, render_path=None, program=None):
     s_eval = _belief_scenario(s, seed) if perception == "belief" else s
-    program = compile_packing_demo()
+    program = program or compile_packing_demo()
     planner = PackingPlanner(program, beam_width=48)
     executor = PackingExecutor(planner)
     states = [PackingState(s_eval.container, dict(s_eval.items))]
@@ -141,7 +173,57 @@ def run_episode(s, perception="oracle", seed=0, render_path=None):
     return dict(scenario=s.name, perception=perception, success=bool(ok and s.feasible),
                 expected_feasible=s.feasible, rearranged=any(x.get("kind") == "temporarily_remove" for x in logs),
                 actions=logs, reason=reason, packed=list(current.placements),
+                placement_layout={i: {"position": p.position, "size": p.size}
+                                  for i, p in current.placements.items()},
                 violations=[x for x in logs if not x.get("verified", True)])
+
+
+def run_demo_dependence(perception="oracle", seed=0):
+    s = policy_sensitive_scenario()
+    demos = policy_demos()
+    rows = {}
+    for name, events in demos.items():
+        program = compile_with_inferred_posterior(events)
+        result = run_episode(s, perception, seed, program=program)
+        result["program_policy"] = program.policy_name
+        result["program_posterior"] = program.posterior
+        result["constraint_posterior"] = program.constraint_posterior
+        result["policy_behavior_match"] = _policy_behavior_match(program.policy_name, result)
+        result["arrangement"] = result.get("placement_layout", result["packed"])
+        rows[name] = result
+    # Controls: no demo, temporal shuffle, and oracle task program.
+    no_demo = compile_packing_demo([], "neutral_prior")
+    rows["no_demo"] = run_episode(s, perception, seed, program=no_demo)
+    rows["no_demo"]["arrangement"] = rows["no_demo"].get("placement_layout", rows["no_demo"]["packed"])
+    rows["no_demo"]["program_policy"] = no_demo.policy_name
+    rows["no_demo"]["policy_behavior_match"] = _policy_behavior_match(no_demo.policy_name, rows["no_demo"])
+    shuffled = [PackingEvent(e.kind, e.item_id) for e in reversed(demos["correct_heavy_bottom"])]
+    shuffled_program = compile_with_inferred_posterior(shuffled)
+    rows["shuffled_demo"] = run_episode(s, perception, seed, program=shuffled_program)
+    rows["shuffled_demo"]["arrangement"] = rows["shuffled_demo"].get("placement_layout", rows["shuffled_demo"]["packed"])
+    rows["shuffled_demo"]["program_policy"] = shuffled_program.policy_name
+    rows["shuffled_demo"]["program_posterior"] = shuffled_program.posterior
+    rows["shuffled_demo"]["policy_behavior_match"] = _policy_behavior_match(shuffled_program.policy_name, rows["shuffled_demo"])
+    oracle = compile_packing_demo([], "heavy_bottom_fragile_top")
+    rows["oracle_task_program"] = run_episode(s, perception, seed, program=oracle)
+    rows["oracle_task_program"]["arrangement"] = rows["oracle_task_program"].get("placement_layout", rows["oracle_task_program"]["packed"])
+    rows["oracle_task_program"]["program_policy"] = oracle.policy_name
+    rows["oracle_task_program"]["policy_behavior_match"] = _policy_behavior_match(oracle.policy_name, rows["oracle_task_program"])
+    return rows
+
+
+def _policy_behavior_match(policy_name, result):
+    layout = result.get("arrangement", result.get("placement_layout", {}))
+    if not layout:
+        return False
+    fragile_z = layout.get("fragile", {}).get("position", (0, 0, 0))[2]
+    if policy_name == "heavy_bottom_fragile_top":
+        return fragile_z <= 1e-8
+    if policy_name == "maximize_volume":
+        return fragile_z > 1e-8
+    if policy_name == "minimize_rehandling":
+        return not result.get("rearranged", False)
+    return False
 
 
 def run_benchmark(episodes=100, perception="oracle", out_path=None, render_dir=None, seed=0):
@@ -154,19 +236,30 @@ def run_benchmark(episodes=100, perception="oracle", out_path=None, render_dir=N
         rows.append(run_episode(s, perception, seed + k, render))
     feasible = [r for r in rows if r["expected_feasible"]]
     impossible = [r for r in rows if not r["expected_feasible"]]
+    dep = run_demo_dependence(perception, seed)
     report = dict(episodes=episodes, perception=perception,
                   completion_rate=float(np.mean([r["success"] for r in feasible])) if feasible else 0.0,
                   impossible_abstention_rate=float(np.mean([not r["success"] for r in impossible])) if impossible else 0.0,
+                  overall_correct_decision=float(np.mean([r["success"] if r["expected_feasible"]
+                                                         else not r["success"] for r in rows])),
                   rearrangement_rate=float(np.mean([r["rearranged"] for r in rows])),
                   violations=sum(len(r["violations"]) for r in rows),
                   baseline_literal_completion=float(np.mean([baseline[r["scenario"]][0] for r in rows])),
                   baseline_greedy_completion=float(np.mean([baseline[r["scenario"]][1] for r in rows])),
+                  baseline_overall_correct_decision={
+                      "literal": float(np.mean([baseline[r["scenario"]][0] if r["expected_feasible"]
+                                                 else not baseline[r["scenario"]][0] for r in rows])),
+                      "greedy": float(np.mean([baseline[r["scenario"]][1] if r["expected_feasible"]
+                                                else not baseline[r["scenario"]][1] for r in rows]))},
                   planner_improvement_over_literal=float(np.mean([r["success"] for r in rows])
                                                          - np.mean([baseline[r["scenario"]][0] for r in rows])),
                   planner_improvement_over_greedy=float(np.mean([r["success"] for r in rows])
                                                         - np.mean([baseline[r["scenario"]][1] for r in rows])),
                   baseline_by_scenario={s.name: {"literal": baseline[s.name][0],
                                                  "greedy": baseline[s.name][1]} for s in ss},
+                  demo_dependence={k: {x: v[x] for x in ("success", "program_policy", "program_posterior",
+                                                         "constraint_posterior", "policy_behavior_match", "arrangement")
+                                      if x in v} for k, v in dep.items()},
                   rows=rows)
     if out_path:
         with open(out_path, "w") as f: json.dump(report, f, indent=2)

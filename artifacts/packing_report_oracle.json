@@ -3,10 +3,15 @@
   "perception": "oracle",
   "completion_rate": 1.0,
   "impossible_abstention_rate": 1.0,
+  "overall_correct_decision": 1.0,
   "rearrangement_rate": 0.25,
   "violations": 0,
   "baseline_literal_completion": 0.25,
   "baseline_greedy_completion": 0.5,
+  "baseline_overall_correct_decision": {
+    "literal": 0.5,
+    "greedy": 0.75
+  },
   "planner_improvement_over_literal": 0.5,
   "planner_improvement_over_greedy": 0.25,
   "baseline_by_scenario": {
@@ -25,6 +30,463 @@
     "impossible_order": {
       "literal": false,
       "greedy": false
+    }
+  },
+  "demo_dependence": {
+    "correct_heavy_bottom": {
+      "success": true,
+      "program_policy": "heavy_bottom_fragile_top",
+      "program_posterior": {
+        "neutral_prior": 0.0024500971842393907,
+        "heavy_bottom_fragile_top": 0.9884397509776449,
+        "maximize_volume": 0.0024500971842393907,
+        "minimize_rehandling": 0.0066600546538766086
+      },
+      "constraint_posterior": {
+        "all_inside": 0.99,
+        "heavy_below_fragile": 0.94,
+        "fragile_never_supports": 0.98,
+        "maximize_fill": 0.31,
+        "minimize_rehandling": 0.31,
+        "large_items_first": 0.27,
+        "preserve_future_space": 0.87,
+        "reproduce_exact_coordinates": 0.02
+      },
+      "policy_behavior_match": true,
+      "arrangement": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            5.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            3.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            2.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            3.0,
+            3.0
+          ]
+        }
+      }
+    },
+    "different_max_volume": {
+      "success": true,
+      "program_policy": "maximize_volume",
+      "program_posterior": {
+        "neutral_prior": 0.03205860328008498,
+        "heavy_bottom_fragile_top": 0.2368828180899101,
+        "maximize_volume": 0.6439142598879722,
+        "minimize_rehandling": 0.08714431874203256
+      },
+      "constraint_posterior": {
+        "all_inside": 0.99,
+        "heavy_below_fragile": 0.42,
+        "fragile_never_supports": 0.98,
+        "maximize_fill": 0.87,
+        "minimize_rehandling": 0.31,
+        "large_items_first": 0.83,
+        "preserve_future_space": 0.87,
+        "reproduce_exact_coordinates": 0.02
+      },
+      "policy_behavior_match": true,
+      "arrangement": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            5.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            3.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            3.5,
+            3.0
+          ],
+          "size": [
+            1.5,
+            3.0,
+            3.0
+          ]
+        }
+      }
+    },
+    "minimize_rehandling": {
+      "success": true,
+      "program_policy": "minimize_rehandling",
+      "program_posterior": {
+        "neutral_prior": 0.015628124127437557,
+        "heavy_bottom_fragile_top": 0.11547708589868774,
+        "maximize_volume": 0.015628124127437557,
+        "minimize_rehandling": 0.8532666658464372
+      },
+      "constraint_posterior": {
+        "all_inside": 0.99,
+        "heavy_below_fragile": 0.42,
+        "fragile_never_supports": 0.98,
+        "maximize_fill": 0.31,
+        "minimize_rehandling": 0.87,
+        "large_items_first": 0.27,
+        "preserve_future_space": 0.31,
+        "reproduce_exact_coordinates": 0.02
+      },
+      "policy_behavior_match": true,
+      "arrangement": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            5.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            3.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            2.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            3.0,
+            3.0
+          ]
+        }
+      }
+    },
+    "conflicting": {
+      "success": true,
+      "program_policy": "maximize_volume",
+      "program_posterior": {
+        "neutral_prior": 0.2866177651314364,
+        "heavy_bottom_fragile_top": 0.10544078326636053,
+        "maximize_volume": 0.4725528059327327,
+        "minimize_rehandling": 0.13538864566947043
+      },
+      "constraint_posterior": {
+        "all_inside": 0.99,
+        "heavy_below_fragile": 0.42,
+        "fragile_never_supports": 0.98,
+        "maximize_fill": 0.87,
+        "minimize_rehandling": 0.31,
+        "large_items_first": 0.83,
+        "preserve_future_space": 0.87,
+        "reproduce_exact_coordinates": 0.02
+      },
+      "policy_behavior_match": true,
+      "arrangement": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            5.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            3.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            3.5,
+            3.0
+          ],
+          "size": [
+            1.5,
+            3.0,
+            3.0
+          ]
+        }
+      }
+    },
+    "no_demo": {
+      "success": true,
+      "program_policy": "neutral_prior",
+      "policy_behavior_match": false,
+      "arrangement": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            5.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            3.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            3.5,
+            3.0
+          ],
+          "size": [
+            1.5,
+            3.0,
+            3.0
+          ]
+        }
+      }
+    },
+    "shuffled_demo": {
+      "success": true,
+      "program_policy": "minimize_rehandling",
+      "program_posterior": {
+        "neutral_prior": 0.19661193324148185,
+        "heavy_bottom_fragile_top": 0.07232948812851327,
+        "maximize_volume": 0.19661193324148185,
+        "minimize_rehandling": 0.5344466453885229
+      },
+      "policy_behavior_match": true,
+      "arrangement": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            5.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            3.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            2.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            3.0,
+            3.0
+          ]
+        }
+      }
+    },
+    "oracle_task_program": {
+      "success": true,
+      "program_policy": "heavy_bottom_fragile_top",
+      "policy_behavior_match": true,
+      "arrangement": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            5.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            3.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            2.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            3.0,
+            3.0
+          ]
+        }
+      }
     }
   },
   "rows": [
@@ -81,6 +543,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -136,6 +636,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -200,6 +738,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -211,6 +787,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -266,6 +843,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -321,6 +936,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -385,6 +1038,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -396,6 +1087,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -451,6 +1143,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -506,6 +1236,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -570,6 +1338,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -581,6 +1387,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -636,6 +1443,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -691,6 +1536,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -755,6 +1638,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -766,6 +1687,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -821,6 +1743,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -876,6 +1836,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -940,6 +1938,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -951,6 +1987,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -1006,6 +2043,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -1061,6 +2136,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -1125,6 +2238,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -1136,6 +2287,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -1191,6 +2343,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -1246,6 +2436,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -1310,6 +2538,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -1321,6 +2587,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -1376,6 +2643,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -1431,6 +2736,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -1495,6 +2838,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -1506,6 +2887,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -1561,6 +2943,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -1616,6 +3036,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -1680,6 +3138,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -1691,6 +3187,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -1746,6 +3243,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -1801,6 +3336,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -1865,6 +3438,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -1876,6 +3487,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -1931,6 +3543,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -1986,6 +3636,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -2050,6 +3738,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -2061,6 +3787,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -2116,6 +3843,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -2171,6 +3936,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -2235,6 +4038,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -2246,6 +4087,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -2301,6 +4143,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -2356,6 +4236,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -2420,6 +4338,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -2431,6 +4387,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -2486,6 +4443,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -2541,6 +4536,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -2605,6 +4638,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -2616,6 +4687,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -2671,6 +4743,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -2726,6 +4836,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -2790,6 +4938,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -2801,6 +4987,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -2856,6 +5043,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -2911,6 +5136,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -2975,6 +5238,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -2986,6 +5287,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -3041,6 +5343,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -3096,6 +5436,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -3160,6 +5538,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -3171,6 +5587,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -3226,6 +5643,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -3281,6 +5736,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -3345,6 +5838,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -3356,6 +5887,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -3411,6 +5943,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -3466,6 +6036,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -3530,6 +6138,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -3541,6 +6187,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -3596,6 +6243,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -3651,6 +6336,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -3715,6 +6438,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -3726,6 +6487,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -3781,6 +6543,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -3836,6 +6636,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -3900,6 +6738,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -3911,6 +6787,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -3966,6 +6843,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -4021,6 +6936,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -4085,6 +7038,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -4096,6 +7087,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -4151,6 +7143,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -4206,6 +7236,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -4270,6 +7338,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -4281,6 +7387,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -4336,6 +7443,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -4391,6 +7536,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -4455,6 +7638,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -4466,6 +7687,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     },
     {
@@ -4521,6 +7743,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.5
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.8,
+            3.2
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.8,
+            0.0
+          ],
+          "size": [
+            1.4,
+            2.0,
+            2.4
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -4576,6 +7836,44 @@
         "heavy",
         "fragile"
       ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            6.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            4.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "size": [
+            1.5,
+            2.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -4640,6 +7938,44 @@
         "late_large",
         "small_b"
       ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.0,
+            5.0,
+            2.0
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.0,
+            0.0
+          ],
+          "size": [
+            4.0,
+            4.0,
+            2.0
+          ]
+        }
+      },
       "violations": []
     },
     {
@@ -4651,6 +7987,7 @@
       "actions": [],
       "reason": "clarify_or_abstain: no feasible placement",
       "packed": [],
+      "placement_layout": {},
       "violations": []
     }
   ]

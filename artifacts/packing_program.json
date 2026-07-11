@@ -42,35 +42,35 @@
   "preferences": [
     {
       "name": "heavy_low",
-      "kind": "ordering",
-      "hard": false,
-      "weight": 1.5,
-      "parameters": {}
-    },
-    {
-      "name": "fragile_high",
-      "kind": "ordering",
-      "hard": false,
-      "weight": 1.0,
-      "parameters": {}
-    },
-    {
-      "name": "preserve_large_item_space",
-      "kind": "future_fit",
+      "kind": "heavy",
       "hard": false,
       "weight": 2.0,
       "parameters": {}
     },
     {
-      "name": "minimize_rehandling",
-      "kind": "rehandling",
+      "name": "fragile_high",
+      "kind": "fragile",
+      "hard": false,
+      "weight": 2.0,
+      "parameters": {}
+    },
+    {
+      "name": "preserve_large_item_space",
+      "kind": "preserve",
       "hard": false,
       "weight": 1.0,
       "parameters": {}
     },
     {
+      "name": "minimize_rehandling",
+      "kind": "minimize",
+      "hard": false,
+      "weight": 0.5,
+      "parameters": {}
+    },
+    {
       "name": "minimize_unused_volume",
-      "kind": "volume",
+      "kind": "minimize",
       "hard": false,
       "weight": 0.5,
       "parameters": {}
@@ -87,8 +87,7 @@
     "clarify"
   ],
   "ordering_rules": [
-    "heavy_before_fragile",
-    "large_before_small_when_fit_is_tight"
+    "heavy_before_fragile"
   ],
   "demonstration_events": [
     {
@@ -169,5 +168,22 @@
     "fragility",
     "load_limit"
   ],
-  "source": "one_shot_demo"
+  "source": "one_shot_demo",
+  "policy_name": "heavy_bottom_fragile_top",
+  "posterior": {
+    "neutral_prior": 0.08259453944353537,
+    "heavy_bottom_fragile_top": 0.6102956854136231,
+    "maximize_volume": 0.08259453944353537,
+    "minimize_rehandling": 0.22451523569930604
+  },
+  "constraint_posterior": {
+    "all_inside": 0.99,
+    "heavy_below_fragile": 0.94,
+    "fragile_never_supports": 0.98,
+    "maximize_fill": 0.31,
+    "minimize_rehandling": 0.31,
+    "large_items_first": 0.27,
+    "preserve_future_space": 0.87,
+    "reproduce_exact_coordinates": 0.02
+  }
 }

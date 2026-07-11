@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import argparse
-from .packing.compiler import compile_packing_demo
+from .packing.compiler import compile_with_inferred_posterior
 from .packing.benchmark import scenarios, run_episode
 
 
@@ -11,7 +11,7 @@ def main():
     ap.add_argument("--render", default="artifacts/packing_demo.gif")
     ap.add_argument("--program", default="artifacts/packing_program.json")
     args = ap.parse_args()
-    program = compile_packing_demo(); program.save(args.program)
+    program = compile_with_inferred_posterior(); program.save(args.program)
     run_episode(scenarios()[0], perception="oracle", render_path=args.render)
     print(args.render)
     print(args.program)

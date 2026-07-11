@@ -36,11 +36,29 @@ class PackingPlanner:
         packed = len(state.placements)
         future = sum(state.items[i].volume for i in pending if i not in state.placements)
         rehandles = sum(a.kind == "temporarily_remove" for a in actions)
+        weights = {c.name: c.weight for c in self.program.preferences}
         heavy_low = sum(state.items[i].mass * p.position[2] for i, p in state.placements.items())
         fragile_high = sum(p.position[2] for i, p in state.placements.items()
                            if state.items[i].fragile)
+        stacked = sum(p.position[2] > 1e-8 for p in state.placements.values())
+        order = [x.get("item") for x in state.history if x.get("action") == "place_inside"]
+        order_bonus = 0.0
+        if "preserve_arrival_order" in self.program.ordering_rules:
+            order_bonus = -sum(abs(order.index(i) - j) for j, i in enumerate(order)) * .1
+        if "large_items_first" in self.program.ordering_rules:
+            order_bonus += sum(state.items[i].volume * (len(order) - j)
+                               for j, i in enumerate(order)) * .05
+            order_bonus += stacked * 12.0
+        if "heavy_before_fragile" in self.program.ordering_rules:
+            try:
+                order_bonus += (20.0 if order.index("heavy") < order.index("fragile") else -20.0)
+            except ValueError:
+                pass
         return (packed * 100.0 - future * 0.01 - rehandles * 2.0
-                - heavy_low * 0.05 + fragile_high * 0.02 + state.packed_volume * .001)
+                - heavy_low * 0.05 * weights.get("heavy_low", 0.0)
+                + fragile_high * 0.02 * weights.get("fragile_high", 0.0)
+                + state.packed_volume * .001
+                + order_bonus)
 
     def plan(self, state: PackingState, pending=None) -> PackingPlan:
         pending = [i for i in (pending or state.items) if i not in state.placements]

@@ -103,6 +103,9 @@ class PackingProgram:
     demonstration_events: list[dict] = field(default_factory=list)
     hidden_information: list[str] = field(default_factory=list)
     source: str = "one_shot_demo"
+    policy_name: str = "heavy_bottom_fragile_top"
+    posterior: dict = field(default_factory=dict)
+    constraint_posterior: dict = field(default_factory=dict)
 
     def to_dict(self):
         return asdict(self)
