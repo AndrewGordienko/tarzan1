@@ -42,7 +42,7 @@ class StateEstimator:
             shape=det.shape, color=det.color, pos_std=0.02,
             size_std=SIZE_PRIOR_VAR ** 0.5, last_seen=t, visible=True)
         self.vel[tid] = np.zeros(4)
-        self.svar[tid] = SIZE_PRIOR_VAR
+        self.svar[tid] = np.full(3, SIZE_PRIOR_VAR)   # per-axis size variance
         return tid
 
     def update(self, percept: Percept) -> BeliefState:
@@ -89,11 +89,14 @@ class StateEstimator:
                 # re-emit must not shrink covariance). Variance -> ~MEAS/N; the mean
                 # converges to the running average, so size RMSE falls together.
                 if t > o.last_seen:
-                    sv = self.svar[best]
-                    K = sv / (sv + SIZE_MEAS_VAR)
+                    sv = self.svar[best]                      # per-axis variance
+                    mv = (det.size_meas_std ** 2 if det.size_meas_std is not None
+                          else np.full(3, SIZE_MEAS_VAR))     # camera calibration
+                    K = sv / (sv + mv)
                     o.size = o.size + K * (det.size - o.size)
                     self.svar[best] = (1.0 - K) * sv
-                    o.size_std = self.svar[best] ** 0.5
+                    # worst-resolved axis: stays high while any dimension is occluded
+                    o.size_std = float(np.sqrt(self.svar[best].max()))
                 o.shape, o.color = det.shape, det.color
                 o.pos_std = max(0.006, o.pos_std * 0.6)
                 o.last_seen = t; o.visible = True

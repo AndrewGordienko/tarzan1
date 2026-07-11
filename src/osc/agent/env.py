@@ -39,6 +39,14 @@ class AgentEnv:
         self.n_steps += 1
         return self._corruptor(self._backend.perceive())
 
+    def set_viewpoint(self, name: str) -> Percept:
+        """Move the camera and return a fresh percept from the new view. This is an
+        ACTION (it changes what is observable), NOT privileged state access."""
+        if hasattr(self._backend, "set_camera"):
+            self._backend.set_camera(name)
+        self.n_steps += 1
+        return self._corruptor(self._backend.perceive())
+
     # -- guard rails ------------------------------------------------------
     def state(self, *a, **k):
         raise PrivilegedAccessError(

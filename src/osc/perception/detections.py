@@ -26,9 +26,14 @@ class Detection:
     shape: str = "box"
     color: str = "unknown"
     contact: bool = False           # noisy hint that the gripper touches this
+    size_meas_std: np.ndarray = None  # per-axis size measurement std (camera calibration);
+                                      # large on an axis the current view cannot resolve
 
     def copy(self) -> "Detection":
-        return replace(self, pose=self.pose.copy(), size=self.size.copy())
+        c = replace(self, pose=self.pose.copy(), size=self.size.copy())
+        if self.size_meas_std is not None:
+            c.size_meas_std = self.size_meas_std.copy()
+        return c
 
 
 @dataclass

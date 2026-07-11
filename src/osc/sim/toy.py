@@ -27,10 +27,29 @@ GRASP_Z = 0.03       # max vertical offset to acquire a grasp
 CLOSE_THRESH = 0.6   # gripper_closed above this counts as "closed"
 FORCE_LIMIT = 8.0    # abstract force units before a violation is flagged
 
+# Per-camera size measurement std, per axis [x, y, z]. A view cannot resolve a
+# dimension along its optical axis: the default TOP view foreshortens HEIGHT (z);
+# a FRONT/SIDE view reveals it but blurs the axis it looks down. This is the
+# explicit partial-observability that a change_viewpoint action must overcome.
+# (A per-axis abstraction of camera geometry; real SE3 calibration arrives with
+# the ManiSkill backend.) The same cameras exist in demo and deployment.
+# A dimension along a view's optical axis is OCCLUDED (uninformative, std OCCLUDED)
+# -- not merely noisy -- so repeated frames from that view carry NO new evidence.
+# The sharp axes get a small std. Same cameras exist in demo and deployment.
+_SHARP, OCCLUDED = 0.002, 1.0
+NEUTRAL_SIZE = 0.040                     # uninformed prior emitted on an occluded axis
+CAMERA_MEAS_STD = {
+    "top":     (_SHARP, _SHARP, OCCLUDED),   # default: footprint sharp, height occluded
+    "top_rot": (_SHARP, _SHARP, OCCLUDED),   # a DIFFERENT view that still can't see height
+    "front":   (_SHARP, OCCLUDED, _SHARP),   # reveals height (z); occludes depth (y)
+    "side":    (OCCLUDED, _SHARP, _SHARP),   # reveals height (z); occludes width (x)
+}
+
 
 class ToyTabletopSim:
     def __init__(self, actuator_delay: float = 0.25, lighting: float = 0.5,
-                 camera_jitter: float = 0.0, rng: np.random.Generator | None = None):
+                 camera_jitter: float = 0.0, rng: np.random.Generator | None = None,
+                 camera_model: bool = False):
         # actuator_delay in [0,1): fraction of the remaining error left uncorrected
         # each step (0 = instantaneous, ->1 = very sluggish).
         self.actuator_delay = float(np.clip(actuator_delay, 0.0, 0.95))
@@ -39,6 +58,14 @@ class ToyTabletopSim:
         self.rng = rng or np.random.default_rng(0)
         self._s: SimState | None = None
         self._pre_step_hook = None       # used by disturbance injection
+        self.camera_model = camera_model # off by default -> exact sizes (headline bench)
+        self.camera = "top"              # current viewpoint (observation state)
+
+    def set_camera(self, name: str) -> None:
+        """Move the camera. An ACTION, not privileged state -- changes which size
+        axis is observable in subsequent percepts."""
+        if name in CAMERA_MEAS_STD:
+            self.camera = name
 
     # -- SimBackend -------------------------------------------------------
     def reset(self, state: SimState) -> Observation:
@@ -177,8 +204,17 @@ class ToyTabletopSim:
                 continue
             p = o.pose.copy()
             p[:2] += self.rng.normal(0, noise, size=2)
-            dets.append(Detection(pose=p, size=o.size.copy(), shape=o.shape,
-                                  color=o.color, contact=(name == s.grasped)))
+            if self.camera_model:
+                # occluded axes emit an uninformed prior (no per-frame evidence);
+                # sharp axes emit the true size + small calibrated noise.
+                meas = np.array(CAMERA_MEAS_STD[self.camera], dtype=float)
+                occ = meas >= OCCLUDED
+                sz = np.where(occ, NEUTRAL_SIZE, o.size + self.rng.normal(0, 1.0, size=3) * meas)
+                dets.append(Detection(pose=p, size=sz, shape=o.shape, color=o.color,
+                                      contact=(name == s.grasped), size_meas_std=meas.copy()))
+            else:
+                dets.append(Detection(pose=p, size=o.size.copy(), shape=o.shape,
+                                      color=o.color, contact=(name == s.grasped)))
         self.rng.shuffle(dets)
         return Percept(detections=dets, gripper=s.gripper.copy(),
                        gripper_closed=s.gripper_closed, t=s.t)
