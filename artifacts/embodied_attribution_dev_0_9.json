@@ -1,0 +1,1371 @@
+{
+  "episodes_per_lane": 10,
+  "development_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "confirmation_seeds_reserved": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "lanes": {
+    "physical_upper_bound": {
+      "count": 10,
+      "program_inferred_correctly": 10,
+      "median_position_error_m": 0.0,
+      "dimension_error_mean": 0.0,
+      "approach_success": 10,
+      "grasp_success": 10,
+      "transport_success": 10,
+      "release_success": 10,
+      "final_verified_placement": 10,
+      "collision_contact_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0
+    },
+    "task_inference": {
+      "count": 10,
+      "program_inferred_correctly": 10,
+      "median_position_error_m": 0.0,
+      "dimension_error_mean": 0.0,
+      "approach_success": 10,
+      "grasp_success": 10,
+      "transport_success": 10,
+      "release_success": 10,
+      "final_verified_placement": 10,
+      "collision_contact_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0
+    },
+    "perception": {
+      "count": 10,
+      "program_inferred_correctly": 10,
+      "median_position_error_m": 0.0,
+      "dimension_error_mean": 0.0,
+      "approach_success": 10,
+      "grasp_success": 10,
+      "transport_success": 10,
+      "release_success": 10,
+      "final_verified_placement": 10,
+      "collision_contact_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0
+    },
+    "full_embodied": {
+      "count": 10,
+      "program_inferred_correctly": 10,
+      "median_position_error_m": 0.0,
+      "dimension_error_mean": 0.0,
+      "approach_success": 10,
+      "grasp_success": 10,
+      "transport_success": 10,
+      "release_success": 10,
+      "final_verified_placement": 10,
+      "collision_contact_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0
+    }
+  },
+  "rows": [
+    {
+      "seed": 0,
+      "lane": "physical_upper_bound",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 1,
+      "lane": "physical_upper_bound",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 2,
+      "lane": "physical_upper_bound",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 3,
+      "lane": "physical_upper_bound",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 4,
+      "lane": "physical_upper_bound",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 5,
+      "lane": "physical_upper_bound",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 6,
+      "lane": "physical_upper_bound",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 7,
+      "lane": "physical_upper_bound",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 8,
+      "lane": "physical_upper_bound",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 9,
+      "lane": "physical_upper_bound",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 0,
+      "lane": "task_inference",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 1,
+      "lane": "task_inference",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 2,
+      "lane": "task_inference",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 3,
+      "lane": "task_inference",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 4,
+      "lane": "task_inference",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 5,
+      "lane": "task_inference",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 6,
+      "lane": "task_inference",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 7,
+      "lane": "task_inference",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 8,
+      "lane": "task_inference",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 9,
+      "lane": "task_inference",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 0,
+      "lane": "perception",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 1,
+      "lane": "perception",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 2,
+      "lane": "perception",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 3,
+      "lane": "perception",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 4,
+      "lane": "perception",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 5,
+      "lane": "perception",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 6,
+      "lane": "perception",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 7,
+      "lane": "perception",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 8,
+      "lane": "perception",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 9,
+      "lane": "perception",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 0,
+      "lane": "full_embodied",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 1,
+      "lane": "full_embodied",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 2,
+      "lane": "full_embodied",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 3,
+      "lane": "full_embodied",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 4,
+      "lane": "full_embodied",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 5,
+      "lane": "full_embodied",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 6,
+      "lane": "full_embodied",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 7,
+      "lane": "full_embodied",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 8,
+      "lane": "full_embodied",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    },
+    {
+      "seed": 9,
+      "lane": "full_embodied",
+      "program_inferred": true,
+      "position_error_m": 0.0,
+      "dimension_error": 0.0,
+      "phases": {
+        "approach": true,
+        "grasp": true,
+        "lift": true,
+        "move_above_box": true,
+        "lower": true,
+        "release": true,
+        "verify": true
+      },
+      "final_verified": true,
+      "mask_pixels": 9658,
+      "contact_events": 0,
+      "collision_anomalies": 0,
+      "constraint_violations": 0,
+      "replans": 0,
+      "recovery_attempts": 0,
+      "rgb_shape": [
+        120,
+        160,
+        3
+      ],
+      "depth_shape": [
+        120,
+        160
+      ]
+    }
+  ]
+}

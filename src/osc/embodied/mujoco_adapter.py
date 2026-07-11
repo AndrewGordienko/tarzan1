@@ -58,7 +58,7 @@ class MujocoPackingAdapter:
               <geom name="box_right" type="box" pos=".22 0 .10" size=".01 .16 .10" rgba=".8 .7 .3 1"/></body>
             <body name="{item['name']}" pos="{item.get('pos',(0,-.12,.035))[0]} {item.get('pos',(0,-.12,.035))[1]} {item.get('pos',(0,-.12,.035))[2]}">
               <freejoint/><geom name="{item['name']}" type="box" size="{sx} {sy} {sz}" material="item"/></body>
-            <camera name="front" pos="0 -1.0 .55" xyaxes="1 0 0 0 .45 -.89"/>
+            <camera name="front" pos="0 -1.0 .18" xyaxes="1 0 0 0 0 1"/>
             <camera name="overhead" pos="0 0 1.2" xyaxes="1 0 0 0 0 -1"/>
             <camera name="wrist" pos=".35 -.45 .35" xyaxes=".8 .6 0 -.25 .33 -.91"/>
           </worldbody></mujoco>'''

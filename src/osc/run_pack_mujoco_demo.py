@@ -7,6 +7,7 @@ import json
 from .embodied.ladder import LadderConfig, unavailable_report
 from .embodied.mujoco_adapter import MujocoPackingAdapter, TinyVLAMuJoCoAdapter
 from .embodied.commands import SkillCommand
+from .embodied.benchmark import render_demo_mp4
 
 
 def main() -> None:
@@ -23,6 +24,7 @@ def main() -> None:
             adapter.execute(SkillCommand("grasp", {"name": "ordinary"}))
             result_step = adapter.execute(SkillCommand("place", {"name": "ordinary"},
                                                         {"position": (0.0, 0.0, 0.14)}))
+            render_demo_mp4(args.render)
         result = {"status": "ready", "demo_policy": args.demo_policy,
                   "perception": args.perception, "controller": args.controller,
                   "render": args.render, "ground_truth_used": False,

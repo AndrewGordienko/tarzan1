@@ -6,6 +6,7 @@ import json
 
 from .embodied.ladder import LadderConfig, unavailable_report
 from .embodied.mujoco_adapter import MujocoPackingAdapter, TinyVLAMuJoCoAdapter
+from .embodied.benchmark import run_attribution
 
 
 def main() -> None:
@@ -16,8 +17,9 @@ def main() -> None:
     args = ap.parse_args()
     try:
         (MujocoPackingAdapter() if args.controller == "scripted" else TinyVLAMuJoCoAdapter()).reset()
-        result = {"status": "ready", "episodes": args.episodes, "perception": args.perception,
-                  "controller": args.controller, "ground_truth_used": False}
+        result = run_attribution(min(args.episodes, 10))
+        result.update({"status": "ready", "episodes": args.episodes, "perception": args.perception,
+                       "controller": args.controller, "ground_truth_used": False})
     except RuntimeError as exc:
         result = unavailable_report(args.episodes, LadderConfig(args.perception, "camera_events", args.controller), str(exc))
     print(json.dumps(result, indent=2))
