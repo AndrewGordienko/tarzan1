@@ -15,7 +15,7 @@ def _resolve(role: str, corr: dict) -> str:
     return "world" if role == "world" else corr.get(role, role)
 
 
-def ground_transition(tr: Transition, corr: dict):
+def ground_transition(tr: Transition, corr: dict, mode: str = "semantic"):
     subj = _resolve(tr.subject, corr)
     ref = _resolve(tr.reference, corr)
     rel = tr.rel_transform
@@ -31,15 +31,17 @@ def ground_transition(tr: Transition, corr: dict):
                                      f"move:{subj}->{ref}"))
     if any(p.name in ("on_table", "on_top", "at_rel") for p in tr.add):
         seq.append(SkillInstance(SKILL_LIBRARY["place"],
-                                 {"object": subj, "reference": ref, "rel": rel},
+                                 {"object": subj, "reference": ref, "rel": rel,
+                                  "relation": tr.relation, "abs_target": tr.abs_target,
+                                  "mode": mode},
                                  f"place:{subj}@{ref}"))
     return seq
 
 
-def ground_plan(graph: TaskGraph, corr: dict):
+def ground_plan(graph: TaskGraph, corr: dict, mode: str = "semantic"):
     plan, held = [], None
     for tr in graph.transitions:
-        for si in ground_transition(tr, corr):
+        for si in ground_transition(tr, corr, mode):
             if si.skill.name in ("reach", "grasp") and held == si.params.get("object"):
                 continue
             plan.append(si)

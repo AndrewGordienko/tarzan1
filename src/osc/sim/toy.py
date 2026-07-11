@@ -79,7 +79,7 @@ class ToyTabletopSim:
             held.pose = pose(s.gripper[0], s.gripper[1], s.gripper[2], s.gripper[3])
 
         self._resolve_contacts(move, info)
-        self._settle()
+        self._settle(info)
         s.t += 1
         return self.observe(), info
 
@@ -107,17 +107,21 @@ class ToyTabletopSim:
                 # push the struck object; heavier/higher-friction slides less.
                 resist = o.mass * (1.0 + o.friction)
                 push = max(0.0, speed_xy - 0.002) / (1.0 + resist)
-                if push < 1e-4 and speed_xy > 0.01:
-                    # commanded laterally into an ~immovable object -> reaction force.
-                    if speed_xy * (1.0 + resist) * 40.0 > FORCE_LIMIT:
-                        info.force_violation = True
+                # contact reaction force ~ commanded speed into the object scaled
+                # by how much it resists. Fires on ANY hard collision -- the old
+                # `push < 1e-4` gate made this unreachable for every configured
+                # mass (min push ~0.004), so the zero rate was structural, not
+                # earned. A gentle agent (speed<0.02) still stays well under the
+                # limit; only driving hard into a heavy object violates.
+                if speed_xy * (1.0 + resist) * 40.0 > FORCE_LIMIT:
+                    info.force_violation = True
                 direction = (o.pose[:2] - ref[:2])
                 n = np.linalg.norm(direction)
                 if n > 1e-6:
                     o.pose[:2] += (direction / n) * push
                     info.events.append(f"pushed:{name}")
 
-    def _settle(self) -> None:
+    def _settle(self, info: "StepInfo | None" = None) -> None:
         """Apply gravity/support: unheld objects rest on table or on a support;
         objects beyond the table edge fall off (irreversible)."""
         s = self._s
@@ -126,8 +130,11 @@ class ToyTabletopSim:
             if name == s.grasped or name in s.fallen:
                 continue
             if not (xmin <= o.pose[0] <= xmax and ymin <= o.pose[1] <= ymax):
-                s.fallen.add(name)
+                s.fallen.add(name)            # newly left the table this step
                 o.pose[2] = s.table_z - 0.5
+                if info is not None:
+                    info.irreversible = True
+                    info.events.append(f"fell:{name}")
                 continue
             support_top = s.table_z
             for other, oo in s.objects.items():
@@ -138,7 +145,8 @@ class ToyTabletopSim:
                 if oo.pose[2] >= o.pose[2]:
                     continue
                 if dist_xy(o.pose, oo.pose) < (_radius(o) + _radius(oo)) * 0.7:
-                    support_top = max(support_top, oo.pose[2] + oo.size[2])
+                    # top surface of the support is its centre + HALF its height.
+                    support_top = max(support_top, oo.pose[2] + oo.size[2] / 2)
             o.pose[2] = support_top + o.size[2] / 2
 
     def observe(self) -> Observation:

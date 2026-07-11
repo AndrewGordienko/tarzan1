@@ -32,13 +32,26 @@ class BeliefObject:
 
     def feature(self) -> np.ndarray:
         """Appearance/geometry signature used for demo<->eval correspondence.
-        Deliberately name-free: size, shape one-hot, coarse color hash."""
+        Deliberately name-free: size, shape one-hot, DETERMINISTIC color code
+        (Python's builtin hash varies between processes and would break
+        reproducibility)."""
         shape_id = 0.0 if self.shape == "box" else 1.0
-        col = float(abs(hash(self.color)) % 997) / 997.0
-        return np.array([self.size[0], self.size[2], shape_id, col])
+        return np.array([self.size[0], self.size[2], shape_id, color_code(self.color)])
 
     def copy(self) -> "BeliefObject":
         return replace(self, pose=self.pose.copy(), size=self.size.copy())
+
+
+# Fixed palette -> stable [0,1) code, independent of process hash seed.
+_PALETTE = ("red", "green", "blue", "yellow", "purple", "orange", "cyan",
+            "magenta", "unknown")
+
+
+def color_code(color: str) -> float:
+    try:
+        return _PALETTE.index(color) / len(_PALETTE)
+    except ValueError:
+        return (len(_PALETTE) - 1) / len(_PALETTE)
 
 
 @dataclass

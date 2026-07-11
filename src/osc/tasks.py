@@ -140,4 +140,21 @@ def record_demo(task: TaskSpec, settle_steps: int = 6) -> TaskGraph:
         for _ in range(settle_steps):
             backend.step(Action(target=target, gripper_close=grip))
             beliefs.append(est.update(corr(backend.perceive())))
-    return compile_demo(extract_tracks(beliefs))
+    graph = compile_demo(extract_tracks(beliefs))
+    graph.role_to_gt = _role_to_gt(graph, beliefs[-1], backend.state())
+    return graph
+
+
+def _role_to_gt(graph, final_belief, gt_state) -> dict:
+    """Map each compiled role to the ground-truth object name it corresponds to,
+    by matching the role's demo track position to the nearest GT object. Used ONLY
+    by oracle attribution modes and scoring -- never by the deployed agent."""
+    from .geometry import dist_xyz
+    mapping = {}
+    for role, tid in graph.demo_role_tracks.items():
+        if tid not in final_belief.objects:
+            continue
+        p = final_belief.objects[tid].pose
+        best = min(gt_state.objects, key=lambda n: dist_xyz(gt_state.objects[n].pose, p))
+        mapping[role] = best
+    return mapping
