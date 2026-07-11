@@ -86,6 +86,33 @@ def test_clarification_persists_across_a_workflow():
     assert w["production_success"] > 0.5
 
 
+def test_paired_scenarios_each_action_resolves_its_own_case():
+    from osc.benchmark.resolution_scenarios import run_scenarios
+    r = run_scenarios(seeds=range(40))
+    # the RIGHT capability resolves each scenario autonomously & correctly...
+    assert r["noisy_identifiable"]["inspection-only"]["autonomous_correct"] > 0.8
+    assert r["occluded"]["+viewpoint"]["autonomous_correct"] > 0.8
+    assert r["interaction"]["+probe"]["autonomous_correct"] > 0.8
+    assert r["fundamental"]["+metadata"]["autonomous_correct"] > 0.8
+
+
+def test_inspection_never_fakes_fundamental_ambiguity():
+    from osc.benchmark.resolution_scenarios import run_scenarios
+    r = run_scenarios(seeds=range(40))
+    # no physical capability may "resolve" a fundamentally ambiguous scene
+    for cap in ("inspection-only", "+viewpoint", "+probe"):
+        assert r["fundamental"][cap]["autonomous_correct"] < 0.1
+    # only asking a human / SKU metadata resolves it
+    assert r["fundamental"]["clarification"]["human"] > 0.8
+
+
+def test_wrong_capability_does_not_resolve_occluded_or_interaction():
+    from osc.benchmark.resolution_scenarios import run_scenarios
+    r = run_scenarios(seeds=range(40))
+    assert r["occluded"]["+probe"]["autonomous_correct"] < 0.1      # probe can't see a label
+    assert r["interaction"]["+viewpoint"]["autonomous_correct"] < 0.1  # viewpoint can't feel mass
+
+
 if __name__ == "__main__":
     import pytest
     raise SystemExit(pytest.main([__file__, "-v"]))

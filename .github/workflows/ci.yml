@@ -16,4 +16,5 @@ jobs:
         run: |
           python -m osc.run_bench --seeds 3 --out /tmp/smoke
           python -m osc.run_attribution --seeds 3
-          python -m osc.run_resolution --seeds 3
+          python -m osc.run_resolution --seeds 3 --workflows 2 --orders 4
+          python -m osc.run_scenarios --seeds 5
