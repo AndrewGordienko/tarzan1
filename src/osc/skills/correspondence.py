@@ -28,11 +28,16 @@ import numpy as np
 
 from ..agent.belief import BeliefState
 
-W = np.array([3.0, 3.0, 1.0, 0.3])      # size_x, size_z, shape, color
+# size_x, size_z, shape, color. Color weight is 0: demo and eval appearance are
+# INDEPENDENTLY randomized, so a demo colour carries no information about which
+# eval object plays a role -- weighting it only injects noise that mis-binds.
+W = np.array([3.0, 3.0, 1.0, 0.0])
 W_RATIO = 2.0                           # weight on demonstrated size-ratio consistency
 STICK = 0.15                            # keep previous unless improvement exceeds this
 AMBIG_MARGIN = 0.06                     # top-2 cost gap below this => genuinely near-tied
 SOFTMAX_SCALE = 0.25
+ROLE_CONF_MIN = 0.55                    # weakest-role marginal below this => ambiguous
+ROLE_MARGIN_MIN = 0.20                  # weakest-role chosen-vs-runnerup gap => ambiguous
 
 
 @dataclass
@@ -85,8 +90,6 @@ class RoleBelief:
         p = np.exp(-(costs - best_cost) / SOFTMAX_SCALE)
         p /= p.sum()
         entropy = float(-np.sum(p * np.log(p + 1e-12)))
-        confidence = float(p[0])
-        ambiguous = margin < AMBIG_MARGIN
 
         # stickiness: prefer to keep the previous binding unless clearly beaten
         chosen = best
@@ -96,7 +99,25 @@ class RoleBelief:
                 if prev_cost - best_cost < STICK:
                     chosen = {r: self.prev[r] for r in self.roles}
         self.prev = dict(chosen)
-        per_role_conf = {r: confidence for r in self.roles}
+
+        # PER-ROLE marginal posterior: mass on each role's CHOSEN track, summed
+        # over every assignment that pairs them. A globally-confident assignment
+        # can still hide one contested role (two similar supports); gating on the
+        # weakest role -- not the joint p[0] -- is what catches confident mis-binds.
+        per_role_conf = {}
+        per_role_margin = {}
+        for r in self.roles:
+            mass = {}
+            for prob, assign in zip(p, (a for _, a in scored)):
+                mass[assign[r]] = mass.get(assign[r], 0.0) + float(prob)
+            per_role_conf[r] = mass.get(chosen[r], 0.0)
+            ranked = sorted(mass.values(), reverse=True)
+            per_role_margin[r] = (ranked[0] - ranked[1]) if len(ranked) > 1 else ranked[0]
+        # weakest-link confidence, and ambiguous if any role is contested.
+        confidence = float(min(per_role_conf.values())) if per_role_conf else 0.0
+        weakest_margin = min(per_role_margin.values()) if per_role_margin else 1.0
+        ambiguous = (margin < AMBIG_MARGIN) or (confidence < ROLE_CONF_MIN) \
+            or (weakest_margin < ROLE_MARGIN_MIN)
         return RoleAssignment(chosen, confidence, entropy, ambiguous, per_role_conf)
 
 

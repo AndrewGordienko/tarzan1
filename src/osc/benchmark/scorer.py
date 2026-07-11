@@ -9,6 +9,7 @@ Builds one EpisodeRecord per episode by combining:
 """
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
 
 from ..geometry import dist_xy
@@ -16,6 +17,9 @@ from ..sim.base import SimState
 
 CONTROL_HZ = 20.0
 NEAR_XY = 0.06
+IDENT_EPS = 0.005   # a distractor within this weighted-feature gap of the true
+                    # object == the role is not observably identifiable (small:
+                    # only flag genuine ties, not merely "hard" scenes)
 
 
 # -- ground-truth predicates ---------------------------------------------
@@ -87,6 +91,40 @@ class Scorer:
         self.roles = roles
         self.graph = graph
 
+    def identifiable(self, final_state: SimState) -> bool:
+        """Ground-truth identifiability. A demonstration binds roles by observable
+        geometry (size + shape; NOT the independently-randomized colour). If, for
+        some role, a distractor matches the demonstrated signature at least as well
+        as the TRUE object -- because size jitter drifted the true target and a
+        distractor sits at the demonstrated size -- then no agent could reliably
+        pick the right object. Such an episode is genuinely ambiguous, not a
+        silent perception failure, and is excluded from the confident-completion
+        denominator. Adjudicated with GT here; uses only agent-observable features.
+        """
+        r2g = getattr(self.graph, "role_to_gt", {}) if self.graph is not None else {}
+        sigs = getattr(self.graph, "role_signatures", {}) if self.graph is not None else {}
+        if not r2g or not sigs:
+            return True
+        W = (3.0, 3.0, 1.0)                               # size_x, size_z, shape (no colour)
+        def feat(o):
+            return (float(o.size[0]), float(o.size[2]), 0.0 if o.shape == "box" else 1.0)
+        def wdist(a, b):
+            return math.sqrt(sum((w * (ai - bi)) ** 2 for w, ai, bi in zip(W, a, b)))
+        alive = [n for n in final_state.objects if n not in final_state.fallen]
+        for role, gt_name in r2g.items():
+            sig = sigs.get(role)
+            if sig is None or gt_name not in final_state.objects:
+                continue
+            sig = tuple(float(x) for x in sig[:3])
+            d = {n: wdist(sig, feat(final_state.objects[n])) for n in alive}
+            if gt_name not in d:
+                continue
+            d_true = d[gt_name]
+            d_other = min((v for n, v in d.items() if n != gt_name), default=d_true + 10.0)
+            if d_true >= d_other - IDENT_EPS:            # a distractor is as good a match
+                return False
+        return True
+
     def role_binding_correct(self, trace, final_state: SimState) -> bool:
         """Evidence-based: did the agent's correspondence bind each role to the
         track nearest the CORRECT ground-truth object? Uses role_to_gt + the
@@ -134,14 +172,15 @@ class Scorer:
                 d2r = reps[0] - disturbance.at_step
 
         rbc = self.role_binding_correct(trace, final_state)
-        cat = "" if success else self._categorize(final_state, trace, irrev, timeout, rbc,
-                                                  getattr(trace, "ambiguous", False))
+        # ambiguous = the agent flagged it OR the scene is objectively unidentifiable.
+        ambiguous = bool(getattr(trace, "ambiguous", False)) or not self.identifiable(final_state)
+        cat = "" if success else self._categorize(final_state, trace, irrev, timeout, rbc, ambiguous)
         return EpisodeRecord(
             task=self.task.name, split=split, seed=seed, success=success,
             believed_success=trace.believed_success,
             wrong_belief=trace.believed_success and not success,
             role_binding_correct=rbc,
-            ambiguous=getattr(trace, "ambiguous", False),
+            ambiguous=ambiguous,
             inspections=getattr(trace, "inspections", 0),
             role_confidence=getattr(trace, "role_confidence", 1.0),
             first_attempt_success=success and trace.autonomous_replans == 0
