@@ -57,6 +57,7 @@ class TaskGraph:
     goal_rel: dict = field(default_factory=dict)  # (subj_role,ref_role) -> expected rel
     roles: list[str] = field(default_factory=list)          # e.g. [manipuland, target]
     role_signatures: dict = field(default_factory=dict)     # role -> feature vector
+    role_signature_vars: dict = field(default_factory=dict) # role -> per-feature covariance
     demo_role_tracks: dict = field(default_factory=dict)    # role -> demo track id (ref only)
     role_to_gt: dict = field(default_factory=dict)          # role -> ground-truth object
                                                             # name (ORACLE/scoring use only)

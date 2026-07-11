@@ -69,7 +69,7 @@ class Report:
     auto_cov_ambiguous: float = 0.0        # ... among genuinely ambiguous scenes (want ~0)
     commit_given_identifiable: float = 0.0 # P(commit | identifiable)
     commit_without_human_ambiguous: float = 0.0   # P(commit w/o human | ambiguous)
-    success_after_one_clar_ambiguous: float = 0.0 # P(success w/ <=1 question | ambiguous)
+    success_after_one_clar_ambiguous: float = 0.0 # P(success after bounded clarification | ambiguous)
     clarification_assisted_coverage: float = 0.0
     abstention_rate: float = 0.0           # P(declined to act)
     clarification_rate: float = 0.0        # user questions per episode
@@ -98,7 +98,7 @@ class Report:
              f"  auto-coverage ident/amb       : {self.auto_cov_identifiable:.1%} / "
              f"{self.auto_cov_ambiguous:.1%}   abstain={self.abstention_rate:.1%}  "
              f"clar/ep={self.clarification_rate:.2f}",
-             f"  ambiguity resolved (<=1 Q)    : {self.ambiguity_resolution_rate:.1%} "
+             f"  ambiguity resolved (<=2 Q)    : {self.ambiguity_resolution_rate:.1%} "
              f"CI95[{self.ci_ambiguity_resolution[0]:.2f},{self.ci_ambiguity_resolution[1]:.2f}]",
              f"  role-binding accuracy         : {self.role_binding_accuracy:6.1%}  "
              f"P(success|correct role)={self.p_success_given_correct_role:.1%}",
@@ -173,8 +173,12 @@ def _agg(records: list[EpisodeRecord], seed=0) -> dict:
     auto_cov_ambiguous = _mean(amb, _auto)                                  # want ~0
     commit_given_identifiable = _mean(ident, lambda r: getattr(r, "committed", True))
     commit_without_human_ambiguous = _mean(amb, _auto)
+    # The resolver's configured bound is two role questions: a global assignment
+    # may legitimately require one answer per role.  The old <=1 definition
+    # mislabeled successful two-role clarification workflows as unresolved after
+    # the initial-scene identifiability correction.
     success_after_one_clar_ambiguous = _mean(
-        amb, lambda r: r.success and getattr(r, "clarifications", 0) <= 1)
+        amb, lambda r: r.success and getattr(r, "clarifications", 0) <= 2)
     autonomous_coverage = _mean(records, _auto)                             # overall (all scenes)
     clarification_assisted_coverage = _mean(
         records, lambda r: getattr(r, "committed", True) and getattr(r, "clarifications", 0) > 0)
@@ -185,7 +189,7 @@ def _agg(records: list[EpisodeRecord], seed=0) -> dict:
     unnecessary_question_rate = _mean(asked, lambda r: not getattr(r, "initially_ambiguous", False))
     insp_per_ep = _mean(records, lambda r: getattr(r, "resolution_inspection_frames", 0))
     # paired CIs on the gate-critical rates:
-    ci_amb_res = bootstrap_ci([r.success and getattr(r, "clarifications", 0) <= 1 for r in amb], seed=seed)
+    ci_amb_res = bootstrap_ci([r.success and getattr(r, "clarifications", 0) <= 2 for r in amb], seed=seed)
     ci_auto_ident = bootstrap_ci([_auto(r) for r in ident], seed=seed)
     ci_silent_committed = bootstrap_ci([r.believed_success and not r.success for r in committed], seed=seed)
 

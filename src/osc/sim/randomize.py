@@ -31,6 +31,11 @@ class RandomizationSpec:
     camera_jitter_range: tuple = (0.0, 0.01)
     n_distractors: int = 2
     randomize_distractor_shape: bool = True
+    camera_model: bool = False
+    # Hard-perception benchmark controls.  They change observable geometry, not
+    # labels exposed to the agent.
+    role_feature_mode: str = "native"  # native | height_only | identical
+    distractor_min_separation: float = 0.09
 
 
 def _free_pose(rng, bounds, taken, margin=0.09):
@@ -54,10 +59,16 @@ def randomize(scene: dict, spec: RandomizationSpec, seed: int):
         base = np.asarray(tmpl["base_pose"], dtype=float).copy()
         base[:2] += rng.uniform(-spec.pose_jitter, spec.pose_jitter, size=2)
         base[3] = rng.uniform(-np.pi, np.pi)
-        size = float(tmpl["size"]) * (1.0 + rng.uniform(-spec.role_size_jitter, spec.role_size_jitter))
+        native = float(tmpl["size"]) * (1.0 + rng.uniform(-spec.role_size_jitter, spec.role_size_jitter))
+        if spec.role_feature_mode == "height_only":
+            size = np.array([0.043, 0.043, native])
+        elif spec.role_feature_mode == "identical":
+            size = np.array([0.043, 0.043, 0.043])
+        else:
+            size = np.array([native, native, native])
         objects[tmpl["name"]] = SimObject(
             name=tmpl["name"], shape=tmpl.get("shape", "box"),
-            size=np.array([size, size, size]),
+            size=size,
             mass=float(rng.uniform(*spec.mass_range)),
             friction=float(rng.uniform(*spec.friction_range)),
             color=rng.choice(COLORS), pose=base)
@@ -66,13 +77,22 @@ def randomize(scene: dict, spec: RandomizationSpec, seed: int):
 
     for k in range(spec.n_distractors):
         name = f"distractor{k}"
-        size = float(rng.uniform(0.03, 0.055))
-        shape = rng.choice(SHAPES) if spec.randomize_distractor_shape else "box"
+        ds = float(rng.uniform(0.03, 0.055))
+        if spec.role_feature_mode == "identical":
+            size = np.array([0.043, 0.043, 0.043])
+            shape = "box"
+        elif spec.role_feature_mode == "height_only":
+            size = np.array([0.043, 0.043, ds])
+            shape = rng.choice(SHAPES) if spec.randomize_distractor_shape else "box"
+        else:
+            size = np.array([ds, ds, ds])
+            shape = rng.choice(SHAPES) if spec.randomize_distractor_shape else "box"
         objects[name] = SimObject(
-            name=name, shape=shape, size=np.array([size, size, size]),
+            name=name, shape=shape, size=size,
             mass=float(rng.uniform(*spec.mass_range)),
             friction=float(rng.uniform(*spec.friction_range)),
-            color=rng.choice(COLORS), pose=_free_pose(rng, bounds, taken))
+            color=rng.choice(COLORS), pose=_free_pose(rng, bounds, taken,
+                                                       margin=spec.distractor_min_separation))
         roles[name] = "distractor"
         taken.append(objects[name].pose)
 
@@ -82,7 +102,7 @@ def randomize(scene: dict, spec: RandomizationSpec, seed: int):
         actuator_delay=float(rng.uniform(*spec.actuator_delay_range)),
         lighting=float(rng.uniform(*spec.lighting_range)),
         camera_jitter=float(rng.uniform(*spec.camera_jitter_range)),
-        rng=rng)
+        rng=rng, camera_model=spec.camera_model)
     return state, backend, roles
 
 

@@ -25,6 +25,7 @@ class Detection:
     size: np.ndarray
     shape: str = "box"
     color: str = "unknown"
+    marker: str = "unknown"       # side-visible label/marker, if the view sees it
     contact: bool = False           # noisy hint that the gripper touches this
     size_meas_std: np.ndarray = None  # per-axis size measurement std (camera calibration);
                                       # large on an axis the current view cannot resolve
@@ -89,6 +90,13 @@ class Corruptor:
             d.pose[:2] += self.rng.normal(0, s.pos_noise, size=2)
             if s.size_noise > 0:                 # independent per-frame size error
                 d.size = d.size + self.rng.normal(0, s.size_noise, size=d.size.shape)
+                # Preserve a calibrated innovation gate: the effective camera
+                # variance is optical measurement variance plus this injected
+                # independent sensor noise.  Leaving the old calibration here
+                # made legitimate noisy observations look like identity swaps.
+                base = (d.size_meas_std if d.size_meas_std is not None
+                        else np.full(d.size.shape, 0.010))
+                d.size_meas_std = np.sqrt(np.asarray(base, dtype=float) ** 2 + s.size_noise ** 2)
             if self.rng.random() < s.false_contact_prob:
                 d.contact = not d.contact
             kept.append(d)

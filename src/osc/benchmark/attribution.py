@@ -95,7 +95,7 @@ def run_ladder_episode(task, graph, split, seed, lc: LadderConfig):
     manip = state.objects["manip"]
     true_params = (backend.actuator_delay, manip.friction / 0.6, manip.mass / 0.1)
     rec = Scorer(task, roles, graph).score(f"{split.name}", seed, final, env.step_info_log,
-                                    trace, disturbance, ctx, true_params)
+                                    trace, disturbance, ctx, true_params, initial_state=state)
     return rec
 
 

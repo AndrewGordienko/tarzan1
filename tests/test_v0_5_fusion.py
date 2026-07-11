@@ -59,6 +59,35 @@ def test_zero_size_noise_leaves_default_benchmark_untouched():
     assert np.allclose(o.size, true, atol=1e-6)
 
 
+def test_wrong_object_after_crossing_is_contested_not_fused_to_confidence():
+    """An association may be spatially valid while its attributes belong to a
+    different object.  Repeated wrong frames must not turn that mistake into a
+    tiny-covariance, high-confidence role signature."""
+    rng = np.random.default_rng(3)
+    a, b = np.array([0.040, 0.040, 0.040]), np.array([0.085, 0.085, 0.085])
+    est = StateEstimator()
+    est.update(_percept(a, 1, 0.0, rng))
+    before = next(iter(est.tracks.values())).size_std
+    for t in range(2, 8):  # same pose: represents the other object after a crossing/reacquisition
+        est.update(_percept(b, t, 0.0, rng))
+    o = next(iter(est.tracks.values()))
+    assert o.association_contested
+    assert np.allclose(o.size, a)                 # no contaminated average
+    assert o.size_std >= before                   # covariance was inflated, not collapsed
+
+
+def test_reacquisition_is_not_an_extra_independent_attribute_observation():
+    rng = np.random.default_rng(4)
+    true = np.array([0.045, 0.045, 0.045])
+    est = StateEstimator()
+    est.update(_percept(true, 1, 0.0, rng))
+    o = next(iter(est.tracks.values()))
+    before = o.size_std
+    est.update(Percept(detections=[], gripper=np.zeros(4), gripper_closed=0.0, t=2))
+    est.update(_percept(true, 3, 0.0, rng))
+    assert next(iter(est.tracks.values())).size_std == before
+
+
 if __name__ == "__main__":
     import pytest
     raise SystemExit(pytest.main([__file__, "-v"]))

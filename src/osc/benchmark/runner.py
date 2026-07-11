@@ -51,7 +51,8 @@ def default_splits() -> list[Split]:
 
 
 def run_episode(task, graph, split: Split, seed: int, cfg: ExecConfig,
-                privileged: bool = False, task_context=None):
+                privileged: bool = False, task_context=None,
+                oracle_role_binding: bool = False):
     from ..sim.randomize import randomize
     state, backend, roles = randomize(task.scene, split.rand, seed=seed)
     disturbance = None
@@ -66,17 +67,19 @@ def run_episode(task, graph, split: Split, seed: int, cfg: ExecConfig,
     ctx = DynamicsContext()
     pm = PlanningModel(ctx, table_bounds_est=state.table_bounds)
     clarify_fn = _clarify_fn(graph, backend) if cfg.resolution and cfg.allow_clarification else None
+    oracle_corr = _oracle_corr_fn(graph, backend) if oracle_role_binding else None
     execu = ClosedLoopExecutor(env, graph, est, ctx, pm,
                                ExecConfig(**{**cfg.__dict__,
                                              "max_total_steps": task.max_total_steps}),
-                               clarify_fn=clarify_fn, task_context=task_context)
+                               clarify_fn=clarify_fn, task_context=task_context,
+                               oracle_corr=oracle_corr)
     trace = execu.run()
 
     final = backend.state()
     manip = state.objects["manip"]
     true_params = (backend.actuator_delay, manip.friction / 0.6, manip.mass / 0.1)
     rec = Scorer(task, roles, graph).score(split.name, seed, final, env.step_info_log,
-                                    trace, disturbance, ctx, true_params)
+                                    trace, disturbance, ctx, true_params, initial_state=state)
     return rec
 
 
@@ -138,6 +141,21 @@ def _clarify_fn(graph, backend):
     return fn
 
 
+def _oracle_corr_fn(graph, backend):
+    """Upper-bound role binding only.  Kept distinct from `privileged`, whose
+    oracle estimator still exercises the normal correspondence implementation."""
+    from ..geometry import dist_xyz
+    r2g = getattr(graph, "role_to_gt", {})
+    def fn(belief):
+        gt = backend.state()
+        return {role: min(sorted(belief.objects),
+                          key=lambda tid: dist_xyz(belief.objects[tid].pose,
+                                                   gt.objects[name].pose))
+                for role, name in r2g.items()
+                if name in gt.objects and belief.objects}
+    return fn
+
+
 def _estimator(backend, privileged: bool):
     """Full system: estimate from percepts. Ablation `privileged`: an oracle
     estimator that reads ground truth (upper bound; used only in ablations)."""
@@ -148,17 +166,29 @@ def _estimator(backend, privileged: bool):
 
 
 def run_benchmark(tasks=None, splits=None, seeds=range(20), cfg: ExecConfig | None = None,
-                  privileged: bool = False, graphs: dict | None = None):
+                  privileged: bool = False, graphs: dict | None = None,
+                  oracle_role_binding: bool = False):
     tasks = tasks or list(DEFAULT_TASKS)
     splits = splits or default_splits()
     cfg = cfg or ExecConfig()
-    graphs = graphs or {t.name: record_demo(t) for t in tasks}
+    # A camera-enabled deployment must compile an equally camera-enabled demo.
+    # Cache by camera mode so the same compiled evidence is reused within a block.
+    graph_cache = dict(graphs or {})
     records = []
     for split in splits:
+        camera_model = bool(getattr(split.rand, "camera_model", False))
         for t in tasks:
+            key = (t.name, camera_model)
+            graph = graph_cache.get(key)
+            if graph is None and not camera_model:
+                graph = graph_cache.get(t.name)
+            if graph is None:
+                graph = record_demo(t, camera_model=camera_model)
+                graph_cache[key] = graph
             for s in seeds:
-                records.append(run_episode(t, graphs[t.name], split, int(s), cfg,
-                                           privileged=privileged))
+                records.append(run_episode(t, graph, split, int(s), cfg,
+                                           privileged=privileged,
+                                           oracle_role_binding=oracle_role_binding))
     return records
 
 

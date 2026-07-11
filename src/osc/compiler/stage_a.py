@@ -115,6 +115,8 @@ def compile_demo(trace: DemoTrace) -> TaskGraph:
         goal.update(add)
 
     sigs = {role: trace.features.get(tk) for tk, role in track_role.items()}
+    sig_vars = {role: trace.feature_vars.get(tk) for tk, role in track_role.items()}
     return TaskGraph(transitions=transitions, goal=frozenset(goal), goal_rel=goal_rel,
                      roles=list(track_role.values()), role_signatures=sigs,
+                     role_signature_vars=sig_vars,
                      demo_role_tracks={r: t for t, r in track_role.items()})

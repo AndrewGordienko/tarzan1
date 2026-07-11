@@ -18,6 +18,8 @@ dev = ["pytest>=7"]
 osc-demo = "osc.run_demo:main"
 osc-bench = "osc.run_bench:main"
 osc-ablations = "osc.run_ablations:main"
+osc-hard-audit = "osc.run_hard_audit:main"
+osc-correspondence-audit = "osc.run_correspondence_audit:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -78,6 +78,18 @@ def test_camera_model_off_leaves_sizes_exact():
     assert d.size_meas_std is None
 
 
+def test_side_only_marker_is_not_visible_from_top_or_front():
+    s = _state()
+    s.objects["A"].marker = "alpha"
+    sim = ToyTabletopSim(camera_model=True); sim._s = s
+    sim.set_camera("top")
+    assert sim.perceive().detections[0].marker == "unknown"
+    sim.set_camera("front")
+    assert sim.perceive().detections[0].marker == "unknown"
+    sim.set_camera("side")
+    assert sim.perceive().detections[0].marker == "alpha"
+
+
 if __name__ == "__main__":
     import pytest
     raise SystemExit(pytest.main([__file__, "-v"]))

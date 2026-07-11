@@ -1,4 +1,4 @@
-"""Probabilistic, sticky, relational role<->track correspondence.
+"""Uncertainty-aware global role<->track correspondence.
 
 The v0.2 greedy matcher bound each role to its individually best-matching track,
 which the attribution ladder showed was the dominant failure (misbound in ~62% of
@@ -6,21 +6,16 @@ episodes). RoleBelief fixes the modelling error:
 
   * GLOBAL one-to-one assignment (enumerate injective role->track maps; small),
     scored jointly -- not greedy per role,
-  * RELATIONAL cost: the demonstrated *size ratio* between roles (e.g. manipuland
-    smaller than support) must be preserved, which disambiguates similarly-sized
-    distractors that fool absolute-size matching,
-  * a NULL option so a role with no good track is left unbound rather than forced,
-  * CONFIDENCE + entropy from the softmax over assignment costs, and an AMBIGUOUS
+  * a covariance-aware Gaussian negative log likelihood over every observed
+    feature dimension, combining demonstration and deployment covariance,
+  * explicit NULL assignments so a role with no supported candidate is not forced,
+  * CONFIDENCE + entropy from the posterior over complete assignments, and an AMBIGUOUS
     flag when the top two assignments are within a margin -- these drive active
     perception and honest "ambiguous episode" labelling,
-  * STICKINESS: keep the previous assignment across replans unless new evidence is
-    clearly better, so bindings don't flip every planning call.
-
 Deterministic throughout (sorted iteration, deterministic color code).
 """
 from __future__ import annotations
 
-import itertools
 import math
 from dataclasses import dataclass, field
 
@@ -28,14 +23,16 @@ import numpy as np
 
 from ..agent.belief import BeliefState
 
-# size_x, size_z, shape, color. Color weight is 0: demo and eval appearance are
-# INDEPENDENTLY randomized, so a demo colour carries no information about which
-# eval object plays a role -- weighting it only injects noise that mis-binds.
-W = np.array([3.0, 3.0, 1.0, 0.0])
-W_RATIO = 2.0                           # weight on demonstrated size-ratio consistency
-STICK = 0.15                            # keep previous unless improvement exceeds this
+# feature dimensions: size_x, size_z, shape, color.  Colour is deliberately
+# excluded: demo/eval colours are independently randomized.  Shape is observed
+# categorically with a small nominal variance; size dimensions participate only
+# while their calibrated covariance says they are observable.
+OBSERVED_DIMS = (0, 1, 2, 4)
+MAX_UNOBSERVED_VAR = 0.05 ** 2
+VAR_FLOOR = 1e-8
+NULL_COST = 10.0
+TOP_K = 256
 AMBIG_MARGIN = 0.06                     # top-2 cost gap below this => genuinely near-tied
-SOFTMAX_SCALE = 0.25
 ROLE_CONF_MIN = 0.55                    # weakest-role marginal below this => ambiguous
 ROLE_MARGIN_MIN = 0.20                  # weakest-role chosen-vs-runnerup gap => ambiguous
 
@@ -52,28 +49,84 @@ class RoleAssignment:
     top_cost: float = 0.0               # best joint-assignment cost
     second_cost: float = 0.0            # runner-up joint-assignment cost
     n_candidates: int = 0               # number of tracks considered
+    association_contested: tuple = ()   # roles whose chosen track has contested identity
+    posterior: list = field(default_factory=list)  # complete assignments: {mapping,cost,prob}
+    null_mass: float = 0.0
+    posterior_mass_outside_top_k: float = 0.0
+    observed_dimensions: dict = field(default_factory=dict)
 
 
 class RoleBelief:
-    def __init__(self, role_signatures: dict):
+    def __init__(self, role_signatures: dict, role_signature_vars: dict | None = None,
+                 top_k: int | None = None, model_error_var: float = 1e-6,
+                 allow_null: bool = True, normalize_dimensions: bool = False,
+                 covariance_floor: float = VAR_FLOOR):
         self.sigs = {r: np.asarray(s, dtype=float)
                      for r, s in role_signatures.items() if s is not None}
+        provided = role_signature_vars or {}
+        self.sig_vars = {r: np.asarray(provided.get(r, np.full_like(s, 0.02 ** 2)), dtype=float)
+                         for r, s in self.sigs.items()}
+        # Categorical shape is observed exactly in this toy frontend.
+        for v in self.sig_vars.values():
+            if len(v) > 2:
+                v[2] = min(v[2], 1e-6)
         self.roles = sorted(self.sigs)
-        # demonstrated size ratios between role pairs (invariant to global scale)
-        self._demo_ratio = {}
-        for a, b in itertools.combinations(self.roles, 2):
-            self._demo_ratio[(a, b)] = self.sigs[a][0] / max(1e-6, self.sigs[b][0])
         self.prev: dict | None = None
+        self.top_k = top_k
+        self.model_error_var = float(model_error_var)
+        self.allow_null = bool(allow_null)
+        self.normalize_dimensions = bool(normalize_dimensions)
+        self.covariance_floor = float(covariance_floor)
 
-    def _assignment_cost(self, assign: dict, feats: dict) -> float:
+    def _pair_cost(self, role: str, tid: str, feats: dict, feat_vars: dict) -> float:
+        """Gaussian NLL for the dimensions both demo and deployment observed.
+
+        C(r,t) = sum_d ((x_r-x_t)^2 / (var_r+var_t) + log(var_r+var_t)).
+        A large per-axis camera variance excludes an occluded dimension instead
+        of treating its neutral placeholder as evidence.
+        """
+        x_r, x_t = self.sigs[role], feats[tid]
+        v_r, v_t = self.sig_vars[role], feat_vars[tid]
         c = 0.0
-        for role, tid in assign.items():
-            c += float(np.linalg.norm(W * (self.sigs[role] - feats[tid])))
-        for (a, b), dr in self._demo_ratio.items():
-            if a in assign and b in assign:
-                ar = feats[assign[a]][0] / max(1e-6, feats[assign[b]][0])
-                c += W_RATIO * abs(math.log(max(1e-6, ar) / max(1e-6, dr)))
+        n = 0
+        for d in OBSERVED_DIMS:
+            if d >= len(x_r) or d >= len(x_t):
+                continue
+            # Shape's nominal covariance is intentionally small; size axes are
+            # omitted whenever either side says that view did not observe them.
+            if d < 2 and (v_r[d] > MAX_UNOBSERVED_VAR or v_t[d] > MAX_UNOBSERVED_VAR):
+                continue
+            v = max(self.covariance_floor, float(v_r[d] + v_t[d] + self.model_error_var))
+            c += float((x_r[d] - x_t[d]) ** 2 / v + math.log(v))
+            n += 1
+        # No shared observed attribute is unsupported evidence, not a free match.
+        return (c / n if self.normalize_dimensions and n else c) if n else NULL_COST
+
+    def _assignment_cost(self, assign: dict, feats: dict, feat_vars: dict) -> float:
+        c = 0.0
+        for role in self.roles:
+            tid = assign.get(role)
+            c += NULL_COST if tid is None else self._pair_cost(role, tid, feats, feat_vars)
         return c
+
+    @staticmethod
+    def _complete_assignments(roles, tracks, allow_null=True):
+        """Enumerate one-to-one complete assignments with an explicit NULL."""
+        def visit(i, used, current):
+            if i == len(roles):
+                yield dict(current); return
+            role = roles[i]
+            if allow_null:
+                current[role] = None
+                yield from visit(i + 1, used, current)
+            for tid in tracks:
+                if tid not in used:
+                    current[role] = tid
+                    used.add(tid)
+                    yield from visit(i + 1, used, current)
+                    used.remove(tid)
+            current.pop(role, None)
+        yield from visit(0, set(), {})
 
     def update(self, belief: BeliefState, fixed: dict | None = None) -> RoleAssignment:
         """`fixed` pins clarified roles to tracks; the one-to-one assignment is then
@@ -84,39 +137,53 @@ class RoleBelief:
                  if r in self.sigs and t in belief.objects}
         tracks = sorted(belief.objects)
         feats = {t: belief.objects[t].feature() for t in tracks}
+        feat_vars = {t: belief.objects[t].feature_var() for t in tracks}
         free_roles = [r for r in self.roles if r not in fixed]
         available = [t for t in tracks if t not in set(fixed.values())]
-        if not self.roles or len(available) < len(free_roles):
+        if not self.roles:
             base = dict(self.prev or {}); base.update(fixed)
             pr = {r: (1.0 if r in fixed else 0.0) for r in self.roles}
             return RoleAssignment(base, 0.0, 0.0, True, pr)
 
         scored = []
-        if free_roles:
-            for combo in itertools.permutations(available, len(free_roles)):
-                assign = dict(fixed); assign.update(zip(free_roles, combo))
-                scored.append((self._assignment_cost(assign, feats), assign))
-        else:
-            scored.append((self._assignment_cost(dict(fixed), feats), dict(fixed)))
+        for partial in self._complete_assignments(free_roles, available, self.allow_null):
+            assign = dict(fixed); assign.update(partial)
+            scored.append((self._assignment_cost(assign, feats, feat_vars), assign))
+        if not scored:
+            # With nulls disabled, a temporarily under-detected scene has no
+            # legal complete assignment.  Represent that state explicitly as an
+            # unsupported/null assignment so policy abstention is safe instead of
+            # crashing the loop.
+            unsupported = dict(fixed)
+            unsupported.update({r: None for r in free_roles})
+            return RoleAssignment(unsupported, 0.0, 0.0, True,
+                                  {r: (1.0 if r in fixed else 0.0) for r in self.roles},
+                                  n_candidates=len(tracks),
+                                  posterior=[dict(mapping=unsupported, cost=NULL_COST * len(free_roles), prob=1.0)],
+                                  null_mass=1.0,
+                                  observed_dimensions={r: () for r in free_roles})
         scored.sort(key=lambda x: x[0])
-        best_cost, best = scored[0]
-        second_cost = scored[1][0] if len(scored) > 1 else best_cost + 10.0
+        exact_scored = scored
+        best_cost, best = exact_scored[0]
+        second_cost = exact_scored[1][0] if len(exact_scored) > 1 else best_cost + 10.0
         margin = second_cost - best_cost
 
         # softmax posterior over assignments -> confidence + entropy
+        exact_costs = np.array([c for c, _ in exact_scored])
+        exact_p = np.exp(-(exact_costs - best_cost))
+        exact_p /= exact_p.sum()
+        outside = 0.0
+        scored = exact_scored
+        if self.top_k is not None and len(scored) > self.top_k:
+            outside = float(exact_p[self.top_k:].sum())
+            scored = scored[:self.top_k]
         costs = np.array([c for c, _ in scored])
-        p = np.exp(-(costs - best_cost) / SOFTMAX_SCALE)
+        p = np.exp(-(costs - best_cost))
         p /= p.sum()
         entropy = float(-np.sum(p * np.log(p + 1e-12)))
 
-        # stickiness among FREE roles only; a fixed (clarified) role is authoritative.
         chosen = best
-        if not fixed and self.prev is not None and all(r in self.prev for r in self.roles):
-            if all(self.prev[r] in tracks for r in self.roles):
-                prev_cost = self._assignment_cost({r: self.prev[r] for r in self.roles}, feats)
-                if prev_cost - best_cost < STICK:
-                    chosen = {r: self.prev[r] for r in self.roles}
-        self.prev = dict(chosen)
+        self.prev = {r: t for r, t in chosen.items() if t is not None}
 
         # PER-ROLE marginal posterior: mass on each role's CHOSEN track, summed
         # over every (constrained) assignment that pairs them. Fixed roles are
@@ -129,21 +196,41 @@ class RoleBelief:
                 continue
             mass = {}
             for prob, assign in zip(p, (a for _, a in scored)):
-                mass[assign[r]] = mass.get(assign[r], 0.0) + float(prob)
-            per_role_conf[r] = mass.get(chosen[r], 0.0)
+                mass[assign.get(r)] = mass.get(assign.get(r), 0.0) + float(prob)
+            per_role_conf[r] = mass.get(chosen.get(r), 0.0) if chosen.get(r) is not None else 0.0
             ranked = sorted(mass.values(), reverse=True)
             per_role_margin[r] = (ranked[0] - ranked[1]) if len(ranked) > 1 else ranked[0]
         # weakest-link confidence, and ambiguous if any role is contested.
         confidence = float(min(per_role_conf.values())) if per_role_conf else 0.0
         weakest_margin = min(per_role_margin.values()) if per_role_margin else 1.0
-        ambiguous = (margin < AMBIG_MARGIN) or (confidence < ROLE_CONF_MIN) \
+        contested = tuple(sorted(r for r, t in chosen.items()
+                                 if t is not None and getattr(belief.objects[t], "association_contested", False)))
+        posterior = [dict(mapping=dict(a), cost=float(c), prob=float(prob))
+                     for (c, a), prob in zip(scored, p)]
+        exact_null_mass = float(sum(prob for item, prob in zip(exact_scored, exact_p)
+                                    if any(t is None for t in item[1].values())))
+        observed = {}
+        for r, tid in chosen.items():
+            if tid is None:
+                observed[r] = ()
+                continue
+            xr, xt = self.sigs[r], feats[tid]
+            vr, vt = self.sig_vars[r], feat_vars[tid]
+            observed[r] = tuple(d for d in OBSERVED_DIMS if d < len(xr) and d < len(xt)
+                                and (d >= 2 or (vr[d] <= MAX_UNOBSERVED_VAR and
+                                                vt[d] <= MAX_UNOBSERVED_VAR)))
+        ambiguous = bool(contested) or (margin < AMBIG_MARGIN) or (confidence < ROLE_CONF_MIN) \
             or (weakest_margin < ROLE_MARGIN_MIN)
         return RoleAssignment(chosen, confidence, entropy, ambiguous, per_role_conf,
                               margin=weakest_margin, assignment_margin=margin,
                               top_cost=best_cost, second_cost=second_cost,
-                              n_candidates=len(tracks))
+                              n_candidates=len(tracks), association_contested=contested,
+                              posterior=posterior,
+                              null_mass=exact_null_mass,
+                              posterior_mass_outside_top_k=outside,
+                              observed_dimensions=observed)
 
 
-def correspond(belief: BeliefState, role_signatures: dict) -> dict:
+def correspond(belief: BeliefState, role_signatures: dict, role_signature_vars: dict | None = None) -> dict:
     """One-shot convenience wrapper (no stickiness). Returns just the mapping."""
-    return RoleBelief(role_signatures).update(belief).mapping
+    return RoleBelief(role_signatures, role_signature_vars).update(belief).mapping

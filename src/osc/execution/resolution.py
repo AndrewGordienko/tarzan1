@@ -74,8 +74,10 @@ class ResolutionPolicy:
 
     def contested(self, ra, context: TaskContext) -> list:
         """Roles not yet trustworthy: below commit threshold and not user-resolved."""
+        association_contested = set(getattr(ra, "association_contested", ()))
         return sorted(r for r, c in ra.per_role_conf.items()
-                      if c < self.cfg.commit_threshold and r not in context.user_selections)
+                      if (c < self.cfg.commit_threshold or r in association_contested)
+                      and r not in context.user_selections)
 
     def committable(self, ra, context: TaskContext) -> bool:
         return not self.contested(ra, context)

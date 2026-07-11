@@ -81,6 +81,13 @@ class EpisodeRecord:
     clarifications: int = 0            # user questions asked
     resolution_inspection_frames: int = 0
     initially_ambiguous: bool = False  # first binding was not committable
+    viewpoints: list = field(default_factory=list)
+    viewpoint_frames: int = 0
+    viewpoint_actions: int = 0
+    association_contested: bool = False
+    viewpoint_diagnostics: list = field(default_factory=list)
+    assignment_diagnostics: dict = field(default_factory=dict)
+    assignment_failure_class: str = ""
     recovery_opportunity: bool = False
     recovered: bool = False
     collisions: int = 0
@@ -146,18 +153,63 @@ class Scorer:
         r2g = getattr(self.graph, "role_to_gt", {}) if self.graph is not None else {}
         if not r2g or not trace.final_track_poses:
             return True
+        return self.mapping_binding_correct(trace.correspondence, trace.final_track_poses, final_state)
+
+    def mapping_binding_correct(self, mapping, track_poses, final_state: SimState) -> bool:
+        r2g = getattr(self.graph, "role_to_gt", {}) if self.graph is not None else {}
+        if not r2g or not track_poses:
+            return True
         for role, gt_name in r2g.items():
-            tid = trace.correspondence.get(role)
-            if tid is None or tid not in trace.final_track_poses or gt_name not in final_state.objects:
+            tid = mapping.get(role)
+            if tid is None or tid not in track_poses or gt_name not in final_state.objects:
                 return False
-            p = trace.final_track_poses[tid]
+            p = track_poses[tid]
             nearest = min(final_state.objects, key=lambda n: dist_xy(final_state.objects[n].pose, p))
             if nearest != gt_name:
                 return False
         return True
 
+    def assignment_audit(self, trace, initial_state: SimState | None) -> tuple[dict, str]:
+        """Adjudicate the exact posterior against the initial-scene GT tracks."""
+        d = dict(getattr(trace, "assignment_diagnostics", {}) or {})
+        if not d or initial_state is None:
+            return d, ""
+        role_to_gt = getattr(self.graph, "role_to_gt", {}) if self.graph is not None else {}
+        poses = d.get("track_poses", {})
+        gt_track = {}
+        for role, name in role_to_gt.items():
+            if name not in initial_state.objects or not poses:
+                continue
+            gp = initial_state.objects[name].pose
+            gt_track[role] = min(poses, key=lambda tid: dist_xy(poses[tid], gp))
+        target = {r: gt_track.get(r) for r in role_to_gt}
+        posterior = d.get("posterior", [])
+        present = []
+        for item in posterior:
+            mapping = item.get("mapping", {})
+            present.append(mapping == target)
+        rank = (present.index(True) + 1) if True in present else None
+        top_correct = bool(present and present[0])
+        d.update(dict(gt_assignment=target, gt_assignment_rank=rank,
+                      gt_assignment_present=rank is not None,
+                      top_assignment_correct=top_correct,
+                      gt_assignment_posterior=(posterior[rank - 1]["prob"] if rank else 0.0)))
+        if rank is None:
+            category = "correct_assignment_excluded"
+        elif rank > 1:
+            category = "correct_assignment_present_but_scored_lower"
+        elif not trace.committed and top_correct:
+            category = "correct_assignment_ranked_first_policy_abstains"
+        elif not trace.committed:
+            category = "wrong_assignment_ranked_first_policy_abstains"
+        elif not top_correct:
+            category = "wrong_assignment_ranked_first_policy_commits"
+        else:
+            category = "correct_assignment_ranked_first_policy_commits"
+        return d, category
+
     def score(self, split, seed, final_state: SimState, step_info_log, trace,
-              disturbance, context, true_params) -> EpisodeRecord:
+              disturbance, context, true_params, initial_state: SimState | None = None) -> EpisodeRecord:
         success = bool(self.task.success(final_state, self.roles))
         collisions = sum(int(i.collision) for i in step_info_log)
         forces = sum(int(i.force_violation) for i in step_info_log)
@@ -186,8 +238,21 @@ class Scorer:
                 d2r = reps[0] - disturbance.at_step
 
         rbc = self.role_binding_correct(trace, final_state)
+        assignment_diagnostics, assignment_failure_class = self.assignment_audit(trace, initial_state)
+        viewpoint_diagnostics = []
+        for d in getattr(trace, "viewpoint_diagnostics", []):
+            d = dict(d)
+            d["binding_before_correct"] = self.mapping_binding_correct(
+                d["assignment_before"], d["track_poses_before"], final_state)
+            d["binding_after_correct"] = self.mapping_binding_correct(
+                d["assignment_after"], d["track_poses_after"], final_state)
+            viewpoint_diagnostics.append(d)
         # ambiguous = the agent flagged it OR the scene is objectively unidentifiable.
-        identifiable = self.identifiable(final_state)
+        # Identifiability is a property of the evidence available when choosing
+        # roles, not of objects after the robot may have moved/dropped them.  Using
+        # final_state here made labels configuration-dependent and could invert a
+        # pooled AUROC without any change to the score itself.
+        identifiable = self.identifiable(initial_state if initial_state is not None else final_state)
         ambiguous = bool(getattr(trace, "ambiguous", False)) or not identifiable
         cat = "" if success else self._categorize(final_state, trace, irrev, timeout, rbc, ambiguous)
         return EpisodeRecord(
@@ -200,6 +265,13 @@ class Scorer:
             clarifications=getattr(trace, "clarifications", 0),
             resolution_inspection_frames=getattr(trace, "resolution_inspection_frames", 0),
             initially_ambiguous=bool(getattr(trace, "initially_ambiguous", False)),
+            viewpoints=list(getattr(trace, "viewpoints", [])),
+            viewpoint_frames=getattr(trace, "viewpoint_frames", 0),
+            viewpoint_actions=getattr(trace, "viewpoint_actions", 0),
+            association_contested=bool(getattr(trace, "association_contested", False)),
+            viewpoint_diagnostics=viewpoint_diagnostics,
+            assignment_diagnostics=assignment_diagnostics,
+            assignment_failure_class=assignment_failure_class,
             inspections=getattr(trace, "inspections", 0),
             role_confidence=getattr(trace, "role_confidence", 1.0),
             role_entropy=getattr(trace, "role_entropy", 0.0),

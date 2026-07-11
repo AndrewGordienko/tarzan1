@@ -44,6 +44,10 @@ CAMERA_MEAS_STD = {
     "front":   (_SHARP, OCCLUDED, _SHARP),   # reveals height (z); occludes depth (y)
     "side":    (OCCLUDED, _SHARP, _SHARP),   # reveals height (z); occludes width (x)
 }
+# Labels are printed on the y-facing side in this toy camera model.  They are
+# deliberately unavailable from TOP and FRONT, so a side observation is a real
+# new appearance channel rather than a name/order shortcut.
+CAMERA_MARKER_VISIBLE = {"top": False, "top_rot": False, "front": False, "side": True}
 
 
 class ToyTabletopSim:
@@ -210,11 +214,12 @@ class ToyTabletopSim:
                 meas = np.array(CAMERA_MEAS_STD[self.camera], dtype=float)
                 occ = meas >= OCCLUDED
                 sz = np.where(occ, NEUTRAL_SIZE, o.size + self.rng.normal(0, 1.0, size=3) * meas)
-                dets.append(Detection(pose=p, size=sz, shape=o.shape, color=o.color,
+                marker = o.marker if CAMERA_MARKER_VISIBLE[self.camera] else "unknown"
+                dets.append(Detection(pose=p, size=sz, shape=o.shape, color=o.color, marker=marker,
                                       contact=(name == s.grasped), size_meas_std=meas.copy()))
             else:
                 dets.append(Detection(pose=p, size=o.size.copy(), shape=o.shape,
-                                      color=o.color, contact=(name == s.grasped)))
+                                      color=o.color, marker=o.marker, contact=(name == s.grasped)))
         self.rng.shuffle(dets)
         return Percept(detections=dets, gripper=s.gripper.copy(),
                        gripper_closed=s.gripper_closed, t=s.t)

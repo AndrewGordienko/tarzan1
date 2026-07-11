@@ -11,9 +11,9 @@ from osc.skills.correspondence import RoleBelief
 from osc.tasks import TASKS, record_demo
 
 
-def _o(tid, sz):
+def _o(tid, sz, contested=False):
     return BeliefObject(track_id=tid, pose=pose(0.4, 0.0), size=np.array([sz, sz, sz]),
-                        shape="box", color="x")
+                        shape="box", color="x", association_contested=contested)
 
 
 def _rb():
@@ -56,6 +56,17 @@ def test_committable_only_when_every_role_supported():
     ra = _rb().update(b, fixed={"manipuland0": "t0", "support0": "t1"})
     assert pol.committable(ra, ctx)                # both pinned -> whole assignment supported
     assert pol.decide(ra, ctx, 0, 1, None).kind == "commit"
+
+
+def test_association_contest_blocks_commit_even_with_a_confident_assignment():
+    b = BeliefState(objects={"t0": _o("t0", 0.036, contested=True),
+                              "t1": _o("t1", 0.050)})
+    ra = _rb().update(b)
+    pol = ResolutionPolicy(ResolutionConfig(allow_inspection=False, allow_clarification=False,
+                                            commit_threshold=0.60))
+    assert "manipuland0" in ra.association_contested
+    assert not pol.committable(ra, TaskContext())
+    assert pol.decide(ra, TaskContext(), 3, 0, 0.0).kind == "abstain"
 
 
 def test_workflow_asks_at_setup_then_stops_repeating():

@@ -16,6 +16,8 @@ from __future__ import annotations
 import time
 from dataclasses import dataclass, field
 
+import numpy as np
+
 from ..agent.env import AgentEnv
 from ..agent.estimator import StateEstimator
 from ..agent.dynamics_context import DynamicsContext
@@ -88,6 +90,12 @@ class AgentTrace:
     clarifications: int = 0             # user questions asked this episode
     resolution_inspection_frames: int = 0   # extra frames spent on active inspection
     initially_ambiguous: bool | None = None  # was the FIRST binding not committable
+    viewpoints: list = field(default_factory=list)
+    viewpoint_frames: int = 0
+    viewpoint_actions: int = 0
+    association_contested: bool = False
+    viewpoint_diagnostics: list = field(default_factory=list)
+    assignment_diagnostics: dict = field(default_factory=dict)
 
 
 @dataclass
@@ -107,6 +115,15 @@ class ExecConfig:
     allow_inspection: bool = True    # active inspection (more frames) when enabled
     allow_clarification: bool = True # ask-the-user clarification when enabled
     commit_threshold: float = 0.60   # weakest-role marginal required to commit
+    allow_viewpoint: bool = False    # camera move chosen from calibrated EIG
+    viewpoint_frames: int = 3        # extra frames collected after camera move
+    viewpoint_candidates: tuple = ("top", "top_rot", "front", "side")
+    assignment_top_k: int | None = None
+    assignment_allow_null: bool = True
+    assignment_normalize_dimensions: bool = False
+    assignment_model_error_var: float = 1e-6
+    assignment_covariance_floor: float = 1e-8
+    honor_clarification_constraints: bool = True
 
 
 class ClosedLoopExecutor:
@@ -127,7 +144,8 @@ class ClosedLoopExecutor:
             self.resolver = ResolutionPolicy(ResolutionConfig(
                 allow_inspection=self.cfg.allow_inspection,
                 allow_clarification=self.cfg.allow_clarification,
-                commit_threshold=self.cfg.commit_threshold))
+                commit_threshold=self.cfg.commit_threshold,
+                allow_viewpoint=self.cfg.allow_viewpoint))
         else:
             self.resolver = None
         # persists across a WORKFLOW when supplied: a clarification answered once
@@ -138,12 +156,19 @@ class ClosedLoopExecutor:
         #   oracle_goal(belief) -> bool               ground-truth stop decision
         self.oracle_corr = oracle_corr
         self.oracle_goal = oracle_goal
-        self.role_belief = RoleBelief(graph.role_signatures)
+        self.role_belief = RoleBelief(
+            graph.role_signatures, getattr(graph, "role_signature_vars", None),
+            top_k=self.cfg.assignment_top_k,
+            allow_null=self.cfg.assignment_allow_null,
+            normalize_dimensions=self.cfg.assignment_normalize_dimensions,
+            model_error_var=self.cfg.assignment_model_error_var,
+            covariance_floor=self.cfg.assignment_covariance_floor)
 
     def _fixed_from_context(self, belief):
         """Re-derive pinned track ids for every already-clarified role (track ids
         churn, so we re-resolve the OBJECT each call rather than re-ask)."""
-        if self.clarify_fn is None or not self.task_context.user_selections:
+        if (not self.cfg.honor_clarification_constraints or self.clarify_fn is None
+                or not self.task_context.user_selections):
             return {}
         ans = self.clarify_fn(tuple(sorted(self.task_context.user_selections)), belief)
         return {r: t for r, t in ans.items() if t is not None}
@@ -154,15 +179,19 @@ class ClosedLoopExecutor:
         re-check EVERY role, and only commit when the whole assignment is supported
         -- never merely because one clarification occurred. Persists on TaskContext."""
         from ..sim.base import Action
-        if self.resolver is None or self.oracle_corr:
-            return belief                            # feature off / oracle binding
+        if self.resolver is None:
+            return belief                            # feature off
         fixed = self._fixed_from_context(belief)
         ra = self.role_belief.update(belief, fixed=fixed)
+        self._record_resolution_assignment(ra, belief, tr)
         tr.initially_ambiguous = not self.resolver.committable(ra, self.task_context)
         inspections_used, last_gain = 0, None
+        tried_physical, tried_views = set(), set()
         while True:
             action = self.resolver.decide(ra, self.task_context, inspections_used,
-                                          tr.clarifications, last_gain)
+                                          tr.clarifications, last_gain, tried_physical)
+            tr.association_contested = tr.association_contested or bool(
+                getattr(ra, "association_contested", ()))
             if action.kind == "commit":
                 break
             if action.kind == "observe":
@@ -172,8 +201,62 @@ class ClosedLoopExecutor:
                     belief = self.est.update(self.env.step(Action(target=hold, gripper_close=0.0)))
                     tr.steps += 1; tr.resolution_inspection_frames += 1
                 ra = self.role_belief.update(belief, fixed=fixed)
+                self._record_resolution_assignment(ra, belief, tr)
                 last_gain = min(ra.per_role_conf.values(), default=1.0) - prev_weak
                 inspections_used += 1
+            elif action.kind == "change_viewpoint":
+                # Select from calibrated camera geometry and the *current belief*
+                # rather than encoding that FRONT is the answer.  A view is one
+                # shot per episode; evidence remains in the estimator when we
+                # return to the normal execution view.
+                view, eig = self._select_viewpoint(belief, ra, tried_views)
+                tried_physical.add("change_viewpoint")
+                if view is None:
+                    continue
+                tried_views.add(view)
+                before_mapping = dict(ra.mapping)
+                before_tracks = set(belief.objects)
+                before_attr = self._attribute_snapshot(belief, before_mapping.values())
+                before_poses = {t: belief.objects[t].pose.copy().tolist()
+                                for t in before_mapping.values() if t in belief.objects}
+                before_margin = ra.assignment_margin
+                event_start = len(getattr(self.est, "association_events", []))
+                p = self.env.set_viewpoint(view)
+                belief = self.est.update(p)
+                tr.steps += 1; tr.viewpoint_actions += 1; tr.viewpoints.append(view)
+                hold = belief.gripper.copy(); hold[2] += 0.02
+                for _ in range(self.cfg.viewpoint_frames):
+                    belief = self.est.update(self.env.step(Action(target=hold, gripper_close=0.0)))
+                    tr.steps += 1; tr.viewpoint_frames += 1
+                # Camera position is part of execution state, not an invisible
+                # reset.  Move back explicitly; fused evidence is retained.
+                if view != "top":
+                    belief = self.est.update(self.env.set_viewpoint("top"))
+                    tr.steps += 1; tr.viewpoint_actions += 1
+                ra = self.role_belief.update(belief, fixed=fixed)
+                self._record_resolution_assignment(ra, belief, tr)
+                after_attr = self._attribute_snapshot(belief, set(before_mapping.values()) | set(ra.mapping.values()))
+                events = getattr(self.est, "association_events", [])[event_start:]
+                actual_gain = self._realized_attribute_gain(before_attr, after_attr)
+                means_changed = any(not np.allclose(before_attr[t]["mean"], after_attr[t]["mean"], atol=1e-5)
+                                    for t in set(before_attr) & set(after_attr))
+                tr.viewpoint_diagnostics.append(dict(
+                    view=view, expected_information_gain=eig, realized_information_gain=actual_gain,
+                    assignment_before=before_mapping, assignment_after=dict(ra.mapping),
+                    assignment_margin_before=before_margin, assignment_margin_after=ra.assignment_margin,
+                    attribute_posterior_before=before_attr, attribute_posterior_after=after_attr,
+                    selected_view_revealed_discriminating_feature=ra.assignment_margin > before_margin + 0.05,
+                    nis_rejections=sum(not e["accepted"] for e in events),
+                    nis_events=events,
+                    track_identity_changed=before_tracks != set(belief.objects),
+                    assignment_changed=before_mapping != ra.mapping,
+                    assignment_changed_from_covariance_only=(before_mapping != ra.mapping and not means_changed
+                                                             and actual_gain > 0),
+                    track_poses_before=before_poses,
+                    track_poses_after={t: belief.objects[t].pose.copy().tolist()
+                                       for t in ra.mapping.values() if t in belief.objects},
+                ))
+                last_gain = max(last_gain or 0.0, eig)
             elif action.kind == "ask_user":
                 if self.clarify_fn is None:
                     tr.committed = False; break      # nobody to ask -> abstain
@@ -185,9 +268,98 @@ class ClosedLoopExecutor:
                 tr.clarifications += 1
                 # RECOMPUTE the constrained one-to-one assignment and re-check all roles
                 ra = self.role_belief.update(belief, fixed=fixed)
+                self._record_resolution_assignment(ra, belief, tr)
             else:                                    # abstain
                 tr.committed = False; break
         return belief
+
+    @staticmethod
+    def _record_resolution_assignment(ra, belief, tr: AgentTrace) -> None:
+        """Keep audit features valid even when policy abstains before planning."""
+        tr.role_confidence = ra.confidence
+        tr.min_role_confidence = min(tr.min_role_confidence, ra.confidence)
+        if not tr.corr_history:
+            tr.role_entropy = ra.entropy
+            tr.role_margin = ra.margin
+            tr.assignment_margin = ra.assignment_margin
+            tr.top_cost = ra.top_cost
+            tr.second_cost = ra.second_cost
+            tr.n_candidates = ra.n_candidates
+            objs = list(belief.objects.values())
+            if objs:
+                tr.track_uncertainty = sum(getattr(o, "pos_std", 0.0) for o in objs) / len(objs)
+                tr.staleness = sum(belief.t - getattr(o, "last_seen", belief.t)
+                                   for o in objs) / len(objs)
+        tr.ambiguous = tr.ambiguous or ra.ambiguous
+        if not tr.assignment_diagnostics:
+            tr.assignment_diagnostics = {
+                "top_assignment": dict(ra.mapping),
+                "top_cost": ra.top_cost,
+                "second_cost": ra.second_cost,
+                "log_likelihood_gap": ra.second_cost - ra.top_cost,
+                "null_mass": ra.null_mass,
+                "posterior_mass_outside_top_k": ra.posterior_mass_outside_top_k,
+                "posterior": list(ra.posterior),
+                "per_role_marginals": dict(ra.per_role_conf),
+                "observed_dimensions": dict(ra.observed_dimensions),
+                "track_poses": {tid: o.pose.copy().tolist() for tid, o in belief.objects.items()},
+                "track_ids": sorted(belief.objects),
+            }
+
+    def _select_viewpoint(self, belief, ra, tried_views: set) -> tuple[str | None, float]:
+        """Choose the calibrated view with maximum expected attribute-variance
+        reduction on contested role tracks.  This uses no GT role or camera state:
+        only belief covariance, current assignment, and sensor calibration.
+        """
+        try:
+            from ..sim.toy import CAMERA_MEAS_STD
+        except ImportError:  # pragma: no cover - alternate backends may omit it
+            return None, 0.0
+        roles = self.resolver.contested(ra, self.task_context)
+        best = (0.0, None)
+        for view in self.cfg.viewpoint_candidates:
+            # TOP is the normal execution camera, so choosing it would spend a
+            # "viewpoint" action without changing measurement geometry.
+            if view == "top" or view in tried_views or view not in CAMERA_MEAS_STD:
+                continue
+            mv = np.square(np.asarray(CAMERA_MEAS_STD[view], dtype=float))
+            gain = 0.0
+            for role in roles:
+                tid = ra.mapping.get(role)
+                obj = belief.objects.get(tid)
+                if obj is None:
+                    continue
+                sv = getattr(obj, "size_var", None)
+                if sv is None:
+                    sv = np.full(3, float(obj.size_std) ** 2)
+                sv = np.asarray(sv, dtype=float)
+                informative = mv < 0.5 ** 2
+                post = sv[informative] * mv[informative] / (sv[informative] + mv[informative])
+                # Lower role confidence and an association contest increase the
+                # value of an informative measurement without assuming its value.
+                weight = 1.0 - ra.per_role_conf.get(role, 0.0)
+                if getattr(obj, "association_contested", False):
+                    weight = max(weight, 1.0)
+                gain += float(np.sum(sv[informative] - post)) * max(0.05, weight)
+            if gain > best[0]:
+                best = (gain, view)
+        return best[1], best[0]
+
+    @staticmethod
+    def _attribute_snapshot(belief, tids):
+        out = {}
+        for tid in set(t for t in tids if t is not None):
+            obj = belief.objects.get(tid)
+            if obj is None:
+                continue
+            var = obj.size_var if obj.size_var is not None else np.full(3, obj.size_std ** 2)
+            out[tid] = {"mean": obj.size.copy().tolist(), "var": np.asarray(var).copy().tolist()}
+        return out
+
+    @staticmethod
+    def _realized_attribute_gain(before, after) -> float:
+        return float(sum(np.sum(np.asarray(before[t]["var"]) - np.asarray(after[t]["var"]))
+                         for t in set(before) & set(after)))
 
     def _plan(self, belief, tr: AgentTrace):
         """Re-resolve roles->tracks against the CURRENT belief (track ids churn
@@ -197,6 +369,7 @@ class ClosedLoopExecutor:
             corr = self.oracle_corr(belief)
         else:
             ra = self.role_belief.update(belief, fixed=self._fixed_from_context(belief))
+            self._record_resolution_assignment(ra, belief, tr)
             corr = ra.mapping
             tr.role_confidence = ra.confidence
             tr.min_role_confidence = min(tr.min_role_confidence, ra.confidence)
