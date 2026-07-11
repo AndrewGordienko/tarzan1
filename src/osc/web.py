@@ -1,0 +1,64 @@
+from __future__ import annotations
+import argparse,json,mimetypes,secrets
+from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
+from pathlib import Path
+from urllib.parse import urlparse
+from .packing.benchmark import policy_demos,policy_sensitive_scenario,run_episode
+from .packing.compiler import compile_with_inferred_posterior
+ROOT=Path(__file__).resolve().parents[2]; ARTIFACTS=ROOT/'artifacts'; RUNS={}
+def clean(v):
+    if isinstance(v,dict): return {str(k):clean(x) for k,x in v.items() if not str(k).startswith('_')}
+    if isinstance(v,(tuple,list)): return [clean(x) for x in v]
+    if hasattr(v,'item'): return v.item()
+    return v
+def infer(kind):
+    if kind=='ood':
+        from .packing.demonstration import PackingEvent
+        events=[PackingEvent('teleport_object','mystery')]
+    else: events=policy_demos()[{'heavy':'correct_heavy_bottom','volume':'different_max_volume','rehandling':'minimize_rehandling'}.get(kind,'correct_heavy_bottom')]
+    p=compile_with_inferred_posterior(events); return p,p.policy_name!='unknown_or_unexplained'
+class Handler(BaseHTTPRequestHandler):
+    def send_json(self,status,v):
+        d=json.dumps(clean(v),indent=2).encode(); self.send_response(status); self.send_header('Content-Type','application/json'); self.send_header('Content-Length',str(len(d))); self.end_headers(); self.wfile.write(d)
+    def do_GET(self):
+        p=urlparse(self.path).path
+        if p=='/': return self.send_html()
+        if p=='/api/status': return self.send_json(200,{'status':'ready','scope':'structured one-shot task acquisition','mujoco':self.has_mujoco()})
+        if p=='/api/artifacts':
+            ns=['packing_policy_comparison.gif','packing_demo.gif','embodied_packing.mp4','packing_program.json','packing_report_oracle.json','packing_report_belief.json','embodied_attribution_dev_0_9.json','embodied_rearrangement_dev_100_109.json']; return self.send_json(200,{'artifacts':[{'name':n,'exists':(ARTIFACTS/n).is_file()} for n in ns]})
+        if p=='/api/evidence':
+            out={}
+            for n in ('packing_report_oracle.json','packing_report_belief.json','embodied_attribution_dev_0_9.json','embodied_rearrangement_dev_100_109.json'):
+                q=ARTIFACTS/n
+                if q.is_file(): out[n]=json.loads(q.read_text())
+            return self.send_json(200,out)
+        if p.startswith('/api/runs/'):
+            rid=p.rsplit('/',1)[-1]; return self.send_json(200 if rid in RUNS else 404,RUNS.get(rid,{'error':'run not found'}))
+        if p.startswith('/artifacts/'):
+            q=(ARTIFACTS/p[11:]).resolve()
+            if ARTIFACTS.resolve() not in q.parents or not q.is_file(): self.send_json(404,{'error':'not found'}); return
+            d=q.read_bytes(); self.send_response(200); self.send_header('Content-Type',mimetypes.guess_type(str(q))[0] or 'application/octet-stream'); self.send_header('Content-Length',str(len(d))); self.end_headers(); self.wfile.write(d); return
+        self.send_json(404,{'error':'not found'})
+    def do_POST(self):
+        p=urlparse(self.path).path
+        try: b=json.loads(self.rfile.read(int(self.headers.get('Content-Length',0))) or b'{}')
+        except Exception: return self.send_json(400,{'error':'invalid JSON'})
+        if p=='/api/demo/infer':
+            q,ok=infer(b.get('demo','heavy')); return self.send_json(200,{'accepted':ok,'program':q.to_dict()})
+        if p=='/api/demo/execute':
+            q,ok=infer(b.get('demo','heavy')); rid=secrets.token_urlsafe(8)
+            if not ok: result={'run_id':rid,'status':'abstained','reason':'unknown_or_unexplained','program':q.to_dict(),'trace':{'actions':[]}}
+            else:
+                x=run_episode(policy_sensitive_scenario(),'oracle',0,program=q,capture_states=True); result={'run_id':rid,'status':'complete' if x['success'] else 'abstained','program':q.to_dict(),'trace':{'actions':x['actions'],'layout':x['placement_layout'],'scenario':x['scenario'],'reason':x['reason']},'metrics':{'success':x['success'],'rearranged':x['rearranged'],'violations':x['violations']}}
+            RUNS[rid]=result; return self.send_json(200,result)
+        self.send_json(404,{'error':'not found'})
+    def send_html(self):
+        d=HTML.encode(); self.send_response(200); self.send_header('Content-Type','text/html; charset=utf-8'); self.send_header('Content-Length',str(len(d))); self.end_headers(); self.wfile.write(d)
+    def has_mujoco(self):
+        try: import mujoco; return True
+        except ImportError: return False
+    def log_message(self,*args): pass
+HTML='''<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tarzan · Teach once</title><style>:root{--bg:#0b1118;--p:#121c26;--l:#253544;--t:#edf4f8;--m:#8ea3b2;--b:#64b5e8;--g:#55d6a1;--a:#e7b86b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font:14px system-ui,sans-serif}header{height:64px;border-bottom:1px solid var(--l);display:flex;align-items:center;padding:0 34px;justify-content:space-between}.brand{font-size:20px;font-weight:700;letter-spacing:.1em}nav{display:flex;gap:25px;color:var(--m)}nav a{color:inherit;text-decoration:none}.badge,.tag{border:1px solid #2f607b;border-radius:999px;padding:6px 10px;color:var(--b);font-size:11px;text-transform:uppercase;letter-spacing:.08em}.wrap{max-width:1240px;margin:auto;padding:42px 28px}.hero,.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.hero{grid-template-columns:1.2fr .8fr;align-items:end;gap:28px}.eyebrow{color:var(--b);letter-spacing:.14em;text-transform:uppercase;font-size:11px}.hero h1{font-size:50px;line-height:1.04;margin:12px 0}.hero p{font-size:18px;color:var(--m)}.panel{background:var(--p);border:1px solid var(--l);border-radius:10px;padding:22px}.wide{grid-column:1/-1}.button{background:var(--b);border:0;border-radius:6px;padding:12px 18px;font-weight:700;cursor:pointer}.ghost{background:transparent;color:var(--t);border:1px solid var(--l);margin-left:8px}.stage{display:flex;gap:7px;margin:30px 0}.stage span{flex:1;padding:10px 8px;border-top:2px solid var(--l);color:var(--m);font-size:12px}.stage span.active{border-color:var(--b);color:var(--t)}select,pre{background:#0c141c;color:var(--t);border:1px solid var(--l);padding:11px;border-radius:5px;width:100%;margin:10px 0}pre{white-space:pre-wrap;max-height:300px;overflow:auto;color:#b9d9e7}.muted{color:var(--m)}.ok{color:var(--g)}.warn{color:var(--a)}.viz{height:250px;background:#0a1219;border:1px solid var(--l);border-radius:6px;position:relative}.box{position:absolute;left:12%;bottom:17%;width:76%;height:58%;border:2px solid #b5a268}.item{position:absolute;width:17%;height:20%;background:var(--b);border:2px solid #d8f3ff;transition:all .7s}.item.a{left:20%;bottom:18%}.item.b{left:43%;bottom:18%;background:var(--a)}.item.c{left:65%;bottom:18%;background:var(--g)}.item.top{bottom:50%;left:43%}.video{width:100%;border-radius:6px;border:1px solid var(--l)}footer{border-top:1px solid var(--l);margin-top:50px;padding:24px 0;color:var(--m)}@media(max-width:800px){.hero,.grid{grid-template-columns:1fr}.hero h1{font-size:38px}nav{display:none}}</style><header><div class="brand">TARZAN</div><nav><a href="#live">Live Demo</a><a href="#embodied">Embodied</a><a href="#rearrange">Rearrangement</a><a href="#evidence">Evidence</a></nav><span class="badge">Local / verified scope</span></header><main class="wrap"><section class="hero"><div><div class="eyebrow">One-shot task acquisition</div><h1>Teach once.<br>Execute on changed orders.</h1><p>Tarzan turns one packing demonstration into an explicit task program, then plans, executes, verifies, and recovers on a new order.</p><button class="button" onclick="document.querySelector('#live').scrollIntoView({behavior:'smooth'})">Run the demo</button></div><div class="panel"><div class="eyebrow">Current scope</div><h2>Structured physical work</h2><p class="muted">Logical one-shot planning is live. Camera-derived MuJoCo scripted execution is live for the one-object smoke path.</p><span class="tag">No learned controller claims</span></div></section><div class="stage"><span class="active">01 Watch demonstration</span><span>02 Infer task</span><span>03 Compile program</span><span>04 Plan changed order</span><span>05 Execute</span><span>06 Verify</span></div><section id="live" class="grid"><div class="panel"><h2>Live demonstration <span class="tag">LIVE RUN</span></h2><select id="demo"><option value="heavy">Heavy items below fragile items</option><option value="volume">Maximize volume</option><option value="rehandling">Minimize rehandling</option><option value="ood">Ambiguous / OOD demonstration</option></select><button class="button" onclick="teach()">Teach Tarzan</button> <button class="button ghost" onclick="execute()">Run changed order</button><p id="state" class="muted">Ready.</p></div><div class="panel"><h2>Program posterior <span class="tag">LIVE RUN</span></h2><pre id="posterior">Select a demonstration.</pre></div><div class="panel wide"><h2>Changed-order trace <span id="traceTag" class="tag">WAITING</span></h2><div class="viz"><div class="box"><div class="item a"></div><div class="item b"></div><div class="item c"></div></div></div><pre id="trace">The actual planner trace appears after execution.</pre></div></section><section id="embodied" class="grid"><div class="panel wide"><h2>Embodied execution <span class="tag">RECORDED ARTIFACT</span></h2><p class="muted">MuJoCo execution from simulator-rendered segmentation and depth; not raw-RGB perception and not a learned controller.</p><video class="video" controls muted loop src="/artifacts/embodied_packing.mp4"></video></div></section><section id="rearrange" class="grid"><div class="panel wide"><h2>Rearrangement laboratory <span class="tag">FORCED CONTROL</span></h2><p>Execution upper bound: forced correct rearrangement sequence, 10/10 development runs.</p><pre id="rearrangement">Loading evidence…</pre><div class="panel"><span class="tag" style="color:var(--a)">NOT IMPLEMENTED</span><p>Autonomous physical rearrangement: not yet implemented.</p></div></div></section><section id="evidence" class="grid"><div class="panel"><h2>Evidence <span class="tag">RECORDED ARTIFACT</span></h2><h1>100% / 88%</h1><p class="muted">Oracle / belief feasible completion. Belief overall correct decision: 91%.</p><pre>OOD → unknown_or_unexplained → abstain | Forced rearrangement → 10/10 | Held-out composition → recorded artifact</pre></div><div class="panel"><h2>Architecture</h2><p>Demonstration → object-centric history → task inference → explicit program → world-model search → skill controller → verification and recovery.</p><p class="muted">Tarzan owns intent and recovery. Continuous motor control remains replaceable.</p></div></section><footer>Tarzan local customer demo · Live runs and recorded evidence are explicitly labelled.</footer></main><script>let current=null,$=x=>document.getElementById(x);async function teach(){let d=$('demo').value;$('state').textContent='Compiling demonstration…';current=await(await fetch('/api/demo/infer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({demo:d})})).json();$('posterior').textContent=JSON.stringify({accepted:current.accepted,policy:current.program.policy_name,posterior:current.program.posterior,constraints:current.program.constraint_posterior},null,2);$('state').innerHTML=current.accepted?'<span class="ok">Accepted · reusable program compiled</span>':'<span class="warn">Abstained · outside current vocabulary</span>';document.querySelectorAll('.stage span').forEach((x,i)=>{if(i==1||i==2)x.classList.add('active')})}async function execute(){if(!current)await teach();let x=await(await fetch('/api/demo/execute',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({demo:$('demo').value})})).json();$('traceTag').textContent=x.status.toUpperCase();$('trace').textContent=JSON.stringify(x.trace,null,2);document.querySelectorAll('.stage span').forEach((x,i)=>{if(i>2)x.classList.add('active')});if(x.status==='complete')document.querySelector('.item.a').classList.add('top')}fetch('/api/evidence').then(r=>r.json()).then(x=>{let d=x['embodied_rearrangement_dev_100_109.json'];if(d)$('rearrangement').textContent=JSON.stringify({controls:d.controls,lanes:d.lanes},null,2)})</script></main>'''
+def main():
+    ap=argparse.ArgumentParser(); ap.add_argument('--port',type=int,default=8765); a=ap.parse_args(); print(f'http://localhost:{a.port}'); ThreadingHTTPServer(('127.0.0.1',a.port),Handler).serve_forever()
+if __name__=='__main__': main()

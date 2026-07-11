@@ -95,6 +95,13 @@ seeds 100--109, with no-removal/wrong-object controls and scorer-only checks.
 Autonomous multi-object removal is intentionally reported as unimplemented until
 the planner is connected; forced execution is not counted as planner success.
 
+### Customer localhost demo
+
+Run `./scripts/run_customer_demo.sh` and open `http://localhost:8765`. The
+application calls the real packing compiler and executor for logical runs,
+renders the recorded MuJoCo smoke trajectory, and labels forced and
+unimplemented rearrangement evidence explicitly.
+
 ## The result that matters: an evidence-based error budget
 
 Perfect-component swaps (same task/split/seed) show what to fix — and refuted the
