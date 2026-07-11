@@ -22,6 +22,7 @@ class DemoTrace:
     gripper_closed: list[float]
     grasped: list                       # track_id or None, per frame
     features: dict[str, np.ndarray]     # track_id -> appearance/geometry signature
+    feature_vars: dict[str, np.ndarray] # track_id -> uncertainty of that signature
     T: int = 0
 
     def contact_of(self, tid: str, t: int) -> bool:
@@ -36,19 +37,20 @@ def extract_tracks(beliefs: list[BeliefState]) -> DemoTrace:
             if k not in ids:
                 ids.append(k)
     tracks = {i: [] for i in ids}
-    feats = {}
+    feats, feat_vars = {}, {}
     grip, gclosed, grasped = [], [], []
     for b in beliefs:
         for i in ids:
             if i in b.objects:
                 tracks[i].append(b.objects[i].pose.copy())
                 feats[i] = b.objects[i].feature()
+                feat_vars[i] = b.objects[i].feature_var()
             else:
                 tracks[i].append(tracks[i][-1] if tracks[i] else np.zeros(4))
         grip.append(b.gripper.copy())
         gclosed.append(b.gripper_closed)
         grasped.append(b.grasped)
-    return DemoTrace(tracks, grip, gclosed, grasped, feats, T=len(beliefs))
+    return DemoTrace(tracks, grip, gclosed, grasped, feats, feat_vars, T=len(beliefs))
 
 
 @dataclass

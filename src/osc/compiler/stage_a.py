@@ -92,22 +92,31 @@ def compile_demo(trace: DemoTrace) -> TaskGraph:
         ref_pose = pose() if ref_role == "world" else trace.object_tracks[ref_tk][t1]
         rel = relative(ref_pose, subj_pose)
         stacked = ref_role != "world" and subj_pose[2] > ref_pose[2] + 1e-3
+        # demonstrated object radii (from role signatures) for size-normalization
+        r_sub = float(trace.features.get(tk, [0.04])[0]) / 2
+        r_ref = float(trace.features.get(ref_tk, [0.04])[0]) / 2 if ref_tk else 0.04
+        relation = None
         if stacked:
             add = {Predicate("on_top", (subj, ref_role))}
+            relation = {"type": "on_top", "align_xy": rel[:2].copy(), "clearance": 0.004}
         elif ref_role != "world":
-            # placed on the table AT the demonstrated offset from a reference:
-            # on_table alone is trivially already true, so the goal is the offset.
             add = {Predicate("at_rel", (subj, ref_role))}
             goal_rel[(subj, ref_role)] = rel
+            d = float(np.hypot(rel[0], rel[1]))
+            relation = {"type": "beside",
+                        "dir": (rel[:2] / d).copy() if d > 1e-6 else np.array([1.0, 0.0]),
+                        "dist_norm": d / max(1e-6, r_sub + r_ref)}
         else:
             add = {Predicate("on_table", (subj,))}
         transitions.append(Transition(
             subject=subj, reference=ref_role, rel_transform=rel,
             add=frozenset(add), remove=frozenset({Predicate("grasped", (subj,))}),
-            contact=False, reason="place", abs_target=subj_pose.copy()))
+            contact=False, reason="place", abs_target=subj_pose.copy(), relation=relation))
         goal.update(add)
 
     sigs = {role: trace.features.get(tk) for tk, role in track_role.items()}
+    sig_vars = {role: trace.feature_vars.get(tk) for tk, role in track_role.items()}
     return TaskGraph(transitions=transitions, goal=frozenset(goal), goal_rel=goal_rel,
                      roles=list(track_role.values()), role_signatures=sigs,
+                     role_signature_vars=sig_vars,
                      demo_role_tracks={r: t for t, r in track_role.items()})

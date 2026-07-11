@@ -127,8 +127,17 @@ DEFAULT_TASKS = [STACK, SIDE_PLACE]
 
 
 # ---------------------------------------------------------------- demo
-def record_demo(task: TaskSpec, settle_steps: int = 6) -> TaskGraph:
+def record_demo(task: TaskSpec, settle_steps: int = 6, *, camera_model: bool = False,
+                inspection_views: tuple[str, ...] | None = None) -> TaskGraph:
+    """Record/compile through the same sensor capabilities used in deployment.
+
+    With camera geometry enabled, a demonstration is actively inspected from the
+    supplied calibrated views before its manipulation trace is compiled.  This
+    avoids a privileged demo signature (for example an exact height) that the
+    production resolver could never have observed.
+    """
     state, backend, _ = nominal(task.scene)
+    backend.camera_model = camera_model
     backend.reset(state)
     est = StateEstimator()
     corr = Corruptor(CorruptionSpec(pos_noise=0.002, occlusion_prob=0.0, drop_prob=0.0,
@@ -136,8 +145,38 @@ def record_demo(task: TaskSpec, settle_steps: int = 6) -> TaskGraph:
                                     identity_swap_prob=0.0),
                      np.random.default_rng(0))
     beliefs = [est.update(corr(backend.perceive()))]
+    if camera_model:
+        # The product workflow has a calibrated setup sweep.  TOP is retained as
+        # the normal execution view; the useful side/front evidence is fused into
+        # the same anonymous tracks before compilation.
+        views = inspection_views or ("top", "front", "side")
+        sensor_t = beliefs[-1].t
+        for view in views:
+            backend.set_camera(view)
+            p = corr(backend.perceive())
+            sensor_t += 1
+            p.t = sensor_t
+            beliefs.append(est.update(p))
+        backend.set_camera("top")
     for target, grip in task.oracle(backend.state()):
         for _ in range(settle_steps):
             backend.step(Action(target=target, gripper_close=grip))
             beliefs.append(est.update(corr(backend.perceive())))
-    return compile_demo(extract_tracks(beliefs))
+    graph = compile_demo(extract_tracks(beliefs))
+    graph.role_to_gt = _role_to_gt(graph, beliefs[-1], backend.state())
+    return graph
+
+
+def _role_to_gt(graph, final_belief, gt_state) -> dict:
+    """Map each compiled role to the ground-truth object name it corresponds to,
+    by matching the role's demo track position to the nearest GT object. Used ONLY
+    by oracle attribution modes and scoring -- never by the deployed agent."""
+    from .geometry import dist_xyz
+    mapping = {}
+    for role, tid in graph.demo_role_tracks.items():
+        if tid not in final_belief.objects:
+            continue
+        p = final_belief.objects[tid].pose
+        best = min(gt_state.objects, key=lambda n: dist_xyz(gt_state.objects[n].pose, p))
+        mapping[role] = best
+    return mapping

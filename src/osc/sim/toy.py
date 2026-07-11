@@ -27,10 +27,33 @@ GRASP_Z = 0.03       # max vertical offset to acquire a grasp
 CLOSE_THRESH = 0.6   # gripper_closed above this counts as "closed"
 FORCE_LIMIT = 8.0    # abstract force units before a violation is flagged
 
+# Per-camera size measurement std, per axis [x, y, z]. A view cannot resolve a
+# dimension along its optical axis: the default TOP view foreshortens HEIGHT (z);
+# a FRONT/SIDE view reveals it but blurs the axis it looks down. This is the
+# explicit partial-observability that a change_viewpoint action must overcome.
+# (A per-axis abstraction of camera geometry; real SE3 calibration arrives with
+# the ManiSkill backend.) The same cameras exist in demo and deployment.
+# A dimension along a view's optical axis is OCCLUDED (uninformative, std OCCLUDED)
+# -- not merely noisy -- so repeated frames from that view carry NO new evidence.
+# The sharp axes get a small std. Same cameras exist in demo and deployment.
+_SHARP, OCCLUDED = 0.002, 1.0
+NEUTRAL_SIZE = 0.040                     # uninformed prior emitted on an occluded axis
+CAMERA_MEAS_STD = {
+    "top":     (_SHARP, _SHARP, OCCLUDED),   # default: footprint sharp, height occluded
+    "top_rot": (_SHARP, _SHARP, OCCLUDED),   # a DIFFERENT view that still can't see height
+    "front":   (_SHARP, OCCLUDED, _SHARP),   # reveals height (z); occludes depth (y)
+    "side":    (OCCLUDED, _SHARP, _SHARP),   # reveals height (z); occludes width (x)
+}
+# Labels are printed on the y-facing side in this toy camera model.  They are
+# deliberately unavailable from TOP and FRONT, so a side observation is a real
+# new appearance channel rather than a name/order shortcut.
+CAMERA_MARKER_VISIBLE = {"top": False, "top_rot": False, "front": False, "side": True}
+
 
 class ToyTabletopSim:
     def __init__(self, actuator_delay: float = 0.25, lighting: float = 0.5,
-                 camera_jitter: float = 0.0, rng: np.random.Generator | None = None):
+                 camera_jitter: float = 0.0, rng: np.random.Generator | None = None,
+                 camera_model: bool = False):
         # actuator_delay in [0,1): fraction of the remaining error left uncorrected
         # each step (0 = instantaneous, ->1 = very sluggish).
         self.actuator_delay = float(np.clip(actuator_delay, 0.0, 0.95))
@@ -39,6 +62,14 @@ class ToyTabletopSim:
         self.rng = rng or np.random.default_rng(0)
         self._s: SimState | None = None
         self._pre_step_hook = None       # used by disturbance injection
+        self.camera_model = camera_model # off by default -> exact sizes (headline bench)
+        self.camera = "top"              # current viewpoint (observation state)
+
+    def set_camera(self, name: str) -> None:
+        """Move the camera. An ACTION, not privileged state -- changes which size
+        axis is observable in subsequent percepts."""
+        if name in CAMERA_MEAS_STD:
+            self.camera = name
 
     # -- SimBackend -------------------------------------------------------
     def reset(self, state: SimState) -> Observation:
@@ -79,7 +110,7 @@ class ToyTabletopSim:
             held.pose = pose(s.gripper[0], s.gripper[1], s.gripper[2], s.gripper[3])
 
         self._resolve_contacts(move, info)
-        self._settle()
+        self._settle(info)
         s.t += 1
         return self.observe(), info
 
@@ -107,17 +138,21 @@ class ToyTabletopSim:
                 # push the struck object; heavier/higher-friction slides less.
                 resist = o.mass * (1.0 + o.friction)
                 push = max(0.0, speed_xy - 0.002) / (1.0 + resist)
-                if push < 1e-4 and speed_xy > 0.01:
-                    # commanded laterally into an ~immovable object -> reaction force.
-                    if speed_xy * (1.0 + resist) * 40.0 > FORCE_LIMIT:
-                        info.force_violation = True
+                # contact reaction force ~ commanded speed into the object scaled
+                # by how much it resists. Fires on ANY hard collision -- the old
+                # `push < 1e-4` gate made this unreachable for every configured
+                # mass (min push ~0.004), so the zero rate was structural, not
+                # earned. A gentle agent (speed<0.02) still stays well under the
+                # limit; only driving hard into a heavy object violates.
+                if speed_xy * (1.0 + resist) * 40.0 > FORCE_LIMIT:
+                    info.force_violation = True
                 direction = (o.pose[:2] - ref[:2])
                 n = np.linalg.norm(direction)
                 if n > 1e-6:
                     o.pose[:2] += (direction / n) * push
                     info.events.append(f"pushed:{name}")
 
-    def _settle(self) -> None:
+    def _settle(self, info: "StepInfo | None" = None) -> None:
         """Apply gravity/support: unheld objects rest on table or on a support;
         objects beyond the table edge fall off (irreversible)."""
         s = self._s
@@ -126,8 +161,11 @@ class ToyTabletopSim:
             if name == s.grasped or name in s.fallen:
                 continue
             if not (xmin <= o.pose[0] <= xmax and ymin <= o.pose[1] <= ymax):
-                s.fallen.add(name)
+                s.fallen.add(name)            # newly left the table this step
                 o.pose[2] = s.table_z - 0.5
+                if info is not None:
+                    info.irreversible = True
+                    info.events.append(f"fell:{name}")
                 continue
             support_top = s.table_z
             for other, oo in s.objects.items():
@@ -138,7 +176,8 @@ class ToyTabletopSim:
                 if oo.pose[2] >= o.pose[2]:
                     continue
                 if dist_xy(o.pose, oo.pose) < (_radius(o) + _radius(oo)) * 0.7:
-                    support_top = max(support_top, oo.pose[2] + oo.size[2])
+                    # top surface of the support is its centre + HALF its height.
+                    support_top = max(support_top, oo.pose[2] + oo.size[2] / 2)
             o.pose[2] = support_top + o.size[2] / 2
 
     def observe(self) -> Observation:
@@ -169,8 +208,18 @@ class ToyTabletopSim:
                 continue
             p = o.pose.copy()
             p[:2] += self.rng.normal(0, noise, size=2)
-            dets.append(Detection(pose=p, size=o.size.copy(), shape=o.shape,
-                                  color=o.color, contact=(name == s.grasped)))
+            if self.camera_model:
+                # occluded axes emit an uninformed prior (no per-frame evidence);
+                # sharp axes emit the true size + small calibrated noise.
+                meas = np.array(CAMERA_MEAS_STD[self.camera], dtype=float)
+                occ = meas >= OCCLUDED
+                sz = np.where(occ, NEUTRAL_SIZE, o.size + self.rng.normal(0, 1.0, size=3) * meas)
+                marker = o.marker if CAMERA_MARKER_VISIBLE[self.camera] else "unknown"
+                dets.append(Detection(pose=p, size=sz, shape=o.shape, color=o.color, marker=marker,
+                                      contact=(name == s.grasped), size_meas_std=meas.copy()))
+            else:
+                dets.append(Detection(pose=p, size=o.size.copy(), shape=o.shape,
+                                      color=o.color, marker=o.marker, contact=(name == s.grasped)))
         self.rng.shuffle(dets)
         return Percept(detections=dets, gripper=s.gripper.copy(),
                        gripper_closed=s.gripper_closed, t=s.t)

@@ -1,0 +1,8140 @@
+{
+  "episodes": 100,
+  "perception": "belief",
+  "completion_rate": 0.88,
+  "impossible_abstention_rate": 1.0,
+  "overall_correct_decision": 0.91,
+  "rearrangement_rate": 0.16,
+  "violations": 0,
+  "baseline_literal_completion": 0.25,
+  "baseline_greedy_completion": 0.5,
+  "baseline_overall_correct_decision": {
+    "literal": 0.5,
+    "greedy": 0.75
+  },
+  "planner_improvement_over_literal": 0.41000000000000003,
+  "planner_improvement_over_greedy": 0.16000000000000003,
+  "baseline_by_scenario": {
+    "changed_inventory": {
+      "literal": false,
+      "greedy": true,
+      "literal_violations": {
+        "geometric": 1,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 0,
+        "correct_abstention": 0
+      },
+      "greedy_violations": {
+        "geometric": 0,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 1,
+        "correct_abstention": 0
+      }
+    },
+    "different_box_orientations": {
+      "literal": true,
+      "greedy": true,
+      "literal_violations": {
+        "geometric": 0,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 1,
+        "correct_abstention": 0
+      },
+      "greedy_violations": {
+        "geometric": 0,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 1,
+        "correct_abstention": 0
+      }
+    },
+    "late_large_rearrangement": {
+      "literal": false,
+      "greedy": false,
+      "literal_violations": {
+        "geometric": 2,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 0,
+        "correct_abstention": 0
+      },
+      "greedy_violations": {
+        "geometric": 1,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 0,
+        "correct_abstention": 0
+      }
+    },
+    "impossible_order": {
+      "literal": false,
+      "greedy": false,
+      "literal_violations": {
+        "geometric": 1,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 0,
+        "correct_abstention": 1
+      },
+      "greedy_violations": {
+        "geometric": 1,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 0,
+        "correct_abstention": 1
+      }
+    }
+  },
+  "demo_dependence": {
+    "correct_heavy_bottom": {
+      "success": true,
+      "program_policy": "heavy_bottom_fragile_top",
+      "program_posterior": {
+        "unknown_or_unexplained": 0.00012196827794415957,
+        "neutral_prior": 0.002449798350105033,
+        "heavy_bottom_fragile_top": 0.9883191926833665,
+        "maximize_volume": 0.002449798350105033,
+        "minimize_rehandling": 0.006659242338479461
+      },
+      "constraint_posterior": {
+        "all_inside": 0.99,
+        "heavy_below_fragile": 0.94,
+        "fragile_never_supports": 0.98,
+        "maximize_fill": 0.31,
+        "minimize_rehandling": 0.31,
+        "large_items_first": 0.27,
+        "preserve_future_space": 0.87,
+        "reproduce_exact_coordinates": 0.02
+      },
+      "policy_behavior_match": true,
+      "arrangement": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9367289264476975,
+            1.9648132382096504,
+            1.9688362768731325
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            1.9648132382096504,
+            0.0
+          ],
+          "size": [
+            1.4532783394780102,
+            1.4917953126025296,
+            4.709371153170146
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.45660855081218,
+            0.0
+          ],
+          "size": [
+            2.032021132522164,
+            2.9900921352531524,
+            3.009429766582004
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.9367289264476975,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5489000016923802,
+            2.959824797012917,
+            3.027119629118211
+          ]
+        }
+      }
+    },
+    "different_max_volume": {
+      "success": true,
+      "program_policy": "maximize_volume",
+      "program_posterior": {
+        "unknown_or_unexplained": 0.0015935603853804011,
+        "neutral_prior": 0.03200751595988722,
+        "heavy_bottom_fragile_top": 0.23650533101502477,
+        "maximize_volume": 0.6428881436318332,
+        "minimize_rehandling": 0.0870054490078743
+      },
+      "constraint_posterior": {
+        "all_inside": 0.99,
+        "heavy_below_fragile": 0.42,
+        "fragile_never_supports": 0.98,
+        "maximize_fill": 0.87,
+        "minimize_rehandling": 0.31,
+        "large_items_first": 0.83,
+        "preserve_future_space": 0.87,
+        "reproduce_exact_coordinates": 0.02
+      },
+      "policy_behavior_match": true,
+      "arrangement": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9367289264476975,
+            1.9648132382096504,
+            1.9688362768731325
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            1.9648132382096504,
+            0.0
+          ],
+          "size": [
+            1.4532783394780102,
+            1.4917953126025296,
+            4.709371153170146
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.45660855081218,
+            0.0
+          ],
+          "size": [
+            2.032021132522164,
+            2.9900921352531524,
+            3.009429766582004
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            3.45660855081218,
+            3.009429766582004
+          ],
+          "size": [
+            1.5489000016923802,
+            3.027119629118211,
+            2.959824797012917
+          ]
+        }
+      }
+    },
+    "minimize_rehandling": {
+      "success": true,
+      "program_policy": "minimize_rehandling",
+      "program_posterior": {
+        "unknown_or_unexplained": 0.0007774735489535714,
+        "neutral_prior": 0.015615973674308711,
+        "heavy_bottom_fragile_top": 0.11538730551889127,
+        "maximize_volume": 0.015615973674308711,
+        "minimize_rehandling": 0.8526032735835378
+      },
+      "constraint_posterior": {
+        "all_inside": 0.99,
+        "heavy_below_fragile": 0.42,
+        "fragile_never_supports": 0.98,
+        "maximize_fill": 0.31,
+        "minimize_rehandling": 0.87,
+        "large_items_first": 0.27,
+        "preserve_future_space": 0.31,
+        "reproduce_exact_coordinates": 0.02
+      },
+      "policy_behavior_match": true,
+      "arrangement": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9367289264476975,
+            1.9648132382096504,
+            1.9688362768731325
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            1.9648132382096504,
+            0.0
+          ],
+          "size": [
+            1.4532783394780102,
+            1.4917953126025296,
+            4.709371153170146
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.45660855081218,
+            0.0
+          ],
+          "size": [
+            2.032021132522164,
+            2.9900921352531524,
+            3.009429766582004
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.9367289264476975,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5489000016923802,
+            2.959824797012917,
+            3.027119629118211
+          ]
+        }
+      }
+    },
+    "conflicting": {
+      "success": true,
+      "program_policy": "maximize_volume",
+      "program_posterior": {
+        "unknown_or_unexplained": 0.014069094286613484,
+        "neutral_prior": 0.28258531276958376,
+        "heavy_bottom_fragile_top": 0.10395732694493172,
+        "maximize_volume": 0.4659044159506613,
+        "minimize_rehandling": 0.13348385004820973
+      },
+      "constraint_posterior": {
+        "all_inside": 0.99,
+        "heavy_below_fragile": 0.42,
+        "fragile_never_supports": 0.98,
+        "maximize_fill": 0.87,
+        "minimize_rehandling": 0.31,
+        "large_items_first": 0.83,
+        "preserve_future_space": 0.87,
+        "reproduce_exact_coordinates": 0.02
+      },
+      "policy_behavior_match": true,
+      "arrangement": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9367289264476975,
+            1.9648132382096504,
+            1.9688362768731325
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            1.9648132382096504,
+            0.0
+          ],
+          "size": [
+            1.4532783394780102,
+            1.4917953126025296,
+            4.709371153170146
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.45660855081218,
+            0.0
+          ],
+          "size": [
+            2.032021132522164,
+            2.9900921352531524,
+            3.009429766582004
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            3.45660855081218,
+            3.009429766582004
+          ],
+          "size": [
+            1.5489000016923802,
+            3.027119629118211,
+            2.959824797012917
+          ]
+        }
+      }
+    },
+    "no_demo": {
+      "success": true,
+      "program_policy": "neutral_prior",
+      "policy_behavior_match": false,
+      "arrangement": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9367289264476975,
+            1.9648132382096504,
+            1.9688362768731325
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            1.9648132382096504,
+            0.0
+          ],
+          "size": [
+            1.4532783394780102,
+            1.4917953126025296,
+            4.709371153170146
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.45660855081218,
+            0.0
+          ],
+          "size": [
+            2.032021132522164,
+            2.9900921352531524,
+            3.009429766582004
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.9367289264476975,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5489000016923802,
+            2.959824797012917,
+            3.027119629118211
+          ]
+        }
+      }
+    },
+    "shuffled_demo": {
+      "success": true,
+      "program_policy": "minimize_rehandling",
+      "program_posterior": {
+        "unknown_or_unexplained": 0.009693841349515522,
+        "neutral_prior": 0.1947060083532174,
+        "heavy_bottom_fragile_top": 0.0716283375457038,
+        "maximize_volume": 0.1947060083532174,
+        "minimize_rehandling": 0.5292658043983459
+      },
+      "policy_behavior_match": true,
+      "arrangement": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9367289264476975,
+            1.9648132382096504,
+            1.9688362768731325
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            1.9648132382096504,
+            0.0
+          ],
+          "size": [
+            1.4532783394780102,
+            1.4917953126025296,
+            4.709371153170146
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.45660855081218,
+            0.0
+          ],
+          "size": [
+            2.032021132522164,
+            2.9900921352531524,
+            3.009429766582004
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.9367289264476975,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5489000016923802,
+            2.959824797012917,
+            3.027119629118211
+          ]
+        }
+      }
+    },
+    "oracle_task_program": {
+      "success": true,
+      "program_policy": "heavy_bottom_fragile_top",
+      "policy_behavior_match": true,
+      "arrangement": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9367289264476975,
+            1.9648132382096504,
+            1.9688362768731325
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            1.9648132382096504,
+            0.0
+          ],
+          "size": [
+            1.4532783394780102,
+            1.4917953126025296,
+            4.709371153170146
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.45660855081218,
+            0.0
+          ],
+          "size": [
+            2.032021132522164,
+            2.9900921352531524,
+            3.009429766582004
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.9367289264476975,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5489000016923802,
+            2.959824797012917,
+            3.027119629118211
+          ]
+        }
+      }
+    }
+  },
+  "forced_rearrangement": {
+    "oracle": {
+      "perception": "oracle",
+      "success": true,
+      "required_rearrangement": true,
+      "rearrangement_occurred": true,
+      "remove_count": 1,
+      "action_kinds": [
+        "temporarily_remove",
+        "place_inside",
+        "place_inside"
+      ],
+      "reason": "complete",
+      "initial_prefix": {
+        "small_a": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "small_b": [
+          4.0,
+          0.0,
+          0.0
+        ]
+      },
+      "final_layout": {
+        "small_a": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "late_large": [
+          4.0,
+          0.0,
+          0.0
+        ],
+        "small_b": [
+          0.0,
+          4.0,
+          0.0
+        ]
+      }
+    },
+    "belief": {
+      "perception": "belief",
+      "success": true,
+      "required_rearrangement": true,
+      "rearrangement_occurred": true,
+      "remove_count": 1,
+      "action_kinds": [
+        "temporarily_remove",
+        "place_inside",
+        "place_inside"
+      ],
+      "reason": "complete",
+      "initial_prefix": {
+        "small_a": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "small_b": [
+          4.0,
+          0.0,
+          0.0
+        ]
+      },
+      "final_layout": {
+        "small_a": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "late_large": [
+          4.012573022109339,
+          0.0,
+          0.0
+        ],
+        "small_b": [
+          4.012573022109339,
+          0.0,
+          1.9688362768731325
+        ]
+      }
+    }
+  },
+  "heldout_composition": {
+    "oracle": {
+      "scenario": "policy_sensitive_same_order",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            5.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            3.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            2.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            3.0,
+            3.0
+          ]
+        }
+      },
+      "violations": [],
+      "heldout_components": [
+        "heavy_below_fragile",
+        "minimize_rehandling"
+      ],
+      "program_policy": "composed_heavy_below_fragile_minimize_rehandling"
+    },
+    "belief": {
+      "scenario": "policy_sensitive_same_order",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9367289264476975,
+            1.9648132382096504,
+            1.9688362768731325
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            1.9648132382096504,
+            0.0
+          ],
+          "size": [
+            1.4532783394780102,
+            1.4917953126025296,
+            4.709371153170146
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.45660855081218,
+            0.0
+          ],
+          "size": [
+            2.032021132522164,
+            2.9900921352531524,
+            3.009429766582004
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.9367289264476975,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5489000016923802,
+            2.959824797012917,
+            3.027119629118211
+          ]
+        }
+      },
+      "violations": [],
+      "heldout_components": [
+        "heavy_below_fragile",
+        "minimize_rehandling"
+      ],
+      "program_policy": "composed_heavy_below_fragile_minimize_rehandling"
+    }
+  },
+  "rows": [
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9367289264476975,
+            1.9688362768731325,
+            2.456016547762063
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.9688362768731325,
+            0.0
+          ],
+          "size": [
+            2.032021132522164,
+            2.7907526595696086,
+            3.2100584176874714
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.759588936442741,
+            0.0
+          ],
+          "size": [
+            1.4456400015795547,
+            1.9732165313419445,
+            2.421695703294569
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.4798642536739894,
+            6.135803380000969,
+            1.5167390464636505
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            6.135803380000969,
+            0.0
+          ],
+          "size": [
+            2.016521853809169,
+            3.025918814404859,
+            4.0821618143501155
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.4798642536739894,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5010658340493421,
+            2.0147066248327765,
+            2.0182286198093036
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [
+        "small_a",
+        "small_b"
+      ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.018905338179353,
+            3.9477251558519253,
+            1.9793468228304054
+          ]
+        },
+        "small_b": {
+          "position": [
+            4.018905338179353,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.1799707382720905,
+            4.114416587203723,
+            1.9837288581566088
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0117690459368727,
+            2.0120885938438424,
+            2.399488263488351
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0120885938438424,
+            0.0
+          ],
+          "size": [
+            2.08318619956956,
+            2.787769789537195,
+            3.147856707791065
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.7998583833810375,
+            0.0
+          ],
+          "size": [
+            1.3781787690654062,
+            1.9179301352707676,
+            2.399687804149684
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.4792757254798912,
+            6.170406979873446,
+            1.5041139899745677
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            6.170406979873446,
+            0.0
+          ],
+          "size": [
+            1.9875819188952375,
+            2.9398551431059916,
+            3.8675641004371855
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.4792757254798912,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.510228829094177,
+            2.0374372885367293,
+            2.0817391521479287
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_a"
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "late_large",
+        "small_a",
+        "small_b"
+      ],
+      "placement_layout": {
+        "late_large": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.043493638704952,
+            5.0689083914710515,
+            2.0089368843785254
+          ]
+        },
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            2.0089368843785254
+          ],
+          "size": [
+            4.105311575448676,
+            4.177649130381699,
+            1.8723354080771493
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            0.0,
+            3.881272292455675
+          ],
+          "size": [
+            4.101371940905327,
+            4.135214182538199,
+            2.0326894192208105
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0383735056547354,
+            2.069612911456954,
+            2.559802952348702
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.069612911456954,
+            0.0
+          ],
+          "size": [
+            1.9319446645717506,
+            2.7064350044773207,
+            3.0609386881202494
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.776047915934274,
+            0.0
+          ],
+          "size": [
+            1.3664969770166278,
+            1.884370921015165,
+            2.3886661682349235
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.4830270873872038,
+            6.171517953403813,
+            1.5161432154582863
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            6.171517953403813,
+            0.0
+          ],
+          "size": [
+            1.9171827286478884,
+            2.939787229801284,
+            4.0242849907079
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.4830270873872038,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.423779283970373,
+            1.9568797567242195,
+            1.9802823972270553
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.8896661550934466,
+            3.927497535975556,
+            1.960909737134097
+          ]
+        },
+        "late_large": {
+          "position": [
+            3.8896661550934466,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.071277546292288,
+            4.943653925239698,
+            1.9622533859088125
+          ]
+        },
+        "small_b": {
+          "position": [
+            3.8896661550934466,
+            0.0,
+            1.9622533859088125
+          ],
+          "size": [
+            3.975141927056111,
+            4.012648305151185,
+            2.042152128540217
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.998902605686481,
+            2.049938182765851,
+            2.4932654682532482
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.049938182765851,
+            0.0
+          ],
+          "size": [
+            2.037079421064424,
+            2.873230030461343,
+            3.199453857610758
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.923168213227195,
+            0.0
+          ],
+          "size": [
+            1.378056558512327,
+            2.0809388111667038,
+            2.3276665114412203
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5144610968749397,
+            6.19773750362716,
+            1.5685221985344817
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            6.19773750362716,
+            0.0
+          ],
+          "size": [
+            2.047903198765442,
+            3.137006741996807,
+            3.6921668089801964
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.5144610968749397,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5162040073001652,
+            1.974188527775376,
+            2.029024246066986
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [
+        "small_a",
+        "small_b"
+      ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.069551977003817,
+            3.902052583164127,
+            1.9213254833526148
+          ]
+        },
+        "small_b": {
+          "position": [
+            4.069551977003817,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.964676783641731,
+            4.1247606372611125,
+            2.0016536311734647
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9648070439730565,
+            2.006808116922663,
+            2.410946967937104
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.006808116922663,
+            0.0
+          ],
+          "size": [
+            2.051967706161188,
+            2.8441548441193882,
+            3.15242210417277
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.850962961042051,
+            0.0
+          ],
+          "size": [
+            1.4190462016063436,
+            2.090892304936447,
+            2.3768886371489857
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.4696037337683148,
+            1.5006989359118732,
+            5.715806809524112
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5006989359118732,
+            0.0
+          ],
+          "size": [
+            1.9730014242373248,
+            3.082594684012938,
+            4.033843127664618
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.583293619924811,
+            0.0
+          ],
+          "size": [
+            1.4146206444084064,
+            1.9889015246458055,
+            1.997407698593399
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_a"
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "late_large",
+        "small_b",
+        "small_a"
+      ],
+      "placement_layout": {
+        "late_large": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.241738363483892,
+            5.3542461758228574,
+            1.9538367667348358
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            0.0,
+            1.9538367667348358
+          ],
+          "size": [
+            4.201391558309115,
+            4.092411203670115,
+            1.9820368530958208
+          ]
+        },
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            3.9358736198306565
+          ],
+          "size": [
+            3.95676599944589,
+            3.886990322810958,
+            2.033692182896399
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9971854041659534,
+            2.0464602412046977,
+            2.4375980457507165
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0464602412046977,
+            0.0
+          ],
+          "size": [
+            2.0698434059809045,
+            2.8842572571041396,
+            3.171226523546289
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.930717498308837,
+            0.0
+          ],
+          "size": [
+            1.368005775330919,
+            2.020706709601789,
+            2.3706270117896864
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.4698891230603612,
+            1.4700008030859317,
+            5.992902418176579
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.4700008030859317,
+            0.0
+          ],
+          "size": [
+            1.9106834381344409,
+            3.0269080056002937,
+            4.151067730814345
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.496908808686225,
+            0.0
+          ],
+          "size": [
+            1.5219023899366115,
+            1.9888177320796274,
+            2.041694208977608
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.860238157529596,
+            3.8795990509904463,
+            1.9348865496971843
+          ]
+        },
+        "late_large": {
+          "position": [
+            3.860238157529596,
+            0.0,
+            0.0
+          ],
+          "size": [
+            5.946680906143342,
+            4.912382989165524,
+            2.02360573103454
+          ]
+        },
+        "small_b": {
+          "position": [
+            3.860238157529596,
+            0.0,
+            2.02360573103454
+          ],
+          "size": [
+            4.144728011539364,
+            3.8398686108384554,
+            2.0471984732133457
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9436019655872363,
+            1.990577073656089,
+            2.560415958092037
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.990577073656089,
+            0.0
+          ],
+          "size": [
+            1.941850491987097,
+            2.8240163409290706,
+            3.308059785866445
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.814593414585159,
+            0.0
+          ],
+          "size": [
+            1.4208899656192262,
+            1.9830267702165012,
+            2.3863394205926576
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5347763306370845,
+            6.00280730662546,
+            1.5391250517088482
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            6.00280730662546,
+            0.0
+          ],
+          "size": [
+            1.973420098976867,
+            3.0265529763112973,
+            3.999503463173415
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.5347763306370845,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.4914415193974553,
+            2.0971845986258675,
+            2.1114681912567925
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [
+        "small_a",
+        "small_b"
+      ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.807493550189619,
+            3.6981204769388,
+            2.057723157328989
+          ]
+        },
+        "small_b": {
+          "position": [
+            3.807493550189619,
+            3.6981204769388,
+            0.0
+          ],
+          "size": [
+            4.132951737130585,
+            3.9570407504612035,
+            1.9963555839290554
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.976974040534587,
+            2.049803896231573,
+            2.525590201196237
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.049803896231573,
+            0.0
+          ],
+          "size": [
+            1.9884501450775436,
+            2.8091950542544173,
+            3.1034520410906583
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.85899895048599,
+            0.0
+          ],
+          "size": [
+            1.3996231521279066,
+            2.0145668793860105,
+            2.455702778705858
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.4915358344502336,
+            6.009392381626764,
+            1.5111346039721831
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            6.009392381626764,
+            0.0
+          ],
+          "size": [
+            1.9917404917157804,
+            2.9706097618554583,
+            4.0049920401523345
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.4915358344502336,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.4864752504074314,
+            1.9671483924376365,
+            2.0284034842454695
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_a"
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "late_large",
+        "small_b",
+        "small_a"
+      ],
+      "placement_layout": {
+        "late_large": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.018476988093976,
+            5.127731726286905,
+            1.9998610939183383
+          ]
+        },
+        "small_b": {
+          "position": [
+            6.018476988093976,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.9713270080998786,
+            4.236241892021374,
+            1.952838725519568
+          ]
+        },
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            1.9998610939183383
+          ],
+          "size": [
+            4.157464114316813,
+            4.0743283386702815,
+            1.951505559122117
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9470532207093596,
+            1.969021397276254,
+            2.3708532446118804
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.969021397276254,
+            0.0
+          ],
+          "size": [
+            1.9987230809454548,
+            2.852597764832057,
+            3.272731617017619
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.821619162108311,
+            0.0
+          ],
+          "size": [
+            1.458747869602171,
+            1.967452316313499,
+            2.290230453174143
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.496329642970505,
+            1.5375620531224883,
+            5.764364922103941
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5375620531224883,
+            0.0
+          ],
+          "size": [
+            2.0294417471874224,
+            3.0298777475447984,
+            3.9437176662582476
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.5674398006672865,
+            0.0
+          ],
+          "size": [
+            1.459707424630734,
+            2.0134214985895498,
+            2.0918416075592985
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [
+        "small_a",
+        "small_b"
+      ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.9960075341052863,
+            3.8742263279078086,
+            2.128701159498187
+          ]
+        },
+        "small_b": {
+          "position": [
+            3.9960075341052863,
+            3.8742263279078086,
+            0.0
+          ],
+          "size": [
+            4.064354662453556,
+            3.979207332008556,
+            2.0029143542310703
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.008591880308138,
+            2.036309709386796,
+            2.443849417947222
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.036309709386796,
+            0.0
+          ],
+          "size": [
+            1.9868433191876491,
+            2.7798444790991628,
+            3.1112155310015526
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.816154188485958,
+            0.0
+          ],
+          "size": [
+            1.412561558541355,
+            2.055940085684733,
+            2.407986575943637
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.4040648973211636,
+            6.143313878835709,
+            1.5196736638879598
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            6.143313878835709,
+            0.0
+          ],
+          "size": [
+            1.9342957321864431,
+            3.0674927325094767,
+            3.95416247185818
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.4040648973211636,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.4439531643994765,
+            2.030681534964222,
+            2.0747182976841674
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [
+        "small_a",
+        "small_b"
+      ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.144574482920946,
+            4.013779878130975,
+            2.013462962252885
+          ]
+        },
+        "small_b": {
+          "position": [
+            4.144574482920946,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.044983685037872,
+            4.152666568898326,
+            1.9419583284434463
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.965163449071272,
+            2.009665445472375,
+            2.4426593149727687
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.009665445472375,
+            0.0
+          ],
+          "size": [
+            1.9621371246597143,
+            2.725146439385403,
+            3.108632615541954
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.734811884857778,
+            0.0
+          ],
+          "size": [
+            1.386258325935189,
+            1.9481032267536167,
+            2.3384378198809945
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5035158080437963,
+            1.5415413062496564,
+            5.800990756078592
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5415413062496564,
+            0.0
+          ],
+          "size": [
+            1.9996536938218177,
+            2.907625127331392,
+            4.026711894772087
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.449166433581048,
+            0.0
+          ],
+          "size": [
+            1.4730894269297832,
+            1.9320879802519948,
+            1.9346717987667714
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_a"
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "late_large",
+        "small_b",
+        "small_a"
+      ],
+      "placement_layout": {
+        "late_large": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            5.997479826374357,
+            4.8933695090533025,
+            2.0439698987431414
+          ]
+        },
+        "small_b": {
+          "position": [
+            5.997479826374357,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.8048964811346164,
+            3.869782049313768,
+            2.0063920201583643
+          ]
+        },
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            2.0439698987431414
+          ],
+          "size": [
+            4.030471707975443,
+            3.8960015893759503,
+            2.037522559790323
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9744020245225575,
+            2.041361743274954,
+            2.523510556012079
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.041361743274954,
+            0.0
+          ],
+          "size": [
+            2.016337638888204,
+            2.807161359774819,
+            3.315677018631543
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.848523103049773,
+            0.0
+          ],
+          "size": [
+            1.3867290295697743,
+            2.0412121967883983,
+            2.43473739062669
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5098431418196099,
+            1.5199375514269002,
+            5.9777251967768965
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5199375514269002,
+            0.0
+          ],
+          "size": [
+            2.006764501321477,
+            2.9656601095251327,
+            3.9377141317847912
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.485597660952033,
+            0.0
+          ],
+          "size": [
+            1.4993329639331194,
+            1.9554050666484462,
+            2.023441021216202
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.949708410006399,
+            4.121789043708776,
+            1.9864440296522614
+          ]
+        },
+        "late_large": {
+          "position": [
+            3.949708410006399,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.013211271200445,
+            5.065661949125833,
+            2.0158089907341004
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.121789043708776,
+            0.0
+          ],
+          "size": [
+            3.883069448300355,
+            3.8570533100463553,
+            1.9988363609001967
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0367039716812707,
+            2.0585065839823664,
+            2.525855967296291
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0585065839823664,
+            0.0
+          ],
+          "size": [
+            2.0096413272813725,
+            2.894471388575865,
+            3.1753899819155387
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.952977972558232,
+            0.0
+          ],
+          "size": [
+            1.4301157477885402,
+            2.0081103006496637,
+            2.338883236710177
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.477949822606707,
+            6.018024513495087,
+            1.5040890319427531
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            6.018024513495087,
+            0.0
+          ],
+          "size": [
+            2.011942687901433,
+            3.0427992010185116,
+            4.138260814199799
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.477949822606707,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.4937009384278421,
+            1.9041884637300015,
+            1.9964889832157207
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_a"
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "late_large",
+        "small_b",
+        "small_a"
+      ],
+      "placement_layout": {
+        "late_large": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.036712555186847,
+            5.022476302741367,
+            1.9329207655295544
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            0.0,
+            1.9329207655295544
+          ],
+          "size": [
+            4.166588842965838,
+            3.980906848279785,
+            2.0267174430137547
+          ]
+        },
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            3.959638208543309
+          ],
+          "size": [
+            4.048638140403222,
+            3.9522608021449877,
+            2.0334669809827095
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9837243761716508,
+            2.0289028572443906,
+            2.428917314471914
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0289028572443906,
+            0.0
+          ],
+          "size": [
+            1.9968074458429617,
+            2.8169753990783724,
+            3.1339239819241103
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.845878256322763,
+            0.0
+          ],
+          "size": [
+            1.4066322212000029,
+            2.0161726075015864,
+            2.439957289993594
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5192546753974492,
+            1.5494643982786158,
+            5.829649848412075
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5494643982786158,
+            0.0
+          ],
+          "size": [
+            2.044598656512136,
+            3.0078511246599238,
+            3.919345468661167
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.55731552293854,
+            0.0
+          ],
+          "size": [
+            1.4869141591436552,
+            2.0201480020898623,
+            2.0677800099258703
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [
+        "small_a",
+        "small_b"
+      ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.9028768673806837,
+            3.9802700243813804,
+            2.06225020809986
+          ]
+        },
+        "small_b": {
+          "position": [
+            3.9028768673806837,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.948392759597506,
+            4.12951872861795,
+            1.9716605018838682
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0062675775954637,
+            2.027211061522415,
+            2.4164207451966937
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.027211061522415,
+            0.0
+          ],
+          "size": [
+            2.0894521429891384,
+            2.8225358593674583,
+            3.1320047426119033
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.849746920889873,
+            0.0
+          ],
+          "size": [
+            1.42550329354059,
+            2.018579641030985,
+            2.489261627008885
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.455551666633897,
+            6.023728652258002,
+            1.5137204842303085
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            6.023728652258002,
+            0.0
+          ],
+          "size": [
+            2.0778948394917562,
+            3.024873510699109,
+            4.046051097860094
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.455551666633897,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.4696379581505699,
+            2.0160020851528038,
+            2.03920648541903
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.942493265878378,
+            4.009206373631659,
+            1.894411438538869
+          ]
+        },
+        "late_large": {
+          "position": [
+            3.942493265878378,
+            0.0,
+            0.0
+          ],
+          "size": [
+            5.935995955495585,
+            4.960318106568562,
+            1.9891162485481966
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.009206373631659,
+            0.0
+          ],
+          "size": [
+            3.9243468171856963,
+            3.9777738311834803,
+            2.03689198092849
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0267814549592273,
+            2.0473877320522678,
+            2.488945497780053
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0473877320522678,
+            0.0
+          ],
+          "size": [
+            2.04058129598382,
+            2.77466088007244,
+            3.1159020517180895
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.822048612124708,
+            0.0
+          ],
+          "size": [
+            1.4413057959024478,
+            1.9362051426840936,
+            2.46442676608715
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5245608587883273,
+            1.5315469204650158,
+            5.733089203785678
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5315469204650158,
+            0.0
+          ],
+          "size": [
+            2.0531039963483013,
+            2.9574927172902905,
+            3.894342581863427
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.489039637755306,
+            0.0
+          ],
+          "size": [
+            1.4618460617504547,
+            1.9717334836283618,
+            2.1389863638911266
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 0.9999999999999999,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.897774285471219,
+            3.852518452151333,
+            1.9765328987411201
+          ]
+        },
+        "late_large": {
+          "position": [
+            3.897774285471219,
+            0.0,
+            0.0
+          ],
+          "size": [
+            5.821045980141916,
+            4.97378495969904,
+            1.9472660269306679
+          ]
+        },
+        "small_b": {
+          "position": [
+            3.897774285471219,
+            0.0,
+            1.9472660269306679
+          ],
+          "size": [
+            3.908231266858779,
+            3.9708594245495474,
+            1.9876759493552385
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9813213814725759,
+            2.012921288386853,
+            2.4812535637080453
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.012921288386853,
+            0.0
+          ],
+          "size": [
+            1.9281730733434377,
+            2.787425636625038,
+            3.158198066179632
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.80034692501189,
+            0.0
+          ],
+          "size": [
+            1.3649905325050173,
+            2.0674674711395817,
+            2.474288131197095
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.471686008230162,
+            1.5032745301531514,
+            5.904413322482941
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5032745301531514,
+            0.0
+          ],
+          "size": [
+            2.062034101247659,
+            2.9165615971609076,
+            4.019546133404846
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.419836127314059,
+            0.0
+          ],
+          "size": [
+            1.5256390236545427,
+            1.9371721192165126,
+            2.0133787518778012
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_a"
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "late_large",
+        "small_b",
+        "small_a"
+      ],
+      "placement_layout": {
+        "late_large": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.066156906045267,
+            5.035685626321756,
+            2.014647335110997
+          ]
+        },
+        "small_b": {
+          "position": [
+            6.066156906045267,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.867398571565141,
+            3.844824592534428,
+            2.0250914023369866
+          ]
+        },
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            2.014647335110997
+          ],
+          "size": [
+            4.054103331213838,
+            3.946008249687565,
+            1.9753642384703018
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0267937962197795,
+            2.0421392093153066,
+            2.4073095438177035
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0421392093153066,
+            0.0
+          ],
+          "size": [
+            2.035523930117874,
+            2.8603546054885953,
+            3.3494027983455
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.902493814803902,
+            0.0
+          ],
+          "size": [
+            1.4014108271090664,
+            2.0660801297097913,
+            2.4484221202849947
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5365918397585685,
+            1.5390927220246007,
+            5.760768547021968
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.5390927220246007,
+            0.0
+          ],
+          "size": [
+            2.133085182821472,
+            3.053573237685343,
+            4.033860174484689
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.592665959709944,
+            0.0
+          ],
+          "size": [
+            1.5203727148836998,
+            1.9828043719894626,
+            1.9959293840750856
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [
+        "small_a",
+        "small_b"
+      ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.991674366539524,
+            3.8988229338955027,
+            2.045317287405602
+          ]
+        },
+        "small_b": {
+          "position": [
+            3.991674366539524,
+            3.8988229338955027,
+            0.0
+          ],
+          "size": [
+            4.140427884592211,
+            3.8535551901313654,
+            2.0231364897083473
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9697174500716805,
+            2.022420683308302,
+            2.5200479465499717
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.022420683308302,
+            0.0
+          ],
+          "size": [
+            2.0292846769699886,
+            2.7980191610594174,
+            3.1197339096212797
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.820439844367719,
+            0.0
+          ],
+          "size": [
+            1.4350975277646563,
+            1.9301417104493972,
+            2.3425389768218148
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.4269955005062014,
+            6.050466335493201,
+            1.518801584435538
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            6.050466335493201,
+            0.0
+          ],
+          "size": [
+            1.9809194847239235,
+            2.9180020570858027,
+            4.077808783215962
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.4269955005062014,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.4395190666523305,
+            1.937791491063934,
+            2.0558064592464516
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.02464884538703,
+            4.020651120506018,
+            2.0368391052563553
+          ]
+        },
+        "late_large": {
+          "position": [
+            4.02464884538703,
+            0.0,
+            0.0
+          ],
+          "size": [
+            5.970632703041701,
+            5.101714419594571,
+            2.0771385959024053
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.020651120506018,
+            0.0
+          ],
+          "size": [
+            3.9135407261071493,
+            3.9678378316154768,
+            2.002109270849209
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9220129762604068,
+            1.9554305891362738,
+            2.5868585375900017
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.9554305891362738,
+            0.0
+          ],
+          "size": [
+            2.0490076049850283,
+            2.9225580765019035,
+            3.154345040997224
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.877988665638178,
+            0.0
+          ],
+          "size": [
+            1.422006782756007,
+            2.053653718382778,
+            2.3061423427442342
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.4867060104323215,
+            6.0992573492496245,
+            1.4946215271007874
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            6.0992573492496245,
+            0.0
+          ],
+          "size": [
+            2.1327230344865047,
+            3.032082747315355,
+            3.9429162443113555
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.4867060104323215,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.4957189945828513,
+            1.9091038999696226,
+            1.9507661894955672
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [
+        "small_a",
+        "small_b"
+      ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.932345140522803,
+            4.039557052786592,
+            1.980918837390082
+          ]
+        },
+        "small_b": {
+          "position": [
+            3.932345140522803,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.070997843046365,
+            3.9656545661718843,
+            2.002320602280874
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.953659273505712,
+            2.0145391271661337,
+            2.5541785485851127
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0145391271661337,
+            0.0
+          ],
+          "size": [
+            1.9709837737806257,
+            2.771212970365027,
+            3.2771423263183523
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.7857520975311605,
+            0.0
+          ],
+          "size": [
+            1.4046570173539916,
+            1.9411263528238687,
+            2.5531826748521023
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5016792091081488,
+            6.1845808556634605,
+            1.5502653245433058
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            6.1845808556634605,
+            0.0
+          ],
+          "size": [
+            1.9640490448653793,
+            3.042460760669856,
+            4.077500967015945
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.5016792091081488,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5220322075000063,
+            1.9876225438884314,
+            2.0334163167388466
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_a"
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "support": 0.903006666513202,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "late_large",
+        "small_b",
+        "small_a"
+      ],
+      "placement_layout": {
+        "late_large": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.129749994937532,
+            5.023848666011497,
+            1.9890484213423965
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            0.0,
+            1.9890484213423965
+          ],
+          "size": [
+            3.93961037109948,
+            3.9240673977969234,
+            1.9146567373387033
+          ]
+        },
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            3.9037051586811
+          ],
+          "size": [
+            4.172816286598998,
+            4.102697613248812,
+            2.055420294473751
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9932704786578452,
+            2.056861858907051,
+            2.446264691591318
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.056861858907051,
+            0.0
+          ],
+          "size": [
+            1.8816360096400973,
+            2.774604763034401,
+            3.076144770226456
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.831466621941452,
+            0.0
+          ],
+          "size": [
+            1.422322040065669,
+            1.9394906857058547,
+            2.389813308973656
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5144560630459973,
+            1.516243752634498,
+            5.985153468772929
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.516243752634498,
+            0.0
+          ],
+          "size": [
+            1.9535637154426984,
+            3.0971777917329026,
+            3.8889468730020096
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.613421544367401,
+            0.0
+          ],
+          "size": [
+            1.5073598492432252,
+            1.9538020475390436,
+            1.9827778391799098
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 0.9999999999999999,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.8352090702148405,
+            3.9745379845434092,
+            2.0335401906850348
+          ]
+        },
+        "late_large": {
+          "position": [
+            3.8352090702148405,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.033538479590283,
+            4.831922421322422,
+            1.9931838377324407
+          ]
+        },
+        "small_b": {
+          "position": [
+            3.8352090702148405,
+            0.0,
+            1.9931838377324407
+          ],
+          "size": [
+            3.9191260347367107,
+            4.051022097432073,
+            2.0197532702361745
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9247330207791913,
+            1.9466782491733114,
+            2.5937555957739815
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.9466782491733114,
+            0.0
+          ],
+          "size": [
+            1.947073731202781,
+            2.7621786856290456,
+            3.141471114934554
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.708856934802357,
+            0.0
+          ],
+          "size": [
+            1.4333945736668845,
+            1.9802230273972863,
+            2.4554595656283587
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5126287851515112,
+            6.141099358787251,
+            1.519353236442435
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            6.141099358787251,
+            0.0
+          ],
+          "size": [
+            2.05375397764644,
+            2.961606224940649,
+            3.9726094430787997
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.5126287851515112,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5401939108343607,
+            1.9555593639077142,
+            2.02891177625223
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [
+        "small_a",
+        "small_b"
+      ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.1814452571729195,
+            3.9521793163974337,
+            1.9945354540089455
+          ]
+        },
+        "small_b": {
+          "position": [
+            4.1814452571729195,
+            3.9521793163974337,
+            0.0
+          ],
+          "size": [
+            3.9686711270398534,
+            4.0006803501234725,
+            2.0878488566998494
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.980316271086988,
+            1.989584067709003,
+            2.4843096676342857
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.989584067709003,
+            0.0
+          ],
+          "size": [
+            1.9325410705052224,
+            2.729197980404684,
+            3.004543534189137
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.718782048113687,
+            0.0
+          ],
+          "size": [
+            1.373964023404698,
+            1.979224269555235,
+            2.466030026776388
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.4562894606774806,
+            6.086756536529893,
+            1.4725749509076431
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            6.086756536529893,
+            0.0
+          ],
+          "size": [
+            2.0589333095398445,
+            3.0830441396151995,
+            3.9187571353155723
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.4562894606774806,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5650067944500548,
+            2.0108216830365437,
+            2.05124222621325
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_a"
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "late_large",
+        "small_b",
+        "small_a"
+      ],
+      "placement_layout": {
+        "late_large": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            5.920174073825077,
+            4.8593907921527215,
+            1.9070883602399382
+          ]
+        },
+        "small_b": {
+          "position": [
+            5.920174073825077,
+            0.0,
+            0.0
+          ],
+          "size": [
+            4.025959477377496,
+            3.9871369451460836,
+            2.025999724688307
+          ]
+        },
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            1.9070883602399382
+          ],
+          "size": [
+            4.101235316611162,
+            4.051376340804408,
+            1.9668422382096686
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9586020459209383,
+            2.0349983927466835,
+            2.46856975916353
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            2.0349983927466835,
+            0.0
+          ],
+          "size": [
+            1.9589672092911803,
+            2.9003474893644348,
+            3.127422932763613
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.935345882111118,
+            0.0
+          ],
+          "size": [
+            1.3696627186982453,
+            1.9792765076637666,
+            2.499184840009924
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "long": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.46552967759363,
+            1.4817829434637568,
+            5.809173926932132
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            1.4817829434637568,
+            0.0
+          ],
+          "size": [
+            1.9787047497138344,
+            2.9804634127134646,
+            4.1160014078446245
+          ]
+        },
+        "fragile": {
+          "position": [
+            0.0,
+            4.462246356177221,
+            0.0
+          ],
+          "size": [
+            1.5406126290924733,
+            1.9334777271342438,
+            2.0504078308473965
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "placement_layout": {
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.8912408957151827,
+            3.8755378631333692,
+            2.028026325268748
+          ]
+        },
+        "late_large": {
+          "position": [
+            3.8912408957151827,
+            0.0,
+            0.0
+          ],
+          "size": [
+            6.058128990058036,
+            5.031799380819184,
+            1.9756602397590262
+          ]
+        },
+        "small_b": {
+          "position": [
+            3.8912408957151827,
+            0.0,
+            1.9756602397590262
+          ],
+          "size": [
+            4.042813233573262,
+            4.106628207124726,
+            1.9846443611852456
+          ]
+        }
+      },
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "belief",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "placement_layout": {},
+      "violations": []
+    }
+  ]
+}

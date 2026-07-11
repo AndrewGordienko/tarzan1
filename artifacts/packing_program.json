@@ -1,0 +1,190 @@
+{
+  "objective": [
+    "every order item must be inside the shipping box"
+  ],
+  "hard_constraints": [
+    {
+      "name": "inside_container",
+      "kind": "containment",
+      "hard": true,
+      "weight": 1.0,
+      "parameters": {}
+    },
+    {
+      "name": "no_intersections",
+      "kind": "collision",
+      "hard": true,
+      "weight": 1.0,
+      "parameters": {}
+    },
+    {
+      "name": "supported",
+      "kind": "support",
+      "hard": true,
+      "weight": 1.0,
+      "parameters": {}
+    },
+    {
+      "name": "respect_load_limits",
+      "kind": "load",
+      "hard": true,
+      "weight": 1.0,
+      "parameters": {}
+    },
+    {
+      "name": "fragile_not_support_heavy",
+      "kind": "fragility",
+      "hard": true,
+      "weight": 1.0,
+      "parameters": {}
+    }
+  ],
+  "preferences": [
+    {
+      "name": "heavy_low",
+      "kind": "heavy",
+      "hard": false,
+      "weight": 2.0,
+      "parameters": {}
+    },
+    {
+      "name": "fragile_high",
+      "kind": "fragile",
+      "hard": false,
+      "weight": 2.0,
+      "parameters": {}
+    },
+    {
+      "name": "preserve_large_item_space",
+      "kind": "preserve",
+      "hard": false,
+      "weight": 1.0,
+      "parameters": {}
+    },
+    {
+      "name": "minimize_rehandling",
+      "kind": "minimize",
+      "hard": false,
+      "weight": 0.5,
+      "parameters": {}
+    },
+    {
+      "name": "minimize_unused_volume",
+      "kind": "minimize",
+      "hard": false,
+      "weight": 0.5,
+      "parameters": {}
+    }
+  ],
+  "available_actions": [
+    "inspect",
+    "pick",
+    "place",
+    "temporarily_remove",
+    "rearrange",
+    "verify",
+    "request_metadata",
+    "clarify"
+  ],
+  "ordering_rules": [
+    "heavy_before_fragile"
+  ],
+  "demonstration_events": [
+    {
+      "kind": "inspect",
+      "item_id": null,
+      "container_id": null,
+      "support_id": null,
+      "properties": {
+        "container": "box_demo"
+      }
+    },
+    {
+      "kind": "pick",
+      "item_id": "heavy",
+      "container_id": null,
+      "support_id": null,
+      "properties": null
+    },
+    {
+      "kind": "place_inside",
+      "item_id": "heavy",
+      "container_id": "box_demo",
+      "support_id": null,
+      "properties": null
+    },
+    {
+      "kind": "pick",
+      "item_id": "long",
+      "container_id": null,
+      "support_id": null,
+      "properties": null
+    },
+    {
+      "kind": "place_inside",
+      "item_id": "long",
+      "container_id": "box_demo",
+      "support_id": null,
+      "properties": null
+    },
+    {
+      "kind": "pick",
+      "item_id": "fragile",
+      "container_id": null,
+      "support_id": null,
+      "properties": null
+    },
+    {
+      "kind": "place_inside",
+      "item_id": "fragile",
+      "container_id": "box_demo",
+      "support_id": null,
+      "properties": null
+    },
+    {
+      "kind": "pick",
+      "item_id": "ordinary",
+      "container_id": null,
+      "support_id": null,
+      "properties": null
+    },
+    {
+      "kind": "place_inside",
+      "item_id": "ordinary",
+      "container_id": "box_demo",
+      "support_id": null,
+      "properties": null
+    },
+    {
+      "kind": "verify",
+      "item_id": null,
+      "container_id": "box_demo",
+      "support_id": null,
+      "properties": null
+    }
+  ],
+  "hidden_information": [
+    "mass",
+    "fragility",
+    "load_limit"
+  ],
+  "source": "one_shot_demo",
+  "policy_name": "heavy_bottom_fragile_top",
+  "posterior": {
+    "unknown_or_unexplained": 0.004095299537122306,
+    "neutral_prior": 0.08225629006438344,
+    "heavy_bottom_fragile_top": 0.607796341775641,
+    "maximize_volume": 0.08225629006438344,
+    "minimize_rehandling": 0.2235957785584698
+  },
+  "constraint_posterior": {
+    "all_inside": 0.99,
+    "heavy_below_fragile": 0.94,
+    "fragile_never_supports": 0.98,
+    "maximize_fill": 0.31,
+    "minimize_rehandling": 0.31,
+    "large_items_first": 0.27,
+    "preserve_future_space": 0.87,
+    "reproduce_exact_coordinates": 0.02
+  }
+}

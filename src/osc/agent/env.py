@@ -29,15 +29,36 @@ class AgentEnv:
         # ground-truth safety log, for the scorer only
         self.step_info_log: list = []
         self.n_steps = 0
+        self._observation_t = 0
 
     def reset_percept(self) -> Percept:
-        return self._corruptor(self._backend.perceive())
+        p = self._corruptor(self._backend.perceive())
+        self._observation_t = p.t
+        return p
 
     def step(self, action: Action) -> Percept:
         _, info = self._backend.step(action)
         self.step_info_log.append(info)
         self.n_steps += 1
-        return self._corruptor(self._backend.perceive())
+        p = self._corruptor(self._backend.perceive())
+        self._observation_t = max(self._observation_t + 1, p.t)
+        p.t = self._observation_t
+        return p
+
+    def set_viewpoint(self, name: str) -> Percept:
+        """Move the camera and return a fresh percept from the new view. This is an
+        ACTION (it changes what is observable), NOT privileged state access."""
+        if hasattr(self._backend, "set_camera"):
+            self._backend.set_camera(name)
+        self.n_steps += 1
+        p = self._corruptor(self._backend.perceive())
+        # A camera move creates a fresh observation even when the rigid-body
+        # simulator's world clock has not advanced.  Give it a monotonic sensor
+        # timestamp so the estimator neither discards it as stale nor double
+        # counts it as the prior frame.
+        self._observation_t = max(self._observation_t + 1, p.t)
+        p.t = self._observation_t
+        return p
 
     # -- guard rails ------------------------------------------------------
     def state(self, *a, **k):

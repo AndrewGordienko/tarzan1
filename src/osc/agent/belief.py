@@ -26,19 +26,64 @@ class BeliefObject:
     size: np.ndarray               # estimated bounding size
     shape: str = "box"             # estimated category
     color: str = "unknown"         # estimated appearance
+    marker: str = "unknown"        # only retained after a view exposes it
     pos_std: float = 0.02          # position uncertainty (metres)
+    size_std: float = 0.02         # size-estimate uncertainty (metres); falls ~1/sqrt(N)
+                                   # as independent observations are fused
+    size_var: np.ndarray | None = None  # per-axis attribute posterior covariance
     last_seen: int = 0             # frame index of last direct observation
     visible: bool = True           # observed this frame?
+    # An association can be spatially plausible but still join a different
+    # object's attributes to this trajectory.  This is deliberately retained in
+    # the agent-visible belief so resolution can decline to commit on it.
+    association_contested: bool = False
+    association_stable_frames: int = 0
 
     def feature(self) -> np.ndarray:
         """Appearance/geometry signature used for demo<->eval correspondence.
-        Deliberately name-free: size, shape one-hot, coarse color hash."""
+        Deliberately name-free: size, shape one-hot, DETERMINISTIC color code
+        (Python's builtin hash varies between processes and would break
+        reproducibility)."""
         shape_id = 0.0 if self.shape == "box" else 1.0
-        col = float(abs(hash(self.color)) % 997) / 997.0
-        return np.array([self.size[0], self.size[2], shape_id, col])
+        return np.array([self.size[0], self.size[2], shape_id, color_code(self.color),
+                         marker_code(self.marker)])
+
+    def feature_var(self) -> np.ndarray:
+        """Per-feature uncertainty for likelihood-based correspondence.
+
+        Shape/color are categorical rather than repeatedly averaged metric
+        measurements.  The matcher currently conditions only on size axes, but
+        keeps finite values here so extensions can opt in explicitly.
+        """
+        sv = self.size_var if self.size_var is not None else np.full(3, self.size_std ** 2)
+        marker_var = 1e-6 if self.marker != "unknown" else 1.0
+        return np.array([sv[0], sv[2], 1e-6, 1e-6, marker_var], dtype=float)
 
     def copy(self) -> "BeliefObject":
-        return replace(self, pose=self.pose.copy(), size=self.size.copy())
+        return replace(self, pose=self.pose.copy(), size=self.size.copy(),
+                       size_var=None if self.size_var is None else self.size_var.copy())
+
+
+# Fixed palette -> stable [0,1) code, independent of process hash seed.
+_PALETTE = ("red", "green", "blue", "yellow", "purple", "orange", "cyan",
+            "magenta", "unknown")
+
+
+def color_code(color: str) -> float:
+    try:
+        return _PALETTE.index(color) / len(_PALETTE)
+    except ValueError:
+        return (len(_PALETTE) - 1) / len(_PALETTE)
+
+
+_MARKERS = ("alpha", "beta", "gamma", "unknown")
+
+
+def marker_code(marker: str) -> float:
+    try:
+        return _MARKERS.index(marker) / len(_MARKERS)
+    except ValueError:
+        return (len(_MARKERS) - 1) / len(_MARKERS)
 
 
 @dataclass

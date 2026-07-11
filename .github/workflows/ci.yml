@@ -1,0 +1,21 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -e .[dev]
+      - name: Tests
+        run: pytest -q
+      - name: Benchmark smoke test (deterministic)
+        run: |
+          python -m osc.run_bench --seeds 3 --out /tmp/smoke
+          python -m osc.run_attribution --seeds 3
+          python -m osc.run_resolution --seeds 3 --workflows 2 --orders 4
+          python -m osc.run_scenarios --seeds 5
+          python -m osc.run_audit --seeds 6

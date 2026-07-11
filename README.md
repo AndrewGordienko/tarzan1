@@ -1,52 +1,120 @@
-# One-Shot Task Compiler (OSC) — v0.2
+# One-Shot Task Compiler (OSC) — v0.3
 
 **Research question:** can a robot watch *one* demonstration of an unseen task,
 infer an executable task *program*, and complete it in changed environments
 **without any task-time fine-tuning**?
 
-> **What this repo is (read first).** This is a **symbolic / scripted
-> architecture prototype and a truthful evaluation harness**, not a learned
-> robot policy. The skills are hand-written closed-form controllers, the world
-> model is an analytic parameter-ensemble, and perception runs in a toy tabletop
-> simulator. The point of v0.2 is that **the evaluation is honest**: the agent
-> acts only on an estimated belief state from noisy, nameless percepts, ground
-> truth is read only by the scorer, and the metrics mean what they say. The
-> numbers are deliberately *lower and harder-earned* than v0.1's inflated ones.
-> See [`MIGRATION.md`](MIGRATION.md) for exactly what changed and why.
+> **What this repo is (read first).** A **symbolic / scripted architecture
+> prototype with a truthful, self-diagnosing evaluation harness** — not a learned
+> policy. The agent acts only on an estimated belief state from noisy, nameless
+> percepts; ground truth is read only by the scorer. v0.3 adds a **paired oracle
+> attribution ladder** that measures which component actually causes failure, a
+> rebuilt correspondence module, active verification, and semantic retargeting.
+> See [`MIGRATION.md`](MIGRATION.md) (v0.1→v0.2) and
+> [`MIGRATION_V0_3.md`](MIGRATION_V0_3.md) (v0.2→v0.3).
+
+> ### Gate status: **selective safety gate passed; ambiguity-resolution gate open.**
+> The system now usually *refuses to confidently claim success* when it cannot
+> identify the roles — silent false-completion is **6.7%**. But it does so by
+> abstaining: **46.9% of completions are flagged uncertain**, and **~half the
+> benchmark is visually unidentifiable from the provided evidence** (distractors
+> overlap the demonstrated role sizes; appearance is independently randomized).
+> **≈1/3 of the recent gain is better binding; ≈2/3 is honest ambiguity
+> attribution.** 6.7% does **not** mean the correspondence problem is solved — it
+> means the system is safely selective. The next objective is to *preserve* the
+> low silent-error rate while converting ambiguous episodes into correctly
+> resolved, autonomous executions (see Roadmap → resolution layer).
 
 ## Quickstart
 
 ```bash
 pip install -e .
-python -m osc.run_demo  --task stack        # one task, watch the loop
-python -m osc.run_bench --seeds 20 --seed-groups 2 --out reports/v0_2
+python -m osc.run_attribution --seeds 40    # the error-budget ladder (headline)
+python -m osc.run_bench --seeds 40 --out reports/v0_3
 python -m osc.run_ablations --seeds 20      # component attribution
-pytest -q                                    # 7 architectural + behavioural tests
+python -m osc.run_demo  --task stack        # watch one task
+pytest -q                                    # 18 architectural + behavioural tests
 ```
 
-## Headline (320 episodes, 2 seed groups, bootstrap CIs)
+### Packing proof-of-concept
+
+The `v0.5-packing-poc` branch demonstrates the broader one-shot task-acquisition
+thesis with a deterministic geometric packing domain. A canonical demonstration
+compiles into hard constraints, soft preferences, and a reusable packing program;
+the planner then searches finite orientations/extreme-point placements and can
+remove/repack an earlier item when a late arrival makes the current arrangement
+infeasible.
+
+```bash
+osc-pack-demo --render artifacts/packing_demo.gif
+osc-pack-bench --episodes 100 --perception oracle
+osc-pack-bench --episodes 100 --perception belief
+```
+
+The controlled PoC currently reports 100% feasible-order completion, zero
+constraint violations, 25% rearrangement episodes, and improvement over literal
+replay and greedy next-fit on the four-scenario suite. Oracle and belief lanes are
+reported separately; no gradient updates occur after the demonstration. The
+packing implementation lives under `src/osc/packing/` and is intentionally a
+finite geometric world model before learned residual dynamics are introduced.
+
+The scientific packing artifact also runs a causal demo-dependence check: the same
+inventory is evaluated after heavy-bottom, maximize-volume, minimize-rehandling,
+shuffled, no-demo, conflicting, and oracle-program conditions. It records the
+program posterior, constraint posterior, arrangement, and policy-behavior match.
+An explicit `unknown_or_unexplained` hypothesis abstains on out-of-vocabulary
+demonstrations. The matched late-item intervention forces both oracle and belief
+lanes through the same initial placement prefix before revealing the large item.
+
+Results are **cross-process deterministic** (identical JSON across
+`PYTHONHASHSEED`, apart from wall-clock latency fields); CI enforces it.
+
+## The result that matters: an evidence-based error budget
+
+Perfect-component swaps (same task/split/seed) show what to fix — and refuted the
+v0.2 guess that perception (tracking) was the bottleneck:
+
+| oracle swap | success | Δ vs full |
+|---|---|---|
+| full (belief) | 75.9% | — |
+| perfect state estimation | 85.9% | +10.0 |
+| **perfect role correspondence** | 83.8% | **+7.8** |
+| perfect perception + binding | 97.8% | +21.9 |
+| perfect verifier | 74.7% | −1.3 |
+
+**Perception + correspondence together are the whole budget** (perfect binding on
+correctly-perceived scenes → 97.8%). Rebuilding correspondence (greedy →
+relational sticky `RoleBelief`, appearance-independent) with ground-truth
+ambiguity attribution drove silent false-completion **18.6% → 6.7%** at
+**P(success | correct role) = 97.9%**.
+
+## Headline (320 episodes, bootstrap CIs, `PYTHONHASHSEED=0`)
 
 | metric | value |
 |---|---|
-| success (belief-state, ground-truth scored) | **41%** (CI95 0.36–0.47) |
-| first-attempt success | 40% |
-| **wrong-belief rate** (agent thinks it succeeded, ground truth says no) | **52%** |
-| plan latency p50/p95/p99 | 0.2 / 0.3 / 0.4 ms |
-| sensor→action p50/p95 | 0.14 / 0.19 ms |
+| success (belief-state, ground-truth scored) | **75.9%** (CI95 0.71–0.81) |
+| first-attempt success | 67.8% |
+| **silent false-completion** (fail among **confident, identifiable** claims) | **6.7%** |
+| uncertain-completion (honestly flagged low-confidence/ambiguous) | 46.9% |
+| role-binding accuracy · P(success \| correct role) | 58.4% · **97.9%** |
+| recovery (of genuine, world-perturbing opportunities) | 73.0% |
+| safety violations / ep (force + irreversible, both now **reachable**) | 0.034 |
+| plan latency p50/p95/p99 | 0.5 / 0.7 / 0.8 ms |
 | human interventions | **0** (no rescue API exists) |
-| context est. error (mean abs) | delay **0.001**, friction 0.31, mass 1.59 |
 
 | split | success | CI95 |
 |---|---|---|
-| seen_task_new_layout | 46% | 0.36–0.57 |
-| unseen_instances | 33% | 0.23–0.42 |
-| hidden_dynamics | 51% | 0.40–0.62 |
-| disturbance_recovery | 35% | 0.25–0.46 |
+| hidden_dynamics | 91.2% | 0.85–0.98 |
+| seen_task_new_layout | 88.7% | 0.81–0.95 |
+| disturbance_recovery | 75.0% | 0.65–0.85 |
+| unseen_instances | 48.7% | 0.38–0.60 |
 
-The dominant failure is **perception / wrong-belief** (correspondence picks the
-wrong object, or placement is imprecise under noise + distractors). That is the
-honest state of the art for this prototype and the clearest next research target
-— not something papered over.
+Failure breakdown: `ambiguous_or_unidentifiable` **60**, `role_correspondence`
+**13**, `control` 3, `verification_false_positive` 1. The dominant bucket is now
+the honest one — scenes where a distractor matches the demonstrated size/shape
+signature at least as well as the true object, so **no** agent could bind it from
+vision alone. `unseen_instances` (heavy size jitter + 3 distractors) is where that
+ambiguity concentrates.
 
 ## The wall between agent and ground truth
 
@@ -71,24 +139,24 @@ boobytraps `backend.state()` and fails if the agent path ever reads it.
 
 | stage | module | what it does |
 |---|---|---|
-| A task inference | `perception/`, `compiler/stage_a.py` | belief trajectory → role-based task graph (predicates + **relative transforms**), multi-grasp-episode capable |
-| B skill grounding | `skills/correspondence.py`, `skills/grounding.py` | bind roles→tracks by geometry (name-free), instantiate only the needed skill experts |
+| A task inference | `perception/`, `compiler/stage_a.py` | belief trajectory → role-based task graph (predicates + **semantic relations**), multi-grasp-episode capable |
+| B skill grounding | `skills/correspondence.py`, `skills/grounding.py` | bind roles→tracks by **geometry only** (appearance-independent), instantiate only the needed skill experts |
 | C imagined search | `worldmodel/planning_model.py` (analytic, **distinct from the sim**), `worldmodel/search.py` | score candidate plans on collision/uncertainty/force/irreversibility |
 | D closed-loop exec | `execution/loop.py`, `execution/verifier.py` | act on belief, adapt `DynamicsContext` online (no weights), replan on events |
-| scoring | `benchmark/scorer.py`, `metrics/metrics.py` | ground-truth success + safety, corrected metrics, bootstrap CIs |
+| scoring | `benchmark/scorer.py`, `metrics/metrics.py` | ground-truth success + safety + **identifiability**, corrected metrics, bootstrap CIs |
 
-## Ablations (component attribution)
+## Ablations (component attribution, paired seeds)
 
-`python -m osc.run_ablations` turns one thing off at a time. On the current
-tasks the informative results are:
+`python -m osc.run_ablations` turns one thing off at a time:
 
-- **absolute vs relative transforms**: relative wins by ~25 points — the
-  relative-frame task graph is what makes one-shot transfer work.
-- **privileged vs belief state**: perfect state is only ~+5 points here, i.e.
-  perception is costly but not the whole story.
-- **world model / recovery / adaptation off**: ≈ no change on these tasks —
-  an honest signal that the benchmark is **not yet hard enough** to exercise
-  them. Making it harder (below) is the point of the next milestone.
+- **retargeting**: absolute **53.8%** < raw-relative **75.0%** < semantic **78.8%**.
+- **event-driven vs every-step planning**: **78.8% vs 17.5%** — naive
+  receding-horizon replanning thrashes; event-driven planning matters a lot.
+- **recovery on/off**: +4.4 points (73% of genuine disturbance opportunities
+  recovered).
+- **world model / adaptation off**: ≈ no change — these tasks still don't give
+  them decisions to make (the benchmark needs harder scenarios; see roadmap).
+- **privileged vs belief state**: +5 points.
 
 ## Implemented vs. future (learned) components
 
@@ -102,16 +170,22 @@ tasks the informative results are:
 
 ## Honest limitations
 
-- **~41% success** with **~52% silent (wrong-belief) failures** — perception and
-  correspondence are the bottleneck.
+- **75.9% success**, but with **46.9% of completions flagged uncertain**: the
+  system buys its low 6.7% silent-error rate largely by *abstaining*. That is a
+  safety property, **not** autonomy — the ambiguity-resolution gate is open.
+- **~half the benchmark is visually unidentifiable** from the demonstration alone
+  (distractors overlap role sizes; appearance is independently randomized). Those
+  episodes cannot be resolved by better vision — they need active inspection,
+  metadata, or a user question. This is the argument for the resolution layer,
+  not a bug to tune away.
+- Even on *identifiable* scenes, role accuracy is only ~0.65 — a real remaining
+  binding problem (stickiness / relational-ratio knobs don't move it).
 - `double_stack` (a 2-object composition) **compiles** via multi-episode Stage A
-  but its **execution-time multi-object tracking is not reliable**; it is
-  excluded from the default benchmark and kept as a known-limitation task.
-- No real physics (no liquids/deformables/contact forces); tasks are pick-place,
-  side-place, and stacking. Pour/wipe/insert wait for a contact simulator.
+  but its **execution-time multi-object tracking is not reliable**; excluded from
+  the default benchmark and kept as a known-limitation task.
+- No real physics (no liquids/deformables); tasks are pick-place, side-place, and
+  stacking. Pour/wipe/insert wait for a contact simulator.
 - No learned components yet; **no baseline (ACT/DP/VLA) is wired** — deliberately.
-  The next correct step is wiring ACT into *this* observation-only harness so the
-  comparison is fair.
 
 ## Layout
 ```
@@ -124,13 +198,19 @@ src/osc/
   skills/                skill experts, correspondence (router), grounding
   worldmodel/            Stage C: analytic planning model + imagined search
   execution/             Stage D: verifier + event-driven closed loop
-  benchmark/             scorer (ground truth), runner, splits, ablations, reports
+  benchmark/             scorer (ground truth + identifiability), runner, splits, ablations, reports
   metrics/               corrected metric suite + bootstrap CIs
   tasks.py               scenes + oracles + ground-truth success predicates
 ```
 
 ## Roadmap
-1. Attack wrong-belief: better correspondence + placement verification from belief.
+1. **Resolution layer (next branch):** `TaskContext` + `RoleBelief` +
+   `ResolutionPolicy` — separate **active inspection** (resolve poor-sensing
+   ambiguity: more frames, viewpoint change, probe/lift, read a label) from
+   **clarification** (introduce information not in the video: language, SKU
+   metadata, a user selection). Report the **autonomous-coverage vs
+   silent-error** curve, not just success. Attach answered clarifications to the
+   compiled workflow so the customer isn't asked again per box.
 2. Make the benchmark hard enough that world-model/recovery/adaptation matter.
 3. Robust multi-object tracking → re-enable `double_stack` and add clear-obstruction.
 4. Wire ACT / Diffusion Policy into the same observation-only harness (fair baseline).

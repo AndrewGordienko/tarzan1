@@ -23,6 +23,7 @@ class SimObject:
     mass: float = 0.1
     friction: float = 0.6
     color: str = "red"
+    marker: str = "unknown"       # view-dependent visual label; not an object name
     pose: Pose = field(default_factory=pose)
 
     def copy(self) -> "SimObject":
