@@ -1,6 +1,8 @@
 from osc.packing.benchmark import run_episode, scenarios
 from osc.packing.compiler import compile_packing_demo, compile_with_inferred_posterior, POLICY_CATALOG
-from osc.packing.benchmark import run_demo_dependence
+from osc.packing.demonstration import PackingEvent
+from osc.packing.benchmark import (run_demo_dependence, run_forced_rearrangement_intervention,
+                                   run_heldout_composition)
 from osc.packing.domain import PackingState
 from osc.packing.planner import PackingPlanner
 
@@ -44,3 +46,24 @@ def test_inverse_planning_keeps_ground_truth_program_in_candidate_set():
     p = compile_with_inferred_posterior()
     assert set(p.posterior) == set(POLICY_CATALOG)
     assert abs(sum(p.posterior.values()) - 1.0) < 1e-9
+
+
+def test_matched_intervention_forces_rearrangement_in_both_perception_lanes():
+    for perception in ("oracle", "belief"):
+        r = run_forced_rearrangement_intervention(perception)
+        assert r["required_rearrangement"] and r["success"]
+        assert r["rearrangement_occurred"]
+        assert "temporarily_remove" in r["action_kinds"]
+
+
+def test_out_of_vocabulary_demo_selects_unknown_and_abstains():
+    p = compile_with_inferred_posterior([PackingEvent("teleport", "mystery")])
+    assert p.policy_name == "unknown_or_unexplained"
+    r = run_episode(scenarios()[0], program=p)
+    assert not r["success"] and r["reason"] == "unknown_program_abstain"
+
+
+def test_heldout_program_composes_known_components():
+    r = run_heldout_composition("oracle")
+    assert r["success"]
+    assert r["program_policy"] == "composed_heavy_below_fragile_minimize_rehandling"

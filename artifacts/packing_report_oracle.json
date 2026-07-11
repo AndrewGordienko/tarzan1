@@ -17,19 +17,75 @@
   "baseline_by_scenario": {
     "changed_inventory": {
       "literal": false,
-      "greedy": true
+      "greedy": true,
+      "literal_violations": {
+        "geometric": 1,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 0,
+        "correct_abstention": 0
+      },
+      "greedy_violations": {
+        "geometric": 0,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 1,
+        "correct_abstention": 0
+      }
     },
     "different_box_orientations": {
       "literal": true,
-      "greedy": true
+      "greedy": true,
+      "literal_violations": {
+        "geometric": 0,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 1,
+        "correct_abstention": 0
+      },
+      "greedy_violations": {
+        "geometric": 0,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 1,
+        "correct_abstention": 0
+      }
     },
     "late_large_rearrangement": {
       "literal": false,
-      "greedy": false
+      "greedy": false,
+      "literal_violations": {
+        "geometric": 2,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 0,
+        "correct_abstention": 0
+      },
+      "greedy_violations": {
+        "geometric": 1,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 0,
+        "correct_abstention": 0
+      }
     },
     "impossible_order": {
       "literal": false,
-      "greedy": false
+      "greedy": false,
+      "literal_violations": {
+        "geometric": 1,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 0,
+        "correct_abstention": 1
+      },
+      "greedy_violations": {
+        "geometric": 1,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 0,
+        "correct_abstention": 1
+      }
     }
   },
   "demo_dependence": {
@@ -37,10 +93,11 @@
       "success": true,
       "program_policy": "heavy_bottom_fragile_top",
       "program_posterior": {
-        "neutral_prior": 0.0024500971842393907,
-        "heavy_bottom_fragile_top": 0.9884397509776449,
-        "maximize_volume": 0.0024500971842393907,
-        "minimize_rehandling": 0.0066600546538766086
+        "unknown_or_unexplained": 0.00012196827794415957,
+        "neutral_prior": 0.002449798350105033,
+        "heavy_bottom_fragile_top": 0.9883191926833665,
+        "maximize_volume": 0.002449798350105033,
+        "minimize_rehandling": 0.006659242338479461
       },
       "constraint_posterior": {
         "all_inside": 0.99,
@@ -108,10 +165,11 @@
       "success": true,
       "program_policy": "maximize_volume",
       "program_posterior": {
-        "neutral_prior": 0.03205860328008498,
-        "heavy_bottom_fragile_top": 0.2368828180899101,
-        "maximize_volume": 0.6439142598879722,
-        "minimize_rehandling": 0.08714431874203256
+        "unknown_or_unexplained": 0.0015935603853804011,
+        "neutral_prior": 0.03200751595988722,
+        "heavy_bottom_fragile_top": 0.23650533101502477,
+        "maximize_volume": 0.6428881436318332,
+        "minimize_rehandling": 0.0870054490078743
       },
       "constraint_posterior": {
         "all_inside": 0.99,
@@ -179,10 +237,11 @@
       "success": true,
       "program_policy": "minimize_rehandling",
       "program_posterior": {
-        "neutral_prior": 0.015628124127437557,
-        "heavy_bottom_fragile_top": 0.11547708589868774,
-        "maximize_volume": 0.015628124127437557,
-        "minimize_rehandling": 0.8532666658464372
+        "unknown_or_unexplained": 0.0007774735489535714,
+        "neutral_prior": 0.015615973674308711,
+        "heavy_bottom_fragile_top": 0.11538730551889127,
+        "maximize_volume": 0.015615973674308711,
+        "minimize_rehandling": 0.8526032735835378
       },
       "constraint_posterior": {
         "all_inside": 0.99,
@@ -250,10 +309,11 @@
       "success": true,
       "program_policy": "maximize_volume",
       "program_posterior": {
-        "neutral_prior": 0.2866177651314364,
-        "heavy_bottom_fragile_top": 0.10544078326636053,
-        "maximize_volume": 0.4725528059327327,
-        "minimize_rehandling": 0.13538864566947043
+        "unknown_or_unexplained": 0.014069094286613484,
+        "neutral_prior": 0.28258531276958376,
+        "heavy_bottom_fragile_top": 0.10395732694493172,
+        "maximize_volume": 0.4659044159506613,
+        "minimize_rehandling": 0.13348385004820973
       },
       "constraint_posterior": {
         "all_inside": 0.99,
@@ -376,10 +436,11 @@
       "success": true,
       "program_policy": "minimize_rehandling",
       "program_posterior": {
-        "neutral_prior": 0.19661193324148185,
-        "heavy_bottom_fragile_top": 0.07232948812851327,
-        "maximize_volume": 0.19661193324148185,
-        "minimize_rehandling": 0.5344466453885229
+        "unknown_or_unexplained": 0.009693841349515522,
+        "neutral_prior": 0.1947060083532174,
+        "heavy_bottom_fragile_top": 0.0716283375457038,
+        "maximize_volume": 0.1947060083532174,
+        "minimize_rehandling": 0.5292658043983459
       },
       "policy_behavior_match": true,
       "arrangement": {
@@ -487,6 +548,342 @@
           ]
         }
       }
+    }
+  },
+  "forced_rearrangement": {
+    "oracle": {
+      "perception": "oracle",
+      "success": true,
+      "required_rearrangement": true,
+      "rearrangement_occurred": true,
+      "remove_count": 1,
+      "action_kinds": [
+        "temporarily_remove",
+        "place_inside",
+        "place_inside"
+      ],
+      "reason": "complete",
+      "initial_prefix": {
+        "small_a": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "small_b": [
+          4.0,
+          0.0,
+          0.0
+        ]
+      },
+      "final_layout": {
+        "small_a": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "late_large": [
+          4.0,
+          0.0,
+          0.0
+        ],
+        "small_b": [
+          0.0,
+          4.0,
+          0.0
+        ]
+      }
+    },
+    "belief": {
+      "perception": "belief",
+      "success": true,
+      "required_rearrangement": true,
+      "rearrangement_occurred": true,
+      "remove_count": 1,
+      "action_kinds": [
+        "temporarily_remove",
+        "place_inside",
+        "place_inside"
+      ],
+      "reason": "complete",
+      "initial_prefix": {
+        "small_a": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "small_b": [
+          4.0,
+          0.0,
+          0.0
+        ]
+      },
+      "final_layout": {
+        "small_a": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "late_large": [
+          4.012573022109339,
+          0.0,
+          0.0
+        ],
+        "small_b": [
+          4.012573022109339,
+          0.0,
+          1.9688362768731325
+        ]
+      }
+    }
+  },
+  "heldout_composition": {
+    "oracle": {
+      "scenario": "policy_sensitive_same_order",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            5.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            3.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            2.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            3.0,
+            3.0
+          ]
+        }
+      },
+      "violations": [],
+      "heldout_components": [
+        "heavy_below_fragile",
+        "minimize_rehandling"
+      ],
+      "program_policy": "composed_heavy_below_fragile_minimize_rehandling"
+    },
+    "belief": {
+      "scenario": "policy_sensitive_same_order",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9367289264476975,
+            1.9648132382096504,
+            1.9688362768731325
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            1.9648132382096504,
+            0.0
+          ],
+          "size": [
+            1.4532783394780102,
+            1.4917953126025296,
+            4.709371153170146
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.45660855081218,
+            0.0
+          ],
+          "size": [
+            2.032021132522164,
+            2.9900921352531524,
+            3.009429766582004
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.9367289264476975,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5489000016923802,
+            2.959824797012917,
+            3.027119629118211
+          ]
+        }
+      },
+      "violations": [],
+      "heldout_components": [
+        "heavy_below_fragile",
+        "minimize_rehandling"
+      ],
+      "program_policy": "composed_heavy_below_fragile_minimize_rehandling"
     }
   },
   "rows": [

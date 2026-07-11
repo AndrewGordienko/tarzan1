@@ -1,10 +1,10 @@
 {
   "episodes": 100,
   "perception": "belief",
-  "completion_rate": 1.0,
+  "completion_rate": 0.88,
   "impossible_abstention_rate": 1.0,
-  "overall_correct_decision": 1.0,
-  "rearrangement_rate": 0.0,
+  "overall_correct_decision": 0.91,
+  "rearrangement_rate": 0.16,
   "violations": 0,
   "baseline_literal_completion": 0.25,
   "baseline_greedy_completion": 0.5,
@@ -12,24 +12,80 @@
     "literal": 0.5,
     "greedy": 0.75
   },
-  "planner_improvement_over_literal": 0.5,
-  "planner_improvement_over_greedy": 0.25,
+  "planner_improvement_over_literal": 0.41000000000000003,
+  "planner_improvement_over_greedy": 0.16000000000000003,
   "baseline_by_scenario": {
     "changed_inventory": {
       "literal": false,
-      "greedy": true
+      "greedy": true,
+      "literal_violations": {
+        "geometric": 1,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 0,
+        "correct_abstention": 0
+      },
+      "greedy_violations": {
+        "geometric": 0,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 1,
+        "correct_abstention": 0
+      }
     },
     "different_box_orientations": {
       "literal": true,
-      "greedy": true
+      "greedy": true,
+      "literal_violations": {
+        "geometric": 0,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 1,
+        "correct_abstention": 0
+      },
+      "greedy_violations": {
+        "geometric": 0,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 1,
+        "correct_abstention": 0
+      }
     },
     "late_large_rearrangement": {
       "literal": false,
-      "greedy": false
+      "greedy": false,
+      "literal_violations": {
+        "geometric": 2,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 0,
+        "correct_abstention": 0
+      },
+      "greedy_violations": {
+        "geometric": 1,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 0,
+        "correct_abstention": 0
+      }
     },
     "impossible_order": {
       "literal": false,
-      "greedy": false
+      "greedy": false,
+      "literal_violations": {
+        "geometric": 1,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 0,
+        "correct_abstention": 1
+      },
+      "greedy_violations": {
+        "geometric": 1,
+        "load": 0,
+        "fragility": 0,
+        "false_completion": 0,
+        "correct_abstention": 1
+      }
     }
   },
   "demo_dependence": {
@@ -37,10 +93,11 @@
       "success": true,
       "program_policy": "heavy_bottom_fragile_top",
       "program_posterior": {
-        "neutral_prior": 0.0024500971842393907,
-        "heavy_bottom_fragile_top": 0.9884397509776449,
-        "maximize_volume": 0.0024500971842393907,
-        "minimize_rehandling": 0.0066600546538766086
+        "unknown_or_unexplained": 0.00012196827794415957,
+        "neutral_prior": 0.002449798350105033,
+        "heavy_bottom_fragile_top": 0.9883191926833665,
+        "maximize_volume": 0.002449798350105033,
+        "minimize_rehandling": 0.006659242338479461
       },
       "constraint_posterior": {
         "all_inside": 0.99,
@@ -108,10 +165,11 @@
       "success": true,
       "program_policy": "maximize_volume",
       "program_posterior": {
-        "neutral_prior": 0.03205860328008498,
-        "heavy_bottom_fragile_top": 0.2368828180899101,
-        "maximize_volume": 0.6439142598879722,
-        "minimize_rehandling": 0.08714431874203256
+        "unknown_or_unexplained": 0.0015935603853804011,
+        "neutral_prior": 0.03200751595988722,
+        "heavy_bottom_fragile_top": 0.23650533101502477,
+        "maximize_volume": 0.6428881436318332,
+        "minimize_rehandling": 0.0870054490078743
       },
       "constraint_posterior": {
         "all_inside": 0.99,
@@ -179,10 +237,11 @@
       "success": true,
       "program_policy": "minimize_rehandling",
       "program_posterior": {
-        "neutral_prior": 0.015628124127437557,
-        "heavy_bottom_fragile_top": 0.11547708589868774,
-        "maximize_volume": 0.015628124127437557,
-        "minimize_rehandling": 0.8532666658464372
+        "unknown_or_unexplained": 0.0007774735489535714,
+        "neutral_prior": 0.015615973674308711,
+        "heavy_bottom_fragile_top": 0.11538730551889127,
+        "maximize_volume": 0.015615973674308711,
+        "minimize_rehandling": 0.8526032735835378
       },
       "constraint_posterior": {
         "all_inside": 0.99,
@@ -250,10 +309,11 @@
       "success": true,
       "program_policy": "maximize_volume",
       "program_posterior": {
-        "neutral_prior": 0.2866177651314364,
-        "heavy_bottom_fragile_top": 0.10544078326636053,
-        "maximize_volume": 0.4725528059327327,
-        "minimize_rehandling": 0.13538864566947043
+        "unknown_or_unexplained": 0.014069094286613484,
+        "neutral_prior": 0.28258531276958376,
+        "heavy_bottom_fragile_top": 0.10395732694493172,
+        "maximize_volume": 0.4659044159506613,
+        "minimize_rehandling": 0.13348385004820973
       },
       "constraint_posterior": {
         "all_inside": 0.99,
@@ -376,10 +436,11 @@
       "success": true,
       "program_policy": "minimize_rehandling",
       "program_posterior": {
-        "neutral_prior": 0.19661193324148185,
-        "heavy_bottom_fragile_top": 0.07232948812851327,
-        "maximize_volume": 0.19661193324148185,
-        "minimize_rehandling": 0.5344466453885229
+        "unknown_or_unexplained": 0.009693841349515522,
+        "neutral_prior": 0.1947060083532174,
+        "heavy_bottom_fragile_top": 0.0716283375457038,
+        "maximize_volume": 0.1947060083532174,
+        "minimize_rehandling": 0.5292658043983459
       },
       "policy_behavior_match": true,
       "arrangement": {
@@ -487,6 +548,342 @@
           ]
         }
       }
+    }
+  },
+  "forced_rearrangement": {
+    "oracle": {
+      "perception": "oracle",
+      "success": true,
+      "required_rearrangement": true,
+      "rearrangement_occurred": true,
+      "remove_count": 1,
+      "action_kinds": [
+        "temporarily_remove",
+        "place_inside",
+        "place_inside"
+      ],
+      "reason": "complete",
+      "initial_prefix": {
+        "small_a": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "small_b": [
+          4.0,
+          0.0,
+          0.0
+        ]
+      },
+      "final_layout": {
+        "small_a": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "late_large": [
+          4.0,
+          0.0,
+          0.0
+        ],
+        "small_b": [
+          0.0,
+          4.0,
+          0.0
+        ]
+      }
+    },
+    "belief": {
+      "perception": "belief",
+      "success": true,
+      "required_rearrangement": true,
+      "rearrangement_occurred": true,
+      "remove_count": 1,
+      "action_kinds": [
+        "temporarily_remove",
+        "place_inside",
+        "place_inside"
+      ],
+      "reason": "complete",
+      "initial_prefix": {
+        "small_a": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "small_b": [
+          4.0,
+          0.0,
+          0.0
+        ]
+      },
+      "final_layout": {
+        "small_a": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "late_large": [
+          4.012573022109339,
+          0.0,
+          0.0
+        ],
+        "small_b": [
+          4.012573022109339,
+          0.0,
+          1.9688362768731325
+        ]
+      }
+    }
+  },
+  "heldout_composition": {
+    "oracle": {
+      "scenario": "policy_sensitive_same_order",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            5.0
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.5,
+            0.0
+          ],
+          "size": [
+            2.0,
+            3.0,
+            3.0
+          ]
+        },
+        "fragile": {
+          "position": [
+            2.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5,
+            3.0,
+            3.0
+          ]
+        }
+      },
+      "violations": [],
+      "heldout_components": [
+        "heavy_below_fragile",
+        "minimize_rehandling"
+      ],
+      "program_policy": "composed_heavy_below_fragile_minimize_rehandling"
+    },
+    "belief": {
+      "scenario": "policy_sensitive_same_order",
+      "perception": "belief",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "placement_layout": {
+        "ordinary": {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.9367289264476975,
+            1.9648132382096504,
+            1.9688362768731325
+          ]
+        },
+        "long": {
+          "position": [
+            0.0,
+            1.9648132382096504,
+            0.0
+          ],
+          "size": [
+            1.4532783394780102,
+            1.4917953126025296,
+            4.709371153170146
+          ]
+        },
+        "heavy": {
+          "position": [
+            0.0,
+            3.45660855081218,
+            0.0
+          ],
+          "size": [
+            2.032021132522164,
+            2.9900921352531524,
+            3.009429766582004
+          ]
+        },
+        "fragile": {
+          "position": [
+            1.9367289264476975,
+            0.0,
+            0.0
+          ],
+          "size": [
+            1.5489000016923802,
+            2.959824797012917,
+            3.027119629118211
+          ]
+        }
+      },
+      "violations": [],
+      "heldout_components": [
+        "heavy_below_fragile",
+        "minimize_rehandling"
+      ],
+      "program_policy": "composed_heavy_below_fragile_minimize_rehandling"
     }
   },
   "rows": [
@@ -679,7 +1076,7 @@
     {
       "scenario": "late_large_rearrangement",
       "perception": "belief",
-      "success": true,
+      "success": false,
       "expected_feasible": true,
       "rearranged": false,
       "actions": [
@@ -700,26 +1097,12 @@
             "arrival_floor_first": true
           },
           "rearranged": false
-        },
-        {
-          "kind": "place_inside",
-          "item": "late_large",
-          "verified": true,
-          "detail": {
-            "support": 1.0,
-            "collision": false,
-            "boundary": false,
-            "load_violation": false,
-            "fragility_violation": false
-          },
-          "rearranged": false
         }
       ],
-      "reason": "complete",
+      "reason": "clarify_or_abstain: no feasible placement",
       "packed": [
         "small_a",
-        "small_b",
-        "late_large"
+        "small_b"
       ],
       "placement_layout": {
         "small_a": {
@@ -729,33 +1112,21 @@
             0.0
           ],
           "size": [
-            1.9793468228304054,
+            4.018905338179353,
             3.9477251558519253,
-            4.018905338179353
+            1.9793468228304054
           ]
         },
         "small_b": {
           "position": [
-            1.9793468228304054,
-            3.9477251558519253,
-            0.0
-          ],
-          "size": [
-            4.114416587203723,
-            1.9837288581566088,
-            4.1799707382720905
-          ]
-        },
-        "late_large": {
-          "position": [
-            1.9793468228304054,
+            4.018905338179353,
             0.0,
             0.0
           ],
           "size": [
-            6.0421816004696485,
-            2.0488783725563016,
-            4.930772145446993
+            4.1799707382720905,
+            4.114416587203723,
+            1.9837288581566088
           ]
         }
       },
@@ -964,7 +1335,7 @@
       "perception": "belief",
       "success": true,
       "expected_feasible": true,
-      "rearranged": false,
+      "rearranged": true,
       "actions": [
         {
           "kind": "place_inside",
@@ -985,6 +1356,14 @@
           "rearranged": false
         },
         {
+          "kind": "temporarily_remove",
+          "item": "small_a"
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
           "kind": "place_inside",
           "item": "late_large",
           "verified": true,
@@ -995,50 +1374,76 @@
             "load_violation": false,
             "fragility_violation": false
           },
-          "rearranged": false
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
         }
       ],
       "reason": "complete",
       "packed": [
+        "late_large",
         "small_a",
-        "small_b",
-        "late_large"
+        "small_b"
       ],
       "placement_layout": {
-        "small_a": {
-          "position": [
-            0.0,
-            0.0,
-            0.0
-          ],
-          "size": [
-            1.8723354080771493,
-            4.105311575448676,
-            4.177649130381699
-          ]
-        },
-        "small_b": {
-          "position": [
-            1.8723354080771493,
-            4.105311575448676,
-            0.0
-          ],
-          "size": [
-            4.101371940905327,
-            2.0326894192208105,
-            4.135214182538199
-          ]
-        },
         "late_large": {
           "position": [
-            1.8723354080771493,
+            0.0,
             0.0,
             0.0
           ],
           "size": [
             6.043493638704952,
-            2.0089368843785254,
-            5.0689083914710515
+            5.0689083914710515,
+            2.0089368843785254
+          ]
+        },
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            2.0089368843785254
+          ],
+          "size": [
+            4.105311575448676,
+            4.177649130381699,
+            1.8723354080771493
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            0.0,
+            3.881272292455675
+          ],
+          "size": [
+            4.101371940905327,
+            4.135214182538199,
+            2.0326894192208105
           ]
         }
       },
@@ -1247,7 +1652,7 @@
       "perception": "belief",
       "success": true,
       "expected_feasible": true,
-      "rearranged": false,
+      "rearranged": true,
       "actions": [
         {
           "kind": "place_inside",
@@ -1268,6 +1673,10 @@
           "rearranged": false
         },
         {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
           "kind": "place_inside",
           "item": "late_large",
           "verified": true,
@@ -1278,14 +1687,27 @@
             "load_violation": false,
             "fragility_violation": false
           },
-          "rearranged": false
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
         }
       ],
       "reason": "complete",
       "packed": [
         "small_a",
-        "small_b",
-        "late_large"
+        "late_large",
+        "small_b"
       ],
       "placement_layout": {
         "small_a": {
@@ -1295,33 +1717,33 @@
             0.0
           ],
           "size": [
-            1.960909737134097,
             3.8896661550934466,
-            3.927497535975556
-          ]
-        },
-        "small_b": {
-          "position": [
-            1.960909737134097,
-            3.8896661550934466,
-            0.0
-          ],
-          "size": [
-            2.042152128540217,
-            3.975141927056111,
-            4.012648305151185
+            3.927497535975556,
+            1.960909737134097
           ]
         },
         "late_large": {
           "position": [
-            1.960909737134097,
+            3.8896661550934466,
             0.0,
             0.0
           ],
           "size": [
             6.071277546292288,
-            1.9622533859088125,
-            4.943653925239698
+            4.943653925239698,
+            1.9622533859088125
+          ]
+        },
+        "small_b": {
+          "position": [
+            3.8896661550934466,
+            0.0,
+            1.9622533859088125
+          ],
+          "size": [
+            3.975141927056111,
+            4.012648305151185,
+            2.042152128540217
           ]
         }
       },
@@ -1528,7 +1950,7 @@
     {
       "scenario": "late_large_rearrangement",
       "perception": "belief",
-      "success": true,
+      "success": false,
       "expected_feasible": true,
       "rearranged": false,
       "actions": [
@@ -1549,26 +1971,12 @@
             "arrival_floor_first": true
           },
           "rearranged": false
-        },
-        {
-          "kind": "place_inside",
-          "item": "late_large",
-          "verified": true,
-          "detail": {
-            "support": 1.0,
-            "collision": false,
-            "boundary": false,
-            "load_violation": false,
-            "fragility_violation": false
-          },
-          "rearranged": false
         }
       ],
-      "reason": "complete",
+      "reason": "clarify_or_abstain: no feasible placement",
       "packed": [
         "small_a",
-        "small_b",
-        "late_large"
+        "small_b"
       ],
       "placement_layout": {
         "small_a": {
@@ -1578,33 +1986,21 @@
             0.0
           ],
           "size": [
-            1.9213254833526148,
+            4.069551977003817,
             3.902052583164127,
-            4.069551977003817
+            1.9213254833526148
           ]
         },
         "small_b": {
           "position": [
-            1.9213254833526148,
-            3.902052583164127,
-            0.0
-          ],
-          "size": [
-            2.0016536311734647,
-            3.964676783641731,
-            4.1247606372611125
-          ]
-        },
-        "late_large": {
-          "position": [
-            1.9213254833526148,
+            4.069551977003817,
             0.0,
             0.0
           ],
           "size": [
-            6.1534857320495195,
-            2.132614334858477,
-            4.8897317689925135
+            3.964676783641731,
+            4.1247606372611125,
+            2.0016536311734647
           ]
         }
       },
@@ -1813,7 +2209,7 @@
       "perception": "belief",
       "success": true,
       "expected_feasible": true,
-      "rearranged": false,
+      "rearranged": true,
       "actions": [
         {
           "kind": "place_inside",
@@ -1834,6 +2230,14 @@
           "rearranged": false
         },
         {
+          "kind": "temporarily_remove",
+          "item": "small_a"
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
           "kind": "place_inside",
           "item": "late_large",
           "verified": true,
@@ -1844,50 +2248,76 @@
             "load_violation": false,
             "fragility_violation": false
           },
-          "rearranged": false
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
         }
       ],
       "reason": "complete",
       "packed": [
-        "small_a",
+        "late_large",
         "small_b",
-        "late_large"
+        "small_a"
       ],
       "placement_layout": {
-        "small_a": {
-          "position": [
-            0.0,
-            0.0,
-            0.0
-          ],
-          "size": [
-            2.033692182896399,
-            3.886990322810958,
-            3.95676599944589
-          ]
-        },
-        "small_b": {
-          "position": [
-            2.033692182896399,
-            3.886990322810958,
-            0.0
-          ],
-          "size": [
-            1.9820368530958208,
-            4.092411203670115,
-            4.201391558309115
-          ]
-        },
         "late_large": {
           "position": [
-            2.033692182896399,
+            0.0,
             0.0,
             0.0
           ],
           "size": [
             6.241738363483892,
-            1.9538367667348358,
-            5.3542461758228574
+            5.3542461758228574,
+            1.9538367667348358
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            0.0,
+            1.9538367667348358
+          ],
+          "size": [
+            4.201391558309115,
+            4.092411203670115,
+            1.9820368530958208
+          ]
+        },
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            3.9358736198306565
+          ],
+          "size": [
+            3.95676599944589,
+            3.886990322810958,
+            2.033692182896399
           ]
         }
       },
@@ -2096,7 +2526,7 @@
       "perception": "belief",
       "success": true,
       "expected_feasible": true,
-      "rearranged": false,
+      "rearranged": true,
       "actions": [
         {
           "kind": "place_inside",
@@ -2117,6 +2547,10 @@
           "rearranged": false
         },
         {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
           "kind": "place_inside",
           "item": "late_large",
           "verified": true,
@@ -2127,14 +2561,27 @@
             "load_violation": false,
             "fragility_violation": false
           },
-          "rearranged": false
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
         }
       ],
       "reason": "complete",
       "packed": [
         "small_a",
-        "small_b",
-        "late_large"
+        "late_large",
+        "small_b"
       ],
       "placement_layout": {
         "small_a": {
@@ -2144,33 +2591,33 @@
             0.0
           ],
           "size": [
-            1.9348865496971843,
             3.860238157529596,
-            3.8795990509904463
-          ]
-        },
-        "small_b": {
-          "position": [
-            1.9348865496971843,
-            3.860238157529596,
-            0.0
-          ],
-          "size": [
-            2.0471984732133457,
-            3.8398686108384554,
-            4.144728011539364
+            3.8795990509904463,
+            1.9348865496971843
           ]
         },
         "late_large": {
           "position": [
-            1.9348865496971843,
+            3.860238157529596,
             0.0,
             0.0
           ],
           "size": [
+            5.946680906143342,
             4.912382989165524,
-            2.02360573103454,
-            5.946680906143342
+            2.02360573103454
+          ]
+        },
+        "small_b": {
+          "position": [
+            3.860238157529596,
+            0.0,
+            2.02360573103454
+          ],
+          "size": [
+            4.144728011539364,
+            3.8398686108384554,
+            2.0471984732133457
           ]
         }
       },
@@ -2377,7 +2824,7 @@
     {
       "scenario": "late_large_rearrangement",
       "perception": "belief",
-      "success": true,
+      "success": false,
       "expected_feasible": true,
       "rearranged": false,
       "actions": [
@@ -2398,26 +2845,12 @@
             "arrival_floor_first": true
           },
           "rearranged": false
-        },
-        {
-          "kind": "place_inside",
-          "item": "late_large",
-          "verified": true,
-          "detail": {
-            "support": 1.0,
-            "collision": false,
-            "boundary": false,
-            "load_violation": false,
-            "fragility_violation": false
-          },
-          "rearranged": false
         }
       ],
-      "reason": "complete",
+      "reason": "clarify_or_abstain: no feasible placement",
       "packed": [
         "small_a",
-        "small_b",
-        "late_large"
+        "small_b"
       ],
       "placement_layout": {
         "small_a": {
@@ -2427,33 +2860,21 @@
             0.0
           ],
           "size": [
-            2.057723157328989,
+            3.807493550189619,
             3.6981204769388,
-            3.807493550189619
+            2.057723157328989
           ]
         },
         "small_b": {
           "position": [
-            2.057723157328989,
+            3.807493550189619,
             3.6981204769388,
             0.0
           ],
           "size": [
-            1.9963555839290554,
+            4.132951737130585,
             3.9570407504612035,
-            4.132951737130585
-          ]
-        },
-        "late_large": {
-          "position": [
-            2.057723157328989,
-            0.0,
-            0.0
-          ],
-          "size": [
-            6.205236402043133,
-            2.002918885990352,
-            5.1089959186033385
+            1.9963555839290554
           ]
         }
       },
@@ -2662,7 +3083,7 @@
       "perception": "belief",
       "success": true,
       "expected_feasible": true,
-      "rearranged": false,
+      "rearranged": true,
       "actions": [
         {
           "kind": "place_inside",
@@ -2683,6 +3104,14 @@
           "rearranged": false
         },
         {
+          "kind": "temporarily_remove",
+          "item": "small_a"
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
           "kind": "place_inside",
           "item": "late_large",
           "verified": true,
@@ -2693,50 +3122,76 @@
             "load_violation": false,
             "fragility_violation": false
           },
-          "rearranged": false
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
         }
       ],
       "reason": "complete",
       "packed": [
-        "small_a",
+        "late_large",
         "small_b",
-        "late_large"
+        "small_a"
       ],
       "placement_layout": {
-        "small_a": {
-          "position": [
-            0.0,
-            0.0,
-            0.0
-          ],
-          "size": [
-            1.951505559122117,
-            4.0743283386702815,
-            4.157464114316813
-          ]
-        },
-        "small_b": {
-          "position": [
-            1.951505559122117,
-            4.0743283386702815,
-            0.0
-          ],
-          "size": [
-            3.9713270080998786,
-            1.952838725519568,
-            4.236241892021374
-          ]
-        },
         "late_large": {
           "position": [
-            1.951505559122117,
+            0.0,
             0.0,
             0.0
           ],
           "size": [
             6.018476988093976,
-            1.9998610939183383,
-            5.127731726286905
+            5.127731726286905,
+            1.9998610939183383
+          ]
+        },
+        "small_b": {
+          "position": [
+            6.018476988093976,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.9713270080998786,
+            4.236241892021374,
+            1.952838725519568
+          ]
+        },
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            1.9998610939183383
+          ],
+          "size": [
+            4.157464114316813,
+            4.0743283386702815,
+            1.951505559122117
           ]
         }
       },
@@ -2943,7 +3398,7 @@
     {
       "scenario": "late_large_rearrangement",
       "perception": "belief",
-      "success": true,
+      "success": false,
       "expected_feasible": true,
       "rearranged": false,
       "actions": [
@@ -2964,26 +3419,12 @@
             "arrival_floor_first": true
           },
           "rearranged": false
-        },
-        {
-          "kind": "place_inside",
-          "item": "late_large",
-          "verified": true,
-          "detail": {
-            "support": 1.0,
-            "collision": false,
-            "boundary": false,
-            "load_violation": false,
-            "fragility_violation": false
-          },
-          "rearranged": false
         }
       ],
-      "reason": "complete",
+      "reason": "clarify_or_abstain: no feasible placement",
       "packed": [
         "small_a",
-        "small_b",
-        "late_large"
+        "small_b"
       ],
       "placement_layout": {
         "small_a": {
@@ -2993,33 +3434,21 @@
             0.0
           ],
           "size": [
-            2.128701159498187,
+            3.9960075341052863,
             3.8742263279078086,
-            3.9960075341052863
+            2.128701159498187
           ]
         },
         "small_b": {
           "position": [
-            2.128701159498187,
+            3.9960075341052863,
             3.8742263279078086,
             0.0
           ],
           "size": [
-            2.0029143542310703,
+            4.064354662453556,
             3.979207332008556,
-            4.064354662453556
-          ]
-        },
-        "late_large": {
-          "position": [
-            2.128701159498187,
-            0.0,
-            0.0
-          ],
-          "size": [
-            6.029266063481568,
-            2.0307340194407497,
-            4.9238356892279835
+            2.0029143542310703
           ]
         }
       },
@@ -3226,7 +3655,7 @@
     {
       "scenario": "late_large_rearrangement",
       "perception": "belief",
-      "success": true,
+      "success": false,
       "expected_feasible": true,
       "rearranged": false,
       "actions": [
@@ -3247,26 +3676,12 @@
             "arrival_floor_first": true
           },
           "rearranged": false
-        },
-        {
-          "kind": "place_inside",
-          "item": "late_large",
-          "verified": true,
-          "detail": {
-            "support": 1.0,
-            "collision": false,
-            "boundary": false,
-            "load_violation": false,
-            "fragility_violation": false
-          },
-          "rearranged": false
         }
       ],
-      "reason": "complete",
+      "reason": "clarify_or_abstain: no feasible placement",
       "packed": [
         "small_a",
-        "small_b",
-        "late_large"
+        "small_b"
       ],
       "placement_layout": {
         "small_a": {
@@ -3276,33 +3691,21 @@
             0.0
           ],
           "size": [
-            2.013462962252885,
+            4.144574482920946,
             4.013779878130975,
-            4.144574482920946
+            2.013462962252885
           ]
         },
         "small_b": {
           "position": [
-            2.013462962252885,
-            4.013779878130975,
-            0.0
-          ],
-          "size": [
-            4.044983685037872,
-            1.9419583284434463,
-            4.152666568898326
-          ]
-        },
-        "late_large": {
-          "position": [
-            2.013462962252885,
+            4.144574482920946,
             0.0,
             0.0
           ],
           "size": [
-            6.013692372926373,
-            2.0634421731625276,
-            5.162743393521959
+            4.044983685037872,
+            4.152666568898326,
+            1.9419583284434463
           ]
         }
       },
@@ -3511,7 +3914,7 @@
       "perception": "belief",
       "success": true,
       "expected_feasible": true,
-      "rearranged": false,
+      "rearranged": true,
       "actions": [
         {
           "kind": "place_inside",
@@ -3532,6 +3935,14 @@
           "rearranged": false
         },
         {
+          "kind": "temporarily_remove",
+          "item": "small_a"
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
           "kind": "place_inside",
           "item": "late_large",
           "verified": true,
@@ -3542,50 +3953,76 @@
             "load_violation": false,
             "fragility_violation": false
           },
-          "rearranged": false
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
         }
       ],
       "reason": "complete",
       "packed": [
-        "small_a",
+        "late_large",
         "small_b",
-        "late_large"
+        "small_a"
       ],
       "placement_layout": {
-        "small_a": {
+        "late_large": {
           "position": [
             0.0,
             0.0,
             0.0
           ],
           "size": [
-            2.037522559790323,
-            3.8960015893759503,
-            4.030471707975443
+            5.997479826374357,
+            4.8933695090533025,
+            2.0439698987431414
           ]
         },
         "small_b": {
           "position": [
-            2.037522559790323,
-            3.8960015893759503,
-            0.0
-          ],
-          "size": [
-            2.0063920201583643,
-            3.8048964811346164,
-            3.869782049313768
-          ]
-        },
-        "late_large": {
-          "position": [
-            2.037522559790323,
+            5.997479826374357,
             0.0,
             0.0
           ],
           "size": [
-            4.8933695090533025,
-            2.0439698987431414,
-            5.997479826374357
+            3.8048964811346164,
+            3.869782049313768,
+            2.0063920201583643
+          ]
+        },
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            2.0439698987431414
+          ],
+          "size": [
+            4.030471707975443,
+            3.8960015893759503,
+            2.037522559790323
           ]
         }
       },
@@ -3794,7 +4231,7 @@
       "perception": "belief",
       "success": true,
       "expected_feasible": true,
-      "rearranged": false,
+      "rearranged": true,
       "actions": [
         {
           "kind": "place_inside",
@@ -3815,6 +4252,10 @@
           "rearranged": false
         },
         {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
           "kind": "place_inside",
           "item": "late_large",
           "verified": true,
@@ -3825,14 +4266,27 @@
             "load_violation": false,
             "fragility_violation": false
           },
-          "rearranged": false
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
         }
       ],
       "reason": "complete",
       "packed": [
         "small_a",
-        "small_b",
-        "late_large"
+        "late_large",
+        "small_b"
       ],
       "placement_layout": {
         "small_a": {
@@ -3842,33 +4296,33 @@
             0.0
           ],
           "size": [
-            1.9864440296522614,
             3.949708410006399,
-            4.121789043708776
-          ]
-        },
-        "small_b": {
-          "position": [
-            1.9864440296522614,
-            3.949708410006399,
-            0.0
-          ],
-          "size": [
-            1.9988363609001967,
-            3.8570533100463553,
-            3.883069448300355
+            4.121789043708776,
+            1.9864440296522614
           ]
         },
         "late_large": {
           "position": [
-            1.9864440296522614,
+            3.949708410006399,
             0.0,
             0.0
           ],
           "size": [
             6.013211271200445,
-            2.0158089907341004,
-            5.065661949125833
+            5.065661949125833,
+            2.0158089907341004
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.121789043708776,
+            0.0
+          ],
+          "size": [
+            3.883069448300355,
+            3.8570533100463553,
+            1.9988363609001967
           ]
         }
       },
@@ -4077,7 +4531,7 @@
       "perception": "belief",
       "success": true,
       "expected_feasible": true,
-      "rearranged": false,
+      "rearranged": true,
       "actions": [
         {
           "kind": "place_inside",
@@ -4098,6 +4552,14 @@
           "rearranged": false
         },
         {
+          "kind": "temporarily_remove",
+          "item": "small_a"
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
           "kind": "place_inside",
           "item": "late_large",
           "verified": true,
@@ -4108,50 +4570,76 @@
             "load_violation": false,
             "fragility_violation": false
           },
-          "rearranged": false
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
         }
       ],
       "reason": "complete",
       "packed": [
-        "small_a",
+        "late_large",
         "small_b",
-        "late_large"
+        "small_a"
       ],
       "placement_layout": {
-        "small_a": {
-          "position": [
-            0.0,
-            0.0,
-            0.0
-          ],
-          "size": [
-            2.0334669809827095,
-            3.9522608021449877,
-            4.048638140403222
-          ]
-        },
-        "small_b": {
-          "position": [
-            2.0334669809827095,
-            3.9522608021449877,
-            0.0
-          ],
-          "size": [
-            2.0267174430137547,
-            3.980906848279785,
-            4.166588842965838
-          ]
-        },
         "late_large": {
           "position": [
-            2.0334669809827095,
+            0.0,
             0.0,
             0.0
           ],
           "size": [
             6.036712555186847,
-            1.9329207655295544,
-            5.022476302741367
+            5.022476302741367,
+            1.9329207655295544
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            0.0,
+            1.9329207655295544
+          ],
+          "size": [
+            4.166588842965838,
+            3.980906848279785,
+            2.0267174430137547
+          ]
+        },
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            3.959638208543309
+          ],
+          "size": [
+            4.048638140403222,
+            3.9522608021449877,
+            2.0334669809827095
           ]
         }
       },
@@ -4358,7 +4846,7 @@
     {
       "scenario": "late_large_rearrangement",
       "perception": "belief",
-      "success": true,
+      "success": false,
       "expected_feasible": true,
       "rearranged": false,
       "actions": [
@@ -4379,26 +4867,12 @@
             "arrival_floor_first": true
           },
           "rearranged": false
-        },
-        {
-          "kind": "place_inside",
-          "item": "late_large",
-          "verified": true,
-          "detail": {
-            "support": 1.0,
-            "collision": false,
-            "boundary": false,
-            "load_violation": false,
-            "fragility_violation": false
-          },
-          "rearranged": false
         }
       ],
-      "reason": "complete",
+      "reason": "clarify_or_abstain: no feasible placement",
       "packed": [
         "small_a",
-        "small_b",
-        "late_large"
+        "small_b"
       ],
       "placement_layout": {
         "small_a": {
@@ -4408,33 +4882,21 @@
             0.0
           ],
           "size": [
-            2.06225020809986,
             3.9028768673806837,
-            3.9802700243813804
+            3.9802700243813804,
+            2.06225020809986
           ]
         },
         "small_b": {
           "position": [
-            2.06225020809986,
             3.9028768673806837,
-            0.0
-          ],
-          "size": [
-            1.9716605018838682,
-            3.948392759597506,
-            4.12951872861795
-          ]
-        },
-        "late_large": {
-          "position": [
-            2.06225020809986,
             0.0,
             0.0
           ],
           "size": [
-            6.1609484727451385,
-            2.1186284893421896,
-            4.958936720285213
+            3.948392759597506,
+            4.12951872861795,
+            1.9716605018838682
           ]
         }
       },
@@ -4643,7 +5105,7 @@
       "perception": "belief",
       "success": true,
       "expected_feasible": true,
-      "rearranged": false,
+      "rearranged": true,
       "actions": [
         {
           "kind": "place_inside",
@@ -4664,6 +5126,10 @@
           "rearranged": false
         },
         {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
           "kind": "place_inside",
           "item": "late_large",
           "verified": true,
@@ -4674,14 +5140,27 @@
             "load_violation": false,
             "fragility_violation": false
           },
-          "rearranged": false
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
         }
       ],
       "reason": "complete",
       "packed": [
         "small_a",
-        "small_b",
-        "late_large"
+        "late_large",
+        "small_b"
       ],
       "placement_layout": {
         "small_a": {
@@ -4691,33 +5170,33 @@
             0.0
           ],
           "size": [
-            1.894411438538869,
             3.942493265878378,
-            4.009206373631659
-          ]
-        },
-        "small_b": {
-          "position": [
-            1.894411438538869,
-            3.942493265878378,
-            0.0
-          ],
-          "size": [
-            2.03689198092849,
-            3.9243468171856963,
-            3.9777738311834803
+            4.009206373631659,
+            1.894411438538869
           ]
         },
         "late_large": {
           "position": [
-            1.894411438538869,
+            3.942493265878378,
             0.0,
             0.0
           ],
           "size": [
+            5.935995955495585,
             4.960318106568562,
-            1.9891162485481966,
-            5.935995955495585
+            1.9891162485481966
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.009206373631659,
+            0.0
+          ],
+          "size": [
+            3.9243468171856963,
+            3.9777738311834803,
+            2.03689198092849
           ]
         }
       },
@@ -4926,7 +5405,7 @@
       "perception": "belief",
       "success": true,
       "expected_feasible": true,
-      "rearranged": false,
+      "rearranged": true,
       "actions": [
         {
           "kind": "place_inside",
@@ -4947,6 +5426,10 @@
           "rearranged": false
         },
         {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
           "kind": "place_inside",
           "item": "late_large",
           "verified": true,
@@ -4957,14 +5440,27 @@
             "load_violation": false,
             "fragility_violation": false
           },
-          "rearranged": false
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 0.9999999999999999,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
         }
       ],
       "reason": "complete",
       "packed": [
         "small_a",
-        "small_b",
-        "late_large"
+        "late_large",
+        "small_b"
       ],
       "placement_layout": {
         "small_a": {
@@ -4974,33 +5470,33 @@
             0.0
           ],
           "size": [
-            1.9765328987411201,
+            3.897774285471219,
             3.852518452151333,
-            3.897774285471219
-          ]
-        },
-        "small_b": {
-          "position": [
-            1.9765328987411201,
-            3.852518452151333,
-            0.0
-          ],
-          "size": [
-            1.9876759493552385,
-            3.908231266858779,
-            3.9708594245495474
+            1.9765328987411201
           ]
         },
         "late_large": {
           "position": [
-            1.9765328987411201,
+            3.897774285471219,
             0.0,
             0.0
           ],
           "size": [
+            5.821045980141916,
             4.97378495969904,
-            1.9472660269306679,
-            5.821045980141916
+            1.9472660269306679
+          ]
+        },
+        "small_b": {
+          "position": [
+            3.897774285471219,
+            0.0,
+            1.9472660269306679
+          ],
+          "size": [
+            3.908231266858779,
+            3.9708594245495474,
+            1.9876759493552385
           ]
         }
       },
@@ -5209,7 +5705,7 @@
       "perception": "belief",
       "success": true,
       "expected_feasible": true,
-      "rearranged": false,
+      "rearranged": true,
       "actions": [
         {
           "kind": "place_inside",
@@ -5230,6 +5726,14 @@
           "rearranged": false
         },
         {
+          "kind": "temporarily_remove",
+          "item": "small_a"
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
           "kind": "place_inside",
           "item": "late_large",
           "verified": true,
@@ -5240,50 +5744,76 @@
             "load_violation": false,
             "fragility_violation": false
           },
-          "rearranged": false
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
         }
       ],
       "reason": "complete",
       "packed": [
-        "small_a",
+        "late_large",
         "small_b",
-        "late_large"
+        "small_a"
       ],
       "placement_layout": {
-        "small_a": {
-          "position": [
-            0.0,
-            0.0,
-            0.0
-          ],
-          "size": [
-            1.9753642384703018,
-            3.946008249687565,
-            4.054103331213838
-          ]
-        },
-        "small_b": {
-          "position": [
-            1.9753642384703018,
-            3.946008249687565,
-            0.0
-          ],
-          "size": [
-            2.0250914023369866,
-            3.844824592534428,
-            3.867398571565141
-          ]
-        },
         "late_large": {
           "position": [
-            1.9753642384703018,
+            0.0,
             0.0,
             0.0
           ],
           "size": [
             6.066156906045267,
-            2.014647335110997,
-            5.035685626321756
+            5.035685626321756,
+            2.014647335110997
+          ]
+        },
+        "small_b": {
+          "position": [
+            6.066156906045267,
+            0.0,
+            0.0
+          ],
+          "size": [
+            3.867398571565141,
+            3.844824592534428,
+            2.0250914023369866
+          ]
+        },
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            2.014647335110997
+          ],
+          "size": [
+            4.054103331213838,
+            3.946008249687565,
+            1.9753642384703018
           ]
         }
       },
@@ -5490,7 +6020,7 @@
     {
       "scenario": "late_large_rearrangement",
       "perception": "belief",
-      "success": true,
+      "success": false,
       "expected_feasible": true,
       "rearranged": false,
       "actions": [
@@ -5511,26 +6041,12 @@
             "arrival_floor_first": true
           },
           "rearranged": false
-        },
-        {
-          "kind": "place_inside",
-          "item": "late_large",
-          "verified": true,
-          "detail": {
-            "support": 1.0,
-            "collision": false,
-            "boundary": false,
-            "load_violation": false,
-            "fragility_violation": false
-          },
-          "rearranged": false
         }
       ],
-      "reason": "complete",
+      "reason": "clarify_or_abstain: no feasible placement",
       "packed": [
         "small_a",
-        "small_b",
-        "late_large"
+        "small_b"
       ],
       "placement_layout": {
         "small_a": {
@@ -5540,33 +6056,21 @@
             0.0
           ],
           "size": [
-            2.045317287405602,
+            3.991674366539524,
             3.8988229338955027,
-            3.991674366539524
+            2.045317287405602
           ]
         },
         "small_b": {
           "position": [
-            2.045317287405602,
+            3.991674366539524,
             3.8988229338955027,
             0.0
           ],
           "size": [
-            2.0231364897083473,
+            4.140427884592211,
             3.8535551901313654,
-            4.140427884592211
-          ]
-        },
-        "late_large": {
-          "position": [
-            2.045317287405602,
-            0.0,
-            0.0
-          ],
-          "size": [
-            6.108268000757518,
-            2.0136078090022376,
-            4.895935163786375
+            2.0231364897083473
           ]
         }
       },
@@ -5775,7 +6279,7 @@
       "perception": "belief",
       "success": true,
       "expected_feasible": true,
-      "rearranged": false,
+      "rearranged": true,
       "actions": [
         {
           "kind": "place_inside",
@@ -5796,6 +6300,10 @@
           "rearranged": false
         },
         {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
           "kind": "place_inside",
           "item": "late_large",
           "verified": true,
@@ -5806,14 +6314,27 @@
             "load_violation": false,
             "fragility_violation": false
           },
-          "rearranged": false
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
         }
       ],
       "reason": "complete",
       "packed": [
         "small_a",
-        "small_b",
-        "late_large"
+        "late_large",
+        "small_b"
       ],
       "placement_layout": {
         "small_a": {
@@ -5823,33 +6344,33 @@
             0.0
           ],
           "size": [
-            2.0368391052563553,
+            4.02464884538703,
             4.020651120506018,
-            4.02464884538703
-          ]
-        },
-        "small_b": {
-          "position": [
-            2.0368391052563553,
-            4.020651120506018,
-            0.0
-          ],
-          "size": [
-            2.002109270849209,
-            3.9135407261071493,
-            3.9678378316154768
+            2.0368391052563553
           ]
         },
         "late_large": {
           "position": [
-            2.0368391052563553,
+            4.02464884538703,
             0.0,
             0.0
           ],
           "size": [
+            5.970632703041701,
             5.101714419594571,
-            2.0771385959024053,
-            5.970632703041701
+            2.0771385959024053
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            4.020651120506018,
+            0.0
+          ],
+          "size": [
+            3.9135407261071493,
+            3.9678378316154768,
+            2.002109270849209
           ]
         }
       },
@@ -6056,7 +6577,7 @@
     {
       "scenario": "late_large_rearrangement",
       "perception": "belief",
-      "success": true,
+      "success": false,
       "expected_feasible": true,
       "rearranged": false,
       "actions": [
@@ -6077,26 +6598,12 @@
             "arrival_floor_first": true
           },
           "rearranged": false
-        },
-        {
-          "kind": "place_inside",
-          "item": "late_large",
-          "verified": true,
-          "detail": {
-            "support": 1.0,
-            "collision": false,
-            "boundary": false,
-            "load_violation": false,
-            "fragility_violation": false
-          },
-          "rearranged": false
         }
       ],
-      "reason": "complete",
+      "reason": "clarify_or_abstain: no feasible placement",
       "packed": [
         "small_a",
-        "small_b",
-        "late_large"
+        "small_b"
       ],
       "placement_layout": {
         "small_a": {
@@ -6106,33 +6613,21 @@
             0.0
           ],
           "size": [
-            1.980918837390082,
             3.932345140522803,
-            4.039557052786592
+            4.039557052786592,
+            1.980918837390082
           ]
         },
         "small_b": {
           "position": [
-            1.980918837390082,
             3.932345140522803,
-            0.0
-          ],
-          "size": [
-            2.002320602280874,
-            3.9656545661718843,
-            4.070997843046365
-          ]
-        },
-        "late_large": {
-          "position": [
-            1.980918837390082,
             0.0,
             0.0
           ],
           "size": [
-            6.379519486827615,
-            2.0264960024394636,
-            4.939956009178487
+            4.070997843046365,
+            3.9656545661718843,
+            2.002320602280874
           ]
         }
       },
@@ -6341,7 +6836,7 @@
       "perception": "belief",
       "success": true,
       "expected_feasible": true,
-      "rearranged": false,
+      "rearranged": true,
       "actions": [
         {
           "kind": "place_inside",
@@ -6362,6 +6857,14 @@
           "rearranged": false
         },
         {
+          "kind": "temporarily_remove",
+          "item": "small_a"
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
           "kind": "place_inside",
           "item": "late_large",
           "verified": true,
@@ -6372,50 +6875,76 @@
             "load_violation": false,
             "fragility_violation": false
           },
-          "rearranged": false
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "support": 0.903006666513202,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
         }
       ],
       "reason": "complete",
       "packed": [
-        "small_a",
+        "late_large",
         "small_b",
-        "late_large"
+        "small_a"
       ],
       "placement_layout": {
-        "small_a": {
-          "position": [
-            0.0,
-            0.0,
-            0.0
-          ],
-          "size": [
-            2.055420294473751,
-            4.102697613248812,
-            4.172816286598998
-          ]
-        },
-        "small_b": {
-          "position": [
-            2.055420294473751,
-            4.102697613248812,
-            0.0
-          ],
-          "size": [
-            3.9240673977969234,
-            1.9146567373387033,
-            3.93961037109948
-          ]
-        },
         "late_large": {
           "position": [
-            2.055420294473751,
+            0.0,
             0.0,
             0.0
           ],
           "size": [
             6.129749994937532,
-            1.9890484213423965,
-            5.023848666011497
+            5.023848666011497,
+            1.9890484213423965
+          ]
+        },
+        "small_b": {
+          "position": [
+            0.0,
+            0.0,
+            1.9890484213423965
+          ],
+          "size": [
+            3.93961037109948,
+            3.9240673977969234,
+            1.9146567373387033
+          ]
+        },
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            3.9037051586811
+          ],
+          "size": [
+            4.172816286598998,
+            4.102697613248812,
+            2.055420294473751
           ]
         }
       },
@@ -6624,7 +7153,7 @@
       "perception": "belief",
       "success": true,
       "expected_feasible": true,
-      "rearranged": false,
+      "rearranged": true,
       "actions": [
         {
           "kind": "place_inside",
@@ -6645,6 +7174,10 @@
           "rearranged": false
         },
         {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
           "kind": "place_inside",
           "item": "late_large",
           "verified": true,
@@ -6655,14 +7188,27 @@
             "load_violation": false,
             "fragility_violation": false
           },
-          "rearranged": false
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 0.9999999999999999,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
         }
       ],
       "reason": "complete",
       "packed": [
         "small_a",
-        "small_b",
-        "late_large"
+        "late_large",
+        "small_b"
       ],
       "placement_layout": {
         "small_a": {
@@ -6672,33 +7218,33 @@
             0.0
           ],
           "size": [
-            2.0335401906850348,
             3.8352090702148405,
-            3.9745379845434092
-          ]
-        },
-        "small_b": {
-          "position": [
-            2.0335401906850348,
-            3.8352090702148405,
-            0.0
-          ],
-          "size": [
-            2.0197532702361745,
-            3.9191260347367107,
-            4.051022097432073
+            3.9745379845434092,
+            2.0335401906850348
           ]
         },
         "late_large": {
           "position": [
-            2.0335401906850348,
+            3.8352090702148405,
             0.0,
             0.0
           ],
           "size": [
             6.033538479590283,
-            1.9931838377324407,
-            4.831922421322422
+            4.831922421322422,
+            1.9931838377324407
+          ]
+        },
+        "small_b": {
+          "position": [
+            3.8352090702148405,
+            0.0,
+            1.9931838377324407
+          ],
+          "size": [
+            3.9191260347367107,
+            4.051022097432073,
+            2.0197532702361745
           ]
         }
       },
@@ -6905,7 +7451,7 @@
     {
       "scenario": "late_large_rearrangement",
       "perception": "belief",
-      "success": true,
+      "success": false,
       "expected_feasible": true,
       "rearranged": false,
       "actions": [
@@ -6926,26 +7472,12 @@
             "arrival_floor_first": true
           },
           "rearranged": false
-        },
-        {
-          "kind": "place_inside",
-          "item": "late_large",
-          "verified": true,
-          "detail": {
-            "support": 1.0,
-            "collision": false,
-            "boundary": false,
-            "load_violation": false,
-            "fragility_violation": false
-          },
-          "rearranged": false
         }
       ],
-      "reason": "complete",
+      "reason": "clarify_or_abstain: no feasible placement",
       "packed": [
         "small_a",
-        "small_b",
-        "late_large"
+        "small_b"
       ],
       "placement_layout": {
         "small_a": {
@@ -6955,33 +7487,21 @@
             0.0
           ],
           "size": [
-            1.9945354540089455,
+            4.1814452571729195,
             3.9521793163974337,
-            4.1814452571729195
+            1.9945354540089455
           ]
         },
         "small_b": {
           "position": [
-            1.9945354540089455,
+            4.1814452571729195,
             3.9521793163974337,
             0.0
           ],
           "size": [
-            2.0878488566998494,
             3.9686711270398534,
-            4.0006803501234725
-          ]
-        },
-        "late_large": {
-          "position": [
-            1.9945354540089455,
-            0.0,
-            0.0
-          ],
-          "size": [
-            6.097336503001241,
-            2.005896382977909,
-            5.0004669131979815
+            4.0006803501234725,
+            2.0878488566998494
           ]
         }
       },
@@ -7190,7 +7710,7 @@
       "perception": "belief",
       "success": true,
       "expected_feasible": true,
-      "rearranged": false,
+      "rearranged": true,
       "actions": [
         {
           "kind": "place_inside",
@@ -7211,6 +7731,14 @@
           "rearranged": false
         },
         {
+          "kind": "temporarily_remove",
+          "item": "small_a"
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
           "kind": "place_inside",
           "item": "late_large",
           "verified": true,
@@ -7221,50 +7749,76 @@
             "load_violation": false,
             "fragility_violation": false
           },
-          "rearranged": false
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
         }
       ],
       "reason": "complete",
       "packed": [
-        "small_a",
+        "late_large",
         "small_b",
-        "late_large"
+        "small_a"
       ],
       "placement_layout": {
-        "small_a": {
+        "late_large": {
           "position": [
             0.0,
             0.0,
             0.0
           ],
           "size": [
-            1.9668422382096686,
-            4.051376340804408,
-            4.101235316611162
+            5.920174073825077,
+            4.8593907921527215,
+            1.9070883602399382
           ]
         },
         "small_b": {
           "position": [
-            1.9668422382096686,
-            4.051376340804408,
-            0.0
-          ],
-          "size": [
-            3.9871369451460836,
-            2.025999724688307,
-            4.025959477377496
-          ]
-        },
-        "late_large": {
-          "position": [
-            1.9668422382096686,
+            5.920174073825077,
             0.0,
             0.0
           ],
           "size": [
-            4.8593907921527215,
-            1.9070883602399382,
-            5.920174073825077
+            4.025959477377496,
+            3.9871369451460836,
+            2.025999724688307
+          ]
+        },
+        "small_a": {
+          "position": [
+            0.0,
+            0.0,
+            1.9070883602399382
+          ],
+          "size": [
+            4.101235316611162,
+            4.051376340804408,
+            1.9668422382096686
           ]
         }
       },
@@ -7473,7 +8027,7 @@
       "perception": "belief",
       "success": true,
       "expected_feasible": true,
-      "rearranged": false,
+      "rearranged": true,
       "actions": [
         {
           "kind": "place_inside",
@@ -7494,6 +8048,10 @@
           "rearranged": false
         },
         {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
           "kind": "place_inside",
           "item": "late_large",
           "verified": true,
@@ -7504,14 +8062,27 @@
             "load_violation": false,
             "fragility_violation": false
           },
-          "rearranged": false
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
         }
       ],
       "reason": "complete",
       "packed": [
         "small_a",
-        "small_b",
-        "late_large"
+        "late_large",
+        "small_b"
       ],
       "placement_layout": {
         "small_a": {
@@ -7521,33 +8092,33 @@
             0.0
           ],
           "size": [
-            2.028026325268748,
+            3.8912408957151827,
             3.8755378631333692,
-            3.8912408957151827
-          ]
-        },
-        "small_b": {
-          "position": [
-            2.028026325268748,
-            3.8755378631333692,
-            0.0
-          ],
-          "size": [
-            1.9846443611852456,
-            4.042813233573262,
-            4.106628207124726
+            2.028026325268748
           ]
         },
         "late_large": {
           "position": [
-            2.028026325268748,
+            3.8912408957151827,
             0.0,
             0.0
           ],
           "size": [
             6.058128990058036,
-            1.9756602397590262,
-            5.031799380819184
+            5.031799380819184,
+            1.9756602397590262
+          ]
+        },
+        "small_b": {
+          "position": [
+            3.8912408957151827,
+            0.0,
+            1.9756602397590262
+          ],
+          "size": [
+            4.042813233573262,
+            4.106628207124726,
+            1.9846443611852456
           ]
         }
       },

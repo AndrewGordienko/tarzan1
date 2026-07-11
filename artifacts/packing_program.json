@@ -171,10 +171,11 @@
   "source": "one_shot_demo",
   "policy_name": "heavy_bottom_fragile_top",
   "posterior": {
-    "neutral_prior": 0.08259453944353537,
-    "heavy_bottom_fragile_top": 0.6102956854136231,
-    "maximize_volume": 0.08259453944353537,
-    "minimize_rehandling": 0.22451523569930604
+    "unknown_or_unexplained": 0.004095299537122306,
+    "neutral_prior": 0.08225629006438344,
+    "heavy_bottom_fragile_top": 0.607796341775641,
+    "maximize_volume": 0.08225629006438344,
+    "minimize_rehandling": 0.2235957785584698
   },
   "constraint_posterior": {
     "all_inside": 0.99,

@@ -9,6 +9,10 @@ from .domain import PackingConstraint, PackingProgram
 
 
 POLICY_CATALOG = {
+    "unknown_or_unexplained": {"rules": [], "prefs": {"heavy_low": 0.0, "fragile_high": 0.0,
+                                                           "preserve_large_item_space": 0.0,
+                                                           "minimize_rehandling": 0.0,
+                                                           "minimize_unused_volume": 0.0}},
     "neutral_prior": {"rules": [], "prefs": {"heavy_low": 0.0, "fragile_high": 0.0,
                                                    "preserve_large_item_space": 0.0,
                                                    "minimize_rehandling": 0.0,
@@ -63,7 +67,7 @@ def compile_packing_demo(events=None, policy_name="heavy_bottom_fragile_top") ->
 def infer_program_posterior(events=None):
     """Small inverse-planning posterior over finite policy hypotheses."""
     if events is None:
-        return {name: 1.0 / len(POLICY_CATALOG) for name in POLICY_CATALOG}
+        return {name: (1.0 if name == "neutral_prior" else 0.0) for name in POLICY_CATALOG}
     events = parse_demo(events)
     order = [e.item_id for e in events if e.kind == "place_inside" and e.item_id]
     scores = {}
@@ -84,6 +88,9 @@ def infer_program_posterior(events=None):
             score += 1.0 if not any(e.kind == "rearrange" for e in events) else -1.0
         score += 0.25 * sum(e.kind == "rearrange" for e in events) if name == "minimize_rehandling" else 0.0
         scores[name] = score
+    known_kinds = {"inspect", "pick", "place_inside", "place_on", "remove", "rearrange", "verify"}
+    unknown_signal = any(e.kind not in known_kinds for e in events)
+    scores["unknown_or_unexplained"] = 5.0 if unknown_signal else -3.0
     vals = np.array(list(scores.values()), dtype=float)
     probs = np.exp(vals - vals.max()); probs /= probs.sum()
     return {name: float(p) for name, p in zip(scores, probs)}
@@ -105,7 +112,27 @@ def compile_with_inferred_posterior(events=None):
         "preserve_future_space": .87 if best in ("heavy_bottom_fragile_top", "maximize_volume") else .31,
         "reproduce_exact_coordinates": .02,
     }
+    if best == "unknown_or_unexplained":
+        program.constraint_posterior = {}
     return program
+
+
+def compile_composed_program(components):
+    """Compose independently known constraints/preferences for a held-out combo."""
+    components = tuple(components)
+    if set(components) - {"heavy_below_fragile", "minimize_rehandling", "maximize_fill"}:
+        raise ValueError("unknown program component")
+    base = _program("heavy_bottom_fragile_top", [])
+    base.policy_name = "composed_" + "_".join(components)
+    base.ordering_rules = []
+    if "heavy_below_fragile" in components:
+        base.ordering_rules.append("heavy_before_fragile")
+    if "maximize_fill" in components:
+        base.ordering_rules.append("large_items_first")
+    if "minimize_rehandling" in components:
+        base.preferences = [PackingConstraint(c.name, c.kind, c.hard, c.weight * 1.5,
+                                              dict(c.parameters)) for c in base.preferences]
+    return base
 
 
 def _before(order, a, b):

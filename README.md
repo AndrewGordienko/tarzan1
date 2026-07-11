@@ -58,6 +58,14 @@ reported separately; no gradient updates occur after the demonstration. The
 packing implementation lives under `src/osc/packing/` and is intentionally a
 finite geometric world model before learned residual dynamics are introduced.
 
+The scientific packing artifact also runs a causal demo-dependence check: the same
+inventory is evaluated after heavy-bottom, maximize-volume, minimize-rehandling,
+shuffled, no-demo, conflicting, and oracle-program conditions. It records the
+program posterior, constraint posterior, arrangement, and policy-behavior match.
+An explicit `unknown_or_unexplained` hypothesis abstains on out-of-vocabulary
+demonstrations. The matched late-item intervention forces both oracle and belief
+lanes through the same initial placement prefix before revealing the large item.
+
 Results are **cross-process deterministic** (identical JSON across
 `PYTHONHASHSEED`, apart from wall-clock latency fields); CI enforces it.
 
