@@ -74,6 +74,9 @@ class AgentTrace:
     final_track_poses: dict = field(default_factory=dict)   # track_id -> pose (for scoring)
     role_confidence: float = 1.0        # confidence of the final role assignment
     min_role_confidence: float = 1.0    # lowest across planning calls
+    role_entropy: float = 0.0           # posterior entropy at the FIRST binding
+    role_margin: float = 1.0            # weakest-role top1-top2 margin at first binding
+    assignment_margin: float = 1.0      # joint top1-top2 cost gap at first binding
     ambiguous: bool = False             # correspondence was ambiguous at some plan
     # -- resolution layer --
     committed: bool = True              # did the robot commit to executing (vs abstain)
@@ -188,6 +191,10 @@ class ClosedLoopExecutor:
             corr = self._apply_clarifications(ra.mapping, belief)
             tr.role_confidence = ra.confidence
             tr.min_role_confidence = min(tr.min_role_confidence, ra.confidence)
+            if not tr.corr_history:            # capture features at the FIRST binding
+                tr.role_entropy = ra.entropy
+                tr.role_margin = ra.margin
+                tr.assignment_margin = ra.assignment_margin
             tr.ambiguous = tr.ambiguous or ra.ambiguous
         tr.correspondence = corr
         tr.corr_history.append(dict(corr))

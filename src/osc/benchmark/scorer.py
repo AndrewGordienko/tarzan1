@@ -67,6 +67,9 @@ class EpisodeRecord:
     identifiable: bool = True          # OBJECTIVE: true role is the best observable match
     inspections: int = 0               # active-perception observe frames used
     role_confidence: float = 1.0
+    role_entropy: float = 0.0          # agent-visible discrimination features (for the audit)
+    role_margin: float = 1.0
+    assignment_margin: float = 1.0
     human_interventions: int = 0       # only nonzero if a human-rescue API is called (none exists)
     # -- resolution layer --
     committed: bool = True             # robot committed to executing (vs abstained)
@@ -194,6 +197,9 @@ class Scorer:
             initially_ambiguous=bool(getattr(trace, "initially_ambiguous", False)),
             inspections=getattr(trace, "inspections", 0),
             role_confidence=getattr(trace, "role_confidence", 1.0),
+            role_entropy=getattr(trace, "role_entropy", 0.0),
+            role_margin=getattr(trace, "role_margin", 1.0),
+            assignment_margin=getattr(trace, "assignment_margin", 1.0),
             first_attempt_success=success and trace.autonomous_replans == 0
                 and trace.first_failure_step is None,
             steps=trace.steps, sim_seconds=trace.steps / CONTROL_HZ,
