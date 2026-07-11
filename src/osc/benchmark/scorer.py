@@ -63,7 +63,8 @@ class EpisodeRecord:
     sim_seconds: float
     autonomous_replans: int
     role_binding_correct: bool = True  # did the agent act on the right GT objects
-    ambiguous: bool = False            # correspondence was genuinely ambiguous
+    ambiguous: bool = False            # agent flagged OR objectively unidentifiable
+    identifiable: bool = True          # OBJECTIVE: true role is the best observable match
     inspections: int = 0               # active-perception observe frames used
     role_confidence: float = 1.0
     human_interventions: int = 0       # only nonzero if a human-rescue API is called (none exists)
@@ -178,14 +179,15 @@ class Scorer:
 
         rbc = self.role_binding_correct(trace, final_state)
         # ambiguous = the agent flagged it OR the scene is objectively unidentifiable.
-        ambiguous = bool(getattr(trace, "ambiguous", False)) or not self.identifiable(final_state)
+        identifiable = self.identifiable(final_state)
+        ambiguous = bool(getattr(trace, "ambiguous", False)) or not identifiable
         cat = "" if success else self._categorize(final_state, trace, irrev, timeout, rbc, ambiguous)
         return EpisodeRecord(
             task=self.task.name, split=split, seed=seed, success=success,
             believed_success=trace.believed_success,
             wrong_belief=trace.believed_success and not success,
             role_binding_correct=rbc,
-            ambiguous=ambiguous,
+            ambiguous=ambiguous, identifiable=identifiable,
             committed=getattr(trace, "committed", True),
             clarifications=getattr(trace, "clarifications", 0),
             resolution_inspection_frames=getattr(trace, "resolution_inspection_frames", 0),

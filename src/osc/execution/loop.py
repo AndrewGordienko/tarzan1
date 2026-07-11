@@ -105,7 +105,7 @@ class ClosedLoopExecutor:
     def __init__(self, env: AgentEnv, graph: TaskGraph, estimator: StateEstimator,
                  context: DynamicsContext, planning_model: PlanningModel,
                  config: ExecConfig | None = None,
-                 oracle_corr=None, oracle_goal=None, clarify_fn=None):
+                 oracle_corr=None, oracle_goal=None, clarify_fn=None, task_context=None):
         self.env = env
         self.graph = graph
         self.est = estimator
@@ -122,7 +122,9 @@ class ClosedLoopExecutor:
                 commit_threshold=self.cfg.commit_threshold))
         else:
             self.resolver = None
-        self.task_context = TaskContext()
+        # persists across a WORKFLOW when supplied: a clarification answered once
+        # during setup carries to every subsequent production box.
+        self.task_context = task_context if task_context is not None else TaskContext()
         # ATTRIBUTION-LADDER hooks (benchmark-side, not the deployed agent):
         #   oracle_corr(belief) -> {role: track_id}  perfect role binding
         #   oracle_goal(belief) -> bool               ground-truth stop decision

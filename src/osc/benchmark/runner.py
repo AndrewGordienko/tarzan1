@@ -51,7 +51,7 @@ def default_splits() -> list[Split]:
 
 
 def run_episode(task, graph, split: Split, seed: int, cfg: ExecConfig,
-                privileged: bool = False):
+                privileged: bool = False, task_context=None):
     from ..sim.randomize import randomize
     state, backend, roles = randomize(task.scene, split.rand, seed=seed)
     disturbance = None
@@ -69,7 +69,7 @@ def run_episode(task, graph, split: Split, seed: int, cfg: ExecConfig,
     execu = ClosedLoopExecutor(env, graph, est, ctx, pm,
                                ExecConfig(**{**cfg.__dict__,
                                              "max_total_steps": task.max_total_steps}),
-                               clarify_fn=clarify_fn)
+                               clarify_fn=clarify_fn, task_context=task_context)
     trace = execu.run()
 
     final = backend.state()
@@ -78,6 +78,44 @@ def run_episode(task, graph, split: Split, seed: int, cfg: ExecConfig,
     rec = Scorer(task, roles, graph).score(split.name, seed, final, env.step_info_log,
                                     trace, disturbance, ctx, true_params)
     return rec
+
+
+def run_workflow(task, graph, split: Split, seeds, cfg: ExecConfig):
+    """One WORKFLOW = a persistent TaskContext shared across many production orders
+    (new layouts, track ids, object instances each seed). A clarification answered
+    on the first order must carry to the rest -- the product asks once at setup,
+    then runs thousands of boxes untouched. Returns (records, per-workflow stats)."""
+    from ..execution.resolution import TaskContext
+    ctx = TaskContext()
+    seeds = list(seeds)
+    records = [run_episode(task, graph, split, s, cfg, task_context=ctx) for s in seeds]
+    prod = records[1:]                      # everything after the first (setup) order
+    n_prod = max(1, len(prod))
+    stats = dict(
+        clarifications_per_workflow=sum(r.clarifications for r in records),
+        clarifications_setup=records[0].clarifications,
+        clarifications_per_production_ep=sum(r.clarifications for r in prod) / n_prod,
+        repeated_question_rate=float(np.mean([r.clarifications > 0 for r in prod])) if prod else 0.0,
+        production_role_accuracy=float(np.mean([r.role_binding_correct for r in prod])) if prod else 0.0,
+        production_success=float(np.mean([r.success for r in prod])) if prod else 0.0,
+    )
+    return records, stats
+
+
+def run_workflows(task=None, split=None, n_workflows=8, orders_per_workflow=20,
+                  cfg: ExecConfig | None = None):
+    """Aggregate run_workflow over several distinct workflows (disjoint seed blocks)."""
+    task = task or DEFAULT_TASKS[0]
+    split = split or default_splits()[1]     # unseen_instances: where ambiguity concentrates
+    cfg = cfg or ExecConfig()
+    graph = record_demo(task)
+    per_wf = []
+    for w in range(n_workflows):
+        base = 1000 * (w + 1)
+        _, stats = run_workflow(task, graph, split, range(base, base + orders_per_workflow), cfg)
+        per_wf.append(stats)
+    keys = per_wf[0].keys()
+    return {k: float(np.mean([s[k] for s in per_wf])) for k in keys}
 
 
 def _clarify_fn(graph, backend):

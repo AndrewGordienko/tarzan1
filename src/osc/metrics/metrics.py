@@ -60,15 +60,26 @@ class Report:
     safety_violations_per_ep: float
     failure_breakdown: dict
     context_error: dict
-    # -- resolution layer (autonomy vs safety) --
-    selective_risk: float = 0.0            # P(fail | robot committed)
-    autonomous_coverage: float = 0.0       # P(committed AND no clarification)
+    # -- resolution layer (autonomy vs safety), decomposed --
+    selective_risk: float = 0.0            # P(any task failure | committed)
+    risk_role_wrong: float = 0.0           # P(role binding wrong | committed)
+    risk_silent_committed: float = 0.0     # P(believed success & real failure | committed)
+    autonomous_coverage: float = 0.0       # P(committed & no question) over ALL scenes
+    auto_cov_identifiable: float = 0.0     # ... among objectively identifiable scenes (the gate)
+    auto_cov_ambiguous: float = 0.0        # ... among genuinely ambiguous scenes (want ~0)
+    commit_given_identifiable: float = 0.0 # P(commit | identifiable)
+    commit_without_human_ambiguous: float = 0.0   # P(commit w/o human | ambiguous)
+    success_after_one_clar_ambiguous: float = 0.0 # P(success w/ <=1 question | ambiguous)
+    clarification_assisted_coverage: float = 0.0
     abstention_rate: float = 0.0           # P(declined to act)
     clarification_rate: float = 0.0        # user questions per episode
-    ambiguity_resolution_rate: float = 0.0 # initially-ambiguous -> committed & correct
-    post_resolution_role_accuracy: float = 0.0   # role accuracy among committed
-    unnecessary_question_rate: float = 0.0 # asked despite not being contested
+    ambiguity_resolution_rate: float = 0.0 # = success_after_one_clar_ambiguous
+    post_resolution_role_accuracy: float = 0.0
+    unnecessary_question_rate: float = 0.0
     inspection_frames_per_ep: float = 0.0
+    ci_ambiguity_resolution: tuple = (0.0, 0.0)
+    ci_auto_cov_identifiable: tuple = (0.0, 0.0)
+    ci_silent_committed: tuple = (0.0, 0.0)
     by_split: dict = field(default_factory=dict)
 
     def pretty(self) -> str:
@@ -82,9 +93,13 @@ class Report:
              f"  wrong-belief rate (any)       : {self.wrong_belief_rate:6.1%}",
              f"  SILENT false-completion (conf): {self.silent_false_completion_rate:6.1%}  "
              f"(uncertain completions flagged: {self.uncertain_completion_rate:.1%})",
-             f"  RESOLUTION  sel-risk/auto-cov : {self.selective_risk:6.1%} / "
-             f"{self.autonomous_coverage:.1%}  abstain={self.abstention_rate:.1%} "
-             f"clar/ep={self.clarification_rate:.2f} amb-resolved={self.ambiguity_resolution_rate:.1%}",
+             f"  RESOLUTION risk|committed     : any-fail {self.selective_risk:.1%}  "
+             f"silent {self.risk_silent_committed:.1%}  role-wrong {self.risk_role_wrong:.1%}",
+             f"  auto-coverage ident/amb       : {self.auto_cov_identifiable:.1%} / "
+             f"{self.auto_cov_ambiguous:.1%}   abstain={self.abstention_rate:.1%}  "
+             f"clar/ep={self.clarification_rate:.2f}",
+             f"  ambiguity resolved (<=1 Q)    : {self.ambiguity_resolution_rate:.1%} "
+             f"CI95[{self.ci_ambiguity_resolution[0]:.2f},{self.ci_ambiguity_resolution[1]:.2f}]",
              f"  role-binding accuracy         : {self.role_binding_accuracy:6.1%}  "
              f"P(success|correct role)={self.p_success_given_correct_role:.1%}",
              f"  recovery opportunities        : {self.recovery_opportunities}"
@@ -138,24 +153,41 @@ def _agg(records: list[EpisodeRecord], seed=0) -> dict:
            if r.disturbance_to_correction_steps is not None]
     d2r = [r.disturbance_to_replan_steps for r in records
            if getattr(r, "disturbance_to_replan_steps", None) is not None]
-    # -- resolution layer: autonomy vs safety --
+    # -- resolution layer: autonomy vs safety (decomposed) --
+    def _mean(rs, f):
+        return float(np.mean([f(r) for r in rs])) if rs else 0.0
+    def _auto(r):  # committed with NO human question
+        return getattr(r, "committed", True) and getattr(r, "clarifications", 0) == 0
     committed = [r for r in records if getattr(r, "committed", True)]
-    auto = [r for r in committed if getattr(r, "clarifications", 0) == 0]
     asked = [r for r in records if getattr(r, "clarifications", 0) > 0]
-    init_amb = [r for r in records if getattr(r, "initially_ambiguous", False)]
-    selective_risk = float(np.mean([not r.success for r in committed])) if committed else 0.0
-    autonomous_coverage = len(auto) / n
+    ident = [r for r in records if getattr(r, "identifiable", True)]        # objectively identifiable
+    amb = [r for r in records if not getattr(r, "identifiable", True)]      # genuinely ambiguous
+
+    # RISK decomposed among COMMITTED episodes (comparable to the 6.7% silent number):
+    risk_role_wrong = _mean(committed, lambda r: not getattr(r, "role_binding_correct", True))
+    risk_silent = _mean(committed, lambda r: r.believed_success and not r.success)  # believed & failed
+    risk_any_fail = _mean(committed, lambda r: not r.success)               # = old selective_risk
+    selective_risk = risk_any_fail
+    # COVERAGE, split by objective identifiability:
+    auto_cov_identifiable = _mean(ident, _auto)
+    auto_cov_ambiguous = _mean(amb, _auto)                                  # want ~0
+    commit_given_identifiable = _mean(ident, lambda r: getattr(r, "committed", True))
+    commit_without_human_ambiguous = _mean(amb, _auto)
+    success_after_one_clar_ambiguous = _mean(
+        amb, lambda r: r.success and getattr(r, "clarifications", 0) <= 1)
+    autonomous_coverage = _mean(records, _auto)                             # overall (all scenes)
+    clarification_assisted_coverage = _mean(
+        records, lambda r: getattr(r, "committed", True) and getattr(r, "clarifications", 0) > 0)
     abstention_rate = 1.0 - len(committed) / n
-    clarification_rate = float(np.mean([getattr(r, "clarifications", 0) for r in records]))
-    ambiguity_resolution_rate = (
-        float(np.mean([getattr(r, "committed", True) and r.success for r in init_amb]))
-        if init_amb else 0.0)
-    post_res_rba = (float(np.mean([getattr(r, "role_binding_correct", True) for r in committed]))
-                    if committed else 0.0)
-    unnecessary_question_rate = (
-        float(np.mean([not getattr(r, "initially_ambiguous", False) for r in asked]))
-        if asked else 0.0)
-    insp_per_ep = float(np.mean([getattr(r, "resolution_inspection_frames", 0) for r in records]))
+    clarification_rate = _mean(records, lambda r: getattr(r, "clarifications", 0))
+    ambiguity_resolution_rate = success_after_one_clar_ambiguous            # among genuinely ambiguous
+    post_res_rba = _mean(committed, lambda r: getattr(r, "role_binding_correct", True))
+    unnecessary_question_rate = _mean(asked, lambda r: not getattr(r, "initially_ambiguous", False))
+    insp_per_ep = _mean(records, lambda r: getattr(r, "resolution_inspection_frames", 0))
+    # paired CIs on the gate-critical rates:
+    ci_amb_res = bootstrap_ci([r.success and getattr(r, "clarifications", 0) <= 1 for r in amb], seed=seed)
+    ci_auto_ident = bootstrap_ci([_auto(r) for r in ident], seed=seed)
+    ci_silent_committed = bootstrap_ci([r.believed_success and not r.success for r in committed], seed=seed)
 
     opps = [r for r in records if r.recovery_opportunity]
     rec = [r for r in opps if r.recovered]
@@ -192,12 +224,21 @@ def _agg(records: list[EpisodeRecord], seed=0) -> dict:
         safety_violations_per_ep=float(np.mean([r.safety_violations for r in records])),
         failure_breakdown=fb,
         context_error={k: float(np.mean(v)) for k, v in cerr.items()},
-        selective_risk=selective_risk, autonomous_coverage=autonomous_coverage,
+        selective_risk=selective_risk, risk_role_wrong=risk_role_wrong,
+        risk_silent_committed=risk_silent,
+        autonomous_coverage=autonomous_coverage,
+        auto_cov_identifiable=auto_cov_identifiable, auto_cov_ambiguous=auto_cov_ambiguous,
+        commit_given_identifiable=commit_given_identifiable,
+        commit_without_human_ambiguous=commit_without_human_ambiguous,
+        success_after_one_clar_ambiguous=success_after_one_clar_ambiguous,
+        clarification_assisted_coverage=clarification_assisted_coverage,
         abstention_rate=abstention_rate, clarification_rate=clarification_rate,
         ambiguity_resolution_rate=ambiguity_resolution_rate,
         post_resolution_role_accuracy=post_res_rba,
         unnecessary_question_rate=unnecessary_question_rate,
-        inspection_frames_per_ep=insp_per_ep)
+        inspection_frames_per_ep=insp_per_ep,
+        ci_ambiguity_resolution=ci_amb_res, ci_auto_cov_identifiable=ci_auto_ident,
+        ci_silent_committed=ci_silent_committed)
 
 
 def aggregate(records: list[EpisodeRecord], seed=0) -> Report:

@@ -64,6 +64,28 @@ def test_resolution_off_is_v0_3_behaviour():
     assert r.autonomous_coverage == 1.0
 
 
+def test_committed_risk_is_decomposed_and_ordered():
+    # silent (believed & failed) must be <= any-failure among committed; both are
+    # measured on the SAME denominator so they are directly comparable.
+    cfg = replace(ExecConfig(), resolution=True, allow_inspection=False, allow_clarification=True)
+    r = aggregate(run_benchmark(seeds=range(20), cfg=cfg))
+    assert r.risk_silent_committed <= r.selective_risk + 1e-9
+    assert 0.0 <= r.auto_cov_identifiable <= 1.0
+    # coverage on genuinely-ambiguous scenes should be far below identifiable ones
+    assert r.auto_cov_ambiguous < r.auto_cov_identifiable
+
+
+def test_clarification_persists_across_a_workflow():
+    from osc.benchmark.runner import run_workflows
+    cfg = replace(ExecConfig(), resolution=True, allow_inspection=True, allow_clarification=True)
+    w = run_workflows(n_workflows=4, orders_per_workflow=15, cfg=cfg)
+    # the customer is asked at setup, then almost never again in production.
+    assert w["clarifications_per_production_ep"] < 0.5
+    assert w["repeated_question_rate"] < 0.5
+    # and the saved answer still produces working executions on new instances.
+    assert w["production_success"] > 0.5
+
+
 if __name__ == "__main__":
     import pytest
     raise SystemExit(pytest.main([__file__, "-v"]))
