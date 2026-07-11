@@ -65,9 +65,11 @@ def run_episode(task, graph, split: Split, seed: int, cfg: ExecConfig,
     est = _estimator(backend, privileged)
     ctx = DynamicsContext()
     pm = PlanningModel(ctx, table_bounds_est=state.table_bounds)
+    clarify_fn = _clarify_fn(graph, backend) if cfg.resolution and cfg.allow_clarification else None
     execu = ClosedLoopExecutor(env, graph, est, ctx, pm,
                                ExecConfig(**{**cfg.__dict__,
-                                             "max_total_steps": task.max_total_steps}))
+                                             "max_total_steps": task.max_total_steps}),
+                               clarify_fn=clarify_fn)
     trace = execu.run()
 
     final = backend.state()
@@ -76,6 +78,26 @@ def run_episode(task, graph, split: Split, seed: int, cfg: ExecConfig,
     rec = Scorer(task, roles, graph).score(split.name, seed, final, env.step_info_log,
                                     trace, disturbance, ctx, true_params)
     return rec
+
+
+def _clarify_fn(graph, backend):
+    """The 'user': answers which track plays a queried role by pointing at the
+    correct GT object (nearest track). Models a customer clicking the object /
+    SKU metadata -- information the demonstration alone did not contain. Only the
+    ASKED roles are answered; the agent never reads this itself."""
+    from ..geometry import dist_xyz
+    r2g = getattr(graph, "role_to_gt", {})
+    def fn(target_roles, belief):
+        out, gt = {}, backend.state()
+        for role in target_roles:
+            gt_name = r2g.get(role)
+            if gt_name is None or gt_name not in gt.objects or not belief.objects:
+                continue
+            gp = gt.objects[gt_name].pose
+            out[role] = min(sorted(belief.objects),
+                            key=lambda t: dist_xyz(belief.objects[t].pose, gp))
+        return out
+    return fn
 
 
 def _estimator(backend, privileged: bool):

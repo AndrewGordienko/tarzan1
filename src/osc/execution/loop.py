@@ -21,6 +21,7 @@ from ..agent.estimator import StateEstimator
 from ..agent.dynamics_context import DynamicsContext
 from ..compiler.task_graph import TaskGraph
 from ..skills.correspondence import RoleBelief
+from .resolution import ResolutionConfig, ResolutionPolicy, TaskContext
 from ..skills.grounding import ground_goal, ground_goal_rel, ground_plan
 from ..worldmodel.planning_model import PlanningModel
 from ..worldmodel.search import ImaginedSearch
@@ -74,6 +75,11 @@ class AgentTrace:
     role_confidence: float = 1.0        # confidence of the final role assignment
     min_role_confidence: float = 1.0    # lowest across planning calls
     ambiguous: bool = False             # correspondence was ambiguous at some plan
+    # -- resolution layer --
+    committed: bool = True              # did the robot commit to executing (vs abstain)
+    clarifications: int = 0             # user questions asked this episode
+    resolution_inspection_frames: int = 0   # extra frames spent on active inspection
+    initially_ambiguous: bool | None = None  # was the FIRST binding not committable
 
 
 @dataclass
@@ -88,25 +94,86 @@ class ExecConfig:
     active_verify: bool = True       # confirm success over several re-observations
     confirm_frames: int = 4          # consecutive frames the goal must hold
     retarget_mode: str = "semantic"  # semantic | relative | absolute (ablation)
+    # -- ambiguity-resolution layer (off => v0.3 behaviour: guess & commit) --
+    resolution: bool = False         # enable the ResolutionPolicy
+    allow_inspection: bool = True    # active inspection (more frames) when enabled
+    allow_clarification: bool = True # ask-the-user clarification when enabled
+    commit_threshold: float = 0.60   # weakest-role marginal required to commit
 
 
 class ClosedLoopExecutor:
     def __init__(self, env: AgentEnv, graph: TaskGraph, estimator: StateEstimator,
                  context: DynamicsContext, planning_model: PlanningModel,
                  config: ExecConfig | None = None,
-                 oracle_corr=None, oracle_goal=None):
+                 oracle_corr=None, oracle_goal=None, clarify_fn=None):
         self.env = env
         self.graph = graph
         self.est = estimator
         self.ctx = context
         self.search = ImaginedSearch(planning_model)
         self.cfg = config or ExecConfig()
+        # ambiguity-resolution layer (benchmark-side clarify_fn is the "user":
+        # clarify_fn(target_roles, belief) -> {role: track_id}, GT-derived).
+        self.clarify_fn = clarify_fn
+        if self.cfg.resolution:
+            self.resolver = ResolutionPolicy(ResolutionConfig(
+                allow_inspection=self.cfg.allow_inspection,
+                allow_clarification=self.cfg.allow_clarification,
+                commit_threshold=self.cfg.commit_threshold))
+        else:
+            self.resolver = None
+        self.task_context = TaskContext()
         # ATTRIBUTION-LADDER hooks (benchmark-side, not the deployed agent):
         #   oracle_corr(belief) -> {role: track_id}  perfect role binding
         #   oracle_goal(belief) -> bool               ground-truth stop decision
         self.oracle_corr = oracle_corr
         self.oracle_goal = oracle_goal
         self.role_belief = RoleBelief(graph.role_signatures)
+
+    def _apply_clarifications(self, corr, belief):
+        """Re-apply roles the user already disambiguated (persisted on TaskContext).
+        Re-derived each call because track ids churn -- the customer answered about
+        an OBJECT once; we keep tracking it without asking again."""
+        if self.clarify_fn is None or not self.task_context.user_selections:
+            return corr
+        corr = dict(corr)
+        fixed = self.clarify_fn(tuple(sorted(self.task_context.user_selections)), belief)
+        corr.update({r: t for r, t in fixed.items() if t is not None})
+        return corr
+
+    def _resolve_initial(self, belief, tr: AgentTrace):
+        """Run the ResolutionPolicy once at episode start: inspect (gather frames),
+        clarify (ask the user), or abstain -- rather than guess a low-confidence
+        binding. Clarifications persist on self.task_context for later plan calls."""
+        from ..sim.base import Action
+        if self.resolver is None or self.oracle_corr:
+            return belief                            # feature off / oracle binding
+        ra = self.role_belief.update(belief)
+        tr.initially_ambiguous = not self.resolver.committable(ra, self.task_context)
+        inspections_used, last_gain = 0, None
+        while True:
+            action = self.resolver.decide(ra, self.task_context, inspections_used,
+                                          tr.clarifications, last_gain)
+            if action.kind == "commit":
+                break
+            if action.kind == "observe":
+                prev_weak = min(ra.per_role_conf.values(), default=1.0)
+                for _ in range(self.resolver.cfg.inspect_frames):
+                    hold = belief.gripper.copy(); hold[2] += 0.02
+                    belief = self.est.update(self.env.step(Action(target=hold, gripper_close=0.0)))
+                    tr.steps += 1; tr.resolution_inspection_frames += 1
+                ra = self.role_belief.update(belief)
+                last_gain = min(ra.per_role_conf.values(), default=1.0) - prev_weak
+                inspections_used += 1
+            elif action.kind == "ask_user":
+                if self.clarify_fn is None:
+                    tr.committed = False; break      # nobody to ask -> abstain
+                self.task_context.user_selections.update(action.target_roles)
+                tr.clarifications += 1
+                ra = self.role_belief.update(belief)  # clarified roles now excluded
+            else:                                    # abstain
+                tr.committed = False; break
+        return belief
 
     def _plan(self, belief, tr: AgentTrace):
         """Re-resolve roles->tracks against the CURRENT belief (track ids churn
@@ -116,7 +183,7 @@ class ClosedLoopExecutor:
             corr = self.oracle_corr(belief)
         else:
             ra = self.role_belief.update(belief)
-            corr = ra.mapping
+            corr = self._apply_clarifications(ra.mapping, belief)
             tr.role_confidence = ra.confidence
             tr.min_role_confidence = min(tr.min_role_confidence, ra.confidence)
             tr.ambiguous = tr.ambiguous or ra.ambiguous
@@ -160,6 +227,11 @@ class ClosedLoopExecutor:
     def run(self) -> AgentTrace:
         tr = AgentTrace()
         belief = self.est.update(self.env.reset_percept())
+        belief = self._resolve_initial(belief, tr)
+        if not tr.committed:                        # abstained -- decline, do not guess
+            tr.n_belief_tracks = len(belief.objects)
+            tr.final_track_poses = {tid: o.pose.copy() for tid, o in belief.objects.items()}
+            return tr
         plan, verifier = self._plan(belief, tr)
 
         idx = 0

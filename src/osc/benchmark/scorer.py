@@ -67,6 +67,11 @@ class EpisodeRecord:
     inspections: int = 0               # active-perception observe frames used
     role_confidence: float = 1.0
     human_interventions: int = 0       # only nonzero if a human-rescue API is called (none exists)
+    # -- resolution layer --
+    committed: bool = True             # robot committed to executing (vs abstained)
+    clarifications: int = 0            # user questions asked
+    resolution_inspection_frames: int = 0
+    initially_ambiguous: bool = False  # first binding was not committable
     recovery_opportunity: bool = False
     recovered: bool = False
     collisions: int = 0
@@ -181,6 +186,10 @@ class Scorer:
             wrong_belief=trace.believed_success and not success,
             role_binding_correct=rbc,
             ambiguous=ambiguous,
+            committed=getattr(trace, "committed", True),
+            clarifications=getattr(trace, "clarifications", 0),
+            resolution_inspection_frames=getattr(trace, "resolution_inspection_frames", 0),
+            initially_ambiguous=bool(getattr(trace, "initially_ambiguous", False)),
             inspections=getattr(trace, "inspections", 0),
             role_confidence=getattr(trace, "role_confidence", 1.0),
             first_attempt_success=success and trace.autonomous_replans == 0
