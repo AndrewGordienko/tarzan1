@@ -27,6 +27,8 @@ class BeliefObject:
     shape: str = "box"             # estimated category
     color: str = "unknown"         # estimated appearance
     pos_std: float = 0.02          # position uncertainty (metres)
+    size_std: float = 0.02         # size-estimate uncertainty (metres); falls ~1/sqrt(N)
+                                   # as independent observations are fused
     last_seen: int = 0             # frame index of last direct observation
     visible: bool = True           # observed this frame?
 

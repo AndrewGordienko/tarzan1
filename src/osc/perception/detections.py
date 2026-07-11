@@ -46,6 +46,8 @@ class Percept:
 @dataclass
 class CorruptionSpec:
     pos_noise: float = 0.004        # extra per-detection position std (m)
+    size_noise: float = 0.0         # per-detection size std (m); >0 makes passive
+                                    # inspection informative (independent per frame)
     occlusion_prob: float = 0.05    # per-detection chance of being missed a frame
     drop_prob: float = 0.02         # whole-frame drop (sensor returns nothing new)
     delay_frames: int = 0           # constant sensing latency, in frames
@@ -80,6 +82,8 @@ class Corruptor:
             if self.rng.random() < s.occlusion_prob:
                 continue
             d.pose[:2] += self.rng.normal(0, s.pos_noise, size=2)
+            if s.size_noise > 0:                 # independent per-frame size error
+                d.size = d.size + self.rng.normal(0, s.size_noise, size=d.size.shape)
             if self.rng.random() < s.false_contact_prob:
                 d.contact = not d.contact
             kept.append(d)

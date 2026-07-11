@@ -22,12 +22,15 @@ from .belief import BeliefObject, BeliefState
 GATE = 0.06          # gating radius around the predicted pose (3D, metres)
 GRASP_XY = 0.035
 GRASP_Z = 0.04
+SIZE_PRIOR_VAR = 0.02 ** 2   # initial size variance before any fusion
+SIZE_MEAS_VAR = 0.010 ** 2   # assumed per-observation size measurement variance
 
 
 class StateEstimator:
     def __init__(self):
         self.tracks: dict[str, BeliefObject] = {}
         self.vel: dict[str, np.ndarray] = {}
+        self.svar: dict[str, float] = {}       # per-track size variance (Kalman)
         self._next = 0
         self.grasped: str | None = None
         self.t = 0
@@ -36,8 +39,10 @@ class StateEstimator:
         tid = f"t{self._next}"; self._next += 1
         self.tracks[tid] = BeliefObject(
             track_id=tid, pose=det.pose.copy(), size=det.size.copy(),
-            shape=det.shape, color=det.color, pos_std=0.02, last_seen=t, visible=True)
+            shape=det.shape, color=det.color, pos_std=0.02,
+            size_std=SIZE_PRIOR_VAR ** 0.5, last_seen=t, visible=True)
         self.vel[tid] = np.zeros(4)
+        self.svar[tid] = SIZE_PRIOR_VAR
         return tid
 
     def update(self, percept: Percept) -> BeliefState:
@@ -80,7 +85,15 @@ class StateEstimator:
                 new_pose = 0.4 * predicted[best] + 0.6 * det.pose
                 self.vel[best] = 0.5 * self.vel[best] + 0.5 * (new_pose - o.pose)
                 o.pose = new_pose
-                o.size = 0.8 * o.size + 0.2 * det.size
+                # Kalman size fusion: only on a genuinely NEW frame (a stale/dropped
+                # re-emit must not shrink covariance). Variance -> ~MEAS/N; the mean
+                # converges to the running average, so size RMSE falls together.
+                if t > o.last_seen:
+                    sv = self.svar[best]
+                    K = sv / (sv + SIZE_MEAS_VAR)
+                    o.size = o.size + K * (det.size - o.size)
+                    self.svar[best] = (1.0 - K) * sv
+                    o.size_std = self.svar[best] ** 0.5
                 o.shape, o.color = det.shape, det.color
                 o.pos_std = max(0.006, o.pos_std * 0.6)
                 o.last_seen = t; o.visible = True
@@ -111,7 +124,7 @@ class StateEstimator:
                     keep, lose = self._prefer(a, b)
                     drop.add(lose)
         for tid in drop:
-            self.tracks.pop(tid, None); self.vel.pop(tid, None)
+            self.tracks.pop(tid, None); self.vel.pop(tid, None); self.svar.pop(tid, None)
 
     def _prefer(self, a, b):
         if self.grasped == a:
