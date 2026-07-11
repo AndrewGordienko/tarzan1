@@ -87,16 +87,18 @@ class MujocoPackingAdapter:
 
     def execute(self, command: SkillCommand) -> SkillResult:
         if self.model is None: raise RuntimeError("call reset(scene) first")
-        allowed = {"approach", "grasp", "lift", "move_above_box", "lower", "release", "place", "verify"}
+        allowed = {"approach", "grasp", "lift", "move_above_box", "lower", "release", "place", "verify",
+                   "temporarily_remove", "stage", "repack"}
         if command.kind not in allowed: return SkillResult(False, self.observe(), failure_reason="unsupported_command")
         steps = 1
         name = command.object_query.get("name", self._scene.get("items", [{"name":"ordinary"}])[0]["name"])
         if command.kind in {"grasp", "pick"}: self._held = name
-        if command.kind in {"release", "place"} and self._held:
+        if command.kind in {"release", "place", "temporarily_remove", "stage", "repack"} and self._held:
             body_id = self.model.body(self._held).id
             joint = int(self.model.body_jntadr[body_id])
             adr = self.model.jnt_qposadr[joint]
-            target = command.target_region.get("position", (0.0, 0.0, 0.14))
+            default = (0.45, -0.12, 0.04) if command.kind in {"temporarily_remove", "stage"} else (0.0, 0.0, 0.14)
+            target = command.target_region.get("position", default)
             self.data.qpos[adr:adr+3] = np.asarray(target, dtype=float)
             self.data.qpos[adr+3:adr+7] = (1, 0, 0, 0)
             mujoco = __import__("mujoco"); mujoco.mj_forward(self.model, self.data)

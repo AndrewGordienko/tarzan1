@@ -1,0 +1,1524 @@
+{
+  "development_seeds": [
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109
+  ],
+  "confirmation_seeds_reserved": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "rows": [
+    {
+      "seed": 100,
+      "lane": "execution_upper_bound",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 0,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 100,
+      "lane": "motor_isolation",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 0,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 100,
+      "lane": "planning_isolation",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 100,
+      "lane": "full_system",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 101,
+      "lane": "execution_upper_bound",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 101,
+      "lane": "motor_isolation",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 101,
+      "lane": "planning_isolation",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 101,
+      "lane": "full_system",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 102,
+      "lane": "execution_upper_bound",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 102,
+      "lane": "motor_isolation",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 102,
+      "lane": "planning_isolation",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 102,
+      "lane": "full_system",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 103,
+      "lane": "execution_upper_bound",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 0,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 103,
+      "lane": "motor_isolation",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 0,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 103,
+      "lane": "planning_isolation",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 103,
+      "lane": "full_system",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 104,
+      "lane": "execution_upper_bound",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 0,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 104,
+      "lane": "motor_isolation",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 0,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 104,
+      "lane": "planning_isolation",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 104,
+      "lane": "full_system",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 105,
+      "lane": "execution_upper_bound",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 0,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 105,
+      "lane": "motor_isolation",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 0,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 105,
+      "lane": "planning_isolation",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 105,
+      "lane": "full_system",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 106,
+      "lane": "execution_upper_bound",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 0,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 106,
+      "lane": "motor_isolation",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 0,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 106,
+      "lane": "planning_isolation",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 106,
+      "lane": "full_system",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 107,
+      "lane": "execution_upper_bound",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 107,
+      "lane": "motor_isolation",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 107,
+      "lane": "planning_isolation",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 107,
+      "lane": "full_system",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 108,
+      "lane": "execution_upper_bound",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 0,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 108,
+      "lane": "motor_isolation",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 0,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 108,
+      "lane": "planning_isolation",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 108,
+      "lane": "full_system",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 109,
+      "lane": "execution_upper_bound",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 109,
+      "lane": "motor_isolation",
+      "autonomous": false,
+      "forced": true,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "temporarily_remove",
+        "stage",
+        "replan",
+        "place_late_item",
+        "repack",
+        "verify"
+      ],
+      "removal_grasp_success": true,
+      "staged_success": true,
+      "late_item_placement_success": true,
+      "repack_success": true,
+      "camera_verification": true,
+      "scorer_verification": true,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 9
+    },
+    {
+      "seed": 109,
+      "lane": "planning_isolation",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    },
+    {
+      "seed": 109,
+      "lane": "full_system",
+      "autonomous": true,
+      "forced": false,
+      "feasibility_certificate": {
+        "no_removal_feasible": false,
+        "search_complete": true,
+        "late_dimensions": [
+          0.16,
+          0.12,
+          0.08
+        ]
+      },
+      "blocking_object": "ordinary",
+      "sequence": [
+        "observe_late_item",
+        "detect_infeasible",
+        "choose_blocker",
+        "planner_not_implemented"
+      ],
+      "removal_grasp_success": false,
+      "staged_success": false,
+      "late_item_placement_success": false,
+      "repack_success": false,
+      "camera_verification": true,
+      "scorer_verification": false,
+      "autonomous_planner_implemented": false,
+      "contacts": 4,
+      "collisions": 0,
+      "constraint_violations": 0,
+      "replans": 1,
+      "skill_commands": 4
+    }
+  ],
+  "controls": {
+    "no_removal": {
+      "successful_completions": 0
+    },
+    "unnecessary_removal": {
+      "unnecessary_removals": 0
+    },
+    "wrong_object": {
+      "successful_completions": 0
+    },
+    "forced_correct_removal": {
+      "successful_completions": 10
+    }
+  },
+  "lanes": {
+    "execution_upper_bound": {
+      "count": 10,
+      "complete": 10,
+      "forced": true
+    },
+    "motor_isolation": {
+      "count": 10,
+      "complete": 10,
+      "forced": true
+    },
+    "planning_isolation": {
+      "count": 10,
+      "complete": 0,
+      "forced": false
+    },
+    "full_system": {
+      "count": 10,
+      "complete": 0,
+      "forced": false
+    }
+  }
+}

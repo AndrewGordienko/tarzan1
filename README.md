@@ -84,6 +84,17 @@ osc-pack-mujoco-bench --episodes 20 --perception segdepth --controller scripted
 Without MuJoCo/TinyVLA installed these commands return a structured `blocked`
 report and never silently substitute simulator ground truth.
 
+The physical rearrangement harness is separate:
+
+```bash
+osc-pack-mujoco-rearrange --out artifacts/embodied_rearrangement_dev_100_109.json
+```
+
+It runs the forced-removal execution and motor-isolation lanes on development
+seeds 100--109, with no-removal/wrong-object controls and scorer-only checks.
+Autonomous multi-object removal is intentionally reported as unimplemented until
+the planner is connected; forced execution is not counted as planner success.
+
 ## The result that matters: an evidence-based error budget
 
 Perfect-component swaps (same task/split/seed) show what to fix — and refuted the

@@ -24,6 +24,7 @@ osc-pack-demo = "osc.run_pack_demo:main"
 osc-pack-bench = "osc.run_pack_bench:main"
 osc-pack-mujoco-demo = "osc.run_pack_mujoco_demo:main"
 osc-pack-mujoco-bench = "osc.run_pack_mujoco_bench:main"
+osc-pack-mujoco-rearrange = "osc.run_pack_mujoco_rearrange:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
