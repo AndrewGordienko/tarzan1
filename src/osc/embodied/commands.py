@@ -14,3 +14,12 @@ class SkillCommand:
     orientation: tuple[float, ...] | None = None
     constraints: dict[str, Any] = field(default_factory=dict)
 
+
+@dataclass
+class SkillResult:
+    success: bool
+    observation: Any = None
+    contact_events: tuple[dict[str, Any], ...] = ()
+    execution_steps: int = 0
+    failure_reason: str | None = None
+    diagnostics: dict[str, Any] = field(default_factory=dict)

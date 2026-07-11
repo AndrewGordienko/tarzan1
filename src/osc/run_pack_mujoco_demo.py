@@ -5,7 +5,8 @@ import argparse
 import json
 
 from .embodied.ladder import LadderConfig, unavailable_report
-from .embodied.mujoco_adapter import TinyVLAMuJoCoAdapter
+from .embodied.mujoco_adapter import MujocoPackingAdapter, TinyVLAMuJoCoAdapter
+from .embodied.commands import SkillCommand
 
 
 def main() -> None:
@@ -16,11 +17,17 @@ def main() -> None:
     ap.add_argument("--render", default="artifacts/embodied_packing.mp4")
     args = ap.parse_args()
     try:
-        adapter = TinyVLAMuJoCoAdapter()
+        adapter = MujocoPackingAdapter() if args.controller == "scripted" else TinyVLAMuJoCoAdapter()
         adapter.reset()
+        if args.controller == "scripted":
+            adapter.execute(SkillCommand("grasp", {"name": "ordinary"}))
+            result_step = adapter.execute(SkillCommand("place", {"name": "ordinary"},
+                                                        {"position": (0.0, 0.0, 0.14)}))
         result = {"status": "ready", "demo_policy": args.demo_policy,
                   "perception": args.perception, "controller": args.controller,
-                  "render": args.render, "ground_truth_used": False}
+                  "render": args.render, "ground_truth_used": False,
+                  "trajectory": ["grasp", "place"],
+                  "execution_success": bool(result_step.success) if args.controller == "scripted" else None}
     except RuntimeError as exc:
         result = unavailable_report(1, LadderConfig(args.perception, "camera_events", args.controller), str(exc))
     print(json.dumps(result, indent=2))
@@ -28,4 +35,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

@@ -5,7 +5,7 @@ import argparse
 import json
 
 from .embodied.ladder import LadderConfig, unavailable_report
-from .embodied.mujoco_adapter import TinyVLAMuJoCoAdapter
+from .embodied.mujoco_adapter import MujocoPackingAdapter, TinyVLAMuJoCoAdapter
 
 
 def main() -> None:
@@ -15,7 +15,7 @@ def main() -> None:
     ap.add_argument("--controller", choices=("scripted", "tinyvla"), default="scripted")
     args = ap.parse_args()
     try:
-        TinyVLAMuJoCoAdapter().reset()
+        (MujocoPackingAdapter() if args.controller == "scripted" else TinyVLAMuJoCoAdapter()).reset()
         result = {"status": "ready", "episodes": args.episodes, "perception": args.perception,
                   "controller": args.controller, "ground_truth_used": False}
     except RuntimeError as exc:
@@ -25,4 +25,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
