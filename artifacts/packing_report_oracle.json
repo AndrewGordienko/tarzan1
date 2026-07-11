@@ -1,0 +1,4657 @@
+{
+  "episodes": 100,
+  "perception": "oracle",
+  "completion_rate": 1.0,
+  "impossible_abstention_rate": 1.0,
+  "rearrangement_rate": 0.25,
+  "violations": 0,
+  "baseline_literal_completion": 0.25,
+  "baseline_greedy_completion": 0.5,
+  "planner_improvement_over_literal": 0.5,
+  "planner_improvement_over_greedy": 0.25,
+  "baseline_by_scenario": {
+    "changed_inventory": {
+      "literal": false,
+      "greedy": true
+    },
+    "different_box_orientations": {
+      "literal": true,
+      "greedy": true
+    },
+    "late_large_rearrangement": {
+      "literal": false,
+      "greedy": false
+    },
+    "impossible_order": {
+      "literal": false,
+      "greedy": false
+    }
+  },
+  "rows": [
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    },
+    {
+      "scenario": "changed_inventory",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "ordinary",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "ordinary",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "different_box_orientations",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": false,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "long",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "heavy",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "fragile",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": false
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "long",
+        "heavy",
+        "fragile"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "late_large_rearrangement",
+      "perception": "oracle",
+      "success": true,
+      "expected_feasible": true,
+      "rearranged": true,
+      "actions": [
+        {
+          "kind": "place_inside",
+          "item": "small_a",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "arrival_floor_first": true
+          },
+          "rearranged": false
+        },
+        {
+          "kind": "temporarily_remove",
+          "item": "small_b"
+        },
+        {
+          "kind": "place_inside",
+          "item": "late_large",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        },
+        {
+          "kind": "place_inside",
+          "item": "small_b",
+          "verified": true,
+          "detail": {
+            "support": 1.0,
+            "collision": false,
+            "boundary": false,
+            "load_violation": false,
+            "fragility_violation": false
+          },
+          "rearranged": true
+        }
+      ],
+      "reason": "complete",
+      "packed": [
+        "small_a",
+        "late_large",
+        "small_b"
+      ],
+      "violations": []
+    },
+    {
+      "scenario": "impossible_order",
+      "perception": "oracle",
+      "success": false,
+      "expected_feasible": false,
+      "rearranged": false,
+      "actions": [],
+      "reason": "clarify_or_abstain: no feasible placement",
+      "packed": [],
+      "violations": []
+    }
+  ]
+}

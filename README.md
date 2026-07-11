@@ -36,6 +36,28 @@ python -m osc.run_demo  --task stack        # watch one task
 pytest -q                                    # 18 architectural + behavioural tests
 ```
 
+### Packing proof-of-concept
+
+The `v0.5-packing-poc` branch demonstrates the broader one-shot task-acquisition
+thesis with a deterministic geometric packing domain. A canonical demonstration
+compiles into hard constraints, soft preferences, and a reusable packing program;
+the planner then searches finite orientations/extreme-point placements and can
+remove/repack an earlier item when a late arrival makes the current arrangement
+infeasible.
+
+```bash
+osc-pack-demo --render artifacts/packing_demo.gif
+osc-pack-bench --episodes 100 --perception oracle
+osc-pack-bench --episodes 100 --perception belief
+```
+
+The controlled PoC currently reports 100% feasible-order completion, zero
+constraint violations, 25% rearrangement episodes, and improvement over literal
+replay and greedy next-fit on the four-scenario suite. Oracle and belief lanes are
+reported separately; no gradient updates occur after the demonstration. The
+packing implementation lives under `src/osc/packing/` and is intentionally a
+finite geometric world model before learned residual dynamics are introduced.
+
 Results are **cross-process deterministic** (identical JSON across
 `PYTHONHASHSEED`, apart from wall-clock latency fields); CI enforces it.
 

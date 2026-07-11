@@ -20,6 +20,8 @@ osc-bench = "osc.run_bench:main"
 osc-ablations = "osc.run_ablations:main"
 osc-hard-audit = "osc.run_hard_audit:main"
 osc-correspondence-audit = "osc.run_correspondence_audit:main"
+osc-pack-demo = "osc.run_pack_demo:main"
+osc-pack-bench = "osc.run_pack_bench:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

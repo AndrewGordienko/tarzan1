@@ -1,0 +1,173 @@
+{
+  "objective": [
+    "every order item must be inside the shipping box"
+  ],
+  "hard_constraints": [
+    {
+      "name": "inside_container",
+      "kind": "containment",
+      "hard": true,
+      "weight": 1.0,
+      "parameters": {}
+    },
+    {
+      "name": "no_intersections",
+      "kind": "collision",
+      "hard": true,
+      "weight": 1.0,
+      "parameters": {}
+    },
+    {
+      "name": "supported",
+      "kind": "support",
+      "hard": true,
+      "weight": 1.0,
+      "parameters": {}
+    },
+    {
+      "name": "respect_load_limits",
+      "kind": "load",
+      "hard": true,
+      "weight": 1.0,
+      "parameters": {}
+    },
+    {
+      "name": "fragile_not_support_heavy",
+      "kind": "fragility",
+      "hard": true,
+      "weight": 1.0,
+      "parameters": {}
+    }
+  ],
+  "preferences": [
+    {
+      "name": "heavy_low",
+      "kind": "ordering",
+      "hard": false,
+      "weight": 1.5,
+      "parameters": {}
+    },
+    {
+      "name": "fragile_high",
+      "kind": "ordering",
+      "hard": false,
+      "weight": 1.0,
+      "parameters": {}
+    },
+    {
+      "name": "preserve_large_item_space",
+      "kind": "future_fit",
+      "hard": false,
+      "weight": 2.0,
+      "parameters": {}
+    },
+    {
+      "name": "minimize_rehandling",
+      "kind": "rehandling",
+      "hard": false,
+      "weight": 1.0,
+      "parameters": {}
+    },
+    {
+      "name": "minimize_unused_volume",
+      "kind": "volume",
+      "hard": false,
+      "weight": 0.5,
+      "parameters": {}
+    }
+  ],
+  "available_actions": [
+    "inspect",
+    "pick",
+    "place",
+    "temporarily_remove",
+    "rearrange",
+    "verify",
+    "request_metadata",
+    "clarify"
+  ],
+  "ordering_rules": [
+    "heavy_before_fragile",
+    "large_before_small_when_fit_is_tight"
+  ],
+  "demonstration_events": [
+    {
+      "kind": "inspect",
+      "item_id": null,
+      "container_id": null,
+      "support_id": null,
+      "properties": {
+        "container": "box_demo"
+      }
+    },
+    {
+      "kind": "pick",
+      "item_id": "heavy",
+      "container_id": null,
+      "support_id": null,
+      "properties": null
+    },
+    {
+      "kind": "place_inside",
+      "item_id": "heavy",
+      "container_id": "box_demo",
+      "support_id": null,
+      "properties": null
+    },
+    {
+      "kind": "pick",
+      "item_id": "long",
+      "container_id": null,
+      "support_id": null,
+      "properties": null
+    },
+    {
+      "kind": "place_inside",
+      "item_id": "long",
+      "container_id": "box_demo",
+      "support_id": null,
+      "properties": null
+    },
+    {
+      "kind": "pick",
+      "item_id": "fragile",
+      "container_id": null,
+      "support_id": null,
+      "properties": null
+    },
+    {
+      "kind": "place_inside",
+      "item_id": "fragile",
+      "container_id": "box_demo",
+      "support_id": null,
+      "properties": null
+    },
+    {
+      "kind": "pick",
+      "item_id": "ordinary",
+      "container_id": null,
+      "support_id": null,
+      "properties": null
+    },
+    {
+      "kind": "place_inside",
+      "item_id": "ordinary",
+      "container_id": "box_demo",
+      "support_id": null,
+      "properties": null
+    },
+    {
+      "kind": "verify",
+      "item_id": null,
+      "container_id": "box_demo",
+      "support_id": null,
+      "properties": null
+    }
+  ],
+  "hidden_information": [
+    "mass",
+    "fragility",
+    "load_limit"
+  ],
+  "source": "one_shot_demo"
+}
