@@ -39,6 +39,10 @@ class Report:
     success_ci: tuple
     first_attempt_rate: float
     wrong_belief_rate: float
+    silent_false_completion_rate: float   # P(fail | CONFIDENT believed success)
+    uncertain_completion_rate: float      # completions the agent flagged low-confidence
+    p_success_given_correct_role: float   # conditional metric
+    role_binding_accuracy: float
     recovery_opportunities: int
     recovered: int
     recovery_rate: float
@@ -59,13 +63,17 @@ class Report:
 
     def pretty(self) -> str:
         L = ["=" * 62,
-             "  OSC v0.2 BENCHMARK REPORT  (belief-state, ground-truth scored)",
+             "  OSC v0.3 BENCHMARK REPORT  (belief-state, ground-truth scored)",
              "=" * 62,
              f"  episodes                      : {self.n}",
              f"  success rate                  : {self.success_rate:6.1%}  "
              f"CI95[{self.success_ci[0]:.2f},{self.success_ci[1]:.2f}]",
              f"  first-attempt success         : {self.first_attempt_rate:6.1%}",
-             f"  wrong-belief rate (silent err): {self.wrong_belief_rate:6.1%}",
+             f"  wrong-belief rate (any)       : {self.wrong_belief_rate:6.1%}",
+             f"  SILENT false-completion (conf): {self.silent_false_completion_rate:6.1%}  "
+             f"(uncertain completions flagged: {self.uncertain_completion_rate:.1%})",
+             f"  role-binding accuracy         : {self.role_binding_accuracy:6.1%}  "
+             f"P(success|correct role)={self.p_success_given_correct_role:.1%}",
              f"  recovery opportunities        : {self.recovery_opportunities}"
              f"  -> recovered {self.recovered}  ({self.recovery_rate:.0%})",
              f"  autonomous replans (total)    : {self.autonomous_replans_total}",
@@ -97,6 +105,16 @@ def _agg(records: list[EpisodeRecord], seed=0) -> dict:
     if n == 0:
         return {}
     succ = [r.success for r in records]
+    # confident completions: agent claimed success, high role confidence, not ambiguous
+    confident = [r for r in records if r.believed_success
+                 and getattr(r, "role_confidence", 1.0) >= 0.6
+                 and not getattr(r, "ambiguous", False)]
+    sfc = float(np.mean([not r.success for r in confident])) if confident else 0.0
+    uncertain = [r for r in records if r.believed_success
+                 and (getattr(r, "ambiguous", False) or getattr(r, "role_confidence", 1.0) < 0.6)]
+    correct_role = [r for r in records if getattr(r, "role_binding_correct", True)]
+    p_s_given_role = float(np.mean([r.success for r in correct_role])) if correct_role else 0.0
+    rba = float(np.mean([getattr(r, "role_binding_correct", True) for r in records]))
     plans = [x for r in records for x in r.plan_latencies_ms]
     steps = [x for r in records for x in r.step_latencies_ms]
     d2c = [r.disturbance_to_correction_steps for r in records
@@ -115,6 +133,10 @@ def _agg(records: list[EpisodeRecord], seed=0) -> dict:
         n=n, success_rate=float(np.mean(succ)), success_ci=bootstrap_ci(succ, seed=seed),
         first_attempt_rate=float(np.mean([r.first_attempt_success for r in records])),
         wrong_belief_rate=float(np.mean([r.wrong_belief for r in records])),
+        silent_false_completion_rate=sfc,
+        uncertain_completion_rate=len(uncertain) / n,
+        p_success_given_correct_role=p_s_given_role,
+        role_binding_accuracy=rba,
         recovery_opportunities=len(opps), recovered=len(rec),
         recovery_rate=(len(rec) / len(opps)) if opps else 0.0,
         autonomous_replans_total=sum(r.autonomous_replans for r in records),

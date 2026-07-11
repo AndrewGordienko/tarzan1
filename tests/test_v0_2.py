@@ -112,16 +112,18 @@ def test_no_optimizer_in_deployment_path():
 
 
 # --- 5. relative transforms beat absolute ----------------------------------
-def test_relative_beats_absolute():
-    from osc.benchmark.ablations import _absolute_transform_graphs
-    # clean split isolates the transform frame from perception/dynamics noise, so
-    # the relative>absolute effect is large and stable.
+def test_semantic_and_relative_beat_absolute():
+    from dataclasses import replace
+    # clean split isolates the placement frame; absolute (demo world pose) ignores
+    # where the current objects are and should fail badly vs relative/semantic.
     clean = [Split("clean", RandomizationSpec(n_distractors=0), CorruptionSpec(enabled=False))]
     seeds = range(12)
-    rel = aggregate(run_benchmark(splits=clean, seeds=seeds))
-    ab = aggregate(run_benchmark(splits=clean, seeds=seeds,
-                                 graphs=_absolute_transform_graphs()))
+    base = ExecConfig()
+    ab = aggregate(run_benchmark(splits=clean, seeds=seeds, cfg=replace(base, retarget_mode="absolute")))
+    rel = aggregate(run_benchmark(splits=clean, seeds=seeds, cfg=replace(base, retarget_mode="relative")))
+    sem = aggregate(run_benchmark(splits=clean, seeds=seeds, cfg=replace(base, retarget_mode="semantic")))
     assert rel.success_rate > ab.success_rate + 0.2
+    assert sem.success_rate > ab.success_rate + 0.2
 
 
 if __name__ == "__main__":

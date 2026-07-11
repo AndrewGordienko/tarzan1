@@ -53,9 +53,10 @@ def run_ablations(seeds=range(20)):
         recs = run_benchmark(seeds=seeds, cfg=cfg)
         rows[name] = aggregate(recs)
 
-    # relative-vs-absolute transforms
-    rows["absolute_transforms"] = aggregate(
-        run_benchmark(seeds=seeds, cfg=base, graphs=_absolute_transform_graphs()))
+    # retargeting: absolute vs raw-relative vs semantic (the central-thesis ablation)
+    for mode in ("absolute", "relative", "semantic"):
+        rows[f"retarget_{mode}"] = aggregate(
+            run_benchmark(seeds=seeds, cfg=replace(base, retarget_mode=mode)))
 
     # privileged-state ablation (oracle estimator)
     rows["privileged_state"] = aggregate(

@@ -73,7 +73,7 @@ def run_episode(task, graph, split: Split, seed: int, cfg: ExecConfig,
     final = backend.state()
     manip = state.objects["manip"]
     true_params = (backend.actuator_delay, manip.friction / 0.6, manip.mass / 0.1)
-    rec = Scorer(task, roles).score(split.name, seed, final, env.step_info_log,
+    rec = Scorer(task, roles, graph).score(split.name, seed, final, env.step_info_log,
                                     trace, disturbance, ctx, true_params)
     return rec
 
@@ -143,7 +143,7 @@ def _report_dict(report):
 
 def _markdown(report) -> str:
     r = report
-    lines = ["# OSC v0.2 Benchmark Report", "",
+    lines = ["# OSC v0.3 Benchmark Report", "",
              f"- episodes: **{r.n}**",
              f"- success: **{r.success_rate:.1%}** (CI95 {r.success_ci[0]:.2f}–{r.success_ci[1]:.2f})",
              f"- first-attempt success: **{r.first_attempt_rate:.1%}**",

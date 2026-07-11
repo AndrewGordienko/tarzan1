@@ -35,8 +35,9 @@ class Transition:
     remove: frozenset               # predicates that become false
     contact: bool                   # is the subject grasped during this transition
     reason: str = ""
-    abs_target: object = None       # subject's absolute demo world pose (for the
-                                    # relative-vs-absolute ablation only)
+    abs_target: object = None       # subject's absolute demo world pose (absolute ablation)
+    relation: dict = None           # SEMANTIC relation for geometry-aware retargeting:
+                                    # {type: on_top|beside, align/dir, dist_norm, clearance}
 
     def describe(self) -> str:
         d = f"move {self.subject} to rel{np.round(self.rel_transform, 3)} of {self.reference}"
@@ -57,6 +58,8 @@ class TaskGraph:
     roles: list[str] = field(default_factory=list)          # e.g. [manipuland, target]
     role_signatures: dict = field(default_factory=dict)     # role -> feature vector
     demo_role_tracks: dict = field(default_factory=dict)    # role -> demo track id (ref only)
+    role_to_gt: dict = field(default_factory=dict)          # role -> ground-truth object
+                                                            # name (ORACLE/scoring use only)
 
     def pretty(self) -> str:
         lines = [f"TaskGraph  ({len(self.transitions)} transitions, roles={self.roles})"]

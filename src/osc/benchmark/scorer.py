@@ -54,6 +54,10 @@ class EpisodeRecord:
     steps: int
     sim_seconds: float
     autonomous_replans: int
+    role_binding_correct: bool = True  # did the agent act on the right GT objects
+    ambiguous: bool = False            # correspondence was genuinely ambiguous
+    inspections: int = 0               # active-perception observe frames used
+    role_confidence: float = 1.0
     human_interventions: int = 0       # only nonzero if a human-rescue API is called (none exists)
     recovery_opportunity: bool = False
     recovered: bool = False
@@ -73,9 +77,27 @@ class EpisodeRecord:
 
 
 class Scorer:
-    def __init__(self, task, roles: dict):
+    def __init__(self, task, roles: dict, graph=None):
         self.task = task
         self.roles = roles
+        self.graph = graph
+
+    def role_binding_correct(self, trace, final_state: SimState) -> bool:
+        """Evidence-based: did the agent's correspondence bind each role to the
+        track nearest the CORRECT ground-truth object? Uses role_to_gt + the
+        agent's final track poses (privileged, scoring-side only)."""
+        r2g = getattr(self.graph, "role_to_gt", {}) if self.graph is not None else {}
+        if not r2g or not trace.final_track_poses:
+            return True
+        for role, gt_name in r2g.items():
+            tid = trace.correspondence.get(role)
+            if tid is None or tid not in trace.final_track_poses or gt_name not in final_state.objects:
+                return False
+            p = trace.final_track_poses[tid]
+            nearest = min(final_state.objects, key=lambda n: dist_xy(final_state.objects[n].pose, p))
+            if nearest != gt_name:
+                return False
+        return True
 
     def score(self, split, seed, final_state: SimState, step_info_log, trace,
               disturbance, context, true_params) -> EpisodeRecord:
@@ -99,11 +121,17 @@ class Scorer:
             if after:
                 d2c = after[0] - disturbance.at_step
 
-        cat = "" if success else self._categorize(final_state, trace, irrev, timeout)
+        rbc = self.role_binding_correct(trace, final_state)
+        cat = "" if success else self._categorize(final_state, trace, irrev, timeout, rbc,
+                                                  getattr(trace, "ambiguous", False))
         return EpisodeRecord(
             task=self.task.name, split=split, seed=seed, success=success,
             believed_success=trace.believed_success,
             wrong_belief=trace.believed_success and not success,
+            role_binding_correct=rbc,
+            ambiguous=getattr(trace, "ambiguous", False),
+            inspections=getattr(trace, "inspections", 0),
+            role_confidence=getattr(trace, "role_confidence", 1.0),
             first_attempt_success=success and trace.autonomous_replans == 0
                 and trace.first_failure_step is None,
             steps=trace.steps, sim_seconds=trace.steps / CONTROL_HZ,
@@ -121,18 +149,26 @@ class Scorer:
     def task_relevant(self, s: SimState):
         return [n for n, r in self.roles.items() if r in ("manipuland", "target")]
 
-    def _categorize(self, s: SimState, trace, irrev, timeout) -> str:
+    def _categorize(self, s: SimState, trace, irrev, timeout, role_binding_correct,
+                    ambiguous) -> str:
+        """Evidence-based, not a default. Role-binding correctness comes from the
+        counterfactual check, so wrong-object failures are labelled as role
+        correspondence rather than lumped into 'perception'."""
+        if not role_binding_correct:
+            # if the scene was genuinely ambiguous, this is not a correspondence
+            # bug -- the observation did not determine the answer.
+            return "ambiguous_or_unidentifiable" if ambiguous else "role_correspondence"
         if irrev > 0:
             return "irreversible"          # a task object was knocked off the table
         if trace.believed_success:
-            # agent stopped convinced it was done, but ground truth disagrees:
-            # its belief/correspondence was wrong (e.g. acted on a distractor)
-            return "perception"
+            # bound the right objects but still declared success wrongly:
+            # the verifier accepted a placement that ground truth rejects.
+            return "verification_false_positive"
         if timeout:
             return "timeout"
         if trace.autonomous_replans > self._max_replans():
             return "recovery_failed"
-        return "control"
+        return "control"                   # right objects, right stop, missed placement
 
     def _max_replans(self) -> int:
         return 4

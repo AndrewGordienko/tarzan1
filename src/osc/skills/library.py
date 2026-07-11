@@ -82,12 +82,47 @@ def _grasp_done(s, p):
     return s.grasped == p["object"]
 
 
+def _place_target(s: BeliefState, p) -> Pose:
+    """Compute the placement target under the selected retargeting mode:
+      * semantic  : solve the demonstrated RELATION on the CURRENT geometry
+                    (target_z from current support/subject sizes), not a copied
+                    metric offset -- this is the one-shot-learning thesis;
+      * relative  : replay the exact demonstrated relative transform (v0.2);
+      * absolute  : replay the demonstrated world pose (ignores the reference)."""
+    mode = p.get("mode", "semantic")
+    rel = p["rel"]
+    ref_pose = _ref_pose(s, p)
+    if mode == "absolute" and p.get("abs_target") is not None:
+        return p["abs_target"]
+    if mode == "relative" or p.get("relation") is None or p.get("reference", "world") == "world":
+        return apply(ref_pose, rel)
+    # semantic
+    R = p["relation"]
+    support = s.objects.get(p["reference"])
+    subj = s.objects.get(p["object"])
+    if support is None or subj is None:
+        return apply(ref_pose, rel)
+    yaw = support.pose[3]
+    c, sn = np.cos(yaw), np.sin(yaw)
+    if R["type"] == "on_top":
+        ax, ay = R["align_xy"]
+        wx = support.pose[0] + c * ax - sn * ay
+        wy = support.pose[1] + sn * ax + c * ay
+        z = support.pose[2] + support.size[2] / 2 + subj.size[2] / 2 + R.get("clearance", 0.004)
+        return pose(wx, wy, z, yaw)
+    if R["type"] == "beside":
+        dx, dy = R["dir"]
+        dist = R["dist_norm"] * (subj.size[0] / 2 + support.size[0] / 2)
+        wx = support.pose[0] + (c * dx - sn * dy) * dist
+        wy = support.pose[1] + (sn * dx + c * dy) * dist
+        return pose(wx, wy, s.table_z + subj.size[2] / 2, yaw)
+    return apply(ref_pose, rel)
+
+
 def _place_act(s: BeliefState, p):
-    """Carry the grasped subject to a target pose defined relative to a
-    reference frame, then descend and release. `lift` sets the travel height
-    (a caution knob the imagined search varies to trade speed vs collision)."""
-    ref = _ref_pose(s, p)
-    target = apply(ref, p["rel"])
+    """Carry the grasped subject to a target pose, then descend and release.
+    `lift` sets travel height (caution knob the imagined search varies)."""
+    target = _place_target(s, p)
     g = s.gripper
     lift = p.get("lift", APPROACH_Z)
     over = pose(target[0], target[1], max(target[2] + lift, g[2]), target[3])
@@ -98,8 +133,7 @@ def _place_act(s: BeliefState, p):
                   gripper_close=0.0 if descended else 1.0)  # release when down
 
 def _place_done(s, p):
-    ref = _ref_pose(s, p)
-    target = apply(ref, p["rel"])
+    target = _place_target(s, p)
     subj = s.objects[p["object"]]
     return s.grasped != p["object"] and dist_xyz(subj.pose, target) < 0.03
 

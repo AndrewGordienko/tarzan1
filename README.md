@@ -1,52 +1,69 @@
-# One-Shot Task Compiler (OSC) — v0.2
+# One-Shot Task Compiler (OSC) — v0.3
 
 **Research question:** can a robot watch *one* demonstration of an unseen task,
 infer an executable task *program*, and complete it in changed environments
 **without any task-time fine-tuning**?
 
-> **What this repo is (read first).** This is a **symbolic / scripted
-> architecture prototype and a truthful evaluation harness**, not a learned
-> robot policy. The skills are hand-written closed-form controllers, the world
-> model is an analytic parameter-ensemble, and perception runs in a toy tabletop
-> simulator. The point of v0.2 is that **the evaluation is honest**: the agent
-> acts only on an estimated belief state from noisy, nameless percepts, ground
-> truth is read only by the scorer, and the metrics mean what they say. The
-> numbers are deliberately *lower and harder-earned* than v0.1's inflated ones.
-> See [`MIGRATION.md`](MIGRATION.md) for exactly what changed and why.
+> **What this repo is (read first).** A **symbolic / scripted architecture
+> prototype with a truthful, self-diagnosing evaluation harness** — not a learned
+> policy. The agent acts only on an estimated belief state from noisy, nameless
+> percepts; ground truth is read only by the scorer. v0.3 adds a **paired oracle
+> attribution ladder** that measures which component actually causes failure, a
+> rebuilt correspondence module, active verification, and semantic retargeting.
+> See [`MIGRATION.md`](MIGRATION.md) (v0.1→v0.2) and
+> [`MIGRATION_V0_3.md`](MIGRATION_V0_3.md) (v0.2→v0.3).
 
 ## Quickstart
 
 ```bash
 pip install -e .
-python -m osc.run_demo  --task stack        # one task, watch the loop
-python -m osc.run_bench --seeds 20 --seed-groups 2 --out reports/v0_2
+python -m osc.run_attribution --seeds 25    # the error-budget ladder (headline)
+python -m osc.run_bench --seeds 25 --out reports/v0_3
 python -m osc.run_ablations --seeds 20      # component attribution
+python -m osc.run_demo  --task stack        # watch one task
 pytest -q                                    # 7 architectural + behavioural tests
 ```
 
-## Headline (320 episodes, 2 seed groups, bootstrap CIs)
+## The result that matters: an evidence-based error budget
+
+Perfect-component swaps (same task/split/seed) show what to fix — and refuted the
+v0.2 guess that perception (tracking) was the bottleneck:
+
+| oracle swap | success | Δ vs full |
+|---|---|---|
+| full (belief) | 74.5% | — |
+| perfect state estimation | 82.0% | +7.5 |
+| **perfect role correspondence** | 87.5% | **+13.0** |
+| perfect perception + binding | 96.5% | +22.0 |
+| perfect verifier | 72.5% | −2.0 |
+
+**Correspondence, not tracking, is the lever.** Rebuilding it (greedy →
+relational sticky `RoleBelief`) took full success **50.6% → 74.5%** and
+wrong-belief **45% → 17.5%**, with **P(success | correct role) = 97.5%**.
+
+## Headline (200 episodes, bootstrap CIs)
 
 | metric | value |
 |---|---|
-| success (belief-state, ground-truth scored) | **41%** (CI95 0.36–0.47) |
-| first-attempt success | 40% |
-| **wrong-belief rate** (agent thinks it succeeded, ground truth says no) | **52%** |
-| plan latency p50/p95/p99 | 0.2 / 0.3 / 0.4 ms |
-| sensor→action p50/p95 | 0.14 / 0.19 ms |
+| success (belief-state, ground-truth scored) | **74.5%** (CI95 0.69–0.80) |
+| first-attempt success | 66% |
+| silent false-completion (among **confident** claims) | **12.1%** (target <10%) |
+| role-binding accuracy · P(success \| correct role) | 59% · **97.5%** |
+| recovery (of genuine opportunities) | 78% |
+| plan latency p50/p95/p99 | 0.7 / 1.7 / 3.6 ms |
 | human interventions | **0** (no rescue API exists) |
-| context est. error (mean abs) | delay **0.001**, friction 0.31, mass 1.59 |
 
 | split | success | CI95 |
 |---|---|---|
-| seen_task_new_layout | 46% | 0.36–0.57 |
-| unseen_instances | 33% | 0.23–0.42 |
-| hidden_dynamics | 51% | 0.40–0.62 |
-| disturbance_recovery | 35% | 0.25–0.46 |
+| seen_task_new_layout | 90% | 0.82–0.98 |
+| hidden_dynamics | 90% | 0.82–0.98 |
+| disturbance_recovery | 78% | 0.66–0.88 |
+| unseen_instances | 40% | 0.26–0.54 |
 
-The dominant failure is **perception / wrong-belief** (correspondence picks the
-wrong object, or placement is imprecise under noise + distractors). That is the
-honest state of the art for this prototype and the clearest next research target
-— not something papered over.
+The remaining failures are **role correspondence on identifiable scenes** and
+**genuinely ambiguous scenes** (distractors that coincidentally match the demo —
+labelled `ambiguous_or_unidentifiable`, not counted as bugs). `unseen_instances`
+(heavy size jitter + 3 distractors) is where ambiguity concentrates.
 
 ## The wall between agent and ground truth
 
@@ -79,16 +96,18 @@ boobytraps `backend.state()` and fails if the agent path ever reads it.
 
 ## Ablations (component attribution)
 
-`python -m osc.run_ablations` turns one thing off at a time. On the current
-tasks the informative results are:
+`python -m osc.run_ablations` turns one thing off at a time (paired seeds):
 
-- **absolute vs relative transforms**: relative wins by ~25 points — the
-  relative-frame task graph is what makes one-shot transfer work.
-- **privileged vs belief state**: perfect state is only ~+5 points here, i.e.
-  perception is costly but not the whole story.
-- **world model / recovery / adaptation off**: ≈ no change on these tasks —
-  an honest signal that the benchmark is **not yet hard enough** to exercise
-  them. Making it harder (below) is the point of the next milestone.
+- **retargeting**: absolute **54%** < raw-relative **72.5%** ≤ semantic **75%**.
+  Semantic only edges relative because the toy sim's **settling forgives z-target
+  error** — a stricter placement task is needed to show the full advantage.
+- **event-driven vs every-step planning**: **75% vs 17.5%** — naive
+  receding-horizon replanning thrashes; event-driven planning matters a lot.
+- **recovery on/off**: +4.4 points (78% of genuine disturbance opportunities
+  recovered).
+- **world model / adaptation off**: ≈ no change — these tasks still don't give
+  them decisions to make (the benchmark needs harder scenarios; see roadmap).
+- **privileged vs belief state**: +7 points.
 
 ## Implemented vs. future (learned) components
 
