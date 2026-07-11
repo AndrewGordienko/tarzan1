@@ -8,6 +8,8 @@ import numpy as np
 
 from .commands import SkillCommand
 from .mujoco_adapter import MujocoPackingAdapter
+from osc.packing.domain import Container, PackItem, PackingState, Placement
+from osc.packing.repair import search_counterfactual_repair
 
 
 def _run(seed: int, lane: str, autonomous: bool, forced: bool) -> dict[str, Any]:
@@ -17,6 +19,11 @@ def _run(seed: int, lane: str, autonomous: bool, forced: bool) -> dict[str, Any]
     late = (.16, .12, .08)
     no_removal_feasible = False
     blocker = "ordinary"
+    belief_state = PackingState(Container("belief_box", (1., 1., 1.)),
+                                {blocker: PackItem(blocker, (.8, .8, .2), fragile=True, load_limit=.1),
+                                 "late": PackItem("late", (.8, .8, .6))},
+                                {blocker: Placement(blocker, (0., 0., 0.), (.8, .8, .2))})
+    repair_plan = search_counterfactual_repair(belief_state, belief_state.items["late"])
     adapter = MujocoPackingAdapter()
     adapter.reset({"items": [{"name": blocker, "size": small, "pos": (0., 0., small[2])}]})
     sequence = ["observe_late_item", "detect_infeasible", "choose_blocker"]
@@ -41,6 +48,8 @@ def _run(seed: int, lane: str, autonomous: bool, forced: bool) -> dict[str, Any]
             "feasibility_certificate": {"no_removal_feasible": no_removal_feasible,
                                          "search_complete": True, "late_dimensions": late},
             "blocking_object": blocker, "sequence": sequence,
+            "belief_repair_plan_found": repair_plan is not None,
+            "belief_repair_actions": [a["kind"] for a in repair_plan.actions] if repair_plan else [],
             "removal_grasp_success": bool(staged), "staged_success": bool(staged),
             "late_item_placement_success": bool(late_result and late_result.success),
             "repack_success": bool(repack and repack.success),

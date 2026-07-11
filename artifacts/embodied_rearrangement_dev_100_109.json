@@ -50,6 +50,12 @@
         "repack",
         "verify"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": true,
       "staged_success": true,
       "late_item_placement_success": true,
@@ -89,6 +95,12 @@
         "repack",
         "verify"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": true,
       "staged_success": true,
       "late_item_placement_success": true,
@@ -123,6 +135,12 @@
         "choose_blocker",
         "planner_not_implemented"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": false,
       "staged_success": false,
       "late_item_placement_success": false,
@@ -157,6 +175,12 @@
         "choose_blocker",
         "planner_not_implemented"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": false,
       "staged_success": false,
       "late_item_placement_success": false,
@@ -195,6 +219,12 @@
         "place_late_item",
         "repack",
         "verify"
+      ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
       ],
       "removal_grasp_success": true,
       "staged_success": true,
@@ -235,6 +265,12 @@
         "repack",
         "verify"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": true,
       "staged_success": true,
       "late_item_placement_success": true,
@@ -269,6 +305,12 @@
         "choose_blocker",
         "planner_not_implemented"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": false,
       "staged_success": false,
       "late_item_placement_success": false,
@@ -302,6 +344,12 @@
         "detect_infeasible",
         "choose_blocker",
         "planner_not_implemented"
+      ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
       ],
       "removal_grasp_success": false,
       "staged_success": false,
@@ -342,6 +390,12 @@
         "repack",
         "verify"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": true,
       "staged_success": true,
       "late_item_placement_success": true,
@@ -381,6 +435,12 @@
         "repack",
         "verify"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": true,
       "staged_success": true,
       "late_item_placement_success": true,
@@ -415,6 +475,12 @@
         "choose_blocker",
         "planner_not_implemented"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": false,
       "staged_success": false,
       "late_item_placement_success": false,
@@ -449,6 +515,12 @@
         "choose_blocker",
         "planner_not_implemented"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": false,
       "staged_success": false,
       "late_item_placement_success": false,
@@ -487,6 +559,12 @@
         "place_late_item",
         "repack",
         "verify"
+      ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
       ],
       "removal_grasp_success": true,
       "staged_success": true,
@@ -527,6 +605,12 @@
         "repack",
         "verify"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": true,
       "staged_success": true,
       "late_item_placement_success": true,
@@ -561,6 +645,12 @@
         "choose_blocker",
         "planner_not_implemented"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": false,
       "staged_success": false,
       "late_item_placement_success": false,
@@ -594,6 +684,12 @@
         "detect_infeasible",
         "choose_blocker",
         "planner_not_implemented"
+      ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
       ],
       "removal_grasp_success": false,
       "staged_success": false,
@@ -634,6 +730,12 @@
         "repack",
         "verify"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": true,
       "staged_success": true,
       "late_item_placement_success": true,
@@ -673,6 +775,12 @@
         "repack",
         "verify"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": true,
       "staged_success": true,
       "late_item_placement_success": true,
@@ -707,6 +815,12 @@
         "choose_blocker",
         "planner_not_implemented"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": false,
       "staged_success": false,
       "late_item_placement_success": false,
@@ -741,6 +855,12 @@
         "choose_blocker",
         "planner_not_implemented"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": false,
       "staged_success": false,
       "late_item_placement_success": false,
@@ -779,6 +899,12 @@
         "place_late_item",
         "repack",
         "verify"
+      ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
       ],
       "removal_grasp_success": true,
       "staged_success": true,
@@ -819,6 +945,12 @@
         "repack",
         "verify"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": true,
       "staged_success": true,
       "late_item_placement_success": true,
@@ -853,6 +985,12 @@
         "choose_blocker",
         "planner_not_implemented"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": false,
       "staged_success": false,
       "late_item_placement_success": false,
@@ -886,6 +1024,12 @@
         "detect_infeasible",
         "choose_blocker",
         "planner_not_implemented"
+      ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
       ],
       "removal_grasp_success": false,
       "staged_success": false,
@@ -926,6 +1070,12 @@
         "repack",
         "verify"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": true,
       "staged_success": true,
       "late_item_placement_success": true,
@@ -965,6 +1115,12 @@
         "repack",
         "verify"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": true,
       "staged_success": true,
       "late_item_placement_success": true,
@@ -999,6 +1155,12 @@
         "choose_blocker",
         "planner_not_implemented"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": false,
       "staged_success": false,
       "late_item_placement_success": false,
@@ -1032,6 +1194,12 @@
         "detect_infeasible",
         "choose_blocker",
         "planner_not_implemented"
+      ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
       ],
       "removal_grasp_success": false,
       "staged_success": false,
@@ -1072,6 +1240,12 @@
         "repack",
         "verify"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": true,
       "staged_success": true,
       "late_item_placement_success": true,
@@ -1111,6 +1285,12 @@
         "repack",
         "verify"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": true,
       "staged_success": true,
       "late_item_placement_success": true,
@@ -1145,6 +1325,12 @@
         "choose_blocker",
         "planner_not_implemented"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": false,
       "staged_success": false,
       "late_item_placement_success": false,
@@ -1178,6 +1364,12 @@
         "detect_infeasible",
         "choose_blocker",
         "planner_not_implemented"
+      ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
       ],
       "removal_grasp_success": false,
       "staged_success": false,
@@ -1218,6 +1410,12 @@
         "repack",
         "verify"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": true,
       "staged_success": true,
       "late_item_placement_success": true,
@@ -1257,6 +1455,12 @@
         "repack",
         "verify"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": true,
       "staged_success": true,
       "late_item_placement_success": true,
@@ -1291,6 +1495,12 @@
         "choose_blocker",
         "planner_not_implemented"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": false,
       "staged_success": false,
       "late_item_placement_success": false,
@@ -1324,6 +1534,12 @@
         "detect_infeasible",
         "choose_blocker",
         "planner_not_implemented"
+      ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
       ],
       "removal_grasp_success": false,
       "staged_success": false,
@@ -1364,6 +1580,12 @@
         "repack",
         "verify"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": true,
       "staged_success": true,
       "late_item_placement_success": true,
@@ -1403,6 +1625,12 @@
         "repack",
         "verify"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": true,
       "staged_success": true,
       "late_item_placement_success": true,
@@ -1437,6 +1665,12 @@
         "choose_blocker",
         "planner_not_implemented"
       ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
+      ],
       "removal_grasp_success": false,
       "staged_success": false,
       "late_item_placement_success": false,
@@ -1470,6 +1704,12 @@
         "detect_infeasible",
         "choose_blocker",
         "planner_not_implemented"
+      ],
+      "belief_repair_plan_found": true,
+      "belief_repair_actions": [
+        "temporarily_remove",
+        "place",
+        "repack"
       ],
       "removal_grasp_success": false,
       "staged_success": false,
