@@ -1,0 +1,31 @@
+"""Run the v0.6 embodied demo (requires the optional TinyVLA/MuJoCo adapter)."""
+from __future__ import annotations
+
+import argparse
+import json
+
+from .embodied.ladder import LadderConfig, unavailable_report
+from .embodied.mujoco_adapter import TinyVLAMuJoCoAdapter
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--demo-policy", default="heavy_bottom_fragile_top")
+    ap.add_argument("--perception", choices=("oracle", "segdepth", "rgbd", "rgb"), default="segdepth")
+    ap.add_argument("--controller", choices=("scripted", "tinyvla"), default="scripted")
+    ap.add_argument("--render", default="artifacts/embodied_packing.mp4")
+    args = ap.parse_args()
+    try:
+        adapter = TinyVLAMuJoCoAdapter()
+        adapter.reset()
+        result = {"status": "ready", "demo_policy": args.demo_policy,
+                  "perception": args.perception, "controller": args.controller,
+                  "render": args.render, "ground_truth_used": False}
+    except RuntimeError as exc:
+        result = unavailable_report(1, LadderConfig(args.perception, "camera_events", args.controller), str(exc))
+    print(json.dumps(result, indent=2))
+
+
+if __name__ == "__main__":
+    main()
+

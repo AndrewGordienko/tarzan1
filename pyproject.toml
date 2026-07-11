@@ -22,6 +22,8 @@ osc-hard-audit = "osc.run_hard_audit:main"
 osc-correspondence-audit = "osc.run_correspondence_audit:main"
 osc-pack-demo = "osc.run_pack_demo:main"
 osc-pack-bench = "osc.run_pack_bench:main"
+osc-pack-mujoco-demo = "osc.run_pack_mujoco_demo:main"
+osc-pack-mujoco-bench = "osc.run_pack_mujoco_bench:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

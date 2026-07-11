@@ -51,10 +51,11 @@ osc-pack-bench --episodes 100 --perception oracle
 osc-pack-bench --episodes 100 --perception belief
 ```
 
-The controlled PoC currently reports 100% feasible-order completion, zero
-constraint violations, 25% rearrangement episodes, and improvement over literal
-replay and greedy next-fit on the four-scenario suite. Oracle and belief lanes are
-reported separately; no gradient updates occur after the demonstration. The
+The controlled PoC reports lanes separately: 100% oracle feasible completion and
+88% belief feasible completion in the regenerated 100-episode report (the earlier
+91% belief run implies 93.25% overall correct decision on a 75% feasible / 25%
+impossible mix). Both lanes have zero constraint violations and beat literal
+replay and greedy next-fit; no gradient updates occur after the demonstration. The
 packing implementation lives under `src/osc/packing/` and is intentionally a
 finite geometric world model before learned residual dynamics are introduced.
 
@@ -68,6 +69,20 @@ lanes through the same initial placement prefix before revealing the large item.
 
 Results are **cross-process deterministic** (identical JSON across
 `PYTHONHASHSEED`, apart from wall-clock latency fields); CI enforces it.
+
+### v0.6 embodied packing (MuJoCo adapter)
+
+Intent, planning, and recovery remain in Tarzan while continuous arm control is
+delegated to the separate [TinyVLA repository](https://github.com/AndrewGordienko/tinyvla).
+The camera/contact-safe `SkillCommand` boundary is in `src/osc/embodied/`.
+
+```bash
+osc-pack-mujoco-demo --demo-policy heavy_bottom_fragile_top --controller scripted
+osc-pack-mujoco-bench --episodes 20 --perception segdepth --controller scripted
+```
+
+Without MuJoCo/TinyVLA installed these commands return a structured `blocked`
+report and never silently substitute simulator ground truth.
 
 ## The result that matters: an evidence-based error budget
 
