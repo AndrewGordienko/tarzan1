@@ -70,6 +70,11 @@ class EpisodeRecord:
     role_entropy: float = 0.0          # agent-visible discrimination features (for the audit)
     role_margin: float = 1.0
     assignment_margin: float = 1.0
+    top_cost: float = 0.0
+    second_cost: float = 0.0
+    n_candidates: int = 0
+    track_uncertainty: float = 0.0
+    staleness: float = 0.0
     human_interventions: int = 0       # only nonzero if a human-rescue API is called (none exists)
     # -- resolution layer --
     committed: bool = True             # robot committed to executing (vs abstained)
@@ -200,6 +205,11 @@ class Scorer:
             role_entropy=getattr(trace, "role_entropy", 0.0),
             role_margin=getattr(trace, "role_margin", 1.0),
             assignment_margin=getattr(trace, "assignment_margin", 1.0),
+            top_cost=getattr(trace, "top_cost", 0.0),
+            second_cost=getattr(trace, "second_cost", 0.0),
+            n_candidates=getattr(trace, "n_candidates", 0),
+            track_uncertainty=getattr(trace, "track_uncertainty", 0.0),
+            staleness=getattr(trace, "staleness", 0.0),
             first_attempt_success=success and trace.autonomous_replans == 0
                 and trace.first_failure_step is None,
             steps=trace.steps, sim_seconds=trace.steps / CONTROL_HZ,

@@ -30,6 +30,26 @@ def test_audit_populates_features_and_labels():
     assert len(d["conf"]) == len(d["bind"]) == len(d["ident"]) > 0
 
 
+def test_multivariate_probe_beats_single_feature_on_identifiability():
+    mp = A.multivariate_probe(dev_seeds=range(0, 30), held_seeds=range(5000, 5030))
+    # combining weak features must rank identifiability well above chance and above
+    # the ~0.75 single-feature ceiling (validates that combos help; route not closed).
+    auroc = mp["models"]["identifiable"]["logistic"]["auroc"]
+    assert auroc > 0.80
+    # and binding-correctness stays comparatively weak (needs more evidence, not model)
+    assert mp["models"]["binding"]["logistic"]["auroc"] < auroc
+
+
+def test_clarification_decomposition_separates_binding_from_control():
+    d = A.clarification_decomposition(seeds=range(40))
+    assert d["n"] > 0
+    # control is strong given a correct binding; the loss is binding persistence
+    assert d["success_given_binding"] > 0.9
+    assert d["persistent_binding"] < d["success_given_binding"]
+    bp = d["breakpoints"]
+    assert bp["binding_not_persistent"] > bp["correct_binding_control_fail"]
+
+
 if __name__ == "__main__":
     import pytest
     raise SystemExit(pytest.main([__file__, "-v"]))

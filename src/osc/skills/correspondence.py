@@ -49,6 +49,9 @@ class RoleAssignment:
     per_role_conf: dict = field(default_factory=dict)
     margin: float = 1.0                 # weakest-role chosen-vs-runnerup posterior gap
     assignment_margin: float = 1.0      # top-1 vs top-2 joint-assignment cost gap
+    top_cost: float = 0.0               # best joint-assignment cost
+    second_cost: float = 0.0            # runner-up joint-assignment cost
+    n_candidates: int = 0               # number of tracks considered
 
 
 class RoleBelief:
@@ -121,7 +124,9 @@ class RoleBelief:
         ambiguous = (margin < AMBIG_MARGIN) or (confidence < ROLE_CONF_MIN) \
             or (weakest_margin < ROLE_MARGIN_MIN)
         return RoleAssignment(chosen, confidence, entropy, ambiguous, per_role_conf,
-                              margin=weakest_margin, assignment_margin=margin)
+                              margin=weakest_margin, assignment_margin=margin,
+                              top_cost=best_cost, second_cost=second_cost,
+                              n_candidates=len(tracks))
 
 
 def correspond(belief: BeliefState, role_signatures: dict) -> dict:

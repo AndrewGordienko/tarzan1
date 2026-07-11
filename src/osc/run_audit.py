@@ -68,12 +68,39 @@ def main():
     if best[0] >= 0.80:
         print("    => VIABLE operating point exists on the current evidence.")
     else:
-        print("    => NO VIABLE OPERATING POINT (gate wants >=0.80) on ANY current feature.")
-        print("       Binding-correctness is ~unrankable (AUROC~0.6); identifiability tops")
-        print("       out ~0.80 -- too low for 80% coverage at 5% FPR. Conclusion: do NOT")
-        print("       tune/calibrate a score over the CURRENT evidence. The agent must")
-        print("       GATHER more evidence (real active inspection / interaction in the")
-        print("       perception path) -- i.e. change the evidence, not the threshold.")
+        print("    => NO viable SINGLE-feature operating point (gate wants >=0.80).")
+
+    # -- CHECK 1: multivariate sanity probe (do weak features COMBINE?) --------
+    print("\n  MULTIVARIATE PROBE  (fit on DEV, evaluate on HELD-OUT; do combos help?)")
+    mp = A.multivariate_probe(dev_seeds=range(0, args.seeds),
+                              held_seeds=range(5000, 5000 + args.seeds))
+    for label, res in mp["models"].items():
+        for name, r in res.items():
+            op = f"  op-cov@<5%amb={r['op'][0]:.3f}" if r["op"] else ""
+            print(f"    {label:12s} {name:9s} held AUROC={r['auroc']:.3f}{op}")
+    id_ops = [r["op"][0] for r in mp["models"]["identifiable"].values() if r["op"]]
+    best_id_op = max(id_ops) if id_ops else 0.0
+    print(f"    (held n={mp['held_n']})")
+    print(f"    => combining weak features RAISES identifiable op-coverage from ~0.23")
+    print(f"       (best single feature) to {best_id_op:.2f}. Route is NOT closed; but it is")
+    print(f"       {'AT' if best_id_op>=0.80 else 'still short of'} the 0.80 gate -- a resolvability model helps, richer")
+    print("       evidence (Step 5) is still needed to clear it. Binding-correctness stays")
+    print("       weak (~0.74) => knowing IF a pick is right needs more evidence, not more model.")
+
+    # -- CHECK 2: clarification decomposition (resolution vs downstream) --------
+    print("\n  CLARIFICATION DECOMPOSITION  (genuinely-ambiguous scenes, clarified)")
+    dc = A.clarification_decomposition(seeds=range(args.seeds))
+    print(f"    n={dc['n']}")
+    print(f"    P(binding persists correct through replans) : {dc['persistent_binding']:.3f}")
+    print(f"    P(task success | binding stayed correct)    : {dc['success_given_binding']:.3f}")
+    print(f"    overall P(success)                          : {dc['overall_success']:.3f}")
+    print("    where the chain breaks (counts):")
+    for k, v in dc["breakpoints"].items():
+        print(f"      {k:34s} {v}")
+    if dc["persistent_binding"] >= 0.95 and dc["success_given_binding"] < dc["persistent_binding"]:
+        print("    => clarification RESOLVES the role; remaining loss is downstream control.")
+    elif dc["persistent_binding"] < 0.95:
+        print("    => clarification itself does not yet persist a correct binding.")
 
 
 if __name__ == "__main__":

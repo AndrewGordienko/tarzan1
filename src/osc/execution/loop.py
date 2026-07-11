@@ -77,6 +77,11 @@ class AgentTrace:
     role_entropy: float = 0.0           # posterior entropy at the FIRST binding
     role_margin: float = 1.0            # weakest-role top1-top2 margin at first binding
     assignment_margin: float = 1.0      # joint top1-top2 cost gap at first binding
+    top_cost: float = 0.0               # best joint-assignment cost at first binding
+    second_cost: float = 0.0            # runner-up joint-assignment cost
+    n_candidates: int = 0               # tracks considered at first binding
+    track_uncertainty: float = 0.0      # mean per-track position std at first binding
+    staleness: float = 0.0              # mean frames-since-seen at first binding
     ambiguous: bool = False             # correspondence was ambiguous at some plan
     # -- resolution layer --
     committed: bool = True              # did the robot commit to executing (vs abstain)
@@ -195,6 +200,14 @@ class ClosedLoopExecutor:
                 tr.role_entropy = ra.entropy
                 tr.role_margin = ra.margin
                 tr.assignment_margin = ra.assignment_margin
+                tr.top_cost = ra.top_cost
+                tr.second_cost = ra.second_cost
+                tr.n_candidates = ra.n_candidates
+                objs = list(belief.objects.values())
+                if objs:
+                    tr.track_uncertainty = sum(getattr(o, "pos_std", 0.0) for o in objs) / len(objs)
+                    tr.staleness = sum(belief.t - getattr(o, "last_seen", belief.t)
+                                       for o in objs) / len(objs)
             tr.ambiguous = tr.ambiguous or ra.ambiguous
         tr.correspondence = corr
         tr.corr_history.append(dict(corr))

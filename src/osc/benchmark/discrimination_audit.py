@@ -15,6 +15,8 @@ Uses only agent-visible confidence + the scorer's objective labels. No sklearn.
 """
 from __future__ import annotations
 
+import numpy as np
+
 from .runner import run_benchmark
 from ..execution.loop import ExecConfig
 
@@ -118,6 +120,116 @@ def feature_table(recs):
         "assignment_margin": [r.assignment_margin for r in recs],
         "neg_entropy": [-r.role_entropy for r in recs],
     }
+
+
+FEATURES = ["role_confidence", "role_margin", "assignment_margin", "role_entropy",
+            "n_candidates", "track_uncertainty", "staleness", "top_cost", "second_cost"]
+
+
+def feature_matrix(recs):
+    X = [[float(getattr(r, f)) for f in FEATURES] for r in recs]
+    return np.asarray(X, dtype=float)
+
+
+# -- two simple, deterministic models (no sklearn; not a model search) --------
+def _fit_logistic(X, y, iters=800, lr=0.2, l2=1e-3):
+    mu, sd = X.mean(0), X.std(0) + 1e-9
+    Xs = (X - mu) / sd
+    w = np.zeros(Xs.shape[1]); b = 0.0
+    yv = np.asarray(y, float)
+    for _ in range(iters):
+        p = 1.0 / (1.0 + np.exp(-(Xs @ w + b)))
+        g = p - yv
+        w -= lr * (Xs.T @ g / len(yv) + l2 * w)
+        b -= lr * g.mean()
+    return ("logistic", w, b, mu, sd)
+
+
+def _fit_gbstumps(X, y, rounds=40, lr=0.3):
+    yv = np.asarray(y, float)
+    base = float(np.clip(yv.mean(), 1e-3, 1 - 1e-3))
+    F = np.full(len(yv), np.log(base / (1 - base)))
+    stumps = []
+    for _ in range(rounds):
+        resid = yv - 1.0 / (1.0 + np.exp(-F))
+        best = None
+        for j in range(X.shape[1]):
+            xs = X[:, j]
+            for thr in np.unique(np.quantile(xs, [0.25, 0.5, 0.75])):
+                left = xs <= thr
+                if left.sum() == 0 or (~left).sum() == 0:
+                    continue
+                vl, vr = resid[left].mean(), resid[~left].mean()
+                sse = ((resid - np.where(left, vl, vr)) ** 2).sum()
+                if best is None or sse < best[0]:
+                    best = (sse, j, thr, vl, vr)
+        _, j, thr, vl, vr = best
+        F += lr * np.where(X[:, j] <= thr, vl, vr)
+        stumps.append((j, thr, vl, vr))
+    return ("gbstumps", stumps, base, lr)
+
+
+def _predict(model, X):
+    if model[0] == "logistic":
+        _, w, b, mu, sd = model
+        return 1.0 / (1.0 + np.exp(-(((X - mu) / sd) @ w + b)))
+    _, stumps, base, lr = model
+    F = np.full(len(X), np.log(base / (1 - base)))
+    for j, thr, vl, vr in stumps:
+        F += lr * np.where(X[:, j] <= thr, vl, vr)
+    return 1.0 / (1.0 + np.exp(-F))
+
+
+def multivariate_probe(dev_seeds, held_seeds):
+    """Fit LR + GB-stumps on DEV, evaluate ranking on HELD-OUT. Tests whether
+    COMBINING weak features clears what single features cannot."""
+    dev = run_benchmark(seeds=dev_seeds, cfg=ExecConfig())
+    held = run_benchmark(seeds=held_seeds, cfg=ExecConfig())
+    Xd, Xh = feature_matrix(dev), feature_matrix(held)
+    out = {}
+    for label, getter in (("binding", lambda r: bool(r.role_binding_correct)),
+                          ("identifiable", lambda r: bool(r.identifiable))):
+        yd = [getter(r) for r in dev]
+        yh = [getter(r) for r in held]
+        res = {}
+        for name, fit in (("logistic", _fit_logistic), ("gbstumps", _fit_gbstumps)):
+            model = fit(Xd, yd)
+            ph = _predict(model, Xh)
+            op = _operating_point(list(ph), [bool(r.identifiable) for r in held]) \
+                if label == "identifiable" else None
+            res[name] = dict(auroc=_auroc(list(ph), yh), op=op)
+        out[label] = res
+    # feature correlations on dev
+    C = np.corrcoef(Xd.T)
+    return dict(models=out, corr=C, held_n=len(held))
+
+
+def clarification_decomposition(seeds=range(80)):
+    """Split ambiguity_resolution into resolution vs downstream execution, on the
+    GENUINELY-AMBIGUOUS scenes that were clarified. The oracle answer + immediate
+    override make response/immediate-binding ~correct by construction, so the
+    measurable chain is: persistent-binding (survives replans) -> task success."""
+    cfg = ExecConfig(resolution=True, allow_inspection=False, allow_clarification=True)
+    recs = run_benchmark(seeds=seeds, cfg=cfg)
+    amb_clar = [r for r in recs if (not r.identifiable) and r.clarifications > 0]
+    n = len(amb_clar)
+    rbc = [r for r in amb_clar if r.role_binding_correct]
+    breakpoints = dict(
+        binding_not_persistent=sum(1 for r in amb_clar if not r.role_binding_correct),
+        correct_binding_control_fail=sum(1 for r in rbc if not r.success
+                                         and r.failure_category == "control"),
+        correct_binding_verifier_reject=sum(1 for r in rbc if not r.success
+                                            and r.failure_category == "verification_false_positive"),
+        correct_binding_other_fail=sum(1 for r in rbc if not r.success
+                                       and r.failure_category not in
+                                       ("control", "verification_false_positive")),
+        fully_resolved=sum(1 for r in rbc if r.success))
+    return dict(
+        n=n,
+        persistent_binding=(len(rbc) / n) if n else 0.0,
+        success_given_binding=(sum(r.success for r in rbc) / len(rbc)) if rbc else 0.0,
+        overall_success=(sum(r.success for r in amb_clar) / n) if n else 0.0,
+        breakpoints=breakpoints)
 
 
 def audit(seeds=range(80)):
