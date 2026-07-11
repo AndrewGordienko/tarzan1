@@ -42,8 +42,11 @@ def predicate_holds(p: Predicate, b: BeliefState, rel_map: dict | None = None) -
         if r not in b.objects:
             return False
         support = b.objects[r]
+        # a's estimated base must rest on the support's estimated top surface,
+        # not merely be "somewhat above" it (looser tol: estimated sizes/poses).
+        rest_z = support.pose[2] + support.size[2] / 2 + obj.size[2] / 2
         return (dist_xy(obj.pose, support.pose) < NEAR_XY
-                and obj.pose[2] > support.pose[2] + support.size[2] / 4
+                and abs(obj.pose[2] - rest_z) < 0.03
                 and b.grasped != o)
     return False
 

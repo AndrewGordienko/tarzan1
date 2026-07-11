@@ -35,7 +35,11 @@ def gt_on_top(s: SimState, a: str, b: str) -> bool:
     if not (_alive(s, a) and _alive(s, b)):
         return False
     oa, ob = s.objects[a], s.objects[b]
-    return (dist_xy(oa.pose, ob.pose) < NEAR_XY and oa.pose[2] > ob.pose[2] + ob.size[2] / 4
+    # a genuine stack: a is horizontally over b AND a's base rests on b's top
+    # surface (b centre + half b's height + half a's height). Loose "somewhat
+    # above" checks let a floating or geometrically invalid stack pass.
+    rest_z = ob.pose[2] + ob.size[2] / 2 + oa.size[2] / 2
+    return (dist_xy(oa.pose, ob.pose) < NEAR_XY and abs(oa.pose[2] - rest_z) < 0.02
             and s.grasped != a)
 
 def gt_in_region(s: SimState, a: str, center, radius: float) -> bool:
