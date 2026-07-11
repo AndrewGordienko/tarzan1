@@ -53,7 +53,8 @@ class Handler(BaseHTTPRequestHandler):
             RUNS[rid]=result; return self.send_json(200,result)
         self.send_json(404,{'error':'not found'})
     def send_html(self):
-        d=HTML.encode(); self.send_response(200); self.send_header('Content-Type','text/html; charset=utf-8'); self.send_header('Content-Length',str(len(d))); self.end_headers(); self.wfile.write(d)
+        theme='<style>:root{--bg:#f4f7f9;--p:#fff;--l:#d8e1e7;--t:#14232e;--m:#607482;--b:#1677ad;--g:#138a62;--a:#9a6818}body{background:var(--bg);color:var(--t)}header{background:#fff;border-bottom-color:var(--l)}.panel{background:var(--p);border-color:var(--l);box-shadow:0 5px 18px #19354a0d}select,pre{background:#f7fafb;color:var(--t);border-color:var(--l)}pre{color:#315366}.viz{background:#edf3f6;border-color:var(--l)}.button{color:#fff}.ghost{color:var(--t);border-color:var(--l)}footer{border-color:var(--l)}</style>'
+        d=HTML.replace('</style>',theme+'</style>',1).encode(); self.send_response(200); self.send_header('Content-Type','text/html; charset=utf-8'); self.send_header('Content-Length',str(len(d))); self.end_headers(); self.wfile.write(d)
     def has_mujoco(self):
         try: import mujoco; return True
         except ImportError: return False
