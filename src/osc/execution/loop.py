@@ -140,25 +140,24 @@ class ClosedLoopExecutor:
         self.oracle_goal = oracle_goal
         self.role_belief = RoleBelief(graph.role_signatures)
 
-    def _apply_clarifications(self, corr, belief):
-        """Re-apply roles the user already disambiguated (persisted on TaskContext).
-        Re-derived each call because track ids churn -- the customer answered about
-        an OBJECT once; we keep tracking it without asking again."""
+    def _fixed_from_context(self, belief):
+        """Re-derive pinned track ids for every already-clarified role (track ids
+        churn, so we re-resolve the OBJECT each call rather than re-ask)."""
         if self.clarify_fn is None or not self.task_context.user_selections:
-            return corr
-        corr = dict(corr)
-        fixed = self.clarify_fn(tuple(sorted(self.task_context.user_selections)), belief)
-        corr.update({r: t for r, t in fixed.items() if t is not None})
-        return corr
+            return {}
+        ans = self.clarify_fn(tuple(sorted(self.task_context.user_selections)), belief)
+        return {r: t for r, t in ans.items() if t is not None}
 
     def _resolve_initial(self, belief, tr: AgentTrace):
-        """Run the ResolutionPolicy once at episode start: inspect (gather frames),
-        clarify (ask the user), or abstain -- rather than guess a low-confidence
-        binding. Clarifications persist on self.task_context for later plan calls."""
+        """Run the ResolutionPolicy once at episode start as a GLOBAL assignment
+        transaction: pin clarified roles, recompute the one-to-one assignment,
+        re-check EVERY role, and only commit when the whole assignment is supported
+        -- never merely because one clarification occurred. Persists on TaskContext."""
         from ..sim.base import Action
         if self.resolver is None or self.oracle_corr:
             return belief                            # feature off / oracle binding
-        ra = self.role_belief.update(belief)
+        fixed = self._fixed_from_context(belief)
+        ra = self.role_belief.update(belief, fixed=fixed)
         tr.initially_ambiguous = not self.resolver.committable(ra, self.task_context)
         inspections_used, last_gain = 0, None
         while True:
@@ -172,15 +171,20 @@ class ClosedLoopExecutor:
                     hold = belief.gripper.copy(); hold[2] += 0.02
                     belief = self.est.update(self.env.step(Action(target=hold, gripper_close=0.0)))
                     tr.steps += 1; tr.resolution_inspection_frames += 1
-                ra = self.role_belief.update(belief)
+                ra = self.role_belief.update(belief, fixed=fixed)
                 last_gain = min(ra.per_role_conf.values(), default=1.0) - prev_weak
                 inspections_used += 1
             elif action.kind == "ask_user":
                 if self.clarify_fn is None:
                     tr.committed = False; break      # nobody to ask -> abstain
-                self.task_context.user_selections.update(action.target_roles)
+                answer = self.clarify_fn(action.target_roles, belief)  # {role: track}
+                if not answer:
+                    tr.committed = False; break
+                fixed.update(answer)
+                self.task_context.user_selections.update(answer.keys())
                 tr.clarifications += 1
-                ra = self.role_belief.update(belief)  # clarified roles now excluded
+                # RECOMPUTE the constrained one-to-one assignment and re-check all roles
+                ra = self.role_belief.update(belief, fixed=fixed)
             else:                                    # abstain
                 tr.committed = False; break
         return belief
@@ -192,8 +196,8 @@ class ClosedLoopExecutor:
         if self.oracle_corr:
             corr = self.oracle_corr(belief)
         else:
-            ra = self.role_belief.update(belief)
-            corr = self._apply_clarifications(ra.mapping, belief)
+            ra = self.role_belief.update(belief, fixed=self._fixed_from_context(belief))
+            corr = ra.mapping
             tr.role_confidence = ra.confidence
             tr.min_role_confidence = min(tr.min_role_confidence, ra.confidence)
             if not tr.corr_history:            # capture features at the FIRST binding

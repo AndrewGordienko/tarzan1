@@ -75,16 +75,29 @@ class RoleBelief:
                 c += W_RATIO * abs(math.log(max(1e-6, ar) / max(1e-6, dr)))
         return c
 
-    def update(self, belief: BeliefState) -> RoleAssignment:
+    def update(self, belief: BeliefState, fixed: dict | None = None) -> RoleAssignment:
+        """`fixed` pins clarified roles to tracks; the one-to-one assignment is then
+        recomputed over the REMAINING roles/tracks, so pinning one role propagates
+        (a used track is removed from the others) and every role is re-scored under
+        the constraint. Clarification is a global transaction, not a local override."""
+        fixed = {r: t for r, t in (fixed or {}).items()
+                 if r in self.sigs and t in belief.objects}
         tracks = sorted(belief.objects)
         feats = {t: belief.objects[t].feature() for t in tracks}
-        if not self.roles or len(tracks) < len(self.roles):
-            return RoleAssignment(dict(self.prev or {}), 0.0, 0.0, True)
+        free_roles = [r for r in self.roles if r not in fixed]
+        available = [t for t in tracks if t not in set(fixed.values())]
+        if not self.roles or len(available) < len(free_roles):
+            base = dict(self.prev or {}); base.update(fixed)
+            pr = {r: (1.0 if r in fixed else 0.0) for r in self.roles}
+            return RoleAssignment(base, 0.0, 0.0, True, pr)
 
         scored = []
-        for combo in itertools.permutations(tracks, len(self.roles)):
-            assign = dict(zip(self.roles, combo))
-            scored.append((self._assignment_cost(assign, feats), assign))
+        if free_roles:
+            for combo in itertools.permutations(available, len(free_roles)):
+                assign = dict(fixed); assign.update(zip(free_roles, combo))
+                scored.append((self._assignment_cost(assign, feats), assign))
+        else:
+            scored.append((self._assignment_cost(dict(fixed), feats), dict(fixed)))
         scored.sort(key=lambda x: x[0])
         best_cost, best = scored[0]
         second_cost = scored[1][0] if len(scored) > 1 else best_cost + 10.0
@@ -96,9 +109,9 @@ class RoleBelief:
         p /= p.sum()
         entropy = float(-np.sum(p * np.log(p + 1e-12)))
 
-        # stickiness: prefer to keep the previous binding unless clearly beaten
+        # stickiness among FREE roles only; a fixed (clarified) role is authoritative.
         chosen = best
-        if self.prev is not None and all(r in self.prev for r in self.roles):
+        if not fixed and self.prev is not None and all(r in self.prev for r in self.roles):
             if all(self.prev[r] in tracks for r in self.roles):
                 prev_cost = self._assignment_cost({r: self.prev[r] for r in self.roles}, feats)
                 if prev_cost - best_cost < STICK:
@@ -106,12 +119,14 @@ class RoleBelief:
         self.prev = dict(chosen)
 
         # PER-ROLE marginal posterior: mass on each role's CHOSEN track, summed
-        # over every assignment that pairs them. A globally-confident assignment
-        # can still hide one contested role (two similar supports); gating on the
-        # weakest role -- not the joint p[0] -- is what catches confident mis-binds.
+        # over every (constrained) assignment that pairs them. Fixed roles are
+        # certain by construction.
         per_role_conf = {}
         per_role_margin = {}
         for r in self.roles:
+            if r in fixed:
+                per_role_conf[r] = 1.0; per_role_margin[r] = 1.0
+                continue
             mass = {}
             for prob, assign in zip(p, (a for _, a in scored)):
                 mass[assign[r]] = mass.get(assign[r], 0.0) + float(prob)

@@ -110,8 +110,10 @@ class ResolutionPolicy:
                 cost = {"change_viewpoint": 2.0, "probe": 4.0, "request_metadata": 0.5}[kind]
                 risk = 0.2 if kind == "probe" else 0.0        # probing can disturb the scene
                 return ResolutionAction(kind, tuple(contested), gain, cost=cost, risk=risk)
-        # 3) human clarification.
+        # 3) human clarification -- ONE role at a time (highest value = lowest
+        #    confidence); the one-to-one recompute may then resolve the others.
         if self.cfg.allow_clarification and clarifications_used < self.cfg.max_clarifications:
-            return ResolutionAction("ask_user", tuple(contested), gain, cost=1.0)
+            worst = min(contested, key=lambda r: ra.per_role_conf[r])
+            return ResolutionAction("ask_user", (worst,), gain, cost=1.0)
         # 4) never guess.
         return ResolutionAction("abstain", tuple(contested))
