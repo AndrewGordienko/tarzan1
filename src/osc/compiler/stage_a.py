@@ -1,120 +1,113 @@
-"""Stage A: compile one demonstration into a TaskGraph.
+"""Stage A: compile one demonstration (belief trajectory) into a role-based
+TaskGraph, supporting MULTIPLE grasp episodes (compositional tasks).
 
-Pipeline: keyframes -> per-segment "which object moved and relative to what" ->
-predicates + relative transforms -> goal set. No weights are updated; this is
-pure inference over the single demo, done once.
+Roles are inferred by function, never names:
+  * each distinct grasped track -> a manipuland role (manipuland0, manipuland1...),
+  * each placement reference -> that manipuland's role if it is one, else a
+    support role (support0, support1, ...).
+Each grasp episode yields a grasp transition and a place transition, expressed in
+relative transforms so they transfer. Correspondence binds roles to eval tracks.
 """
 from __future__ import annotations
 
 import numpy as np
 
-from ..geometry import Pose, dist_xy, relative
-from ..perception.tracks import DemoTrace, Keyframe, segment_keyframes
+from ..geometry import pose, relative
+from ..perception.tracks import DemoTrace
 from .task_graph import Predicate, TaskGraph, Transition
 
 NEAR_XY = 0.06
 
 
-def compile_demo(trace: DemoTrace, roles: dict[str, str]) -> TaskGraph:
-    kfs = segment_keyframes(trace)
-    objects = list(trace.object_tracks.keys())
-    transitions: list[Transition] = []
+def _grasp_episodes(trace: DemoTrace):
+    """Maximal spans where a single track is held. Returns [(track, t0, t1)]."""
+    eps, cur, start = [], None, 0
+    for t, g in enumerate(trace.grasped):
+        if g != cur:
+            if cur is not None:
+                eps.append((cur, start, t - 1))
+            cur, start = g, t
+    if cur is not None:
+        eps.append((cur, start, trace.T - 1))
+    return eps
 
-    for a, b in zip(kfs[:-1], kfs[1:]):
-        subject = _manipulated_object(a, b, objects)
-        if subject is None:
+
+def _nearest_other(trace: DemoTrace, subject: str, t: int):
+    """Placement reference. If the subject rests on something (an object below it
+    at the same xy), that support is the reference -- this distinguishes stacked
+    objects. Otherwise the nearest object in the plane (e.g. side placement)."""
+    sp = trace.object_tracks[subject][t]
+    supports = []
+    for tid, track in trace.object_tracks.items():
+        if tid == subject:
             continue
-        reference = _reference_frame(subject, b, objects, roles)
-        subj_pose = b.object_poses[subject]
-        ref_pose = _frame_pose(reference, b)
-        rel = relative(ref_pose, subj_pose)
-        add, remove = _predicate_delta(subject, reference, a, b, objects)
-        transitions.append(Transition(
-            subject=subject, reference=reference, rel_transform=rel,
-            add=frozenset(add), remove=frozenset(remove),
-            contact=(b.grasped == subject), reason=b.reason))
-
-    goal = _goal_predicates(kfs[-1], objects, roles)
-    return TaskGraph(transitions=_merge_trivial(transitions), goal=frozenset(goal),
-                     objects=objects, roles=roles)
-
-
-def _manipulated_object(a: Keyframe, b: Keyframe, objects: list[str]) -> str | None:
-    """The object whose pose changed the most between two keyframes (or the one
-    being grasped), i.e. the manipuland of this segment."""
-    if b.grasped is not None:
-        return b.grasped
-    if a.grasped is not None:
-        return a.grasped
-    best, best_d = None, 1e-3
-    for n in objects:
-        d = float(np.linalg.norm(b.object_poses[n][:3] - a.object_poses[n][:3]))
-        if d > best_d:
-            best, best_d = n, d
+        p = track[t]
+        if float(np.hypot(sp[0] - p[0], sp[1] - p[1])) < NEAR_XY and p[2] < sp[2] - 1e-3:
+            supports.append((p[2], tid))            # object directly beneath
+    if supports:
+        return max(supports)[1]                     # the highest support below
+    best, best_d = None, 3 * NEAR_XY
+    for tid, track in trace.object_tracks.items():
+        if tid == subject:
+            continue
+        d = float(np.hypot(sp[0] - track[t][0], sp[1] - track[t][1]))
+        if d < best_d:
+            best, best_d = tid, d
     return best
 
 
-def _reference_frame(subject: str, b: Keyframe, objects: list[str],
-                     roles: dict[str, str]) -> str:
-    """Pick the frame the subgoal is most naturally expressed in: the nearest
-    other object (typically the target/support), else the world/table."""
-    others = [n for n in objects if n != subject]
-    if not others:
-        return "world"
-    nearest = min(others, key=lambda n: dist_xy(b.object_poses[subject], b.object_poses[n]))
-    if dist_xy(b.object_poses[subject], b.object_poses[nearest]) < 3 * NEAR_XY:
-        return nearest
-    return "world"
+def compile_demo(trace: DemoTrace) -> TaskGraph:
+    episodes = _grasp_episodes(trace)
+    if not episodes:
+        return TaskGraph()
 
+    track_role: dict[str, str] = {}
+    for tk, _, _ in episodes:
+        if tk not in track_role:
+            track_role[tk] = f"manipuland{len([r for r in track_role.values() if r.startswith('manipuland')])}"
 
-def _frame_pose(reference: str, kf: Keyframe) -> Pose:
-    if reference == "world":
-        from ..geometry import pose
-        return pose(0, 0, 0, 0)
-    return kf.object_poses[reference]
+    transitions, goal, goal_rel = [], set(), {}
+    support_n = 0
+    for tk, t0, t1 in episodes:
+        subj = track_role[tk]
+        # grasp transition (reference = world; reach/grasp use object's own pose)
+        transitions.append(Transition(
+            subject=subj, reference="world",
+            rel_transform=relative(pose(), trace.object_tracks[tk][t0]),
+            add=frozenset({Predicate("grasped", (subj,))}),
+            remove=frozenset({Predicate("on_table", (subj,))}),
+            contact=True, reason="grasp"))
 
-
-def _predicate_delta(subject, reference, a: Keyframe, b: Keyframe, objects):
-    add, remove = set(), set()
-    if b.grasped == subject and a.grasped != subject:
-        add.add(Predicate("grasped", (subject,)))
-        remove.add(Predicate("on_table", (subject,)))
-    if a.grasped == subject and b.grasped != subject:
-        remove.add(Predicate("grasped", (subject,)))
-        # released: either placed on a support or back on the table
-        if reference != "world" and b.object_poses[subject][2] > b.object_poses[reference][2]:
-            add.add(Predicate("on_top", (subject, reference)))
+        # placement transition (at release frame t1)
+        ref_tk = _nearest_other(trace, tk, t1)
+        if ref_tk is None:
+            ref_role = "world"
+        elif ref_tk in track_role:
+            ref_role = track_role[ref_tk]
         else:
-            add.add(Predicate("on_table", (subject,)))
-    if reference != "world" and dist_xy(b.object_poses[subject], b.object_poses[reference]) < NEAR_XY:
-        add.add(Predicate("near", (subject, reference)))
-    return add, remove
+            ref_role = f"support{support_n}"; support_n += 1
+            track_role[ref_tk] = ref_role
 
+        subj_pose = trace.object_tracks[tk][t1]
+        ref_pose = pose() if ref_role == "world" else trace.object_tracks[ref_tk][t1]
+        rel = relative(ref_pose, subj_pose)
+        stacked = ref_role != "world" and subj_pose[2] > ref_pose[2] + 1e-3
+        if stacked:
+            add = {Predicate("on_top", (subj, ref_role))}
+        elif ref_role != "world":
+            # placed on the table AT the demonstrated offset from a reference:
+            # on_table alone is trivially already true, so the goal is the offset.
+            add = {Predicate("at_rel", (subj, ref_role))}
+            goal_rel[(subj, ref_role)] = rel
+        else:
+            add = {Predicate("on_table", (subj,))}
+        transitions.append(Transition(
+            subject=subj, reference=ref_role, rel_transform=rel,
+            add=frozenset(add), remove=frozenset({Predicate("grasped", (subj,))}),
+            contact=False, reason="place", abs_target=subj_pose.copy()))
+        goal.update(add)
 
-def _goal_predicates(last: Keyframe, objects, roles):
-    """Goal = the durable spatial relations that hold at the end of the demo."""
-    goal = set()
-    for n in objects:
-        p = last.object_poses[n]
-        support = None
-        for m in objects:
-            if m == n:
-                continue
-            if dist_xy(p, last.object_poses[m]) < NEAR_XY and p[2] > last.object_poses[m][2] + 1e-3:
-                support = m
-        if support is not None:
-            goal.add(Predicate("on_top", (n, support)))
-    return goal
-
-
-def _merge_trivial(transitions: list[Transition]) -> list[Transition]:
-    """Keep only transitions that carry task meaning: a contact change, a durable
-    predicate (grasped / on_table / on_top), or a removal. `near`-only, no-contact
-    transitions are perception jitter after the object is already placed and are
-    dropped (the durable `near` relations still surface in the goal set)."""
-    out = []
-    for tr in transitions:
-        durable = {p for p in tr.add if p.name != "near"}
-        if tr.contact or durable or tr.remove:
-            out.append(tr)
-    return out
+    sigs = {role: trace.features.get(tk) for tk, role in track_role.items()}
+    return TaskGraph(transitions=transitions, goal=frozenset(goal), goal_rel=goal_rel,
+                     roles=list(track_role.values()), role_signatures=sigs,
+                     demo_role_tracks={r: t for t, r in track_role.items()})

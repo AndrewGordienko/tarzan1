@@ -1,114 +1,137 @@
-# One-Shot Task Compiler (OSC)
+# One-Shot Task Compiler (OSC) — v0.2
 
-**Research question:** can a robot watch *one* demonstration of a previously
-unseen task, infer an executable task *program*, and complete it in changed
-environments **without any task-time fine-tuning**?
+**Research question:** can a robot watch *one* demonstration of an unseen task,
+infer an executable task *program*, and complete it in changed environments
+**without any task-time fine-tuning**?
 
-This repo is the **Phase-1 / Phase-2 vertical slice**: a single manipulation task
-(`STACK`: place cube A on cube B) driven end-to-end through the full pipeline —
-demo → task graph → skill grounding → imagined search → closed-loop execution
-with event-driven recovery — evaluated across randomized environments with an
-injected disturbance and **zero gradient updates after the demonstration**.
-
-It runs on a laptop CPU today. The GPU/photoreal backend (ManiSkill3) plugs in
-behind the same interface later.
-
----
+> **What this repo is (read first).** This is a **symbolic / scripted
+> architecture prototype and a truthful evaluation harness**, not a learned
+> robot policy. The skills are hand-written closed-form controllers, the world
+> model is an analytic parameter-ensemble, and perception runs in a toy tabletop
+> simulator. The point of v0.2 is that **the evaluation is honest**: the agent
+> acts only on an estimated belief state from noisy, nameless percepts, ground
+> truth is read only by the scorer, and the metrics mean what they say. The
+> numbers are deliberately *lower and harder-earned* than v0.1's inflated ones.
+> See [`MIGRATION.md`](MIGRATION.md) for exactly what changed and why.
 
 ## Quickstart
 
 ```bash
-pip install -e .                 # numpy only
-python -m osc.run_demo --episodes 30 --seed 0
-pytest -q                        # 5 behavioural tests, ~0.3 s
+pip install -e .
+python -m osc.run_demo  --task stack        # one task, watch the loop
+python -m osc.run_bench --seeds 20 --seed-groups 2 --out reports/v0_2
+python -m osc.run_ablations --seeds 20      # component attribution
+pytest -q                                    # 7 architectural + behavioural tests
 ```
 
-Example output (seed 0, 30 episodes, disturbance on):
+## Headline (320 episodes, 2 seed groups, bootstrap CIs)
 
-```
-unseen-environment success   :  90.0%
-first-attempt success        :  63.3%     <- before recovery
-eventual success (w/ recovery):  90.0%     <- recovery closes the gap
-recovery rate                : 100.0%
-mean planning latency        :   16.4 ms   <- event-driven, not per-frame
-p95  planning latency        :   21.0 ms
-safety violations / episode  :   0.00
-```
+| metric | value |
+|---|---|
+| success (belief-state, ground-truth scored) | **41%** (CI95 0.36–0.47) |
+| first-attempt success | 40% |
+| **wrong-belief rate** (agent thinks it succeeded, ground truth says no) | **52%** |
+| plan latency p50/p95/p99 | 0.2 / 0.3 / 0.4 ms |
+| sensor→action p50/p95 | 0.14 / 0.19 ms |
+| human interventions | **0** (no rescue API exists) |
+| context est. error (mean abs) | delay **0.001**, friction 0.31, mass 1.59 |
 
-The gap between **first-attempt** and **eventual** success is the recovery story;
-the low planning latency is the event-driven-replanning story.
-
----
-
-## How the code maps to the research plan
-
-| Plan stage | Module | What it does |
+| split | success | CI95 |
 |---|---|---|
-| **A** task inference | `perception/tracks.py`, `compiler/stage_a.py` | one demo → object tracks, contact states, keyframes → **task graph** of predicates + *relative* transforms |
-| **B** skill grounding | `skills/library.py`, `skills/grounding.py` | retrieve reusable skill experts for each transition and **retarget** them to current objects (the sparse *router*) |
-| **C** imagined search | `worldmodel/model.py`, `worldmodel/search.py` | roll candidate plans through an action-conditioned **world model**; penalize collision / uncertainty / force / irreversible states |
-| **D** closed-loop exec | `execution/loop.py`, `execution/verifier.py` | execute a short horizon, adapt dynamics online (RMA-style, no weights), **replan only on events** |
-| **E** autonomous improvement | *(hook)* `EpisodeResult.events` | every episode logs failures/recoveries for offline consolidation — the store is here; the consolidation trainer is future work |
+| seen_task_new_layout | 46% | 0.36–0.57 |
+| unseen_instances | 33% | 0.23–0.42 |
+| hidden_dynamics | 51% | 0.40–0.62 |
+| disturbance_recovery | 35% | 0.25–0.46 |
 
-The **metric suite** (`metrics/metrics.py`) is deliberately *not* average action
-error: unseen-env success, first-attempt vs eventual success, recovery rate,
-interventions/op-hour, planning latency (p50/p95), completion time, safety
-violations, demos required (=1), cost per success.
+The dominant failure is **perception / wrong-belief** (correspondence picks the
+wrong object, or placement is imprecise under noise + distractors). That is the
+honest state of the art for this prototype and the clearest next research target
+— not something papered over.
 
-### Why one demo transfers
-The task graph stores **relative transforms** (`geometry.relative`), not world
-poses or joint trajectories. A subgoal recorded once ("cube A ends 0 offset above
-cube B") is invariant to where the objects sit, how they're turned, what they
-look like, and the dynamics — which is exactly what changes between the demo and
-each randomized evaluation episode.
+## The wall between agent and ground truth
 
-### The modular / latency-first architecture
-This slice already instantiates the "nervous-system" decomposition:
-skill grounding **is** the sparse router (only the handful of experts a phase
-needs are activated), Stage C **is** the predictive forward model, and Stage D's
-replan-on-event **is** the event-driven planner that wakes expensive reasoning
-only on novelty / failure — keeping the reactive loop cheap.
+```
+ backend (SimState, ground truth)         <- scorer only
+        │  perceive()  (sensor model)
+        ▼
+ Percept: nameless, unordered detections + proprioception
+        │  Corruptor: occlusion, drop, delay, false-contact, id-swap, noise
+        ▼
+ StateEstimator: association + coasting + grasp inference
+        ▼
+ BeliefState (anonymous track ids, per-object uncertainty)
+        ▼
+ correspondence → skills → world model → verifier → executor   (agent side)
+```
 
----
+`AgentEnv` exposes no `state()`; an architectural test (`tests/test_v0_2.py`)
+boobytraps `backend.state()` and fails if the agent path ever reads it.
 
-## Simulator backends
+## Code → research-plan map
 
-- **`ToyTabletopSim`** (`sim/toy.py`) — NumPy CPU rigid-body tabletop. Not a
-  physics engine; it models exactly the phenomena the benchmark stresses (grasp,
-  stack, lateral collision, force limits, irreversible off-table loss, actuator
-  delay, friction/mass). Runs on this Mac now.
-- **`ManiSkillBackend`** — same `SimBackend` interface, GPU/SAPIEN, added when a
-  CUDA machine is available. Nothing above `sim/base.py` changes.
+| stage | module | what it does |
+|---|---|---|
+| A task inference | `perception/`, `compiler/stage_a.py` | belief trajectory → role-based task graph (predicates + **relative transforms**), multi-grasp-episode capable |
+| B skill grounding | `skills/correspondence.py`, `skills/grounding.py` | bind roles→tracks by geometry (name-free), instantiate only the needed skill experts |
+| C imagined search | `worldmodel/planning_model.py` (analytic, **distinct from the sim**), `worldmodel/search.py` | score candidate plans on collision/uncertainty/force/irreversibility |
+| D closed-loop exec | `execution/loop.py`, `execution/verifier.py` | act on belief, adapt `DynamicsContext` online (no weights), replan on events |
+| scoring | `benchmark/scorer.py`, `metrics/metrics.py` | ground-truth success + safety, corrected metrics, bootstrap CIs |
+
+## Ablations (component attribution)
+
+`python -m osc.run_ablations` turns one thing off at a time. On the current
+tasks the informative results are:
+
+- **absolute vs relative transforms**: relative wins by ~25 points — the
+  relative-frame task graph is what makes one-shot transfer work.
+- **privileged vs belief state**: perfect state is only ~+5 points here, i.e.
+  perception is costly but not the whole story.
+- **world model / recovery / adaptation off**: ≈ no change on these tasks —
+  an honest signal that the benchmark is **not yet hard enough** to exercise
+  them. Making it harder (below) is the point of the next milestone.
+
+## Implemented vs. future (learned) components
+
+| implemented now (symbolic/scripted) | future (learned) |
+|---|---|
+| scripted skill controllers | small neural skill experts sharing an encoder |
+| analytic parameter-ensemble planning model | learned latent world model (V-JEPA-2 / OSVI-WM) |
+| geometry/size correspondence | learned object correspondence + open-vocab ID |
+| RMA-style delay/friction estimation | learned dynamics-context encoder (payload/slip/compliance) |
+| toy tabletop CPU sim | ManiSkill3 GPU / contact sim (behind the same `SimBackend`) |
+
+## Honest limitations
+
+- **~41% success** with **~52% silent (wrong-belief) failures** — perception and
+  correspondence are the bottleneck.
+- `double_stack` (a 2-object composition) **compiles** via multi-episode Stage A
+  but its **execution-time multi-object tracking is not reliable**; it is
+  excluded from the default benchmark and kept as a known-limitation task.
+- No real physics (no liquids/deformables/contact forces); tasks are pick-place,
+  side-place, and stacking. Pour/wipe/insert wait for a contact simulator.
+- No learned components yet; **no baseline (ACT/DP/VLA) is wired** — deliberately.
+  The next correct step is wiring ACT into *this* observation-only harness so the
+  comparison is fair.
 
 ## Layout
 ```
 src/osc/
-  geometry.py          SE(2)+z transforms (relative/apply invariance)
-  sim/                 backend interface, toy sim, randomization, disturbance
-  perception/          Stage A front-end: tracks, contacts, keyframes
-  compiler/            Stage A: task graph (predicates + relative transforms)
-  skills/              reusable skill experts + grounding/router (Stage B)
-  worldmodel/          Stage C: ensemble world model + imagined search
-  execution/           Stage D: verifier + event-driven closed loop
-  metrics/             the deployment-oriented metric suite
-  tasks.py             STACK scene + scripted oracle that records the 1 demo
-  run_demo.py          end-to-end entry point
+  geometry.py            SE(2)+z relative transforms
+  sim/                   backend interface, toy sim, randomization, disturbance
+  perception/            nameless detections + corruptions; belief-based tracks/keyframes
+  agent/                 BeliefState, StateEstimator, AgentEnv guard, DynamicsContext
+  compiler/              Stage A: role-based task graph
+  skills/                skill experts, correspondence (router), grounding
+  worldmodel/            Stage C: analytic planning model + imagined search
+  execution/             Stage D: verifier + event-driven closed loop
+  benchmark/             scorer (ground truth), runner, splits, ablations, reports
+  metrics/               corrected metric suite + bootstrap CIs
+  tasks.py               scenes + oracles + ground-truth success predicates
 ```
 
-## Status & honest limitations
-- One task (STACK). Widening to the 15–25 task benchmark = add a scene + oracle
-  per task; the pipeline is untouched.
-- The world model is a **parameter-ensemble** analytic model, not yet a learned
-  latent forward model (V-JEPA-2 / OSVI-WM). The `rollout` interface is the seam
-  to swap it.
-- Baselines (ACT, Diffusion Policy, OpenVLA/π0, pure TAMP) are **not yet wired**;
-  the metric harness is built to receive them.
-- Stage E stores experience but does not yet consolidate it into new experts.
-
-## Roadmap (next)
-1. Widen to ~6 tasks (drawer, insert, pour, wipe, push, handover).
-2. Wire an ACT / Diffusion-Policy baseline into the same harness for the
-   20-point head-to-head on held-out tasks.
-3. Replace the ensemble world model with a learned latent model.
-4. Implement Stage-E offline consolidation (replay → distilled skills).
-5. Stand up the ManiSkill3 backend on a GPU box.
+## Roadmap
+1. Attack wrong-belief: better correspondence + placement verification from belief.
+2. Make the benchmark hard enough that world-model/recovery/adaptation matter.
+3. Robust multi-object tracking → re-enable `double_stack` and add clear-obstruction.
+4. Wire ACT / Diffusion Policy into the same observation-only harness (fair baseline).
+5. Learned world model; then the ManiSkill3 GPU backend.

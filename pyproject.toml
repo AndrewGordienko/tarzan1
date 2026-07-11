@@ -16,6 +16,8 @@ dev = ["pytest>=7"]
 
 [project.scripts]
 osc-demo = "osc.run_demo:main"
+osc-bench = "osc.run_bench:main"
+osc-ablations = "osc.run_ablations:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

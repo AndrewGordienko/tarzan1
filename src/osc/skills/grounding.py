@@ -1,11 +1,9 @@
-"""Stage B: ground the task graph onto skill experts (the sparse router).
+"""Stage B: ground the role-based task graph onto skill experts (the router).
 
-For each transition in the compiled program, retrieve the small set of skills
-whose effects realize that subgoal and retarget them to the *current* objects
-and poses by filling in params (object, reference frame, relative transform).
-This is the router: from a whole library, only the handful of experts needed for
-the current phase are instantiated. Retargeting uses the relative transform from
-the demo, so a subgoal recorded once transfers to any layout.
+Takes a correspondence mapping (role -> eval track id) and expands each
+transition into an ordered micro-sequence of grounded skills whose params refer
+to concrete track ids. Only the handful of experts a phase needs are
+instantiated.
 """
 from __future__ import annotations
 
@@ -13,40 +11,56 @@ from .library import SKILL_LIBRARY, SkillInstance
 from ..compiler.task_graph import TaskGraph, Transition
 
 
-def ground_transition(tr: Transition) -> list[SkillInstance]:
-    """Expand one subgoal into an ordered micro-sequence of grounded skills."""
-    subj, ref, rel = tr.subject, tr.reference, tr.rel_transform
-    seq: list[SkillInstance] = []
+def _resolve(role: str, corr: dict) -> str:
+    return "world" if role == "world" else corr.get(role, role)
+
+
+def ground_transition(tr: Transition, corr: dict):
+    subj = _resolve(tr.subject, corr)
+    ref = _resolve(tr.reference, corr)
+    rel = tr.rel_transform
+    seq = []
+    if subj is None:
+        return seq
     if tr.contact:
-        # subject must be in-hand for this transition: acquire if needed, then
-        # transport to the relative target. A pure grasp-acquisition (target is
-        # the object's own spot, reference == world) needs no transport.
         seq.append(SkillInstance(SKILL_LIBRARY["reach"], {"object": subj}, f"reach:{subj}"))
         seq.append(SkillInstance(SKILL_LIBRARY["grasp"], {"object": subj}, f"grasp:{subj}"))
         if ref != "world":
             seq.append(SkillInstance(SKILL_LIBRARY["move"],
                                      {"object": subj, "reference": ref, "rel": rel},
                                      f"move:{subj}->{ref}"))
-    ends_released = any(p.name in ("on_table", "on_top") for p in tr.add)
-    if ends_released:
+    if any(p.name in ("on_table", "on_top", "at_rel") for p in tr.add):
         seq.append(SkillInstance(SKILL_LIBRARY["place"],
                                  {"object": subj, "reference": ref, "rel": rel},
                                  f"place:{subj}@{ref}"))
     return seq
 
 
-def ground_plan(graph: TaskGraph) -> list[SkillInstance]:
-    """The nominal grounded plan: concatenate each transition's micro-sequence,
-    collapsing redundant re-grasps of an already-held object."""
-    plan: list[SkillInstance] = []
-    held = None
+def ground_plan(graph: TaskGraph, corr: dict):
+    plan, held = [], None
     for tr in graph.transitions:
-        for si in ground_transition(tr):
+        for si in ground_transition(tr, corr):
             if si.skill.name in ("reach", "grasp") and held == si.params.get("object"):
-                continue                        # already in hand; skip re-grasp
+                continue
             plan.append(si)
             if si.skill.name == "grasp":
                 held = si.params["object"]
             if si.skill.name in ("place", "release"):
                 held = None
     return plan
+
+
+def ground_goal(graph: TaskGraph, corr: dict) -> frozenset:
+    """Rewrite the goal predicates from roles to concrete track ids."""
+    from ..compiler.task_graph import Predicate
+    out = set()
+    for p in graph.goal:
+        args = tuple(_resolve(a, corr) for a in p.args)
+        out.add(Predicate(p.name, args))
+    return frozenset(out)
+
+
+def ground_goal_rel(graph: TaskGraph, corr: dict) -> dict:
+    """Resolve the expected-offset map (for at_rel goals) to track ids."""
+    return {(_resolve(a, corr), _resolve(b, corr)): rel
+            for (a, b), rel in graph.goal_rel.items()}

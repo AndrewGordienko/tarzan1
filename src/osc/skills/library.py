@@ -21,7 +21,8 @@ from typing import Callable
 import numpy as np
 
 from ..geometry import Pose, apply, dist_xy, dist_xyz, pose
-from ..sim.base import Action, SimState
+from ..sim.base import Action
+from ..agent.belief import BeliefState
 
 APPROACH_Z = 0.09       # hover height above a target before descending
 STEP = 0.05             # nominal target step magnitude
@@ -33,10 +34,10 @@ class SkillInstance:
     params: dict
     label: str
 
-    def act(self, state: SimState):
+    def act(self, state: BeliefState):
         return self.skill.act(state, self.params)
 
-    def done(self, state: SimState) -> bool:
+    def done(self, state: BeliefState) -> bool:
         return self.skill.done(state, self.params)
 
 
@@ -60,7 +61,7 @@ class Skill:
 
 # -- primitive controllers -----------------------------------------------
 
-def _reach_act(s: SimState, p):
+def _reach_act(s: BeliefState, p):
     obj = s.objects[p["object"]]
     hover = pose(obj.pose[0], obj.pose[1], obj.pose[2] + APPROACH_Z, obj.pose[3])
     return Action(target=hover, gripper_close=0.0)
@@ -71,7 +72,7 @@ def _reach_done(s, p):
     return float(np.linalg.norm(s.gripper[:3] - hover)) < 0.02
 
 
-def _grasp_act(s: SimState, p):
+def _grasp_act(s: BeliefState, p):
     obj = s.objects[p["object"]]
     at = pose(obj.pose[0], obj.pose[1], obj.pose[2], obj.pose[3])
     close = 1.0 if dist_xy(s.gripper, obj.pose) < 0.02 and abs(s.gripper[2] - obj.pose[2]) < 0.04 else 0.0
@@ -81,7 +82,7 @@ def _grasp_done(s, p):
     return s.grasped == p["object"]
 
 
-def _place_act(s: SimState, p):
+def _place_act(s: BeliefState, p):
     """Carry the grasped subject to a target pose defined relative to a
     reference frame, then descend and release. `lift` sets the travel height
     (a caution knob the imagined search varies to trade speed vs collision)."""
@@ -103,7 +104,7 @@ def _place_done(s, p):
     return s.grasped != p["object"] and dist_xyz(subj.pose, target) < 0.03
 
 
-def _move_act(s: SimState, p):
+def _move_act(s: BeliefState, p):
     ref = _ref_pose(s, p)
     target = apply(ref, p["rel"])
     lift = p.get("lift", 0.0)
@@ -128,7 +129,7 @@ def _release_done(s, p):
     return s.grasped is None
 
 
-def _ref_pose(s: SimState, p) -> Pose:
+def _ref_pose(s: BeliefState, p) -> Pose:
     ref = p.get("reference", "world")
     if ref == "world":
         return pose(0, 0, 0, 0)

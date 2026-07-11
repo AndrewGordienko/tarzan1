@@ -155,6 +155,26 @@ class ToyTabletopSim:
         return Observation(object_tracks=tracks, gripper=s.gripper.copy(),
                            gripper_closed=s.gripper_closed, contact=contact, t=s.t)
 
+    def perceive(self) -> "Percept":
+        """Sensor model: ground truth -> an UNORDERED list of nameless detections
+        with lighting-dependent position noise. This is the only thing the agent
+        is allowed to see (further corrupted by Corruptor in AgentEnv). Names,
+        ground-truth grasp, mass and friction are NOT exposed."""
+        from ..perception.detections import Detection, Percept
+        s = self._s
+        noise = 0.0015 + 0.01 * (1.0 - float(self.lighting)) + 0.5 * self.camera_jitter
+        dets = []
+        for name, o in s.objects.items():
+            if name in s.fallen:
+                continue
+            p = o.pose.copy()
+            p[:2] += self.rng.normal(0, noise, size=2)
+            dets.append(Detection(pose=p, size=o.size.copy(), shape=o.shape,
+                                  color=o.color, contact=(name == s.grasped)))
+        self.rng.shuffle(dets)
+        return Percept(detections=dets, gripper=s.gripper.copy(),
+                       gripper_closed=s.gripper_closed, t=s.t)
+
 
 def _radius(o: SimObject) -> float:
     return float(max(o.size[0], o.size[1]) / 2)

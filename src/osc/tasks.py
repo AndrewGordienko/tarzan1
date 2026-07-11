@@ -1,60 +1,143 @@
-"""Task scenes + the scripted oracle that records the single demonstration.
+"""Task registry: scenes (ground-truth roles), scripted oracles that record the
+single demo, and ground-truth success predicates.
 
-For the vertical slice we ship one task: STACK (place cube A on cube B). The
-oracle is an independent scripted expert used ONCE, in the clean nominal scene,
-to produce a demonstration. Stage A only ever sees the resulting object tracks
-and contact signal -- never the oracle's code -- so compiling a task graph from
-it and transferring to randomized scenes is a fair one-shot test.
-
-Adding tasks 2..25 means adding scene dicts + an oracle each; the rest of the
-pipeline (A-E, metrics) is untouched.
+Ground-truth objects are named by role for the scorer; the agent only ever sees
+nameless percepts, so this leaks nothing. record_demo drives the oracle in a
+clean scene but the compiler sees the demo through perception (Corruptor +
+StateEstimator), exactly like execution.
 """
 from __future__ import annotations
 
+from dataclasses import dataclass
+from typing import Callable
+
 import numpy as np
 
+from .agent.estimator import StateEstimator
+from .compiler.stage_a import compile_demo
+from .compiler.task_graph import TaskGraph
 from .geometry import pose
-from .perception.tracks import DemoTrace, extract_tracks
+from .perception.detections import Corruptor, CorruptionSpec
+from .perception.tracks import extract_tracks
 from .sim.base import Action
 from .sim.randomize import nominal
-
-STACK_SCENE = {
-    "name": "stack",
-    "table_bounds": (-0.3, 0.3, -0.3, 0.3),
-    "objects": [
-        {"name": "cube_a", "role": "manipuland", "base_pose": [-0.08, 0.05, 0.02, 0.0],
-         "color": "red", "shape": "box"},
-        {"name": "cube_b", "role": "target", "base_pose": [0.10, -0.03, 0.02, 0.0],
-         "color": "blue", "shape": "box"},
-    ],
-    "roles": {"cube_a": "manipuland", "cube_b": "target"},
-}
+from .benchmark.scorer import gt_on_top, gt_on_table, gt_near
+from .geometry import dist_xy as _dxy
 
 
-def _oracle_actions(state):
-    """Scripted stack expert: approach A, grasp, lift, carry over B, place."""
-    a = state.objects["cube_a"].pose
-    b = state.objects["cube_b"].pose
-    top_of_b = b[2] + state.objects["cube_b"].size[2] / 2 + state.objects["cube_a"].size[2] / 2
-    waypoints = [
-        (pose(a[0], a[1], a[2] + 0.09, 0.0), 0.0),   # hover over A
-        (pose(a[0], a[1], a[2], 0.0), 0.0),          # descend
-        (pose(a[0], a[1], a[2], 0.0), 1.0),          # close (grasp)
-        (pose(a[0], a[1], a[2] + 0.10, 0.0), 1.0),   # lift
-        (pose(b[0], b[1], a[2] + 0.12, 0.0), 1.0),   # carry over B (high)
-        (pose(b[0], b[1], top_of_b, 0.0), 1.0),      # descend onto B
-        (pose(b[0], b[1], top_of_b, 0.0), 0.0),      # release
-        (pose(b[0], b[1], top_of_b + 0.09, 0.0), 0.0),  # retract
-    ]
-    return waypoints
+def _beside(s, a, b, lo=0.05, hi=0.16):
+    """a on the table, offset from b within the demonstrated side-placement band
+    (not stacked, not on top)."""
+    if a in s.fallen or b in s.fallen:
+        return False
+    return gt_on_table(s, a) and lo < _dxy(s.objects[a].pose, s.objects[b].pose) < hi
 
 
-def record_demo(scene: dict = STACK_SCENE, settle_steps: int = 6) -> DemoTrace:
-    state, backend = nominal(scene)
+@dataclass
+class TaskSpec:
+    name: str
+    scene: dict
+    oracle: Callable
+    success: Callable
+    max_total_steps: int = 400
+
+
+# ---------------------------------------------------------------- oracles
+def _pick(a, z_lift=0.10):
+    return [(pose(a[0], a[1], a[2] + 0.09, 0.0), 0.0),
+            (pose(a[0], a[1], a[2], 0.0), 0.0),
+            (pose(a[0], a[1], a[2], 0.0), 1.0),
+            (pose(a[0], a[1], a[2] + z_lift, 0.0), 1.0)]
+
+def _place_on(a, b, sizes):
+    top = b[2] + sizes[1] / 2 + sizes[0] / 2
+    return [(pose(b[0], b[1], a[2] + 0.12, 0.0), 1.0),
+            (pose(b[0], b[1], top, 0.0), 1.0),
+            (pose(b[0], b[1], top, 0.0), 0.0),
+            (pose(b[0], b[1], top + 0.09, 0.0), 0.0)]
+
+def _place_beside(a, b, sizes, dx=0.10):
+    tx, ty, tz = b[0] + dx, b[1], sizes[0] / 2
+    return [(pose(tx, ty, a[2] + 0.12, 0.0), 1.0),
+            (pose(tx, ty, tz, 0.0), 1.0),
+            (pose(tx, ty, tz, 0.0), 0.0),
+            (pose(tx, ty, tz + 0.09, 0.0), 0.0)]
+
+
+def stack_oracle(s):
+    a, b = s.objects["manip"].pose, s.objects["target"].pose
+    sizes = (s.objects["manip"].size[2], s.objects["target"].size[2])
+    return _pick(a) + _place_on(a, b, sizes)
+
+def side_oracle(s):
+    a, b = s.objects["manip"].pose, s.objects["target"].pose
+    sizes = (s.objects["manip"].size[2], s.objects["target"].size[2])
+    return _pick(a) + _place_beside(a, b, sizes)
+
+def double_oracle(s):
+    a, b = s.objects["manip"].pose, s.objects["target"].pose
+    a2 = s.objects["manip2"].pose
+    sa = (s.objects["manip"].size[2], s.objects["target"].size[2])
+    seq = _pick(a) + _place_on(a, b, sa)
+    # after first stack, manip sits on target; put manip2 on top of manip
+    top1 = b[2] + s.objects["target"].size[2] / 2 + s.objects["manip"].size[2]
+    stacked_manip = pose(b[0], b[1], top1 - s.objects["manip"].size[2] / 2, 0.0)
+    sb = (s.objects["manip2"].size[2], s.objects["manip"].size[2])
+    return seq + _pick(a2) + _place_on(a2, stacked_manip, sb)
+
+
+# ---------------------------------------------------------------- scenes
+def _obj(name, role, x, y, shape="box", size=0.04):
+    return {"name": name, "role": role, "base_pose": [x, y, 0.02, 0.0],
+            "shape": shape, "size": size}
+
+STACK = TaskSpec(
+    name="stack",
+    scene={"table_bounds": (-0.3, 0.3, -0.3, 0.3),
+           "objects": [_obj("manip", "manipuland", -0.08, 0.05, size=0.036),
+                       _obj("target", "target", 0.10, -0.03, size=0.05)]},
+    oracle=stack_oracle,
+    success=lambda s, roles: gt_on_top(s, "manip", "target"))
+
+SIDE_PLACE = TaskSpec(
+    name="side_place",
+    scene={"table_bounds": (-0.3, 0.3, -0.3, 0.3),
+           "objects": [_obj("manip", "manipuland", -0.08, 0.05, size=0.036),
+                       _obj("target", "target", 0.08, -0.03, size=0.05)]},
+    oracle=side_oracle,
+    success=lambda s, roles: _beside(s, "manip", "target"))
+
+DOUBLE_STACK = TaskSpec(
+    name="double_stack",
+    scene={"table_bounds": (-0.3, 0.3, -0.3, 0.3),
+           "objects": [_obj("manip", "manipuland", -0.10, 0.06, size=0.036),
+                       _obj("manip2", "manipuland2", -0.02, 0.12, size=0.030),
+                       _obj("target", "target", 0.10, -0.04, size=0.055)]},
+    oracle=double_oracle,
+    success=lambda s, roles: gt_on_top(s, "manip", "target") and gt_on_top(s, "manip2", "manip"),
+    max_total_steps=700)
+
+TASKS = {t.name: t for t in (STACK, SIDE_PLACE, DOUBLE_STACK)}
+
+# The default benchmark uses the two robust single-manipuland tasks. DOUBLE_STACK
+# compiles correctly (multi-episode Stage A) but simultaneous two-object track
+# management at execution time is not yet reliable, so it is excluded from the
+# headline numbers and kept as an experimental/known-limitation task.
+DEFAULT_TASKS = [STACK, SIDE_PLACE]
+
+
+# ---------------------------------------------------------------- demo
+def record_demo(task: TaskSpec, settle_steps: int = 6) -> TaskGraph:
+    state, backend, _ = nominal(task.scene)
     backend.reset(state)
-    observations = [backend.observe()]
-    for target, grip in _oracle_actions(state):
+    est = StateEstimator()
+    corr = Corruptor(CorruptionSpec(pos_noise=0.002, occlusion_prob=0.0, drop_prob=0.0,
+                                    delay_frames=0, false_contact_prob=0.0,
+                                    identity_swap_prob=0.0),
+                     np.random.default_rng(0))
+    beliefs = [est.update(corr(backend.perceive()))]
+    for target, grip in task.oracle(backend.state()):
         for _ in range(settle_steps):
-            obs, _ = backend.step(Action(target=target, gripper_close=grip))
-            observations.append(obs)
-    return extract_tracks(observations)
+            backend.step(Action(target=target, gripper_close=grip))
+            beliefs.append(est.update(corr(backend.perceive())))
+    return compile_demo(extract_tracks(beliefs))

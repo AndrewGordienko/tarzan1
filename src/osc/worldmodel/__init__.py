@@ -1,4 +1,4 @@
-from .model import WorldModel, RolloutResult
+from .planning_model import PlanningModel, RolloutResult
 from .search import ImaginedSearch, PlanScore
 
-__all__ = ["WorldModel", "RolloutResult", "ImaginedSearch", "PlanScore"]
+__all__ = ["PlanningModel", "RolloutResult", "ImaginedSearch", "PlanScore"]

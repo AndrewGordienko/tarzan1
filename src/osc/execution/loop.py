@@ -1,127 +1,153 @@
-"""Stage D: closed-loop execution with event-driven replanning.
+"""Stage D: closed-loop execution on BELIEF, with event-driven replanning.
 
-Execute only a short horizon of the selected plan, observe, update the world
-model's dynamics context (online adaptation), and check the verifier. The
-expensive planner (Stage C imagined search) is woken ONLY on an event:
-  * a skill's precondition breaks,
-  * the verifier detects a failure (drop / lost object),
-  * a subgoal completes and the next needs grounding.
-Otherwise the cheap skill controllers keep running. This is the "recompute only
-on novelty / uncertainty / failure" principle, and it is what keeps latency low.
+The executor never touches ground truth. Each control step it: gets a percept
+from AgentEnv, updates the StateEstimator -> BeliefState, updates the
+DynamicsContext (online adaptation), selects an action from the current skill,
+and steps. Expensive replanning (Stage C imagined search) fires only on events
+(precondition break, believed drop, subgoal boundary) unless configured
+otherwise. It produces an AgentTrace; the benchmark Scorer decides real success
+and safety from ground truth afterward.
+
+Ablation switches (all default to the full system):
+  use_world_model, event_driven, adapt, allow_recovery.
 """
 from __future__ import annotations
 
 import time
 from dataclasses import dataclass, field
 
+from ..agent.env import AgentEnv
+from ..agent.estimator import StateEstimator
+from ..agent.dynamics_context import DynamicsContext
 from ..compiler.task_graph import TaskGraph
-from ..skills.grounding import ground_plan
+from ..skills.correspondence import correspond
+from ..skills.grounding import ground_goal, ground_goal_rel, ground_plan
+from ..worldmodel.planning_model import PlanningModel
 from ..worldmodel.search import ImaginedSearch
-from ..sim.base import SimState
 from .verifier import Verifier
 
 
 @dataclass
-class EpisodeResult:
-    success: bool = False
-    first_attempt_success: bool = False        # succeeded with zero replans
-    replans: int = 0                           # proxy for human interventions
+class AgentTrace:
+    believed_success: bool = False
     steps: int = 0
-    collisions: int = 0
-    force_violations: int = 0
-    irreversible: int = 0
-    planning_latency_s: float = 0.0            # total wall-clock in Stage C
-    plan_calls: int = 0
-    exec_time_s: float = 0.0
+    autonomous_replans: int = 0
+    replan_steps: list = field(default_factory=list)   # control-step index of each replan
+    plan_latencies_ms: list = field(default_factory=list)   # per planning CALL
+    step_latencies_ms: list = field(default_factory=list)   # per control step (sensor->action)
     events: list = field(default_factory=list)
-    final_progress: float = 0.0
+    correspondence: dict = field(default_factory=dict)
+    first_failure_step: int | None = None
+    believed_progress: float = 0.0
 
-    @property
-    def safety_violations(self) -> int:
-        return self.force_violations + self.irreversible
 
-    @property
-    def mean_plan_latency_ms(self) -> float:
-        return 1000 * self.planning_latency_s / max(1, self.plan_calls)
+@dataclass
+class ExecConfig:
+    max_steps_per_skill: int = 60
+    max_replans: int = 4
+    max_total_steps: int = 600
+    use_world_model: bool = True
+    event_driven: bool = True
+    adapt: bool = True
+    allow_recovery: bool = True
 
 
 class ClosedLoopExecutor:
-    def __init__(self, backend, graph: TaskGraph, search: ImaginedSearch,
-                 max_steps_per_skill: int = 60, max_replans: int = 4,
-                 max_total_steps: int = 600):
-        self.backend = backend
+    def __init__(self, env: AgentEnv, graph: TaskGraph, estimator: StateEstimator,
+                 context: DynamicsContext, planning_model: PlanningModel,
+                 config: ExecConfig | None = None):
+        self.env = env
         self.graph = graph
-        self.search = search
-        self.verifier = Verifier(graph.goal)
-        self.max_steps_per_skill = max_steps_per_skill
-        self.max_replans = max_replans
-        self.max_total_steps = max_total_steps
+        self.est = estimator
+        self.ctx = context
+        self.search = ImaginedSearch(planning_model)
+        self.cfg = config or ExecConfig()
 
-    def _plan(self, state: SimState):
+    def _plan(self, belief, tr: AgentTrace):
+        """Re-resolve roles->tracks against the CURRENT belief (track ids churn
+        under occlusion/merge), rebuild the goal+verifier, then select a plan."""
         t0 = time.perf_counter()
-        base = ground_plan(self.graph)
-        best = self.search.select(state, base, self.verifier.goal_satisfied)
-        return best, time.perf_counter() - t0
+        corr = correspond(belief, self.graph.role_signatures)
+        tr.correspondence = corr
+        verifier = Verifier(ground_goal(self.graph, corr), ground_goal_rel(self.graph, corr))
+        base = ground_plan(self.graph, corr)
+        if self.cfg.use_world_model:
+            plan = self.search.select(belief, base, verifier.goal_satisfied).plan
+        else:
+            plan = base
+        tr.plan_latencies_ms.append(1000 * (time.perf_counter() - t0))
+        return list(plan), verifier
 
-    def run(self) -> EpisodeResult:
-        res = EpisodeResult()
-        wm = self.search.wm
-        t_start = time.perf_counter()
+    def _replan(self, belief, tr, at_event: str) -> tuple:
+        tr.autonomous_replans += 1
+        tr.replan_steps.append(tr.steps)
+        tr.events.append(f"replan({at_event}) @step{tr.steps}")
+        return self._plan(belief, tr)
 
-        best, dt = self._plan(self.backend.state())
-        res.planning_latency_s += dt; res.plan_calls += 1
-        plan = list(best.plan)
-        res.events.append(f"plan: {best.breakdown()}")
+    def run(self) -> AgentTrace:
+        tr = AgentTrace()
+        belief = self.est.update(self.env.reset_percept())
+        plan, verifier = self._plan(belief, tr)
 
         idx = 0
         while idx < len(plan):
             si = plan[idx]
-            # event: precondition broken -> wake planner
-            if not si.skill.precondition(self.backend.state(), si.params):
-                res.replans += 1
-                res.events.append(f"replan(precond) before {si.label}")
-                best, dt = self._plan(self.backend.state())
-                res.planning_latency_s += dt; res.plan_calls += 1
-                plan, idx = list(best.plan), 0
-                if res.replans > self.max_replans:
+            try:
+                ok = si.skill.precondition(belief, si.params)
+            except KeyError:
+                ok = False                          # a referenced track vanished
+            if not ok:
+                if self.cfg.allow_recovery and tr.autonomous_replans < self.cfg.max_replans:
+                    plan, verifier = self._replan(belief, tr, "precond"); idx = 0
+                    continue
+                idx += 1; continue
+
+            expected = si.params.get("object") if si.skill.name in ("move", "place") else None
+            sk_steps, restart = 0, False
+            while sk_steps < self.cfg.max_steps_per_skill:
+                t0 = time.perf_counter()
+                try:
+                    if si.done(belief):
+                        break
+                    action = si.act(belief)
+                except KeyError:                    # track referenced by skill is gone
+                    if self.cfg.allow_recovery and tr.autonomous_replans < self.cfg.max_replans:
+                        plan, verifier = self._replan(belief, tr, "lost-track"); idx = 0
+                        restart = True
                     break
-                continue
+                if self.cfg.use_world_model and not self.cfg.event_driven:
+                    plan, verifier = self._plan(belief, tr)   # every-step replan ablation
+                prev = belief
+                belief = self.est.update(self.env.step(action))
+                if self.cfg.adapt:
+                    self.ctx.update(prev, action.target, belief)
+                tr.steps += 1; sk_steps += 1
+                tr.step_latencies_ms.append(1000 * (time.perf_counter() - t0))
 
-            expected_grasp = si.params.get("object") if si.skill.name in ("move", "place") else None
-            steps = 0
-            while not si.done(self.backend.state()) and steps < self.max_steps_per_skill:
-                prev = self.backend.state()
-                action = si.act(prev)
-                obs, info = self.backend.step(action)
-                cur = self.backend.state()
-                wm.update_context(prev, action.target, cur)   # online adaptation
-                res.steps += 1; steps += 1
-                res.collisions += int(info.collision)
-                res.force_violations += int(info.force_violation)
-                res.irreversible += int(info.irreversible)
-
-                event = self.verifier.detect_failure(prev, cur, expected_grasp)
+                event = verifier.detect_failure(prev, belief, expected)
                 if event:
-                    res.events.append(f"event:{event} @step{res.steps}")
-                    res.replans += 1
-                    if res.replans > self.max_replans:
-                        idx = len(plan); break
-                    best, dt = self._plan(cur)
-                    res.planning_latency_s += dt; res.plan_calls += 1
-                    plan, idx = list(best.plan), 0
-                    steps = -1  # signal outer loop to restart from new plan
+                    tr.events.append(f"event:{event} @step{tr.steps}")
+                    if tr.first_failure_step is None:
+                        tr.first_failure_step = tr.steps
+                    if self.cfg.allow_recovery and tr.autonomous_replans < self.cfg.max_replans:
+                        plan, verifier = self._replan(belief, tr, event.split(":")[0])
+                        idx = 0; restart = True
                     break
-                if res.steps >= self.max_total_steps:
+                if tr.steps >= self.cfg.max_total_steps:
                     idx = len(plan); break
 
-            if steps == -1:
+            if restart:
                 continue
             idx += 1
-            if self.verifier.goal_satisfied(self.backend.state()):
-                break
+            try:
+                if verifier.goal_satisfied(belief):
+                    break
+            except KeyError:
+                pass
 
-        res.exec_time_s = time.perf_counter() - t_start
-        res.success = self.verifier.goal_satisfied(self.backend.state())
-        res.first_attempt_success = res.success and res.replans == 0
-        res.final_progress = self.verifier.progress(self.backend.state())
-        return res
+        try:
+            tr.believed_success = verifier.goal_satisfied(belief)
+            tr.believed_progress = verifier.progress(belief)
+        except KeyError:
+            pass
+        return tr

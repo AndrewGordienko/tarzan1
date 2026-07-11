@@ -1,3 +1,3 @@
-from .metrics import BenchmarkReport, aggregate
+from .metrics import Report, aggregate, bootstrap_ci
 
-__all__ = ["BenchmarkReport", "aggregate"]
+__all__ = ["Report", "aggregate", "bootstrap_ci"]

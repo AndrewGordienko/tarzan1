@@ -35,6 +35,8 @@ class Transition:
     remove: frozenset               # predicates that become false
     contact: bool                   # is the subject grasped during this transition
     reason: str = ""
+    abs_target: object = None       # subject's absolute demo world pose (for the
+                                    # relative-vs-absolute ablation only)
 
     def describe(self) -> str:
         d = f"move {self.subject} to rel{np.round(self.rel_transform, 3)} of {self.reference}"
@@ -45,13 +47,19 @@ class Transition:
 
 @dataclass
 class TaskGraph:
+    """A program over ROLES, not object names. `subject`/`reference` in each
+    transition and in the goal are role labels (e.g. "manipuland", "target",
+    "world"); `role_signatures` lets eval-time correspondence bind each role to a
+    concrete estimator track by geometry/appearance."""
     transitions: list[Transition] = field(default_factory=list)
-    goal: frozenset = frozenset()               # predicates that define success
-    objects: list[str] = field(default_factory=list)
-    roles: dict[str, str] = field(default_factory=dict)   # name -> manipuland/target/...
+    goal: frozenset = frozenset()               # predicates over role labels
+    goal_rel: dict = field(default_factory=dict)  # (subj_role,ref_role) -> expected rel
+    roles: list[str] = field(default_factory=list)          # e.g. [manipuland, target]
+    role_signatures: dict = field(default_factory=dict)     # role -> feature vector
+    demo_role_tracks: dict = field(default_factory=dict)    # role -> demo track id (ref only)
 
     def pretty(self) -> str:
-        lines = [f"TaskGraph  ({len(self.transitions)} transitions)"]
+        lines = [f"TaskGraph  ({len(self.transitions)} transitions, roles={self.roles})"]
         for i, tr in enumerate(self.transitions):
             lines.append(f"  {i}. [{tr.reason}] {tr.describe()}")
         lines.append("  goal: " + ", ".join(map(str, sorted(self.goal, key=str))))
