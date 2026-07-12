@@ -37,6 +37,7 @@ osc-packcell-attribution = "osc.run_packcell_attribution:main"
 osc-packcell-final-attribution = "osc.run_packcell_final_attribution:run"
 osc-validate-industrial-asset = "osc.run_validate_industrial_asset:validate"
 osc-industrial-envelope = "osc.run_industrial_envelope:main"
+osc-grasp-compatibility = "osc.run_grasp_compatibility_matrix:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

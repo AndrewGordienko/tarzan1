@@ -13,7 +13,7 @@
   "joints": ["joint1","joint2","joint3","joint4","joint5","joint6","joint7"],
   "actuators": ["actuator1","actuator2","actuator3","actuator4","actuator5","actuator6","actuator7"],
   "payload_limit_kg": null,
-  "gripper": {"type": "parallel_jaw", "aperture_m": 0.08, "force_limit_n": 70.0, "grasp_site": "grasp_site", "finger_collision_geoms": ["left_finger", "right_finger"]},
+  "gripper": {"name": "stock_panda_parallel_jaw", "type": "parallel_jaw", "aperture_m": 0.08, "min_usable_aperture_m": 0.0117, "max_usable_aperture_m": 0.0847171765, "insertion_clearance_m": 0.003, "pad_dimensions_m": [0.017, 0.008, 0.017], "closing_axis": "+Y in grasp-site frame", "grip_force_range_n": [0.0, 70.0], "payload_capacity_kg": 3.0, "payload_safety_factor": 2.0, "supported_grasp_axes": [0, 1, 2], "fragile_materials": ["glass", "ceramic", "unknown"], "force_limit_n": 70.0, "grasp_site": "grasp_site", "finger_collision_geoms": ["left_finger", "right_finger"]},
   "controller_limits": {"position_error_m": 0.002, "clearance_m": 0.003, "force_limit_n": null},
   "boundary": {"agent_observation": true, "controller_state_read_only": true, "actuator_targets_only": true, "privileged_scorer_separate": true}
 }

@@ -1,0 +1,129 @@
+{
+  "schema": "end_effector_grasp_compatibility_v1",
+  "task_scope": "amazon_small_sortable",
+  "confirmation_objects_sealed": true,
+  "contract": {
+    "name": "stock_panda_parallel_jaw",
+    "min_usable_aperture_m": 0.0117,
+    "max_usable_aperture_m": 0.0847171765,
+    "insertion_clearance_m": 0.003,
+    "closing_axis": "+Y in grasp-site frame",
+    "payload_capacity_kg": 3.0,
+    "safe_payload_kg": 1.5
+  },
+  "objects": [
+    {
+      "dimensions_m": [
+        0.05,
+        0.05,
+        0.05
+      ],
+      "axes": [
+        {
+          "closing_axis_index": 0,
+          "closing_axis_width_m": 0.05,
+          "required_aperture_with_clearance_m": 0.056,
+          "feasible": true,
+          "margin_to_max_aperture_m": 0.028717176500000004
+        },
+        {
+          "closing_axis_index": 1,
+          "closing_axis_width_m": 0.05,
+          "required_aperture_with_clearance_m": 0.056,
+          "feasible": true,
+          "margin_to_max_aperture_m": 0.028717176500000004
+        },
+        {
+          "closing_axis_index": 2,
+          "closing_axis_width_m": 0.05,
+          "required_aperture_with_clearance_m": 0.056,
+          "feasible": true,
+          "margin_to_max_aperture_m": 0.028717176500000004
+        }
+      ],
+      "feasible": true,
+      "feasible_axes": [
+        0,
+        1,
+        2
+      ],
+      "object_index": 0,
+      "sealed_set": "development"
+    },
+    {
+      "dimensions_m": [
+        0.12,
+        0.08,
+        0.06
+      ],
+      "axes": [
+        {
+          "closing_axis_index": 0,
+          "closing_axis_width_m": 0.12,
+          "required_aperture_with_clearance_m": 0.126,
+          "feasible": false,
+          "margin_to_max_aperture_m": -0.041282823499999996
+        },
+        {
+          "closing_axis_index": 1,
+          "closing_axis_width_m": 0.08,
+          "required_aperture_with_clearance_m": 0.08600000000000001,
+          "feasible": false,
+          "margin_to_max_aperture_m": -0.0012828235000000021
+        },
+        {
+          "closing_axis_index": 2,
+          "closing_axis_width_m": 0.06,
+          "required_aperture_with_clearance_m": 0.066,
+          "feasible": true,
+          "margin_to_max_aperture_m": 0.018717176500000002
+        }
+      ],
+      "feasible": true,
+      "feasible_axes": [
+        2
+      ],
+      "object_index": 1,
+      "sealed_set": "development"
+    },
+    {
+      "dimensions_m": [
+        0.25,
+        0.15,
+        0.1
+      ],
+      "axes": [
+        {
+          "closing_axis_index": 0,
+          "closing_axis_width_m": 0.25,
+          "required_aperture_with_clearance_m": 0.256,
+          "feasible": false,
+          "margin_to_max_aperture_m": -0.17128282350000001
+        },
+        {
+          "closing_axis_index": 1,
+          "closing_axis_width_m": 0.15,
+          "required_aperture_with_clearance_m": 0.156,
+          "feasible": false,
+          "margin_to_max_aperture_m": -0.0712828235
+        },
+        {
+          "closing_axis_index": 2,
+          "closing_axis_width_m": 0.1,
+          "required_aperture_with_clearance_m": 0.10600000000000001,
+          "feasible": false,
+          "margin_to_max_aperture_m": -0.021282823500000006
+        }
+      ],
+      "feasible": false,
+      "feasible_axes": [],
+      "object_index": 2,
+      "sealed_set": "development"
+    }
+  ],
+  "summary": {
+    "total": 3,
+    "feasible_objects": 2,
+    "infeasible_objects": 1
+  }
+}
