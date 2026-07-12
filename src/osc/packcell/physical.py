@@ -80,6 +80,16 @@ class PackCell:
         return {"joint_position": self.data.qpos[:6].copy(), "joint_velocity": self.data.qvel[:6].copy(),
                 "actuator_control": self.data.ctrl.copy()}
 
+    def ee_position(self):
+        sid = self.mujoco.mj_name2id(self.model, self.mujoco.mjtObj.mjOBJ_SITE, "gripperframe")
+        return self.data.site_xpos[sid].copy()
+
+    def actuator_ranges(self):
+        return self.model.actuator_ctrlrange.copy()
+
+    def contact_summary(self):
+        return self._contact_observation()
+
     def scorer_state(self) -> dict[str, Any]:
         """Privileged evaluation view; never passed to controller methods."""
         a = self.object_qadr
