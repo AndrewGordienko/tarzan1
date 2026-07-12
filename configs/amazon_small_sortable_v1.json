@@ -1,0 +1,11 @@
+{
+  "scope": "amazon_small_sortable",
+  "embodiment": {"class": "industrial_7dof", "model": "pending_franka_or_menagerie", "gripper": "parallel_jaw"},
+  "box": {"dimensions_m": [0.40, 0.30, 0.25], "max_load_kg": 12.0},
+  "pick_surface": {"dimensions_m": [1.2, 0.8, 0.75], "zone": {"x_m": [0.25, 0.85], "y_m": [-0.30, 0.30]}},
+  "objects": {"dimensions_m": [[0.05, 0.05, 0.05], [0.12, 0.08, 0.06], [0.25, 0.15, 0.10]], "mass_kg": [0.1, 1.0, 4.0], "payload_limit_kg": 12.0, "gripper_aperture_m": 0.12},
+  "thresholds": {"position_error_m": 0.002, "non_grasp_clearance_m": 0.003, "stationary_linear_mps": 0.03, "stationary_angular_rps": 0.10, "force_limit_n": 80.0},
+  "development_layouts": 50,
+  "confirmation_layouts": 100,
+  "notes": "Frozen scope before controller development; no SO-101/Amazon-scale substitution."
+}
