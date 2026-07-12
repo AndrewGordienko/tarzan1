@@ -22,13 +22,16 @@ def offline_solve(cell, target, orientation=False, starts=8):
         for c in d.contact:
             a,b=int(c.geom1),int(c.geom2); pair=(m.geom(a).name or f"geom_{a}",m.geom(b).name or f"geom_{b}")
             allowed=bool((table in {a,b}) or (obj in {a,b} and bool({a,b}&finger)))
-            contacts.append({"pair":pair,"allowed":allowed})
-            if not allowed: prohibited.append(pair)
-        row={"position_error":err,"final_qpos":d.qpos[joints].tolist(),"joint_limit_margin":float(np.min(margins)),"singular_values":sv.tolist(),"collision_count":int(d.ncon),"collision_free":not prohibited,"contacts":contacts,"prohibited_contacts":prohibited,"orientation_objective":orientation}
+            record={"pair":pair,"allowed":allowed,"penetration_m":float(max(0.0,-c.dist)),"clearance_m":float(max(0.0,c.dist)),"phase":"endpoint"}
+            contacts.append(record)
+            if not allowed: prohibited.append(record)
+        row={"position_error":err,"final_qpos":d.qpos[joints].tolist(),"joint_limit_margin":float(np.min(margins)),"singular_values":sv.tolist(),"collision_count":int(d.ncon),"collision_free":not prohibited,"contacts":contacts,"prohibited_contacts":prohibited,"max_prohibited_penetration_m":max([x["penetration_m"] for x in prohibited] or [0.0]),"orientation_objective":orientation}
         if best is None or err<best["position_error"]: best=row
     return best
 
 def run_reachability():
     c=PackCell(); c.reset(); target=c.scorer_state()["object_position"]
+    reset_contacts=[{"geom1":int(x.geom1),"geom2":int(x.geom2),"penetration_m":float(max(0.0,-x.dist)),"phase":"reset_pregrasp"} for x in c.data.contact]
     offline={"position_only":offline_solve(c,target,False),"position_plus_orientation":offline_solve(c,target,True)}
-    return {"target":target.tolist(),"offline":offline,"live_position_only":{"implemented":True,"note":"OraclePackController already uses position-only DLS; insertion remains hard-gated and should be run for 20 seeds."}}
+    candidates=[v for v in offline.values() if v["position_error"]<.002 and v["collision_free"]]
+    return {"target":target.tolist(),"reset_contacts":reset_contacts,"offline":offline,"lexicographic_candidate":min(candidates,key=lambda x:(x["max_prohibited_penetration_m"],-x["joint_limit_margin"])) if candidates else None,"live_position_only":{"implemented":True,"note":"OraclePackController uses position-only DLS; insertion remains hard-gated."}}
