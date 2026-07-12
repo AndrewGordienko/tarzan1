@@ -1,0 +1,8 @@
+{
+  "job_id": "placement_only_workcell_L000",
+  "layout_id": "L000",
+  "variant": "placement_only_workcell",
+  "status": "error",
+  "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+  "runtime_s": 0.08304190635681152
+}

@@ -1,0 +1,594 @@
+{
+  "jobs_expected": 20,
+  "jobs_completed": 20,
+  "results": [
+    {
+      "job_id": "free_space_arm_L000",
+      "layout_id": "L000",
+      "variant": "free_space_arm",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.0825951099395752
+    },
+    {
+      "job_id": "pick_only_workcell_L000",
+      "layout_id": "L000",
+      "variant": "pick_only_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 26.298315048217773,
+      "status": "complete"
+    },
+    {
+      "job_id": "placement_only_workcell_L000",
+      "layout_id": "L000",
+      "variant": "placement_only_workcell",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.08304190635681152
+    },
+    {
+      "job_id": "full_workcell_L000",
+      "layout_id": "L000",
+      "variant": "full_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('geom_33', 'geom_18')": 216,
+        "('geom_35', 'geom_18')": 216,
+        "('geom_33', 'geom_30')": 136,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_33', 'geom_32')": 88,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 31.941160202026367,
+      "status": "complete"
+    },
+    {
+      "job_id": "free_space_arm_L001",
+      "layout_id": "L001",
+      "variant": "free_space_arm",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.08215022087097168
+    },
+    {
+      "job_id": "pick_only_workcell_L001",
+      "layout_id": "L001",
+      "variant": "pick_only_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 27.29669690132141,
+      "status": "complete"
+    },
+    {
+      "job_id": "placement_only_workcell_L001",
+      "layout_id": "L001",
+      "variant": "placement_only_workcell",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.0796668529510498
+    },
+    {
+      "job_id": "full_workcell_L001",
+      "layout_id": "L001",
+      "variant": "full_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('geom_33', 'geom_18')": 216,
+        "('geom_35', 'geom_18')": 216,
+        "('geom_33', 'geom_30')": 136,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_33', 'geom_32')": 88,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 31.521660804748535,
+      "status": "complete"
+    },
+    {
+      "job_id": "free_space_arm_L002",
+      "layout_id": "L002",
+      "variant": "free_space_arm",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.0869441032409668
+    },
+    {
+      "job_id": "pick_only_workcell_L002",
+      "layout_id": "L002",
+      "variant": "pick_only_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 25.99839186668396,
+      "status": "complete"
+    },
+    {
+      "job_id": "placement_only_workcell_L002",
+      "layout_id": "L002",
+      "variant": "placement_only_workcell",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.08389806747436523
+    },
+    {
+      "job_id": "full_workcell_L002",
+      "layout_id": "L002",
+      "variant": "full_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('geom_33', 'geom_18')": 216,
+        "('geom_35', 'geom_18')": 216,
+        "('geom_33', 'geom_30')": 136,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_33', 'geom_32')": 88,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 30.961139917373657,
+      "status": "complete"
+    },
+    {
+      "job_id": "free_space_arm_L003",
+      "layout_id": "L003",
+      "variant": "free_space_arm",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.08268284797668457
+    },
+    {
+      "job_id": "pick_only_workcell_L003",
+      "layout_id": "L003",
+      "variant": "pick_only_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 26.457804918289185,
+      "status": "complete"
+    },
+    {
+      "job_id": "placement_only_workcell_L003",
+      "layout_id": "L003",
+      "variant": "placement_only_workcell",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.0850682258605957
+    },
+    {
+      "job_id": "full_workcell_L003",
+      "layout_id": "L003",
+      "variant": "full_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('geom_33', 'geom_18')": 216,
+        "('geom_35', 'geom_18')": 216,
+        "('geom_33', 'geom_30')": 136,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_33', 'geom_32')": 88,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 31.967243909835815,
+      "status": "complete"
+    },
+    {
+      "job_id": "free_space_arm_L004",
+      "layout_id": "L004",
+      "variant": "free_space_arm",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.08064579963684082
+    },
+    {
+      "job_id": "pick_only_workcell_L004",
+      "layout_id": "L004",
+      "variant": "pick_only_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 27.080419063568115,
+      "status": "complete"
+    },
+    {
+      "job_id": "placement_only_workcell_L004",
+      "layout_id": "L004",
+      "variant": "placement_only_workcell",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.0787501335144043
+    },
+    {
+      "job_id": "full_workcell_L004",
+      "layout_id": "L004",
+      "variant": "full_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('geom_33', 'geom_18')": 216,
+        "('geom_35', 'geom_18')": 216,
+        "('geom_33', 'geom_30')": 136,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_33', 'geom_32')": 88,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 31.471937894821167,
+      "status": "complete"
+    }
+  ],
+  "decision": "attribution_complete"
+}
+{
+  "jobs_expected": 20,
+  "jobs_completed": 20,
+  "results": [
+    {
+      "job_id": "free_space_arm_L000",
+      "layout_id": "L000",
+      "variant": "free_space_arm",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.0825951099395752
+    },
+    {
+      "job_id": "pick_only_workcell_L000",
+      "layout_id": "L000",
+      "variant": "pick_only_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 26.298315048217773,
+      "status": "complete"
+    },
+    {
+      "job_id": "placement_only_workcell_L000",
+      "layout_id": "L000",
+      "variant": "placement_only_workcell",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.08304190635681152
+    },
+    {
+      "job_id": "full_workcell_L000",
+      "layout_id": "L000",
+      "variant": "full_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('geom_33', 'geom_18')": 216,
+        "('geom_35', 'geom_18')": 216,
+        "('geom_33', 'geom_30')": 136,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_33', 'geom_32')": 88,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 31.941160202026367,
+      "status": "complete"
+    },
+    {
+      "job_id": "free_space_arm_L001",
+      "layout_id": "L001",
+      "variant": "free_space_arm",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.08215022087097168
+    },
+    {
+      "job_id": "pick_only_workcell_L001",
+      "layout_id": "L001",
+      "variant": "pick_only_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 27.29669690132141,
+      "status": "complete"
+    },
+    {
+      "job_id": "placement_only_workcell_L001",
+      "layout_id": "L001",
+      "variant": "placement_only_workcell",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.0796668529510498
+    },
+    {
+      "job_id": "full_workcell_L001",
+      "layout_id": "L001",
+      "variant": "full_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('geom_33', 'geom_18')": 216,
+        "('geom_35', 'geom_18')": 216,
+        "('geom_33', 'geom_30')": 136,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_33', 'geom_32')": 88,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 31.521660804748535,
+      "status": "complete"
+    },
+    {
+      "job_id": "free_space_arm_L002",
+      "layout_id": "L002",
+      "variant": "free_space_arm",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.0869441032409668
+    },
+    {
+      "job_id": "pick_only_workcell_L002",
+      "layout_id": "L002",
+      "variant": "pick_only_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 25.99839186668396,
+      "status": "complete"
+    },
+    {
+      "job_id": "placement_only_workcell_L002",
+      "layout_id": "L002",
+      "variant": "placement_only_workcell",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.08389806747436523
+    },
+    {
+      "job_id": "full_workcell_L002",
+      "layout_id": "L002",
+      "variant": "full_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('geom_33', 'geom_18')": 216,
+        "('geom_35', 'geom_18')": 216,
+        "('geom_33', 'geom_30')": 136,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_33', 'geom_32')": 88,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 30.961139917373657,
+      "status": "complete"
+    },
+    {
+      "job_id": "free_space_arm_L003",
+      "layout_id": "L003",
+      "variant": "free_space_arm",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.08268284797668457
+    },
+    {
+      "job_id": "pick_only_workcell_L003",
+      "layout_id": "L003",
+      "variant": "pick_only_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 26.457804918289185,
+      "status": "complete"
+    },
+    {
+      "job_id": "placement_only_workcell_L003",
+      "layout_id": "L003",
+      "variant": "placement_only_workcell",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.0850682258605957
+    },
+    {
+      "job_id": "full_workcell_L003",
+      "layout_id": "L003",
+      "variant": "full_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('geom_33', 'geom_18')": 216,
+        "('geom_35', 'geom_18')": 216,
+        "('geom_33', 'geom_30')": 136,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_33', 'geom_32')": 88,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 31.967243909835815,
+      "status": "complete"
+    },
+    {
+      "job_id": "free_space_arm_L004",
+      "layout_id": "L004",
+      "variant": "free_space_arm",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.08064579963684082
+    },
+    {
+      "job_id": "pick_only_workcell_L004",
+      "layout_id": "L004",
+      "variant": "pick_only_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 27.080419063568115,
+      "status": "complete"
+    },
+    {
+      "job_id": "placement_only_workcell_L004",
+      "layout_id": "L004",
+      "variant": "placement_only_workcell",
+      "status": "error",
+      "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+      "runtime_s": 0.0787501335144043
+    },
+    {
+      "job_id": "full_workcell_L004",
+      "layout_id": "L004",
+      "variant": "full_workcell",
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('geom_33', 'geom_18')": 216,
+        "('geom_35', 'geom_18')": 216,
+        "('geom_33', 'geom_30')": 136,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_33', 'geom_32')": 88,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 31.471937894821167,
+      "status": "complete"
+    }
+  ],
+  "decision": "attribution_complete"
+}

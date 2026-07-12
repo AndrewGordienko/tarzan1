@@ -1,0 +1,8 @@
+{
+  "job_id": "free_space_arm_L001",
+  "layout_id": "L001",
+  "variant": "free_space_arm",
+  "status": "error",
+  "error": "unsupported operand type(s) for +: 'NoneType' and 'float'",
+  "runtime_s": 0.08215022087097168
+}
