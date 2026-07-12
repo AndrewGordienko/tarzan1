@@ -1,0 +1,23 @@
+{
+  "scope": "amazon_small_sortable_v1",
+  "status": "selection_matrix_not_frozen_pair",
+  "requirements": {
+    "workpiece_mass_kg": 8.0,
+    "minimum_usable_external_aperture_m": 0.106,
+    "arm_payload_safety_factor": 1.2,
+    "worst_case_workpiece_cog_offset_m": 0.20,
+    "wrist_moment_verification_required": true,
+    "simulation_asset_must_be_provenance_pinned": true
+  },
+  "arms": [
+    {"id": "ur15_product", "role": "product_candidate", "rated_payload_kg": 15.0, "conditional_top_down_payload_kg": 17.5, "reach_m": 1.30, "tool_flange_force_torque": true, "repeatability_m": null, "simulation_asset": null, "source": "https://www.universal-robots.com/insights/faq/"},
+    {"id": "ur20_product", "role": "product_candidate", "rated_payload_kg": 20.0, "conditional_top_down_payload_kg": 25.0, "reach_m": 1.75, "tool_flange_force_torque": true, "repeatability_m": 0.0001, "simulation_asset": null, "source": "https://www.universal-robots.com/manuals/EN/HTML/SW10_6/Content/prod-usr-man/hardware/arm_UR20/appendix/technical_specifications_datasheet_UR20.htm"},
+    {"id": "ur10e_menagerie_proxy", "role": "simulation_proxy_only", "rated_payload_kg": 12.5, "conditional_top_down_payload_kg": null, "reach_m": 1.30, "tool_flange_force_torque": true, "repeatability_m": null, "simulation_asset": "universal_robots_ur10e", "source": "https://github.com/google-deepmind/mujoco_menagerie"},
+    {"id": "kuka_iiwa14_menagerie_proxy", "role": "simulation_proxy_only", "rated_payload_kg": 14.0, "conditional_top_down_payload_kg": null, "reach_m": null, "tool_flange_force_torque": true, "repeatability_m": null, "simulation_asset": "kuka_iiwa_14", "source": "https://github.com/google-deepmind/mujoco_menagerie"}
+  ],
+  "tools": [
+    {"id": "robotiq_2f140", "type": "parallel_jaw", "usable_external_aperture_m": 0.140, "workpiece_capacity_kg": 2.5, "tool_mass_kg": 1.025, "grip_force_n": [10, 125], "custom_fingers": true, "suction_fallback": false, "simulation_asset": null, "source": "https://assets.robotiq.com/website-assets/support_documents/document/online/2F-85_2F-140_Instruction_Manual_Gen_HTML_20190524.zip/2F-85_2F-140_Instruction_Manual_Gen_HTML/Content/6.%20Specifications.htm"},
+    {"id": "onrobot_2fg14_default_external", "type": "parallel_jaw", "usable_external_aperture_m": 0.105, "workpiece_capacity_kg": 14.0, "tool_mass_kg": 1.5, "grip_force_n": [40, 280], "custom_fingers": true, "suction_fallback": false, "simulation_asset": null, "source": "https://onrobot.com/storage/datasheets/2fg14.pdf"},
+    {"id": "wide_jaw_plus_vacuum_tbd", "type": "hybrid", "usable_external_aperture_m": null, "workpiece_capacity_kg": null, "tool_mass_kg": null, "grip_force_n": null, "custom_fingers": true, "suction_fallback": true, "simulation_asset": null, "source": null}
+  ]
+}

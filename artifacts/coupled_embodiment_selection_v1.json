@@ -1,0 +1,350 @@
+{
+  "schema": "coupled_embodiment_selection_v1",
+  "scope": "amazon_small_sortable_v1",
+  "requirements": {
+    "workpiece_mass_kg": 8.0,
+    "minimum_usable_external_aperture_m": 0.106,
+    "arm_payload_safety_factor": 1.2,
+    "worst_case_workpiece_cog_offset_m": 0.2,
+    "wrist_moment_verification_required": true,
+    "simulation_asset_must_be_provenance_pinned": true
+  },
+  "pairs": [
+    {
+      "pair_id": "ur15_product__robotiq_2f140",
+      "role": "product_candidate",
+      "gates": {
+        "aperture": true,
+        "tool_workpiece_capacity": false,
+        "arm_payload_derated": true,
+        "wrist_moment_verified": false,
+        "acceleration_derating_verified": false,
+        "fragility_force_verified": false,
+        "tool_carton_clearance_verified": false,
+        "full_simulation_asset": false
+      },
+      "combined_tool_and_workpiece_mass_kg": 9.025,
+      "arm_payload_required_with_safety_margin_kg": 10.83,
+      "workpiece_wrist_moment_proxy_nm": 15.696000000000002,
+      "tool_cog_moment_nm": null,
+      "status": "rejected_or_incomplete",
+      "reasons": [
+        "tool_workpiece_capacity_below_8kg",
+        "wrist_payload_curve_and_tool_cog_moment_not_yet_verified",
+        "acceleration_derating_not_yet_verified",
+        "fragility_force_range_not_yet_verified",
+        "tool_inside_carton_collision_envelope_not_yet_verified",
+        "complete_provenance_pinned_pair_asset_missing"
+      ]
+    },
+    {
+      "pair_id": "ur15_product__onrobot_2fg14_default_external",
+      "role": "product_candidate",
+      "gates": {
+        "aperture": false,
+        "tool_workpiece_capacity": true,
+        "arm_payload_derated": true,
+        "wrist_moment_verified": false,
+        "acceleration_derating_verified": false,
+        "fragility_force_verified": false,
+        "tool_carton_clearance_verified": false,
+        "full_simulation_asset": false
+      },
+      "combined_tool_and_workpiece_mass_kg": 9.5,
+      "arm_payload_required_with_safety_margin_kg": 11.4,
+      "workpiece_wrist_moment_proxy_nm": 15.696000000000002,
+      "tool_cog_moment_nm": null,
+      "status": "rejected_or_incomplete",
+      "reasons": [
+        "usable_external_aperture_unverified_or_below_106mm",
+        "wrist_payload_curve_and_tool_cog_moment_not_yet_verified",
+        "acceleration_derating_not_yet_verified",
+        "fragility_force_range_not_yet_verified",
+        "tool_inside_carton_collision_envelope_not_yet_verified",
+        "complete_provenance_pinned_pair_asset_missing"
+      ]
+    },
+    {
+      "pair_id": "ur15_product__wide_jaw_plus_vacuum_tbd",
+      "role": "product_candidate",
+      "gates": {
+        "aperture": false,
+        "tool_workpiece_capacity": false,
+        "arm_payload_derated": false,
+        "wrist_moment_verified": false,
+        "acceleration_derating_verified": false,
+        "fragility_force_verified": false,
+        "tool_carton_clearance_verified": false,
+        "full_simulation_asset": false
+      },
+      "combined_tool_and_workpiece_mass_kg": null,
+      "arm_payload_required_with_safety_margin_kg": null,
+      "workpiece_wrist_moment_proxy_nm": 15.696000000000002,
+      "tool_cog_moment_nm": null,
+      "status": "rejected_or_incomplete",
+      "reasons": [
+        "usable_external_aperture_unverified_or_below_106mm",
+        "tool_workpiece_capacity_below_8kg",
+        "arm_payload_after_tool_and_safety_margin_insufficient_or_unknown",
+        "wrist_payload_curve_and_tool_cog_moment_not_yet_verified",
+        "acceleration_derating_not_yet_verified",
+        "fragility_force_range_not_yet_verified",
+        "tool_inside_carton_collision_envelope_not_yet_verified",
+        "complete_provenance_pinned_pair_asset_missing"
+      ]
+    },
+    {
+      "pair_id": "ur20_product__robotiq_2f140",
+      "role": "product_candidate",
+      "gates": {
+        "aperture": true,
+        "tool_workpiece_capacity": false,
+        "arm_payload_derated": true,
+        "wrist_moment_verified": false,
+        "acceleration_derating_verified": false,
+        "fragility_force_verified": false,
+        "tool_carton_clearance_verified": false,
+        "full_simulation_asset": false
+      },
+      "combined_tool_and_workpiece_mass_kg": 9.025,
+      "arm_payload_required_with_safety_margin_kg": 10.83,
+      "workpiece_wrist_moment_proxy_nm": 15.696000000000002,
+      "tool_cog_moment_nm": null,
+      "status": "rejected_or_incomplete",
+      "reasons": [
+        "tool_workpiece_capacity_below_8kg",
+        "wrist_payload_curve_and_tool_cog_moment_not_yet_verified",
+        "acceleration_derating_not_yet_verified",
+        "fragility_force_range_not_yet_verified",
+        "tool_inside_carton_collision_envelope_not_yet_verified",
+        "complete_provenance_pinned_pair_asset_missing"
+      ]
+    },
+    {
+      "pair_id": "ur20_product__onrobot_2fg14_default_external",
+      "role": "product_candidate",
+      "gates": {
+        "aperture": false,
+        "tool_workpiece_capacity": true,
+        "arm_payload_derated": true,
+        "wrist_moment_verified": false,
+        "acceleration_derating_verified": false,
+        "fragility_force_verified": false,
+        "tool_carton_clearance_verified": false,
+        "full_simulation_asset": false
+      },
+      "combined_tool_and_workpiece_mass_kg": 9.5,
+      "arm_payload_required_with_safety_margin_kg": 11.4,
+      "workpiece_wrist_moment_proxy_nm": 15.696000000000002,
+      "tool_cog_moment_nm": null,
+      "status": "rejected_or_incomplete",
+      "reasons": [
+        "usable_external_aperture_unverified_or_below_106mm",
+        "wrist_payload_curve_and_tool_cog_moment_not_yet_verified",
+        "acceleration_derating_not_yet_verified",
+        "fragility_force_range_not_yet_verified",
+        "tool_inside_carton_collision_envelope_not_yet_verified",
+        "complete_provenance_pinned_pair_asset_missing"
+      ]
+    },
+    {
+      "pair_id": "ur20_product__wide_jaw_plus_vacuum_tbd",
+      "role": "product_candidate",
+      "gates": {
+        "aperture": false,
+        "tool_workpiece_capacity": false,
+        "arm_payload_derated": false,
+        "wrist_moment_verified": false,
+        "acceleration_derating_verified": false,
+        "fragility_force_verified": false,
+        "tool_carton_clearance_verified": false,
+        "full_simulation_asset": false
+      },
+      "combined_tool_and_workpiece_mass_kg": null,
+      "arm_payload_required_with_safety_margin_kg": null,
+      "workpiece_wrist_moment_proxy_nm": 15.696000000000002,
+      "tool_cog_moment_nm": null,
+      "status": "rejected_or_incomplete",
+      "reasons": [
+        "usable_external_aperture_unverified_or_below_106mm",
+        "tool_workpiece_capacity_below_8kg",
+        "arm_payload_after_tool_and_safety_margin_insufficient_or_unknown",
+        "wrist_payload_curve_and_tool_cog_moment_not_yet_verified",
+        "acceleration_derating_not_yet_verified",
+        "fragility_force_range_not_yet_verified",
+        "tool_inside_carton_collision_envelope_not_yet_verified",
+        "complete_provenance_pinned_pair_asset_missing"
+      ]
+    },
+    {
+      "pair_id": "ur10e_menagerie_proxy__robotiq_2f140",
+      "role": "simulation_proxy_only",
+      "gates": {
+        "aperture": true,
+        "tool_workpiece_capacity": false,
+        "arm_payload_derated": true,
+        "wrist_moment_verified": false,
+        "acceleration_derating_verified": false,
+        "fragility_force_verified": false,
+        "tool_carton_clearance_verified": false,
+        "full_simulation_asset": false
+      },
+      "combined_tool_and_workpiece_mass_kg": 9.025,
+      "arm_payload_required_with_safety_margin_kg": 10.83,
+      "workpiece_wrist_moment_proxy_nm": 15.696000000000002,
+      "tool_cog_moment_nm": null,
+      "status": "rejected_or_incomplete",
+      "reasons": [
+        "tool_workpiece_capacity_below_8kg",
+        "wrist_payload_curve_and_tool_cog_moment_not_yet_verified",
+        "acceleration_derating_not_yet_verified",
+        "fragility_force_range_not_yet_verified",
+        "tool_inside_carton_collision_envelope_not_yet_verified",
+        "complete_provenance_pinned_pair_asset_missing"
+      ]
+    },
+    {
+      "pair_id": "ur10e_menagerie_proxy__onrobot_2fg14_default_external",
+      "role": "simulation_proxy_only",
+      "gates": {
+        "aperture": false,
+        "tool_workpiece_capacity": true,
+        "arm_payload_derated": true,
+        "wrist_moment_verified": false,
+        "acceleration_derating_verified": false,
+        "fragility_force_verified": false,
+        "tool_carton_clearance_verified": false,
+        "full_simulation_asset": false
+      },
+      "combined_tool_and_workpiece_mass_kg": 9.5,
+      "arm_payload_required_with_safety_margin_kg": 11.4,
+      "workpiece_wrist_moment_proxy_nm": 15.696000000000002,
+      "tool_cog_moment_nm": null,
+      "status": "rejected_or_incomplete",
+      "reasons": [
+        "usable_external_aperture_unverified_or_below_106mm",
+        "wrist_payload_curve_and_tool_cog_moment_not_yet_verified",
+        "acceleration_derating_not_yet_verified",
+        "fragility_force_range_not_yet_verified",
+        "tool_inside_carton_collision_envelope_not_yet_verified",
+        "complete_provenance_pinned_pair_asset_missing"
+      ]
+    },
+    {
+      "pair_id": "ur10e_menagerie_proxy__wide_jaw_plus_vacuum_tbd",
+      "role": "simulation_proxy_only",
+      "gates": {
+        "aperture": false,
+        "tool_workpiece_capacity": false,
+        "arm_payload_derated": false,
+        "wrist_moment_verified": false,
+        "acceleration_derating_verified": false,
+        "fragility_force_verified": false,
+        "tool_carton_clearance_verified": false,
+        "full_simulation_asset": false
+      },
+      "combined_tool_and_workpiece_mass_kg": null,
+      "arm_payload_required_with_safety_margin_kg": null,
+      "workpiece_wrist_moment_proxy_nm": 15.696000000000002,
+      "tool_cog_moment_nm": null,
+      "status": "rejected_or_incomplete",
+      "reasons": [
+        "usable_external_aperture_unverified_or_below_106mm",
+        "tool_workpiece_capacity_below_8kg",
+        "arm_payload_after_tool_and_safety_margin_insufficient_or_unknown",
+        "wrist_payload_curve_and_tool_cog_moment_not_yet_verified",
+        "acceleration_derating_not_yet_verified",
+        "fragility_force_range_not_yet_verified",
+        "tool_inside_carton_collision_envelope_not_yet_verified",
+        "complete_provenance_pinned_pair_asset_missing"
+      ]
+    },
+    {
+      "pair_id": "kuka_iiwa14_menagerie_proxy__robotiq_2f140",
+      "role": "simulation_proxy_only",
+      "gates": {
+        "aperture": true,
+        "tool_workpiece_capacity": false,
+        "arm_payload_derated": true,
+        "wrist_moment_verified": false,
+        "acceleration_derating_verified": false,
+        "fragility_force_verified": false,
+        "tool_carton_clearance_verified": false,
+        "full_simulation_asset": false
+      },
+      "combined_tool_and_workpiece_mass_kg": 9.025,
+      "arm_payload_required_with_safety_margin_kg": 10.83,
+      "workpiece_wrist_moment_proxy_nm": 15.696000000000002,
+      "tool_cog_moment_nm": null,
+      "status": "rejected_or_incomplete",
+      "reasons": [
+        "tool_workpiece_capacity_below_8kg",
+        "wrist_payload_curve_and_tool_cog_moment_not_yet_verified",
+        "acceleration_derating_not_yet_verified",
+        "fragility_force_range_not_yet_verified",
+        "tool_inside_carton_collision_envelope_not_yet_verified",
+        "complete_provenance_pinned_pair_asset_missing"
+      ]
+    },
+    {
+      "pair_id": "kuka_iiwa14_menagerie_proxy__onrobot_2fg14_default_external",
+      "role": "simulation_proxy_only",
+      "gates": {
+        "aperture": false,
+        "tool_workpiece_capacity": true,
+        "arm_payload_derated": true,
+        "wrist_moment_verified": false,
+        "acceleration_derating_verified": false,
+        "fragility_force_verified": false,
+        "tool_carton_clearance_verified": false,
+        "full_simulation_asset": false
+      },
+      "combined_tool_and_workpiece_mass_kg": 9.5,
+      "arm_payload_required_with_safety_margin_kg": 11.4,
+      "workpiece_wrist_moment_proxy_nm": 15.696000000000002,
+      "tool_cog_moment_nm": null,
+      "status": "rejected_or_incomplete",
+      "reasons": [
+        "usable_external_aperture_unverified_or_below_106mm",
+        "wrist_payload_curve_and_tool_cog_moment_not_yet_verified",
+        "acceleration_derating_not_yet_verified",
+        "fragility_force_range_not_yet_verified",
+        "tool_inside_carton_collision_envelope_not_yet_verified",
+        "complete_provenance_pinned_pair_asset_missing"
+      ]
+    },
+    {
+      "pair_id": "kuka_iiwa14_menagerie_proxy__wide_jaw_plus_vacuum_tbd",
+      "role": "simulation_proxy_only",
+      "gates": {
+        "aperture": false,
+        "tool_workpiece_capacity": false,
+        "arm_payload_derated": false,
+        "wrist_moment_verified": false,
+        "acceleration_derating_verified": false,
+        "fragility_force_verified": false,
+        "tool_carton_clearance_verified": false,
+        "full_simulation_asset": false
+      },
+      "combined_tool_and_workpiece_mass_kg": null,
+      "arm_payload_required_with_safety_margin_kg": null,
+      "workpiece_wrist_moment_proxy_nm": 15.696000000000002,
+      "tool_cog_moment_nm": null,
+      "status": "rejected_or_incomplete",
+      "reasons": [
+        "usable_external_aperture_unverified_or_below_106mm",
+        "tool_workpiece_capacity_below_8kg",
+        "arm_payload_after_tool_and_safety_margin_insufficient_or_unknown",
+        "wrist_payload_curve_and_tool_cog_moment_not_yet_verified",
+        "acceleration_derating_not_yet_verified",
+        "fragility_force_range_not_yet_verified",
+        "tool_inside_carton_collision_envelope_not_yet_verified",
+        "complete_provenance_pinned_pair_asset_missing"
+      ]
+    }
+  ],
+  "product_shortlist": [],
+  "selected_pair": null,
+  "decision": "no_pair_frozen; verify custom-finger aperture and wrist payload curves",
+  "simulation_proxy_note": "UR10e/iiwa14 are geometry proxies only and must not be presented as the selected physical product."
+}
