@@ -1,0 +1,91 @@
+{
+  "episodes": 4,
+  "modes": {
+    "empty_close": {
+      "count": 1,
+      "successes": 0
+    },
+    "centered_close": {
+      "count": 1,
+      "successes": 0
+    },
+    "centered_lift": {
+      "count": 1,
+      "successes": 0
+    },
+    "randomized_oracle_grasp": {
+      "count": 1,
+      "successes": 0
+    }
+  },
+  "rows": [
+    {
+      "seed": 0,
+      "mode": "empty_close",
+      "success": false,
+      "aperture_start": 1.2,
+      "aperture_end": 0.35261568197817905,
+      "command_start": 0.0,
+      "command_end": -0.17,
+      "contact_pairs": [],
+      "normal_forces": [],
+      "position_error": 0.0971184239295686,
+      "orientation_error": 0.0,
+      "table_support_contacts": 13,
+      "joint_limit_saturation": 0,
+      "object_height": 0.08689241213253365,
+      "failure": "no_opposing_contact"
+    },
+    {
+      "seed": 0,
+      "mode": "centered_close",
+      "success": false,
+      "aperture_start": 1.2,
+      "aperture_end": 0.35270570824364283,
+      "command_start": 0.0,
+      "command_end": -0.17,
+      "contact_pairs": [],
+      "normal_forces": [],
+      "position_error": 0.05669093157662251,
+      "orientation_error": 0.0,
+      "table_support_contacts": 16,
+      "joint_limit_saturation": 0,
+      "object_height": 0.08689241213253364,
+      "failure": "no_opposing_contact"
+    },
+    {
+      "seed": 0,
+      "mode": "centered_lift",
+      "success": false,
+      "aperture_start": 1.2,
+      "aperture_end": 0.5683883642814899,
+      "command_start": 0.0,
+      "command_end": 1.2,
+      "contact_pairs": [],
+      "normal_forces": [],
+      "position_error": 0.11252231400511796,
+      "orientation_error": 0.0,
+      "table_support_contacts": 16,
+      "joint_limit_saturation": 1,
+      "object_height": 0.08689224457978391,
+      "failure": "no_opposing_contact"
+    },
+    {
+      "seed": 0,
+      "mode": "randomized_oracle_grasp",
+      "success": false,
+      "aperture_start": 1.2,
+      "aperture_end": 0.5683883642814899,
+      "command_start": 0.0,
+      "command_end": 1.2,
+      "contact_pairs": [],
+      "normal_forces": [],
+      "position_error": 0.11252231400511796,
+      "orientation_error": 0.0,
+      "table_support_contacts": 16,
+      "joint_limit_saturation": 1,
+      "object_height": 0.08689224457978391,
+      "failure": "no_opposing_contact"
+    }
+  ]
+}
