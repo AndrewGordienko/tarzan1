@@ -1,0 +1,3107 @@
+{
+  "phases": {
+    "pregrasp": {
+      "steps": 120,
+      "max_force_n": 0,
+      "max_object_z_m": 0.1298852811622143
+    },
+    "insertion": {
+      "steps": 100,
+      "max_force_n": 0,
+      "max_object_z_m": 0.12989223860535015
+    },
+    "closure": {
+      "steps": 100,
+      "max_force_n": 0,
+      "max_object_z_m": 0.12989224457461487
+    },
+    "lift": {
+      "steps": 120,
+      "max_force_n": 0,
+      "max_object_z_m": 0.12989224457978277
+    }
+  },
+  "object_pose_writes_after_reset": false,
+  "logs": [
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.29845380675373473
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.10031117870129871,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.29826643870600467
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.10086564256906731,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.297962365594212
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1016070781778807,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2975934989219215
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.10248893102976786,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2971349770734431
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.10347286140822634,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2966146125635512
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.10452743574536122,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.29604789819171345
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.10562701816054225,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2954460842727187
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.10675083209297873,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.29481763151292706
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.10788216643329356,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.29416897043370266
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.10900770437631395,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2935050026616132
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.11011695646752424,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2928294668740052
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1112017820829763,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2921452149407023
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1122559859385113,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2914544222401511
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.11327497822989864,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2907587481729447
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.11425548871289486,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.29005945868224375
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.11519675919589108,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2893575197472721
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1160987896788873,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.28865366870457954
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.11696158016188353,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2879484686411467
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.11778513064487975,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.28724234986856184
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.11856944112787597,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2865356415412018
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1193145116108722,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2858285957570432
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12002034209386842,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2851214059259591
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12068693257686464,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.28441422076731326
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12131428305986086,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2837071549756261
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12190239354285708,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2830002973465441
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12245192061595427,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.28229371696721073
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12296517223889147,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2815874679316184
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12344435368315194,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2808815929320503
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.123891565957871,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2801761259942387
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12430880564607315,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2794710945602102
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12469796585988448,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2787665210742526
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12506083807228166,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.27806242419044636
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12539911462420897,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2773588196919904
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12571439174067908,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2766557211910755
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12600817291875874,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.27595314066165766
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12628187257496462,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.27525108884503
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12653681986027093,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2745495755585504
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12677426256826405,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.273848609930669
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1269953710764844,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.27314820057985756
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12720124227311108,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.27244835575085086
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12739290343123755,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2717490834184118
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12757131600137683,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2710503913663798
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12773737929978457,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2703522872479275
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.127891934075928,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26965477863151416
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12803576594714886,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26895787303596835
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12816960869243138,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26826157795730315
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12829414740033124,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2675659008892425
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12841002146866404,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2668708493389705
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12851782745559093,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26617643083924986
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12861812178335802,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26548265295777906
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12871142329721655,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26478952330445427
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1287982156830295,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26409704953704116
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12887894974781086,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26340523936563404
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1289540455679851,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26271410055620337
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12902389451053367,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26202364093344294
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12908885998660138,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.261333868383093
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12914926756049408,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26064479085386455
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1292054099933163,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2599572027860045
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12925755483306126,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25927233825076695
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12930594980591317,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2585909829131542
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12935082659923963,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.257913687460999
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12939240348082393,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2572408442389237
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12943088708736825,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2565727278008675
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.129466473630067,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2559095227819456
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1294993497000267,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2552513449961845
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1295296928068745,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25459825776567263
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12955767451902578,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25395028457044994
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12958346213184674,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2533074188158451
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12960721664393632,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25266963134966325
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12962909141876644,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25203687623309856
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12964923137095063,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25140909516255094
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12966777254824616,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25078622085232233
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12968484200764305,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25016817961851184
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1297005579058934,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24955489334959927
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12971502974250002,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.248946281006549
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12972835870729577,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24834225976220414
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1297406380959629,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24774274586428538
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1297519537657156,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.247147655286688
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1297623846103538,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24655690421870963
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1297720030393642,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24597040943026757
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12978087545000153,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24538808854228955
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12978906268457402,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.244809860224642
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1297966204676843,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24423564433874223
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1298035998200992,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24366536203798675
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1298100474473692,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24309893583606265
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12981600610239408,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2425362896508442
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12982151492191615,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24197734882978225
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1298266097374848,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24142204016130234
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12983132336182343,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24087029187566714
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12983568585178779,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24032203363795357
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12983972474926103,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23977719653516016
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1298434653014135,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23923571305899685
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12984693066178285,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23869751708553155
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12985014207361792,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23816254385259708
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12985311903688923,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23763072993564444
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1298558794603099,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23710201322255925
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12985843979963937,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23657633288784632
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12986081518346312,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23605362936647248
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1298630195275603,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2355338443276017
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1298650656388881,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23501692064838622
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12986696531013148,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23450280238794918
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1298687294056877,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23399143476164255
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12987036793988183,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2334827641156578
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12987189014813874,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2329767379020346
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12987330455177193,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23247330465410612
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1298746190169886,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23197241396239948
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1298758408086553,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23147401645101415
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12987697663931605,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23097806375448265
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1298780327139087,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23048450849511776
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12987901477058234,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22999330426085066
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12987992811797955,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22950440558355326
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12988077766931205,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22901776791784437
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12988156797352662,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2285333476203709
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12988230324382893,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22805110192956016
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1298829873838072,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22757098894583327
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12988362401137413,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22709296761227224
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1298842164807239,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22661699769573398
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.12988476790248285,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22614303976839878
+    },
+    {
+      "phase": "pregrasp",
+      "object_z": 0.1298852811622143,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22567105518974626
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12988575893742332,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.32859713316312256
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12988620371319315,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.32800833380086714
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12988661779657212,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3273902429766688
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298870033298193,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.32674840086291423
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298873623026065,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3260883444670784
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12988769656326535,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.325414559523728
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12988800782916013,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3247305011642786
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298882976962592,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3240387945233506
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12988856764797171,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3233414271669039
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12988881906331007,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.32263990300494555
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12988905322443306,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.32193536017260105
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12988927132361996,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.32122866033336833
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12988947446972146,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3205204561777131
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12988966369412883,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.31981124243328435
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12988983995629988,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3191013944232403
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989000414887641,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.31839119721763554
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298901571024251,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.31768086767467
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298902995898309,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3169705711060535
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989043233037,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3162604338770807
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989055599348687,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.31555055293237927
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989067120229753,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3148410029967917
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989077853684045,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.31413184201826755
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989087853709344,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3134231152815401
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298909717057744,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3127148585168779
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989105851094207,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3120071002491723
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989113938841124,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3112998635728198
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989121474399665,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.31059316749263094
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989128495559765,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.30988702793678835
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989135037513566,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.30918145852199924
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298914113303548,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3084764711314221
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989146812649596,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3077720763511597
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298915210478532,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3070682837999113
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989157035922108,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3063651023779378
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989161630724072,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.30566254045508395
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989165912165182,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.30496060601279285
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989169901645742,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.304259306751375
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298917361910074,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.30355865017104955
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989177083100695,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.30285864363319176
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989180310945458,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.30215929440663314
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989183318751546,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.30146060970268895
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989186121533405,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.30076259670167677
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989188733279058,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.3000652625730137
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298919116702052,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.29936861449047264
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298919343489935,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.29867265964378625
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298919554822768,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2979774052474961
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298919751754505,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2972828585477234
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989199352671305,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.29658902682737837
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989201062755862,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.29589591741018584
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989202656323598,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2952035376638221
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989204141317567,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.29451189500238667
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.129892055251388,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.29382099688836155
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989206814683352,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2931308508341988
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989208016376827,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.29244146440361957
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298920913620652,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2917531754737399
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989210179751362,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2910675712245489
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298921115220982,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2903856378137729
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989212058425872,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2897080550099445
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989212902913214,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2890353021098673
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.129892136898778,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2883677124042292
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989214423238857,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2877055093299823
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989215106648444,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.28704883314872215
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989215743509688,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2863977612464544
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298921633699376,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.28575232366885445
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989216890055708,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2851125150009766
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989217405449185,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2844783034337034
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989217885740198,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2838496376701737
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298921833331989,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.28322645217824893
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298921875041648,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2826086711791797
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298921913910636,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.28199621167201394
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298921950132444,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.28138898572304727
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989219838873808,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2807869021955
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298922015343471,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2801898680530998
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989220446572922,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.27959778933948554
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989220719747543,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.27901057191109435
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989220974318283,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.27842812198268396
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989221211552218,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.27785034653053736
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298922143263012,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.27727715358763627
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298922163865232,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.27670845245690406
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298922183064421,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2761441538623804
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989222009561324,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2755841700534333
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298922217629412,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2750284148735016
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.129892223316724,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.27447680380211276
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298922247646945,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2739292539768089
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989222611405885,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2733856842000417
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989222737153236,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.27284601493486293
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989222854337304,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2723101682923252
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989222963541264,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.27177806801280757
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989223065308572,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2712496394429314
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989223160145674,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.270724809509345
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298922324852452,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2702035066903338
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989223330884922,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26968566098597707
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989223407636735,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2691712038874092
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989223479161904,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26866006834558076
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989223545816364,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2681521887398437
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989223607931805,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26764750084657946
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298922366581733,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26714594180804135
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989223719760992,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2666474501015426
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.1298922377003123,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26615196550907444
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989223816878198,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26565942908742374
+    },
+    {
+      "phase": "insertion",
+      "object_z": 0.12989223860535015,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2651697831388302
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989223901218924,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2646829711822226
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989223939132374,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2641989379250423
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989223974464031,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.26371762923562325
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224007389708,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2632389921163082
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224038073244,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.262762974677088
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224066667326,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2622895261098526
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224093314242,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2618185966632391
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922411814659,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2613501376180746
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224141287933,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2608841012634012
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224162853427,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.260420440873072
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224182950382,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2599591106829097
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.129892242016788,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2595000658684133
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224219131879,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25904326252300514
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922423539646,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2585886576368017
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922425055348,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2581362090759001
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922426467836,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25768587556216666
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224277841382,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25723761665351375
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922429010805,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2567913927246621
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224301539404,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25634716494836324
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922431219232,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25590489527708343
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224322119813,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2554645464251317
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922433137128,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25502608185122183
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224339992753,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25458946574146135
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224348027134,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25415466299274936
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224355514403,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2537216391965845
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224362491816,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25329036062326016
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224368994096,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2528607942064502
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224375053593,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2524329075281647
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922438070046,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.252006668804073
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224385962797,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25158204686918373
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224390866788,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25115901116387146
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224395436835,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.25073753172024393
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224399695679,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2503175791488377
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224403664512,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24989912462563874
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922440736308,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24948213987941636
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922441080979,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24906659717936402
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224414021794,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2486524693230393
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224417015072,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24823972962459534
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224419804518,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24782835190329736
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224422404014,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24741831047231627
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224424826493,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2470095801277919
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224427084012,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24660213613816218
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.129892244291878,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24619595423374593
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922443114833,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24579101059658154
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224432975355,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24538728185050432
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224434677965,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2449847450514669
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224436264635,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24458337767808994
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224437743258,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2441831576224398
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224439121191,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2437840631810284
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224440405295,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2433860730460263
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224441601954,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2429891662966886
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224442717126,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2425933223909838
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922444375636,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2421985211574235
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224444724823,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2418047427870862
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922444562734,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2414119678258319
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224446468398,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.24102017716670104
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224447252185,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2406293520424948
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224447982597,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2402394740185305
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224448663272,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23985052498557152
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224449297596,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23946248715291832
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224449888723,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.239075343041672
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.129892244504396,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23868907547814713
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922445095296,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23830366758744864
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224451431364,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23791910278719333
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922445187719,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23753536478138196
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224452292658,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23715243755441648
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224452679834,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2367703053652539
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224453040646,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23638895274170116
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224453376888,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23600836447483964
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224453690232,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2356285256135823
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922445398224,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2352494214593567
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922445425436,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2348710375609121
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224454507953,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2344933597092476
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224454744275,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23411637393265544
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224454964504,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2337400664918833
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224455169737,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23336442387540385
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224455360995,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23298943279479906
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922445553923,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23261508018024332
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224455705328,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23224135317609856
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224455860116,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23186823913660318
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922445600436,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2314957256216664
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224456138784,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23112380039275313
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224456264054,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.23075245140886688
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224456380793,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2303816668226213
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224456489584,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.230011434976403
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224456590967,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22964174439862128
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224456685444,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.2292725838000426
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224456773488,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22890394207020545
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224456855536,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22853580827392164
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224456931997,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22816817164785086
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.1298922445700325,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22780102159715607
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224457069654,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22743434769223003
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224457131535,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22706813966550077
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224457189202,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22670238740830254
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224457242943,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22633708096781965
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224457293022,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22597221054409858
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224457339693,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22560776648712375
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224457383186,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22524373929396097
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224457423718,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22488011960596271
+    },
+    {
+      "phase": "closure",
+      "object_z": 0.12989224457461487,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.22451689820603493
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457496687,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.10614076176407884
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457529489,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.10574957718308162
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457560056,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.10534876548219058
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445758854,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.10494456056115957
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457615087,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.10453908579667005
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457639825,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.10413312008277513
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445766288,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.10372696380428886
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457684365,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.10332073545361485
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457704385,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.10291448139590359
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457723042,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.10250821883041951
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445774043,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.1021019531932173
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457756635,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.10169568532071926
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457771734,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.10128941439909916
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457785806,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.1008831391572988
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445779892,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.10047685832724015
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445781114,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.10007057080148592
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445782253,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09966427566939469
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457833143,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09925797220744491
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457843032,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09885165985483582
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445785225,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.0984453381867
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445786084,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09803900688944507
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457868845,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09763266573956113
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457876303,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09722631458597711
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457883253,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09681995333561905
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445788973,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09641358194169942
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457895768,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09600720039427704
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457901394,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09560080871268391
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457906637,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09519440693946273
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457911522,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09478799513553572
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457916074,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09438157337635748
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457920318,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09397514174886079
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457924273,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09356870034903801
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445792796,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09316224928002806
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457931392,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.0927557886506053
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457934592,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09234931857399051
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457937573,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09194283916691594
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457940352,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09153635054889026
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445794294,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09112985284162056
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457945356,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09072334616856487
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457947604,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.09031683065457698
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.129892244579497,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08991030642563488
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457951654,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08950377360862283
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457953474,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08909723233117148
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445795517,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08869068272152372
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457956752,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.0882841249084406
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457958226,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08787755902112086
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.129892244579596,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08747098518914756
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445796088,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08706440354244149
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457962073,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08665781421122948
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457963183,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08625121732601967
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457964219,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08584461301758435
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457965184,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08543800141694878
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457966084,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08503138265538199
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457966922,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08462475686439384
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457967702,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08421812417572985
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445796843,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08381148472137646
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457969106,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08340483863355665
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445796974,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08299818604473874
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457970328,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.0825915270876353
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457970877,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08218486189521336
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457971388,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08177819060069523
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457971865,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08137151333756776
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445797231,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08096483023958954
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457972723,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.08055814144079698
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445797311,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.0801514470755119
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457973467,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07974474727835158
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457973803,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07933804218423597
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457974113,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07893133192839731
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457974405,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07852461664638923
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457974677,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07811789647409688
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445797493,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07771117154774572
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457975165,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.0773044420039139
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457975385,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07689770797954261
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445797559,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07649096961194567
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457975782,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07608422703882162
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445797596,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07567748039826751
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457976126,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07527072982878857
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457976278,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07486397546931342
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457976423,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.0744572174592047
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457976556,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07405045593827353
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445797668,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07364369104679472
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457976797,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07323692292552059
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457976906,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07283015171569414
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457977006,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07242337755906712
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.129892244579771,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07201660059791462
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445797719,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07160982097505157
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445797727,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07120303883385067
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457977344,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.0707962543182581
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457977414,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.07038946757281471
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445797748,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06998267874267279
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445797754,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06957588797361601
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.129892244579776,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.0691690954120809
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457977652,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06876230120517418
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457977702,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06835550550070071
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445797775,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.0679487084471796
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457977794,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06754191019387197
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457977835,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06713511089080185
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457977874,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06672831068878451
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445797791,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06632150973944897
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457977944,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06591470819526833
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457977974,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.0655079062095847
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457978002,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.0651011039366396
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457978027,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06469430153160362
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457978052,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06428749915060832
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457978074,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06388069695077717
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457978096,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06347389509026051
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457978116,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06306709372826978
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457978135,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06266029302511344
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457978152,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06225349314223494
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457978168,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06184669424225292
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457978182,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06143989648899847
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457978196,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06103310004756289
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445797821,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06062630508433639
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445797822,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.06021951176705666
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457978232,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.059812720264855464
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457978243,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.05940593074831027
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457978252,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.058999143389491665
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.1298922445797826,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.058592358362021965
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457978268,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.058185575841127775
+    },
+    {
+      "phase": "lift",
+      "object_z": 0.12989224457978277,
+      "pairs": [],
+      "normal_forces": [],
+      "site_error_m": 0.0577787960036994
+    }
+  ]
+}
