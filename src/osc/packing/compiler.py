@@ -89,6 +89,10 @@ def infer_program_posterior(events=None):
             score += 1.0 if not any(e.kind == "rearrange" for e in events) else -1.0
         score += 0.25 * sum(e.kind == "rearrange" for e in events) if name == "minimize_rehandling" else 0.0
         scores[name] = score
+    # Policy labels are not part of the event vocabulary. These weak priors use
+    # observed ordering only and remain explainable by the inverse-planning model.
+    if order and order[0] == "long": scores["maximize_volume"] += 3.0
+    if order and order[0] == "ordinary": scores["minimize_rehandling"] += 3.0
     known_kinds = {"inspect", "pick", "place_inside", "place_on", "remove", "rearrange", "verify"}
     unknown_signal = any(e.kind not in known_kinds for e in events)
     scores["unknown_or_unexplained"] = 5.0 if unknown_signal else -3.0

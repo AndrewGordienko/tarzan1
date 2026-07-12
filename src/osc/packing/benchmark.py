@@ -82,14 +82,14 @@ def policy_sensitive_scenario():
 
 def policy_demos():
     return {
-        "correct_heavy_bottom": [PackingEvent("place_inside", "heavy", properties={"policy": "heavy_bottom_fragile_top"}),
+        "correct_heavy_bottom": [PackingEvent("place_inside", "heavy"),
                                  PackingEvent("place_inside", "fragile"),
                                  PackingEvent("place_inside", "ordinary")],
-        "different_max_volume": [PackingEvent("place_inside", "long", properties={"fill": "high"}),
+        "different_max_volume": [PackingEvent("place_inside", "long"),
                                   PackingEvent("place_inside", "ordinary"),
                                   PackingEvent("place_inside", "heavy"),
                                   PackingEvent("place_inside", "fragile")],
-        "minimize_rehandling": [PackingEvent("place_inside", "ordinary", properties={"rehandling": "low"}),
+        "minimize_rehandling": [PackingEvent("place_inside", "ordinary"),
                                 PackingEvent("place_inside", "long"),
                                 PackingEvent("place_inside", "heavy"),
                                 PackingEvent("place_inside", "fragile")],
