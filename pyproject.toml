@@ -35,6 +35,7 @@ osc-packcell-layout = "osc.run_packcell_layout:main"
 osc-packcell-sweep = "osc.run_packcell_sweep:main"
 osc-packcell-attribution = "osc.run_packcell_attribution:main"
 osc-packcell-final-attribution = "osc.run_packcell_final_attribution:run"
+osc-validate-industrial-asset = "osc.run_validate_industrial_asset:validate"
 
 [tool.setuptools.packages.find]
 where = ["src"]
