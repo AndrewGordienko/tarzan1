@@ -1,0 +1,667 @@
+{
+  "schema": "packcell.attribution.v2",
+  "jobs_expected": 20,
+  "jobs_completed": 20,
+  "clean_jobs": 20,
+  "results": [
+    {
+      "job_id": "free_space_arm_L000",
+      "layout_id": "L000",
+      "variant": "free_space_arm",
+      "target": [
+        0.2,
+        0,
+        0.18
+      ],
+      "object_checks": false,
+      "valid_candidates": 216,
+      "candidate_count": 216,
+      "best": {
+        "yaw": "major_axis",
+        "insertion_depth_m": 0,
+        "lateral_offset_m": [
+          -0.004,
+          -0.004
+        ],
+        "initialization": 0,
+        "target": [
+          0.196,
+          -0.004,
+          0.18
+        ],
+        "position_error_m": 0.0,
+        "max_penetration_m": 0.0,
+        "clearance_m": 0.05,
+        "straddles_object": true,
+        "prohibited_contacts": [],
+        "valid": true,
+        "score": [
+          0.0,
+          -0.05,
+          0.0
+        ]
+      },
+      "prohibited_link_frequency": {},
+      "runtime_s": 14.176659107208252,
+      "status": "complete"
+    },
+    {
+      "job_id": "pick_only_workcell_L000",
+      "layout_id": "L000",
+      "variant": "pick_only_workcell",
+      "target": [
+        0.18,
+        -0.12,
+        0.087
+      ],
+      "object_checks": true,
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 368,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 184,
+        "('geom_16', 'geom_32')": 8
+      },
+      "runtime_s": 18.22191286087036,
+      "status": "complete"
+    },
+    {
+      "job_id": "placement_only_workcell_L000",
+      "layout_id": "L000",
+      "variant": "placement_only_workcell",
+      "target": [
+        0.13,
+        -0.075,
+        0.12
+      ],
+      "object_checks": false,
+      "valid_candidates": 216,
+      "candidate_count": 216,
+      "best": {
+        "yaw": "major_axis",
+        "insertion_depth_m": -0.006,
+        "lateral_offset_m": [
+          -0.004,
+          -0.004
+        ],
+        "initialization": 0,
+        "target": [
+          0.126,
+          -0.079,
+          0.11399999999999999
+        ],
+        "position_error_m": 0.0,
+        "max_penetration_m": 0.0,
+        "clearance_m": 0.05,
+        "straddles_object": true,
+        "prohibited_contacts": [],
+        "valid": true,
+        "score": [
+          0.0,
+          -0.05,
+          0.0
+        ]
+      },
+      "prohibited_link_frequency": {},
+      "runtime_s": 20.6987361907959,
+      "status": "complete"
+    },
+    {
+      "job_id": "full_workcell_L000",
+      "layout_id": "L000",
+      "variant": "full_workcell",
+      "target": null,
+      "object_checks": true,
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('geom_33', 'geom_18')": 216,
+        "('geom_35', 'geom_18')": 216,
+        "('geom_33', 'geom_30')": 136,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_33', 'geom_32')": 88,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 30.102415800094604,
+      "status": "complete"
+    },
+    {
+      "job_id": "free_space_arm_L001",
+      "layout_id": "L001",
+      "variant": "free_space_arm",
+      "target": [
+        0.2,
+        0,
+        0.18
+      ],
+      "object_checks": false,
+      "valid_candidates": 216,
+      "candidate_count": 216,
+      "best": {
+        "yaw": "major_axis",
+        "insertion_depth_m": 0,
+        "lateral_offset_m": [
+          -0.004,
+          -0.004
+        ],
+        "initialization": 0,
+        "target": [
+          0.196,
+          -0.004,
+          0.18
+        ],
+        "position_error_m": 0.0,
+        "max_penetration_m": 0.0,
+        "clearance_m": 0.05,
+        "straddles_object": true,
+        "prohibited_contacts": [],
+        "valid": true,
+        "score": [
+          0.0,
+          -0.05,
+          0.0
+        ]
+      },
+      "prohibited_link_frequency": {},
+      "runtime_s": 14.016669034957886,
+      "status": "complete"
+    },
+    {
+      "job_id": "pick_only_workcell_L001",
+      "layout_id": "L001",
+      "variant": "pick_only_workcell",
+      "target": [
+        0.18,
+        -0.12,
+        0.087
+      ],
+      "object_checks": true,
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 368,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 184,
+        "('geom_16', 'geom_32')": 8
+      },
+      "runtime_s": 18.148119926452637,
+      "status": "complete"
+    },
+    {
+      "job_id": "placement_only_workcell_L001",
+      "layout_id": "L001",
+      "variant": "placement_only_workcell",
+      "target": [
+        0.13,
+        -0.075,
+        0.12
+      ],
+      "object_checks": false,
+      "valid_candidates": 216,
+      "candidate_count": 216,
+      "best": {
+        "yaw": "major_axis",
+        "insertion_depth_m": -0.006,
+        "lateral_offset_m": [
+          -0.004,
+          -0.004
+        ],
+        "initialization": 0,
+        "target": [
+          0.126,
+          -0.079,
+          0.11399999999999999
+        ],
+        "position_error_m": 0.0,
+        "max_penetration_m": 0.0,
+        "clearance_m": 0.05,
+        "straddles_object": true,
+        "prohibited_contacts": [],
+        "valid": true,
+        "score": [
+          0.0,
+          -0.05,
+          0.0
+        ]
+      },
+      "prohibited_link_frequency": {},
+      "runtime_s": 20.463478088378906,
+      "status": "complete"
+    },
+    {
+      "job_id": "full_workcell_L001",
+      "layout_id": "L001",
+      "variant": "full_workcell",
+      "target": null,
+      "object_checks": true,
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('geom_33', 'geom_18')": 216,
+        "('geom_35', 'geom_18')": 216,
+        "('geom_33', 'geom_30')": 136,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_33', 'geom_32')": 88,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 30.16634774208069,
+      "status": "complete"
+    },
+    {
+      "job_id": "free_space_arm_L002",
+      "layout_id": "L002",
+      "variant": "free_space_arm",
+      "target": [
+        0.2,
+        0,
+        0.18
+      ],
+      "object_checks": false,
+      "valid_candidates": 216,
+      "candidate_count": 216,
+      "best": {
+        "yaw": "major_axis",
+        "insertion_depth_m": 0,
+        "lateral_offset_m": [
+          -0.004,
+          -0.004
+        ],
+        "initialization": 0,
+        "target": [
+          0.196,
+          -0.004,
+          0.18
+        ],
+        "position_error_m": 0.0,
+        "max_penetration_m": 0.0,
+        "clearance_m": 0.05,
+        "straddles_object": true,
+        "prohibited_contacts": [],
+        "valid": true,
+        "score": [
+          0.0,
+          -0.05,
+          0.0
+        ]
+      },
+      "prohibited_link_frequency": {},
+      "runtime_s": 13.889245986938477,
+      "status": "complete"
+    },
+    {
+      "job_id": "pick_only_workcell_L002",
+      "layout_id": "L002",
+      "variant": "pick_only_workcell",
+      "target": [
+        0.18,
+        -0.06,
+        0.087
+      ],
+      "object_checks": true,
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 312,
+        "('geom_16', 'geom_32')": 216,
+        "('geom_18', 'geom_28')": 216,
+        "('geom_18', 'geom_30')": 216,
+        "('geom_18', 'geom_32')": 456,
+        "('cube_red', 'geom_28')": 216
+      },
+      "runtime_s": 28.28612494468689,
+      "status": "complete"
+    },
+    {
+      "job_id": "placement_only_workcell_L002",
+      "layout_id": "L002",
+      "variant": "placement_only_workcell",
+      "target": [
+        0.13,
+        -0.075,
+        0.12
+      ],
+      "object_checks": false,
+      "valid_candidates": 216,
+      "candidate_count": 216,
+      "best": {
+        "yaw": "major_axis",
+        "insertion_depth_m": -0.006,
+        "lateral_offset_m": [
+          -0.004,
+          -0.004
+        ],
+        "initialization": 0,
+        "target": [
+          0.126,
+          -0.079,
+          0.11399999999999999
+        ],
+        "position_error_m": 0.0,
+        "max_penetration_m": 0.0,
+        "clearance_m": 0.05,
+        "straddles_object": true,
+        "prohibited_contacts": [],
+        "valid": true,
+        "score": [
+          0.0,
+          -0.05,
+          0.0
+        ]
+      },
+      "prohibited_link_frequency": {},
+      "runtime_s": 20.880481958389282,
+      "status": "complete"
+    },
+    {
+      "job_id": "full_workcell_L002",
+      "layout_id": "L002",
+      "variant": "full_workcell",
+      "target": null,
+      "object_checks": true,
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('geom_33', 'geom_18')": 216,
+        "('geom_35', 'geom_18')": 216,
+        "('geom_33', 'geom_30')": 136,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_33', 'geom_32')": 88,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 30.287742853164673,
+      "status": "complete"
+    },
+    {
+      "job_id": "free_space_arm_L003",
+      "layout_id": "L003",
+      "variant": "free_space_arm",
+      "target": [
+        0.2,
+        0,
+        0.18
+      ],
+      "object_checks": false,
+      "valid_candidates": 216,
+      "candidate_count": 216,
+      "best": {
+        "yaw": "major_axis",
+        "insertion_depth_m": 0,
+        "lateral_offset_m": [
+          -0.004,
+          -0.004
+        ],
+        "initialization": 0,
+        "target": [
+          0.196,
+          -0.004,
+          0.18
+        ],
+        "position_error_m": 0.0,
+        "max_penetration_m": 0.0,
+        "clearance_m": 0.05,
+        "straddles_object": true,
+        "prohibited_contacts": [],
+        "valid": true,
+        "score": [
+          0.0,
+          -0.05,
+          0.0
+        ]
+      },
+      "prohibited_link_frequency": {},
+      "runtime_s": 13.879865169525146,
+      "status": "complete"
+    },
+    {
+      "job_id": "pick_only_workcell_L003",
+      "layout_id": "L003",
+      "variant": "pick_only_workcell",
+      "target": [
+        0.18,
+        -0.06,
+        0.087
+      ],
+      "object_checks": true,
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 312,
+        "('geom_16', 'geom_32')": 216,
+        "('geom_18', 'geom_28')": 216,
+        "('geom_18', 'geom_30')": 216,
+        "('geom_18', 'geom_32')": 456,
+        "('cube_red', 'geom_28')": 216
+      },
+      "runtime_s": 29.12147808074951,
+      "status": "complete"
+    },
+    {
+      "job_id": "placement_only_workcell_L003",
+      "layout_id": "L003",
+      "variant": "placement_only_workcell",
+      "target": [
+        0.13,
+        -0.075,
+        0.12
+      ],
+      "object_checks": false,
+      "valid_candidates": 216,
+      "candidate_count": 216,
+      "best": {
+        "yaw": "major_axis",
+        "insertion_depth_m": -0.006,
+        "lateral_offset_m": [
+          -0.004,
+          -0.004
+        ],
+        "initialization": 0,
+        "target": [
+          0.126,
+          -0.079,
+          0.11399999999999999
+        ],
+        "position_error_m": 0.0,
+        "max_penetration_m": 0.0,
+        "clearance_m": 0.05,
+        "straddles_object": true,
+        "prohibited_contacts": [],
+        "valid": true,
+        "score": [
+          0.0,
+          -0.05,
+          0.0
+        ]
+      },
+      "prohibited_link_frequency": {},
+      "runtime_s": 21.133440017700195,
+      "status": "complete"
+    },
+    {
+      "job_id": "full_workcell_L003",
+      "layout_id": "L003",
+      "variant": "full_workcell",
+      "target": null,
+      "object_checks": true,
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('geom_33', 'geom_18')": 216,
+        "('geom_35', 'geom_18')": 216,
+        "('geom_33', 'geom_30')": 136,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_33', 'geom_32')": 88,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 30.439324855804443,
+      "status": "complete"
+    },
+    {
+      "job_id": "free_space_arm_L004",
+      "layout_id": "L004",
+      "variant": "free_space_arm",
+      "target": [
+        0.2,
+        0,
+        0.18
+      ],
+      "object_checks": false,
+      "valid_candidates": 216,
+      "candidate_count": 216,
+      "best": {
+        "yaw": "major_axis",
+        "insertion_depth_m": 0,
+        "lateral_offset_m": [
+          -0.004,
+          -0.004
+        ],
+        "initialization": 0,
+        "target": [
+          0.196,
+          -0.004,
+          0.18
+        ],
+        "position_error_m": 0.0,
+        "max_penetration_m": 0.0,
+        "clearance_m": 0.05,
+        "straddles_object": true,
+        "prohibited_contacts": [],
+        "valid": true,
+        "score": [
+          0.0,
+          -0.05,
+          0.0
+        ]
+      },
+      "prohibited_link_frequency": {},
+      "runtime_s": 14.003409147262573,
+      "status": "complete"
+    },
+    {
+      "job_id": "pick_only_workcell_L004",
+      "layout_id": "L004",
+      "variant": "pick_only_workcell",
+      "target": [
+        0.18,
+        0,
+        0.087
+      ],
+      "object_checks": true,
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 312,
+        "('floor', 'geom_26')": 216,
+        "('geom_16', 'geom_32')": 216,
+        "('geom_18', 'geom_28')": 216,
+        "('geom_18', 'geom_30')": 216,
+        "('geom_18', 'geom_32')": 216,
+        "('geom_14', 'geom_32')": 24
+      },
+      "runtime_s": 22.517618894577026,
+      "status": "complete"
+    },
+    {
+      "job_id": "placement_only_workcell_L004",
+      "layout_id": "L004",
+      "variant": "placement_only_workcell",
+      "target": [
+        0.13,
+        -0.075,
+        0.12
+      ],
+      "object_checks": false,
+      "valid_candidates": 216,
+      "candidate_count": 216,
+      "best": {
+        "yaw": "major_axis",
+        "insertion_depth_m": -0.006,
+        "lateral_offset_m": [
+          -0.004,
+          -0.004
+        ],
+        "initialization": 0,
+        "target": [
+          0.126,
+          -0.079,
+          0.11399999999999999
+        ],
+        "position_error_m": 0.0,
+        "max_penetration_m": 0.0,
+        "clearance_m": 0.05,
+        "straddles_object": true,
+        "prohibited_contacts": [],
+        "valid": true,
+        "score": [
+          0.0,
+          -0.05,
+          0.0
+        ]
+      },
+      "prohibited_link_frequency": {},
+      "runtime_s": 20.671030044555664,
+      "status": "complete"
+    },
+    {
+      "job_id": "full_workcell_L004",
+      "layout_id": "L004",
+      "variant": "full_workcell",
+      "target": null,
+      "object_checks": true,
+      "valid_candidates": 0,
+      "candidate_count": 216,
+      "best": null,
+      "prohibited_link_frequency": {
+        "('floor', 'geom_22')": 432,
+        "('floor', 'geom_26')": 432,
+        "('geom_14', 'geom_32')": 328,
+        "('geom_16', 'geom_32')": 208,
+        "('geom_18', 'geom_32')": 264,
+        "('geom_33', 'geom_18')": 216,
+        "('geom_35', 'geom_18')": 216,
+        "('geom_33', 'geom_30')": 136,
+        "('cube_red', 'geom_28')": 216,
+        "('geom_33', 'geom_32')": 88,
+        "('geom_18', 'geom_30')": 8
+      },
+      "runtime_s": 30.23837900161743,
+      "status": "complete"
+    }
+  ],
+  "decision": "attribution_complete"
+}

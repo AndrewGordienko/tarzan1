@@ -1,0 +1,41 @@
+{
+  "job_id": "free_space_arm_L004",
+  "layout_id": "L004",
+  "variant": "free_space_arm",
+  "target": [
+    0.2,
+    0,
+    0.18
+  ],
+  "object_checks": false,
+  "valid_candidates": 216,
+  "candidate_count": 216,
+  "best": {
+    "yaw": "major_axis",
+    "insertion_depth_m": 0,
+    "lateral_offset_m": [
+      -0.004,
+      -0.004
+    ],
+    "initialization": 0,
+    "target": [
+      0.196,
+      -0.004,
+      0.18
+    ],
+    "position_error_m": 0.0,
+    "max_penetration_m": 0.0,
+    "clearance_m": 0.05,
+    "straddles_object": true,
+    "prohibited_contacts": [],
+    "valid": true,
+    "score": [
+      0.0,
+      -0.05,
+      0.0
+    ]
+  },
+  "prohibited_link_frequency": {},
+  "runtime_s": 14.003409147262573,
+  "status": "complete"
+}

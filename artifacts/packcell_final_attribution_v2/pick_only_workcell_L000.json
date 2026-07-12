@@ -1,0 +1,23 @@
+{
+  "job_id": "pick_only_workcell_L000",
+  "layout_id": "L000",
+  "variant": "pick_only_workcell",
+  "target": [
+    0.18,
+    -0.12,
+    0.087
+  ],
+  "object_checks": true,
+  "valid_candidates": 0,
+  "candidate_count": 216,
+  "best": null,
+  "prohibited_link_frequency": {
+    "('floor', 'geom_22')": 368,
+    "('floor', 'geom_26')": 432,
+    "('geom_14', 'geom_32')": 208,
+    "('geom_18', 'geom_32')": 184,
+    "('geom_16', 'geom_32')": 8
+  },
+  "runtime_s": 18.22191286087036,
+  "status": "complete"
+}

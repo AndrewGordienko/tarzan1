@@ -1,0 +1,41 @@
+{
+  "job_id": "placement_only_workcell_L004",
+  "layout_id": "L004",
+  "variant": "placement_only_workcell",
+  "target": [
+    0.13,
+    -0.075,
+    0.12
+  ],
+  "object_checks": false,
+  "valid_candidates": 216,
+  "candidate_count": 216,
+  "best": {
+    "yaw": "major_axis",
+    "insertion_depth_m": -0.006,
+    "lateral_offset_m": [
+      -0.004,
+      -0.004
+    ],
+    "initialization": 0,
+    "target": [
+      0.126,
+      -0.079,
+      0.11399999999999999
+    ],
+    "position_error_m": 0.0,
+    "max_penetration_m": 0.0,
+    "clearance_m": 0.05,
+    "straddles_object": true,
+    "prohibited_contacts": [],
+    "valid": true,
+    "score": [
+      0.0,
+      -0.05,
+      0.0
+    ]
+  },
+  "prohibited_link_frequency": {},
+  "runtime_s": 20.671030044555664,
+  "status": "complete"
+}

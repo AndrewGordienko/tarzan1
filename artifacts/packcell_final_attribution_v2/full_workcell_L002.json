@@ -1,0 +1,25 @@
+{
+  "job_id": "full_workcell_L002",
+  "layout_id": "L002",
+  "variant": "full_workcell",
+  "target": null,
+  "object_checks": true,
+  "valid_candidates": 0,
+  "candidate_count": 216,
+  "best": null,
+  "prohibited_link_frequency": {
+    "('floor', 'geom_22')": 432,
+    "('floor', 'geom_26')": 432,
+    "('geom_14', 'geom_32')": 328,
+    "('geom_16', 'geom_32')": 208,
+    "('geom_18', 'geom_32')": 264,
+    "('geom_33', 'geom_18')": 216,
+    "('geom_35', 'geom_18')": 216,
+    "('geom_33', 'geom_30')": 136,
+    "('cube_red', 'geom_28')": 216,
+    "('geom_33', 'geom_32')": 88,
+    "('geom_18', 'geom_30')": 8
+  },
+  "runtime_s": 30.287742853164673,
+  "status": "complete"
+}
