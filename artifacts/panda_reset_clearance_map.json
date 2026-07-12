@@ -1,5 +1,6 @@
 {
-  "schema": "panda_reset_clearance_map_v1",
+  "schema": "panda_reset_clearance_map_v2_geometry_conditioned",
+  "generator": "maximin minimum clearance over object-conditioned insertion offsets",
   "controls": [
     {
       "width_m": 0.05,
@@ -21,6 +22,7 @@
       ],
       "grid_count": 15625,
       "valid_count": 76,
+      "robust_count": 0,
       "valid_offset_keys": [
         [
           -0.012,
@@ -532,6 +534,7 @@
         "active_contact_count": 0,
         "support_contact_count": 1
       },
+      "maximin_robust_pose": null,
       "best_near_miss": {
         "offset_grasp_frame_m": [
           0.0,
@@ -634,6 +637,7 @@
       ],
       "grid_count": 15625,
       "valid_count": 111,
+      "robust_count": 0,
       "valid_offset_keys": [
         [
           -0.012,
@@ -1320,6 +1324,7 @@
         "active_contact_count": 0,
         "support_contact_count": 1
       },
+      "maximin_robust_pose": null,
       "best_near_miss": {
         "offset_grasp_frame_m": [
           0.0,
@@ -1537,6 +1542,18 @@
     ]
   ],
   "robust_shared_offset_keys": [],
+  "individually_robust": [
+    {
+      "width_m": 0.05,
+      "robust": false,
+      "pose": null
+    },
+    {
+      "width_m": 0.06,
+      "robust": false,
+      "pose": null
+    }
+  ],
   "requirements": {
     "minimum_clearance_m": 0.002,
     "pad_symmetry_m": 0.001,

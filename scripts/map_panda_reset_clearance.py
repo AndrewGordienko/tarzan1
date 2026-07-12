@@ -35,7 +35,15 @@ def run(width_m: float) -> dict:
         best = max(valid, key=lambda r: (r["min_clearance_m"], -sum(abs(v) for v in r["offset_grasp_frame_m"]))) if valid else None
         near = max(rows, key=lambda r: (r["min_clearance_m"], -sum(abs(v) for v in r["offset_grasp_frame_m"])))
         best_symmetric = max(symmetric, key=lambda r: (r["min_clearance_m"], -sum(abs(v) for v in r["offset_grasp_frame_m"]))) if symmetric else None
-        return {"width_m": width_m, "pad_geom_ids": pads, "structural_geom_ids": structural, "grid_count": len(rows), "valid_count": len(valid), "valid_offset_keys": [tuple(round(v, 6) for v in r["offset_grasp_frame_m"]) for r in valid], "symmetric_within_2mm_count": len(symmetric), "best": best, "best_symmetric_within_2mm": best_symmetric, "best_near_miss": near, "best_closest_pairs": None if best is None else {"pad": {k: {"geom_id": best["pad_geom_ids"][k], "distance_m": best["pad_clearance_m"][k]} for k in ("left", "right")}, "structural": {"geom_id": best["structural_geom_id"], "distance_m": best["structural_clearance_m"]}}, "perturbation_robust": False}
+        row_map = {tuple(round(v, 6) for v in r["offset_grasp_frame_m"]): r for r in rows}
+        robust = []
+        for r in valid:
+            key = tuple(round(v, 6) for v in r["offset_grasp_frame_m"])
+            neighbors = [(round(key[0] + dx, 6), round(key[1] + dy, 6), round(key[2] + dz, 6)) for dx in (-.001, 0, .001) for dy in (-.001, 0, .001) for dz in (-.001, 0, .001)]
+            if all(n in row_map and row_map[n]["min_clearance_m"] >= .002 and row_map[n]["pad_symmetry_m"] <= .001 and row_map[n]["active_contact_count"] == 0 for n in neighbors):
+                robust.append(r)
+        maximin = max(robust, key=lambda r: r["min_clearance_m"]) if robust else None
+        return {"width_m": width_m, "pad_geom_ids": pads, "structural_geom_ids": structural, "grid_count": len(rows), "valid_count": len(valid), "robust_count": len(robust), "valid_offset_keys": [tuple(round(v, 6) for v in r["offset_grasp_frame_m"]) for r in valid], "symmetric_within_2mm_count": len(symmetric), "best": best, "best_symmetric_within_2mm": best_symmetric, "maximin_robust_pose": maximin, "best_near_miss": near, "best_closest_pairs": None if best is None else {"pad": {k: {"geom_id": best["pad_geom_ids"][k], "distance_m": best["pad_clearance_m"][k]} for k in ("left", "right")}, "structural": {"geom_id": best["structural_geom_id"], "distance_m": best["structural_clearance_m"]}}, "perturbation_robust": maximin is not None}
     finally: scene.unlink(missing_ok=True)
 
 if __name__ == "__main__":
@@ -48,6 +56,6 @@ if __name__ == "__main__":
     for key in shared_keys:
         neighbors = [(round(key[0] + dx, 6), round(key[1] + dy, 6), round(key[2] + dz, 6)) for dx in (-.001, 0, .001) for dy in (-.001, 0, .001) for dz in (-.001, 0, .001)]
         if all(set(neighbors) <= s for s in valid_sets): robust_keys.append(key)
-    result = {"schema": "panda_reset_clearance_map_v1", "controls": controls, "shared_transform_rule_found": shared, "shared_valid_offset_keys": shared_keys, "robust_shared_offset_keys": robust_keys, "requirements": {"minimum_clearance_m": .002, "pad_symmetry_m": .001, "pose_perturbation_m": .001}}
+    result = {"schema": "panda_reset_clearance_map_v2_geometry_conditioned", "generator": "maximin minimum clearance over object-conditioned insertion offsets", "controls": controls, "shared_transform_rule_found": shared, "shared_valid_offset_keys": shared_keys, "robust_shared_offset_keys": robust_keys, "individually_robust": [{"width_m": c["width_m"], "robust": c["perturbation_robust"], "pose": c["maximin_robust_pose"]} for c in controls], "requirements": {"minimum_clearance_m": .002, "pad_symmetry_m": .001, "pose_perturbation_m": .001}}
     out = ROOT / "artifacts/panda_reset_clearance_map.json"; out.write_text(json.dumps(result, indent=2) + "\n")
     print(json.dumps({"artifact": str(out), "summary": [{"width_m": x["width_m"], "valid_count": x["valid_count"], "best": x["best"]} for x in controls], "shared_transform_rule_found": shared}, indent=2))
