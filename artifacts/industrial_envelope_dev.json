@@ -1,0 +1,114 @@
+{
+  "asset": "assets/industrial/derived/franka_panda_tarzan/panda_grasp_overlay.xml",
+  "development_layouts": 50,
+  "jacobian_gates": [
+    {
+      "pose": "home",
+      "rank": 3,
+      "singular_values": [
+        0.5628010681563658,
+        0.1524204710660611,
+        0.11549908087103258
+      ],
+      "finite": true,
+      "min_singular_value": 0.11549908087103258,
+      "condition_number": 4.872775297535008
+    },
+    {
+      "pose": "pregrasp",
+      "rank": 3,
+      "singular_values": [
+        0.5628010681563658,
+        0.1524204710660611,
+        0.11549908087103258
+      ],
+      "finite": true,
+      "min_singular_value": 0.11549908087103258,
+      "condition_number": 4.872775297535008
+    },
+    {
+      "pose": "insertion",
+      "rank": 3,
+      "singular_values": [
+        0.5628010681563658,
+        0.1524204710660611,
+        0.11549908087103258
+      ],
+      "finite": true,
+      "min_singular_value": 0.11549908087103258,
+      "condition_number": 4.872775297535008
+    },
+    {
+      "pose": "placement",
+      "rank": 3,
+      "singular_values": [
+        0.5628010681563658,
+        0.1524204710660611,
+        0.11549908087103258
+      ],
+      "finite": true,
+      "min_singular_value": 0.11549908087103258,
+      "condition_number": 4.872775297535008
+    }
+  ],
+  "lanes": {
+    "free_space": {
+      "layouts": 50,
+      "valid_endpoints": 0,
+      "valid_paths": 0,
+      "failures": {
+        "reach": 0,
+        "joint_limit": 0,
+        "singularity": 0,
+        "self_collision": 0,
+        "table_collision": 0,
+        "box_collision": 0
+      },
+      "status": "endpoint_search_not_started"
+    },
+    "pick_only": {
+      "layouts": 50,
+      "valid_endpoints": 0,
+      "valid_paths": 0,
+      "failures": {
+        "reach": 0,
+        "joint_limit": 0,
+        "singularity": 0,
+        "self_collision": 0,
+        "table_collision": 0,
+        "box_collision": 0
+      },
+      "status": "endpoint_search_not_started"
+    },
+    "placement_only": {
+      "layouts": 50,
+      "valid_endpoints": 0,
+      "valid_paths": 0,
+      "failures": {
+        "reach": 0,
+        "joint_limit": 0,
+        "singularity": 0,
+        "self_collision": 0,
+        "table_collision": 0,
+        "box_collision": 0
+      },
+      "status": "endpoint_search_not_started"
+    },
+    "full_workcell": {
+      "layouts": 50,
+      "valid_endpoints": 0,
+      "valid_paths": 0,
+      "failures": {
+        "reach": 0,
+        "joint_limit": 0,
+        "singularity": 0,
+        "self_collision": 0,
+        "table_collision": 0,
+        "box_collision": 0
+      },
+      "status": "endpoint_search_not_started"
+    }
+  },
+  "confirmation_layouts_sealed": 100,
+  "status": "geometry_variant_evaluator_pending"
+}

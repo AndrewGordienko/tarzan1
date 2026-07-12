@@ -5,7 +5,7 @@ import re
 import mujoco
 import numpy as np
 
-ROOT=Path(__file__).resolve().parents[3]; ASSET=ROOT/'assets/industrial/franka_emika_panda'; OVERLAY=ASSET/'panda_grasp_overlay.xml'
+ROOT=Path(__file__).resolve().parents[3]; ASSET=ROOT/'assets/industrial/franka_emika_panda'; OVERLAY=ROOT/'assets/industrial/derived/franka_panda_tarzan/panda_grasp_overlay.xml'
 def validate():
     files={str(p.relative_to(ASSET)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(x for x in ASSET.rglob('*') if x.is_file())}
     tree=hashlib.sha256('\n'.join(f'{k} {v}' for k,v in files.items()).encode()).hexdigest(); result={'asset_tree_sha256':tree,'file_hashes':files,'checks':{}}

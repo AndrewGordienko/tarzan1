@@ -8,7 +8,7 @@
     "asset_sha256": "d3b329b3db0703a441025b115ab5142c5486b3f609598d33152f6ad41e61502b",
     "license": "Apache-2.0 (see assets/industrial/franka_emika_panda/LICENSE)",
     "provenance_status": "vendored upstream immutable; Tarzan grasp-site overlay is derived separately",
-    "derived_overlay": "assets/industrial/franka_emika_panda/panda_grasp_overlay.xml"
+    "derived_overlay": "assets/industrial/derived/franka_panda_tarzan/panda_grasp_overlay.xml"
   },
   "joints": ["joint1","joint2","joint3","joint4","joint5","joint6","joint7"],
   "actuators": ["actuator1","actuator2","actuator3","actuator4","actuator5","actuator6","actuator7"],
