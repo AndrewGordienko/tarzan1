@@ -1,0 +1,179 @@
+{
+  "schema": "panda_final_grasp_decision_v1",
+  "object_dimensions_m": [
+    0.05,
+    0.05,
+    0.05
+  ],
+  "candidate_counts": {
+    "coarse": 4410,
+    "refined": 1500,
+    "nominal": 97,
+    "robust": 0
+  },
+  "search": {
+    "translations_m": {
+      "x": [
+        -0.015,
+        0.015
+      ],
+      "y": [
+        -0.01,
+        0.01
+      ],
+      "z": [
+        -0.015,
+        0.015
+      ]
+    },
+    "rpy_deg": {
+      "roll": [
+        -5,
+        0,
+        5
+      ],
+      "pitch": [
+        -5,
+        0,
+        5
+      ],
+      "yaw": [
+        0,
+        90
+      ]
+    },
+    "axis_flips": true,
+    "uncertainty_m": 0.001,
+    "minimum_clearance_m": 0.002
+  },
+  "active_constraint_attribution": {
+    "offset_grasp_frame_m": [
+      0.0,
+      0.0,
+      -0.009999999999999998
+    ],
+    "rpy_rad": [
+      0.08726646259971647,
+      0.0,
+      1.5707963267948966
+    ],
+    "minimum_clearance_m": 0.014129229693112587,
+    "binding_class": "left_pad",
+    "binding": {
+      "distance_m": 0.014129229693112587,
+      "geom_id": 70,
+      "geom_name": "unnamed_geom_70",
+      "body": "left_finger",
+      "geom_type": 6,
+      "fromto_world_m": {
+        "finger": [
+          0.39798514582259203,
+          -0.03912922969311257,
+          0.5435675946015115
+        ],
+        "parcel": [
+          0.39798514582259203,
+          -0.024999999999999984,
+          0.5435675946015115
+        ]
+      }
+    },
+    "pad_clearance_m": {
+      "left": 0.014129229693112587,
+      "right": 0.014129229693112647
+    },
+    "pad_symmetry_m": 6.071532165918825e-17,
+    "active_contacts": 0,
+    "worst_case": {
+      "direction_m": [
+        -0.001,
+        -0.001,
+        0.001
+      ],
+      "minimum_clearance_m": 0.0,
+      "binding_class": "left_pad",
+      "binding": {
+        "distance_m": 0.0,
+        "geom_id": 70,
+        "geom_name": "unnamed_geom_70",
+        "body": "left_finger",
+        "geom_type": 6,
+        "fromto_world_m": {
+          "finger": [
+            0.48530193721049886,
+            -0.047714069660496725,
+            0.6656025267916462
+          ],
+          "parcel": [
+            0.4765159143838653,
+            -0.02937398211203231,
+            0.664455963217144
+          ]
+        }
+      },
+      "pad_clearance_m": {
+        "left": 0.0,
+        "right": 0.01321816826492944
+      },
+      "pad_symmetry_m": 0.01321816826492944,
+      "active_contacts": 0
+    },
+    "robust_clearance_m": 0.0,
+    "clearance_deficit_m": 0.002,
+    "pad_only_robust_clearance_m": 0.0
+  },
+  "selected_robust_pose": null,
+  "pad_only_counterfactual_pass": false,
+  "full_structure_pass": false,
+  "collision_model_fidelity": {
+    "structural_geoms": [
+      {
+        "geom_id": 68,
+        "name": "unnamed_geom_68",
+        "type": 7,
+        "mesh_collision": true,
+        "size": [
+          0.014414417604459833,
+          0.010501512915939037,
+          0.037332739328875035
+        ]
+      },
+      {
+        "geom_id": 69,
+        "name": "unnamed_geom_69",
+        "type": 6,
+        "mesh_collision": false,
+        "size": [
+          0.0085,
+          0.004,
+          0.0085
+        ]
+      },
+      {
+        "geom_id": 76,
+        "name": "unnamed_geom_76",
+        "type": 7,
+        "mesh_collision": true,
+        "size": [
+          0.014414417604459833,
+          0.010501512915939037,
+          0.037332739328875035
+        ]
+      },
+      {
+        "geom_id": 77,
+        "name": "unnamed_geom_77",
+        "type": 6,
+        "mesh_collision": false,
+        "size": [
+          0.0085,
+          0.004,
+          0.0085
+        ]
+      }
+    ],
+    "conclusion": "mesh_collision_is_convexified_by_MuJoCo; physical-fidelity correction requires documented jaw dimensions before any primitive overlay",
+    "derived_geometry_changed": false
+  },
+  "decision": "close_stock_panda_physical_lane"
+}
