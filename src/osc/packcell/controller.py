@@ -22,7 +22,7 @@ class OraclePackController:
         self.cell = cell
         self.object_pose = np.asarray(object_pose, dtype=float).copy()
         self.m = cell.mujoco
-        self.site = self.m.mj_name2id(cell.model, self.m.mjtObj.mjOBJ_SITE, "gripperframe")
+        self.site = self.m.mj_name2id(cell.model, self.m.mjtObj.mjOBJ_SITE, "grasp_site")
         self.arm_dof = np.array([cell.model.jnt_dofadr[self.m.mj_name2id(cell.model, self.m.mjtObj.mjOBJ_JOINT, n)]
                                  for n in ("shoulder_pan", "shoulder_lift", "elbow_flex", "wrist_flex", "wrist_roll")])
         self.arm_q = np.array([cell.model.jnt_qposadr[self.m.mj_name2id(cell.model, self.m.mjtObj.mjOBJ_JOINT, n)]
@@ -42,8 +42,9 @@ class OraclePackController:
     def _contacts(self):
         obj = self.cell.model.geom("cube_red").id
         gripper_body = self.cell.model.body("gripper").id
+        moving_body = self.cell.model.body("moving_jaw_so101_v1").id
         fingers = {i for i in range(self.cell.model.ngeom)
-                   if self.cell.model.geom_bodyid[i] == gripper_body}
+                   if self.cell.model.geom_bodyid[i] in {gripper_body, moving_body} and i >= 29}
         hits=[]; forces=[]
         for c in self.cell.data.contact:
             if (c.geom1 == obj and c.geom2 in fingers) or (c.geom2 == obj and c.geom1 in fingers):

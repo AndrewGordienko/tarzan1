@@ -19,9 +19,9 @@ def audit(seed=0):
     c=PackCell(seed); c.reset(); m,d=c.model,c.data; obj=m.geom("cube_red").id
     # The calibrated asset has a fixed gripper collision mesh and a moving jaw.
     gripper=m.body("gripper").id
-    candidates=[i for i in range(m.ngeom) if m.geom_bodyid[i]==gripper and m.geom_contype[i]>0]
-    fixed=next((i for i in candidates if "moving_jaw" not in (m.geom(i).name or "")), candidates[0])
-    moving=next((i for i in candidates if "moving_jaw" in (m.geom(i).name or "")), candidates[-1])
+    candidates=[i for i in range(m.ngeom) if m.geom_contype[i]>0 and m.geom_bodyid[i] in {gripper, m.body("moving_jaw_so101_v1").id}]
+    fixed=next(i for i in candidates if i != m.geom("cube_red").id and m.geom_bodyid[i] == gripper and i >= 29)
+    moving=next(i for i in candidates if m.geom_bodyid[i] != gripper)
     def distance(a,b):
         fromto=np.zeros(6); return float(mj.mj_geomDistance(m,d,int(a),int(b),1.0,fromto))
     import mujoco as mj

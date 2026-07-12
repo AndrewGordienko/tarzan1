@@ -42,7 +42,12 @@ class PackCell:
         if not source.exists():
             raise RuntimeError(f"TinyVLA SO-101 assets not found at {source}")
         xml = source.read_text().replace('contype="2" conaffinity="2"', 'contype="1" conaffinity="1"')
-        xml = xml.replace('file="so101_new_calib.xml"', f'file="{(tiny / "so101_new_calib.xml").as_posix()}"')
+        calibration = tiny / "so101_new_calib.xml"
+        cal_runtime = tiny / "packcell_calibration_runtime.xml"
+        cal_xml = calibration.read_text().replace('<site group="3" name="gripperframe" pos="-0.0079 -0.000218121 -0.0981274" quat="0.707107 -0 0.707107 -2.37788e-17"/>',
+                          '<site group="3" name="gripperframe" pos="-0.0079 -0.000218121 -0.0981274" quat="0.707107 -0 0.707107 -2.37788e-17"/><site name="grasp_site" pos="0.01644 0.000055 -0.03093"/>')
+        cal_runtime.write_text(cal_xml)
+        xml = xml.replace('file="so101_new_calib.xml"', f'file="{cal_runtime.name}"')
         xml = xml.replace('<global azimuth="160" elevation="-20" offwidth="640" offheight="480"/>',
                           '<global azimuth="160" elevation="-20" offwidth="640" offheight="480"/>')
         generated = tiny / "packcell_v1_runtime.xml"
@@ -51,6 +56,7 @@ class PackCell:
             self.model = m.MjModel.from_xml_path(str(generated))
         finally:
             generated.unlink(missing_ok=True)
+            cal_runtime.unlink(missing_ok=True)
         self.data = m.MjData(self.model)
         self.renderer = m.Renderer(self.model, height=self.height, width=self.width)
         self.object_body = m.mj_name2id(self.model, m.mjtObj.mjOBJ_BODY, "cube_red")
@@ -81,7 +87,7 @@ class PackCell:
                 "actuator_control": self.data.ctrl.copy()}
 
     def ee_position(self):
-        sid = self.mujoco.mj_name2id(self.model, self.mujoco.mjtObj.mjOBJ_SITE, "gripperframe")
+        sid = self.mujoco.mj_name2id(self.model, self.mujoco.mjtObj.mjOBJ_SITE, "grasp_site")
         return self.data.site_xpos[sid].copy()
 
     def actuator_ranges(self):
