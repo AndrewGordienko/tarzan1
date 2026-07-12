@@ -6,6 +6,12 @@ import re
 from typing import Any
 import numpy as np
 
+def _initialize_reset_qpos(data, object_qadr):
+    data.qpos[:6] = [0, -1.2, .6, 1.2, 0, 1.2]
+    if object_qadr is not None:
+        data.qpos[object_qadr:object_qadr + 3] = [.20, -.06, .087]
+        data.qpos[object_qadr + 3:object_qadr + 7] = [1, 0, 0, 0]
+
 
 @dataclass
 class PhaseResult:
@@ -77,10 +83,7 @@ class PackCell:
             jid = m.mj_name2id(self.model, m.mjtObj.mjOBJ_JOINT, "cube_red_free"); self.object_qadr = int(self.model.jnt_qposadr[jid])
         # Reset-time initialization is the only object-state write in this module.
         m.mj_resetData(self.model, self.data)
-        self.data.qpos[:6] = [0, -1.2, .6, 1.2, 0, 1.2]
-        if self.object_qadr is not None:
-            self.data.qpos[self.object_qadr:self.object_qadr + 3] = [.20, -.06, .087]
-            self.data.qpos[self.object_qadr + 3:self.object_qadr + 7] = [1, 0, 0, 0]
+        _initialize_reset_qpos(self.data, self.object_qadr)
         m.mj_forward(self.model, self.data)
         self._reset_done = True
         return self.agent_observation() if self.renderer is not None else self.controller_state()

@@ -36,12 +36,14 @@ class MujocoPackingAdapter:
         self._time = 0.0
         self._held: str | None = None
         self._scene: dict[str, Any] = {}
+        self._mujoco = None
 
     def reset(self, scene: dict[str, Any] | None = None) -> CameraContactObservation:
         try:
             import mujoco
         except ImportError as exc:
             raise RuntimeError("MuJoCo is required for embodied packing") from exc
+        self._mujoco = mujoco
         self._scene = scene or {"items": [{"name": "ordinary", "size": (.035, .035, .035),
                                             "pos": (.0, -.12, .035)}]}
         item = self._scene["items"][0]
@@ -84,7 +86,7 @@ class MujocoPackingAdapter:
         contacts = []
         for i, c in enumerate(self.data.contact):
             force = np.zeros(6)
-            mujoco.mj_contactForce(self.model, self.data, i, force)
+            self._mujoco.mj_contactForce(self.model, self.data, i, force)
             contacts.append({"geom1": int(c.geom1), "geom2": int(c.geom2),
                              "force": float(np.linalg.norm(force[:3])),
                              "torque": float(np.linalg.norm(force[3:]))})

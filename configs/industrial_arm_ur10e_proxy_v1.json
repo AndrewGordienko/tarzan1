@@ -1,0 +1,7 @@
+{
+  "scope": "light_sortable_v1_simulation_proxy",
+  "label": "Menagerie UR10e plus spec-derived simplified 2F-140; not an OEM digital twin",
+  "upstream": {"repository": "google-deepmind/mujoco_menagerie", "commit": "71f066ad0be9cd271f7ed58c030243ef157af9f4", "subdirectory": "universal_robots_ur10e", "license": "see assets/industrial/universal_robots_ur10e/LICENSE"},
+  "arm": {"joints": ["shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"], "actuators": ["shoulder_pan", "shoulder_lift", "elbow", "wrist_1", "wrist_2", "wrist_3"], "rated_payload_kg": 12.5},
+  "tool": {"name": "simplified_2f140_equivalent", "stroke_m": 0.140, "grip_force_n": [10, 125], "tool_mass_kg": 1.025, "workpiece_limit_kg": 2.5, "model_status": "spec-derived primitive collision geometry with explicit custom support-lip assumption", "oem_digital_twin": false}
+}

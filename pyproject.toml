@@ -40,6 +40,7 @@ osc-industrial-envelope = "osc.run_industrial_envelope:main"
 osc-grasp-compatibility = "osc.run_grasp_compatibility_matrix:main"
 osc-embodiment-selection = "osc.run_embodiment_selection:main"
 osc-product-embodiment-decision = "osc.run_product_embodiment_decision:main"
+osc-light-sortable-smoke = "osc.run_light_sortable_smoke:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
