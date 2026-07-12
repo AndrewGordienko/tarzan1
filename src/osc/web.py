@@ -25,7 +25,7 @@ class Handler(BaseHTTPRequestHandler):
         if p=='/': return self.send_html()
         if p=='/api/status': return self.send_json(200,{'status':'ready','scope':'structured one-shot task acquisition','mujoco':self.has_mujoco()})
         if p=='/api/artifacts':
-            ns=['packing_policy_comparison.gif','packing_demo.gif','embodied_packing.mp4','packing_program.json','packing_report_oracle.json','packing_report_belief.json','embodied_attribution_dev_0_9.json','embodied_rearrangement_dev_100_109.json']; return self.send_json(200,{'artifacts':[{'name':n,'exists':(ARTIFACTS/n).is_file()} for n in ns]})
+            ns=['packing_policy_comparison.gif','packing_demo.gif','embodied_packing.mp4','tarzan_customer_packing_demo.mp4','packing_program.json','packing_report_oracle.json','packing_report_belief.json','embodied_attribution_dev_0_9.json','embodied_rearrangement_dev_100_109.json']; return self.send_json(200,{'artifacts':[{'name':n,'exists':(ARTIFACTS/n).is_file()} for n in ns]})
         if p=='/api/evidence':
             out={}
             for n in ('packing_report_oracle.json','packing_report_belief.json','embodied_attribution_dev_0_9.json','embodied_rearrangement_dev_100_109.json'):
@@ -54,7 +54,10 @@ class Handler(BaseHTTPRequestHandler):
         self.send_json(404,{'error':'not found'})
     def send_html(self):
         theme='<style>:root{--bg:#f4f7f9;--p:#fff;--l:#d8e1e7;--t:#14232e;--m:#607482;--b:#1677ad;--g:#138a62;--a:#9a6818}body{background:var(--bg);color:var(--t)}header{background:#fff;border-bottom-color:var(--l)}.panel{background:var(--p);border-color:var(--l);box-shadow:0 5px 18px #19354a0d}select,pre{background:#f7fafb;color:var(--t);border-color:var(--l)}pre{color:#315366}.viz{background:#edf3f6;border-color:var(--l)}.button{color:#fff}.ghost{color:var(--t);border-color:var(--l)}footer{border-color:var(--l)}</style>'
-        d=HTML.replace('</style>','</style>'+theme,1).encode(); self.send_response(200); self.send_header('Content-Type','text/html; charset=utf-8'); self.send_header('Content-Length',str(len(d))); self.end_headers(); self.wfile.write(d)
+        hero='<section class="customer-viewport"><div class="eyebrow">LIVE PRODUCT STORY · SCRIPTED MUJOCO</div><h2>Watch Tarzan pack a changed order</h2><video controls autoplay muted loop src="/artifacts/tarzan_customer_packing_demo.mp4"></video><div class="phase-row"><span>Watch demonstration</span><span>Learned policy</span><span>Plan changed order</span><span>Pack</span><span>Verify</span></div><p>Arm, gripper, three physical packages, and open box rendered from the adjacent TinyVLA MuJoCo assets. Scripted controller; placement targets come from Tarzan’s packing program.</p></section>'
+        theme += '<style>.customer-viewport{background:#fff;border:1px solid #d8e1e7;border-radius:12px;padding:24px;margin-bottom:26px;box-shadow:0 8px 30px #19354a12}.customer-viewport video{display:block;width:100%;max-height:620px;object-fit:contain;background:#102235;border-radius:8px}.customer-viewport h2{font-size:30px;margin:8px 0 16px}.phase-row{display:flex;gap:8px;margin-top:14px}.phase-row span{flex:1;border-top:2px solid #1677ad;padding-top:8px;font-size:12px;color:#607482}.customer-viewport p{color:#607482}.viz{display:none}</style>'
+        page=HTML.replace('<main class="wrap">','<main class="wrap">'+hero)
+        d=page.replace('</style>','</style>'+theme,1).encode(); self.send_response(200); self.send_header('Content-Type','text/html; charset=utf-8'); self.send_header('Content-Length',str(len(d))); self.end_headers(); self.wfile.write(d)
     def has_mujoco(self):
         try: import mujoco; return True
         except ImportError: return False
