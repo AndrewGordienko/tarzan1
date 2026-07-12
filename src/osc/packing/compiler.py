@@ -74,8 +74,9 @@ def infer_program_posterior(events=None):
     for name, spec in POLICY_CATALOG.items():
         score = 0.0
         props = [e.properties or {} for e in events]
-        if any(p.get("policy") == name for p in props):
-            score += 4.0
+        # Demonstration metadata is never treated as an answer key. Optional
+        # metadata may describe an object/SKU, but policy inference must explain
+        # the observed ordering and outcomes from the events themselves.
         if any(p.get("rehandling") == "low" for p in props) and name == "minimize_rehandling":
             score += 3.0
         if any(p.get("fill") == "high" for p in props) and name == "maximize_volume":

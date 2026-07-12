@@ -78,8 +78,9 @@ class PackingState:
     history: list[dict] = field(default_factory=list)
 
     def clone(self):
-        return PackingState(self.container, copy.deepcopy(self.items), dict(self.placements),
-                             dict(self.staged), list(self.history))
+        return PackingState(self.container, copy.deepcopy(self.items),
+                             copy.deepcopy(self.placements), copy.deepcopy(self.staged),
+                             list(self.history))
 
     @property
     def packed_volume(self):

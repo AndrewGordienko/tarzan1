@@ -10,6 +10,7 @@ requires-python = ">=3.10"
 dependencies = ["numpy>=1.24"]
 
 [project.optional-dependencies]
+embodied = ["mujoco>=3.1", "imageio>=2.31", "Pillow>=10"]
 # GPU / photoreal backend, installed only where CUDA is available.
 maniskill = ["mani-skill>=3.0.0", "torch"]
 dev = ["pytest>=7"]

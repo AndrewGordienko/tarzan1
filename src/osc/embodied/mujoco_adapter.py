@@ -81,8 +81,14 @@ class MujocoPackingAdapter:
         for name in self._scene.get("items", [{"name": "ordinary"}]):
             geom_id = self.model.geom(name=name["name"]).id
             masks[name["name"]] = (seg[:, :, 1] == geom_id)
-        contacts = tuple({"geom1": int(c.geom1), "geom2": int(c.geom2), "force": float(np.linalg.norm(c.frame[:3]))}
-                         for c in self.data.contact)
+        contacts = []
+        for i, c in enumerate(self.data.contact):
+            force = np.zeros(6)
+            mujoco.mj_contactForce(self.model, self.data, i, force)
+            contacts.append({"geom1": int(c.geom1), "geom2": int(c.geom2),
+                             "force": float(np.linalg.norm(force[:3])),
+                             "torque": float(np.linalg.norm(force[3:]))})
+        contacts = tuple(contacts)
         return CameraContactObservation(rgb=rgb, depth=depth, masks=masks, contacts=contacts, timestamp=self._time)
 
     def execute(self, command: SkillCommand) -> SkillResult:

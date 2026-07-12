@@ -72,6 +72,12 @@ Results are **cross-process deterministic** (identical JSON across
 
 ### v0.6 embodied packing (MuJoCo adapter)
 
+> **Truth status:** the current embodied MP4 and adapter are kinematic smoke
+> visualizations, not validated physical grasp/transport evidence. They are not
+> a trained policy, autonomous rearrangement, or contact-valid PackCell result.
+> The historical forced-lane numbers are retained as audit artifacts only and
+> are not product claims.
+
 Intent, planning, and recovery remain in Tarzan while continuous arm control is
 delegated to the separate [TinyVLA repository](https://github.com/AndrewGordienko/tinyvla).
 The camera/contact-safe `SkillCommand` boundary is in `src/osc/embodied/`.
