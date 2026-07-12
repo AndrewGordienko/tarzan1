@@ -1,0 +1,51 @@
+{
+  "target": [
+    0.2,
+    -0.06,
+    0.087
+  ],
+  "offline": {
+    "position_only": {
+      "position_error": 0.0,
+      "final_qpos": [
+        0.30855525278608226,
+        -0.08966056825225573,
+        0.5163456621684716,
+        1.313577794708443,
+        -0.466061986967823
+      ],
+      "joint_limit_margin": 0.34448493462509044,
+      "singular_values": [
+        0.23432101026880311,
+        0.17245820324471253,
+        0.10394241502223059
+      ],
+      "collision_count": 23,
+      "collision_free": false,
+      "orientation_objective": false
+    },
+    "position_plus_orientation": {
+      "position_error": 0.0,
+      "final_qpos": [
+        0.30855525278608226,
+        -0.08966056825225573,
+        0.5163456621684716,
+        1.313577794708443,
+        -0.466061986967823
+      ],
+      "joint_limit_margin": 0.34448493462509044,
+      "singular_values": [
+        0.23432101026880311,
+        0.17245820324471253,
+        0.10394241502223059
+      ],
+      "collision_count": 23,
+      "collision_free": false,
+      "orientation_objective": true
+    }
+  },
+  "live_position_only": {
+    "implemented": true,
+    "note": "OraclePackController already uses position-only DLS; insertion remains hard-gated and should be run for 20 seeds."
+  }
+}
