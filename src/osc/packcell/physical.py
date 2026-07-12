@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, asdict
 from pathlib import Path
+import re
 from typing import Any
 import numpy as np
 
@@ -24,13 +25,13 @@ class PackCell:
     this class writes only actuator controls; MuJoCo advances object qpos/qvel.
     """
 
-    def __init__(self, seed: int = 0, width: int = 640, height: int = 480, layout: dict | None = None, render: bool = True):
+    def __init__(self, seed: int = 0, width: int = 640, height: int = 480, layout: dict | None = None, render: bool = True, variant: str = "full_workcell"):
         try:
             import mujoco
         except ImportError as exc:
             raise RuntimeError("Install osc[embodied] for PackCell") from exc
         self.mujoco = mujoco
-        self.width, self.height, self.seed = width, height, seed; self.layout = layout or {}; self.render_enabled = render
+        self.width, self.height, self.seed = width, height, seed; self.layout = layout or {}; self.render_enabled = render; self.variant = variant
         self.model = self.data = self.renderer = None
         self.object_body = self.object_qadr = None
         self._reset_done = False
@@ -42,6 +43,16 @@ class PackCell:
         if not source.exists():
             raise RuntimeError(f"TinyVLA SO-101 assets not found at {source}")
         xml = source.read_text().replace('contype="2" conaffinity="2"', 'contype="1" conaffinity="1"')
+        if self.variant in {"free_space_arm", "placement_only_workcell"}:
+            xml = re.sub(r'    <geom name="table".*?/>\n', '', xml)
+            xml = re.sub(r'    <body name="bin".*?</body>\n', '', xml, flags=re.S)
+            xml = re.sub(r'    <geom name="plate".*?/>\n', '', xml)
+        if self.variant in {"free_space_arm", "placement_only_workcell"}:
+            xml = re.sub(r'    <body name="cube_red".*?</body>\n', '', xml, flags=re.S)
+            xml = re.sub(r'    <body name="cube_blue".*?</body>\n', '', xml, flags=re.S)
+        if self.variant == "pick_only_workcell":
+            xml = re.sub(r'    <body name="bin".*?</body>\n', '', xml, flags=re.S)
+            xml = re.sub(r'    <geom name="plate".*?/>\n', '', xml)
         calibration = tiny / "so101_new_calib.xml"
         cal_runtime = tiny / "packcell_calibration_runtime.xml"
         cal_xml = calibration.read_text().replace('<body name="base" pos="0 0 0"', f'<body name="base" pos="0 0 {self.layout.get("base_height",0.0)}"')
@@ -60,14 +71,16 @@ class PackCell:
             cal_runtime.unlink(missing_ok=True)
         self.data = m.MjData(self.model)
         self.renderer = m.Renderer(self.model, height=self.height, width=self.width) if self.render_enabled else None
-        self.object_body = m.mj_name2id(self.model, m.mjtObj.mjOBJ_BODY, "cube_red")
-        jid = m.mj_name2id(self.model, m.mjtObj.mjOBJ_JOINT, "cube_red_free")
-        self.object_qadr = int(self.model.jnt_qposadr[jid])
+        self.object_body = m.mj_name2id(self.model, m.mjtObj.mjOBJ_BODY, "cube_red") if "cube_red" in xml else -1
+        self.object_qadr = None
+        if self.object_body >= 0:
+            jid = m.mj_name2id(self.model, m.mjtObj.mjOBJ_JOINT, "cube_red_free"); self.object_qadr = int(self.model.jnt_qposadr[jid])
         # Reset-time initialization is the only object-state write in this module.
         m.mj_resetData(self.model, self.data)
         self.data.qpos[:6] = [0, -1.2, .6, 1.2, 0, 1.2]
-        self.data.qpos[self.object_qadr:self.object_qadr + 3] = [.20, -.06, .087]
-        self.data.qpos[self.object_qadr + 3:self.object_qadr + 7] = [1, 0, 0, 0]
+        if self.object_qadr is not None:
+            self.data.qpos[self.object_qadr:self.object_qadr + 3] = [.20, -.06, .087]
+            self.data.qpos[self.object_qadr + 3:self.object_qadr + 7] = [1, 0, 0, 0]
         m.mj_forward(self.model, self.data)
         self._reset_done = True
         return self.agent_observation() if self.renderer is not None else self.controller_state()
@@ -100,6 +113,8 @@ class PackCell:
 
     def scorer_state(self) -> dict[str, Any]:
         """Privileged evaluation view; never passed to controller methods."""
+        if self.object_qadr is None:
+            return {"object_position": None, "object_velocity": None, "object_body": None}
         a = self.object_qadr
         return {"object_position": self.data.qpos[a:a + 3].copy(),
                 "object_velocity": self.data.qvel[self.model.jnt_dofadr[self.model.body_jntadr[self.object_body]]:][:3].copy(),

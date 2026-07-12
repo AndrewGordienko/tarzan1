@@ -13,27 +13,39 @@
   },
   "lanes": {
     "free_space_arm": {
-      "status": "not_isolated",
+      "status": "validated_variant",
       "successes": null,
       "episodes": 0,
-      "reason": "scene_variant_not_implemented"
+      "scene_hash": "3c5b3024d6ee9f195dc4cb96fe22a0488e461c2fbc7004c30cd1118581557b4f",
+      "geom_count": 33,
+      "body_count": 8,
+      "reason": "candidate_evaluation_pending"
     },
     "pick_only_workcell": {
-      "status": "not_isolated",
+      "status": "validated_variant",
       "successes": null,
       "episodes": 0,
-      "reason": "scene_variant_not_implemented"
+      "scene_hash": "5e065cccebc796b7c652f7005b9388ef17c829a35e6888b58c8a222cc60056af",
+      "geom_count": 35,
+      "body_count": 10,
+      "reason": "candidate_evaluation_pending"
     },
     "placement_only_workcell": {
-      "status": "not_isolated",
+      "status": "validated_variant",
       "successes": null,
       "episodes": 0,
-      "reason": "scene_variant_not_implemented"
+      "scene_hash": "ea0158b03fc4ed34ad1d8d5b3aac5056dfa06b6046c869f3b52b3d2229ddff03",
+      "geom_count": 33,
+      "body_count": 8,
+      "reason": "candidate_evaluation_pending"
     },
     "full_workcell": {
       "status": "evaluated",
       "successes": 0,
       "episodes": 360,
+      "scene_hash": "bd85070afc49417c0d93d7035e1425f3037e2eb9f0e433774af3bff44d2f961b",
+      "geom_count": 39,
+      "body_count": 11,
       "reason": "coarse_layout_sweep_zero_valid_layouts"
     }
   },
