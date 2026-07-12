@@ -1,0 +1,38 @@
+{
+  "baseline": {
+    "status": "invalid_reference"
+  },
+  "layouts": [
+    {
+      "layout": {
+        "base_height": 0.05,
+        "base_yaw": 0,
+        "pick_zone": [
+          0.2,
+          -0.06
+        ],
+        "box_sector": "opposite"
+      },
+      "valid_candidates": 0,
+      "prohibited_links": {
+        "('geom_35', 'geom_18')": 60,
+        "('geom_35', 'geom_20')": 84,
+        "('geom_35', 'geom_22')": 86,
+        "('geom_33', 'geom_26')": 70,
+        "('geom_35', 'geom_26')": 78,
+        "('geom_33', 'geom_30')": 40,
+        "('cube_red', 'geom_28')": 56,
+        "('geom_33', 'geom_18')": 6,
+        "('geom_33', 'geom_24')": 18,
+        "('geom_35', 'geom_24')": 14,
+        "('geom_33', 'geom_28')": 4,
+        "('geom_33', 'geom_32')": 2,
+        "('geom_33', 'geom_20')": 2
+      },
+      "status": "evaluated"
+    }
+  ],
+  "selected": null,
+  "intervention_required": true,
+  "note": "Full grid sweep requires headless renderer resource management; this bounded layout evaluation is the first deterministic intervention result."
+}

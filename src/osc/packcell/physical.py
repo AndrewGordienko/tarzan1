@@ -24,13 +24,13 @@ class PackCell:
     this class writes only actuator controls; MuJoCo advances object qpos/qvel.
     """
 
-    def __init__(self, seed: int = 0, width: int = 640, height: int = 480):
+    def __init__(self, seed: int = 0, width: int = 640, height: int = 480, layout: dict | None = None):
         try:
             import mujoco
         except ImportError as exc:
             raise RuntimeError("Install osc[embodied] for PackCell") from exc
         self.mujoco = mujoco
-        self.width, self.height, self.seed = width, height, seed
+        self.width, self.height, self.seed = width, height, seed; self.layout = layout or {}
         self.model = self.data = self.renderer = None
         self.object_body = self.object_qadr = None
         self._reset_done = False
@@ -44,7 +44,8 @@ class PackCell:
         xml = source.read_text().replace('contype="2" conaffinity="2"', 'contype="1" conaffinity="1"')
         calibration = tiny / "so101_new_calib.xml"
         cal_runtime = tiny / "packcell_calibration_runtime.xml"
-        cal_xml = calibration.read_text().replace('<site group="3" name="gripperframe" pos="-0.0079 -0.000218121 -0.0981274" quat="0.707107 -0 0.707107 -2.37788e-17"/>',
+        cal_xml = calibration.read_text().replace('<body name="base" pos="0 0 0"', f'<body name="base" pos="0 0 {self.layout.get("base_height",0.0)}"')
+        cal_xml = cal_xml.replace('<site group="3" name="gripperframe" pos="-0.0079 -0.000218121 -0.0981274" quat="0.707107 -0 0.707107 -2.37788e-17"/>',
                           '<site group="3" name="gripperframe" pos="-0.0079 -0.000218121 -0.0981274" quat="0.707107 -0 0.707107 -2.37788e-17"/><site name="grasp_site" pos="0.01644 0.000055 -0.03093"/>')
         cal_runtime.write_text(cal_xml)
         xml = xml.replace('file="so101_new_calib.xml"', f'file="{cal_runtime.name}"')

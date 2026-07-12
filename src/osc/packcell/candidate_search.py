@@ -4,13 +4,14 @@ import numpy as np
 from .physical import PackCell
 from .reachability import offline_solve
 
-def search(seed=0):
-    cell=PackCell(seed); cell.reset(); base=np.asarray(cell.scorer_state()["object_position"])
+def search(seed=0, layout=None, fast=False):
+    cell=PackCell(seed, layout=layout); cell.reset(); base=np.asarray(cell.scorer_state()["object_position"])
     candidates=[]
     # Labels describe physically achievable parallel-jaw orientations; the
     # current SO-101 model exposes position-only site control, so orientation is
     # recorded and scored rather than silently treated as six-DoF control.
-    for yaw,depth,dx,dy,start in itertools.product(("major_axis","minor_axis"),(-.006,0,.006),(-.004,0,.004),(-.004,0,.004),range(4)):
+    combos=itertools.product(("major_axis","minor_axis"),(-.006,0,.006),(-.004,0,.004),(-.004,0,.004),range(1 if fast else 4))
+    for yaw,depth,dx,dy,start in combos:
         target=base+np.array([dx,dy,depth]); result=offline_solve(cell,target,False,starts=1)
         prohibited=result["prohibited_contacts"]
         clearance=min([x["clearance_m"] for x in result["contacts"] if not x["allowed"]] or [0.05])
@@ -22,4 +23,6 @@ def search(seed=0):
     links={}
     for c in candidates:
         for p in c["prohibited_contacts"]: links.setdefault(str(p["pair"]),0); links[str(p["pair"])] += 1
+    if getattr(cell, "renderer", None) is not None:
+        cell.renderer.close()
     return {"seed":seed,"candidate_count":len(candidates),"valid_count":len(valid),"best":best,"prohibited_link_frequency":links,"workspace_design_intervention_required":best is None,"candidates":candidates}

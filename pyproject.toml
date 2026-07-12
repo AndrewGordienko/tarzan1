@@ -31,6 +31,7 @@ osc-packcell-bench = "osc.run_packcell_bench:main"
 osc-packcell-grasp = "osc.run_packcell_grasp:main"
 osc-packcell-geometry = "osc.run_packcell_geometry:main"
 osc-packcell-candidates = "osc.run_packcell_candidates:main"
+osc-packcell-layout = "osc.run_packcell_layout:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
