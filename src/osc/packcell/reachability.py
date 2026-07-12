@@ -17,11 +17,11 @@ def offline_solve(cell, target, orientation=False, starts=8):
         err=float(np.linalg.norm(target-d.site_xpos[sid])); sv=np.linalg.svd(J,compute_uv=False)
         margins=np.minimum(d.qpos[joints]-m.jnt_range[jids,0],m.jnt_range[jids,1]-d.qpos[joints])
         contacts=[]; prohibited=[]
-        obj=m.geom("cube_red").id; table=m.geom("table").id; gripper=m.body("gripper").id; moving=m.body("moving_jaw_so101_v1").id
+        obj=mujoco.mj_name2id(m,mujoco.mjtObj.mjOBJ_GEOM,"cube_red"); table=mujoco.mj_name2id(m,mujoco.mjtObj.mjOBJ_GEOM,"table"); gripper=m.body("gripper").id; moving=m.body("moving_jaw_so101_v1").id
         finger={i for i in range(m.ngeom) if m.geom_bodyid[i] in {gripper,moving} and i>=29}
         for c in d.contact:
             a,b=int(c.geom1),int(c.geom2); pair=(m.geom(a).name or f"geom_{a}",m.geom(b).name or f"geom_{b}")
-            allowed=bool((table in {a,b}) or (obj in {a,b} and bool({a,b}&finger)))
+            allowed=bool((table >= 0 and table in {a,b}) or (obj >= 0 and obj in {a,b} and bool({a,b}&finger)) or obj < 0)
             record={"pair":pair,"allowed":allowed,"penetration_m":float(max(0.0,-c.dist)),"clearance_m":float(max(0.0,c.dist)),"phase":"endpoint"}
             contacts.append(record)
             if not allowed: prohibited.append(record)
