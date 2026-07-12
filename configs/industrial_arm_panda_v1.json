@@ -7,12 +7,13 @@
     "asset_subdirectory": "franka_emika_panda",
     "asset_sha256": "d3b329b3db0703a441025b115ab5142c5486b3f609598d33152f6ad41e61502b",
     "license": "Apache-2.0 (see assets/industrial/franka_emika_panda/LICENSE)",
-    "provenance_status": "vendored; compile validation currently fails on local MuJoCo 3.9 mesh link7_4"
+    "provenance_status": "vendored upstream immutable; Tarzan grasp-site overlay is derived separately",
+    "derived_overlay": "assets/industrial/franka_emika_panda/panda_grasp_overlay.xml"
   },
   "joints": ["joint1","joint2","joint3","joint4","joint5","joint6","joint7"],
   "actuators": ["actuator1","actuator2","actuator3","actuator4","actuator5","actuator6","actuator7"],
   "payload_limit_kg": null,
-  "gripper": {"type": "parallel_jaw", "aperture_m": 0.08, "force_limit_n": 70.0, "grasp_site": "grasp_site_pending_addition", "finger_collision_geoms": ["left_finger", "right_finger"]},
+  "gripper": {"type": "parallel_jaw", "aperture_m": 0.08, "force_limit_n": 70.0, "grasp_site": "grasp_site", "finger_collision_geoms": ["left_finger", "right_finger"]},
   "controller_limits": {"position_error_m": 0.002, "clearance_m": 0.003, "force_limit_n": null},
   "boundary": {"agent_observation": true, "controller_state_read_only": true, "actuator_targets_only": true, "privileged_scorer_separate": true}
 }

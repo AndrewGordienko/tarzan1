@@ -1,5 +1,5 @@
 {
-  "asset_tree_sha256": "c421cb6acfb8b8649efa301115c9942e02b5be440e184a53741622b274d4ec7d",
+  "asset_tree_sha256": "f6f33897cadb7d1093df3399af85372c93ec1aa72a94901fd4a7b78bc6c1bac5",
   "file_hashes": {
     "CHANGELOG.md": "164a6ec704aa1714b1311f8b1538e20b4223b6ef08b7d3cb03edc26192892f67",
     "LICENSE": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
@@ -79,6 +79,7 @@
     "mjx_single_cube.xml": "333997ddcb065ff94871247fb2b96e1847119549bfba7a6db645fdb6cdc5199b",
     "panda.png": "d6ad5fcfc60237f0f006cf22d6e0b70febb559f609d915cd4316e9f1ad383c2d",
     "panda.xml": "96ad67da03710f17f798c9478fd9e9efdf24a3bf8359f05e456dd9fb158ea273",
+    "panda_grasp_overlay.xml": "8c5406a45eae2a717a258658aae116cee7c0e6b107b7f231dff6a8ff797c513f",
     "panda_nohand.xml": "e7090a5e2384b18a223ef532d98bf914f7f9a6b74dc8bc9f74c8291201074071",
     "scene.xml": "4b08c2e5108f0ed67fa689e096e58850210130c3e6ef889b1e22822d369fd8c3"
   },
@@ -86,16 +87,39 @@
     "compile": true,
     "seven_arm_joints": true,
     "gripper_joints": true,
-    "grasp_site": false,
-    "jacobian_site": false
+    "grasp_site": true,
+    "jacobian_site": true
   },
   "integrity": {
-    "references": 268,
+    "references": 335,
     "missing": [],
     "empty": [],
     "invalid_mesh": []
   },
   "joints": 9,
   "actuators": 8,
-  "sites": 0
+  "sites": 1,
+  "site_body": "hand",
+  "jacobian_singular_values": {
+    "home": [
+      0.5628010681563658,
+      0.1524204710660611,
+      0.11549908087103258
+    ],
+    "pregrasp": [
+      0.5628010681563658,
+      0.1524204710660611,
+      0.11549908087103258
+    ],
+    "insertion": [
+      0.5628010681563658,
+      0.1524204710660611,
+      0.11549908087103258
+    ],
+    "placement": [
+      0.5628010681563658,
+      0.1524204710660611,
+      0.11549908087103258
+    ]
+  }
 }
