@@ -21,7 +21,7 @@ def offline_solve(cell, target, orientation=False, starts=8):
         finger={i for i in range(m.ngeom) if m.geom_bodyid[i] in {gripper,moving} and i>=29}
         for c in d.contact:
             a,b=int(c.geom1),int(c.geom2); pair=(m.geom(a).name or f"geom_{a}",m.geom(b).name or f"geom_{b}")
-            allowed=(table in {a,b}) or (obj in {a,b} and ({a,b}&finger))
+            allowed=bool((table in {a,b}) or (obj in {a,b} and bool({a,b}&finger)))
             contacts.append({"pair":pair,"allowed":allowed})
             if not allowed: prohibited.append(pair)
         row={"position_error":err,"final_qpos":d.qpos[joints].tolist(),"joint_limit_margin":float(np.min(margins)),"singular_values":sv.tolist(),"collision_count":int(d.ncon),"collision_free":not prohibited,"contacts":contacts,"prohibited_contacts":prohibited,"orientation_objective":orientation}
