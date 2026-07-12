@@ -1,0 +1,22 @@
+{
+  "scope": "amazon_small_sortable_v1_hybrid_portfolio",
+  "status": "frozen_candidate_spec_not_hardware_selected",
+  "preserves_single_jaw_v1_evidence": true,
+  "coverage_policy": "union_of_tools",
+  "requirements": {
+    "maximum_workpiece_mass_kg": 8.0,
+    "jaw_minimum_usable_aperture_m": 0.106,
+    "jaw_preferred_usable_aperture_m": [0.110, 0.120],
+    "maximum_object_force_n": 80.0,
+    "minimum_pose_clearance_m": 0.003,
+    "minimum_suction_confidence": 0.90,
+    "maximum_tool_change_time_s": 4.0,
+    "dual_mount_mass_limit_kg": null
+  },
+  "tools": [
+    {"id": "wide_force_limited_jaws", "covers": ["small_rigid", "porous", "irregular", "fragile_with_validated_force"], "unsupported": ["outside_aperture", "outside_payload", "unknown_fragility"]},
+    {"id": "vacuum_tool", "covers": ["large_flat_nonporous", "sealed_carton_with_verified_seal"], "unsupported": ["porous", "fabric", "damaged_surface", "insufficient_seal_area", "unknown_surface"]}
+  ],
+  "decision_policy": ["use_jaws", "use_suction", "tool_change", "abstain"],
+  "recovery": ["verify_grip", "detect_slip_or_seal_loss", "return_to_safe_stage", "try_alternate_eligible_tool_once", "escalate"]
+}

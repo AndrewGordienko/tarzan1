@@ -1,0 +1,12 @@
+{
+  "scope": "light_sortable_v1",
+  "status": "separate_mvp_lane",
+  "maximum_workpiece_mass_kg": 2.0,
+  "payload_rationale": "2.0 kg with 20 percent margin remains below a 2.5 kg tool workpiece limit",
+  "object_envelope_m": {"maximum": [0.25, 0.14, 0.10], "minimum": [0.03, 0.03, 0.02]},
+  "required_usable_aperture_m": 0.106,
+  "carton_types": 3,
+  "materials": ["rigid_packaged_goods", "semi_rigid_packaged_goods"],
+  "excluded": ["deformable_bags", "damaged_items", "unlabelled_fragile_items", "objects_over_2kg"],
+  "relationship_to_product_lane": "does not modify amazon_small_sortable_v1 or its 8 kg requirement"
+}
