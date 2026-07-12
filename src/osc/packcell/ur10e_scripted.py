@@ -5,6 +5,7 @@ import numpy as np
 import mujoco
 from scipy.optimize import least_squares
 from osc.robot_api import ActuatorCommand
+from osc.packcell.ur10e_adapter import CARTON
 
 R_DOWN=np.array([[1.,0,0],[0,-1.,0],[0,0,-1.]])
 
@@ -48,19 +49,32 @@ class UR10eScriptedController:
         for point in np.linspace(np.asarray(start_xyz),np.asarray(end_xyz),segments+1)[1:]:
             q,err=self.solve(point,q);self.move(q,grip,phase,steps_per_segment,frame_cb)
         return q,err
+    def bilateral_tool_contact(self,min_force_n=.05):
+        sides=set()
+        for i,c in enumerate(self.robot.data.contact):
+            pair={int(c.geom1),int(c.geom2)}
+            if self.robot._parcel not in pair:continue
+            tool=pair&(self.robot._pads|self.robot._lips)
+            if not tool:continue
+            force=np.zeros(6);mujoco.mj_contactForce(self.m,self.robot.data,i,force)
+            if abs(float(force[0]))<min_force_n:continue
+            for geom in tool:
+                body=self.m.body(int(self.m.geom_bodyid[geom])).name
+                if body in {'left_jaw','right_jaw'}:sides.add(body)
+        return sides=={'left_jaw','right_jaw'}
     def run(self,frame_cb=None):
         self.robot.reset();home=np.asarray(self.robot.observe().joint_position);open_grip=(.075,-.075)
         poses={};q=home
-        for name,target in [('pregrasp',(.52,0,.93)),('insertion',(.52,0,.78)),('lift',(.52,0,.96)),('transport',(.34,-.16,.96)),('lower',(.34,-.16,.82)),('retreat',(.34,-.16,.96))]:
+        for name,target in [('pregrasp',(.52,0,.93)),('insertion',(.52,0,.78)),('lift',(.52,0,1.10)),('transport',(CARTON[0],CARTON[1],1.10)),('lower',(CARTON[0],CARTON[1],.82)),('retreat',(CARTON[0],CARTON[1],1.10))]:
             q,err=self.solve(target,q);poses[name]={'q':q,'error_m':err}
         self.move(poses['pregrasp']['q'],open_grip,'pregrasp',500,frame_cb);self.move(poses['insertion']['q'],open_grip,'insertion',400,frame_cb);held=self.close_guarded(poses['insertion']['q'],frame_cb)
         if held is None:return {'success':False,'failure_phase':'contact','poses':{k:{'error_m':v['error_m']} for k,v in poses.items()},'trace':self.trace}
         hold_q=np.asarray(self.robot.observe().joint_position);self.move(hold_q,held,'grasp_dwell',200,frame_cb)
-        lift_q,lift_err=self.cartesian_path((.52,0,.78),(.52,0,.96),held,'lift',18,70,frame_cb);poses['lift']={'q':lift_q,'error_m':lift_err};retained=self.robot.scorer_state()['object_position'][2]>.83
+        lift_q,lift_err=self.cartesian_path((.52,0,.78),(.52,0,1.10),held,'lift',24,70,frame_cb);poses['lift']={'q':lift_q,'error_m':lift_err};retained=self.robot.scorer_state()['object_position'][2]>.83
         if not retained:return {'success':False,'failure_phase':'lift_retention','poses':{k:{'error_m':v['error_m']} for k,v in poses.items()},'trace':self.trace}
-        transport_q,transport_err=self.cartesian_path((.52,0,.96),(.34,-.16,.96),held,'transport',16,80,frame_cb);poses['transport']={'q':transport_q,'error_m':transport_err}
-        if self.robot.scorer_state()['object_position'][2] < .83:
+        transport_q,transport_err=self.cartesian_path((.52,0,1.10),(CARTON[0],CARTON[1],1.10),held,'transport',24,80,frame_cb);poses['transport']={'q':transport_q,'error_m':transport_err}
+        if self.robot.scorer_state()['object_position'][2] < .83 or not self.bilateral_tool_contact():
             return {'success':False,'failure_phase':'transport_retention','poses':{k:{'error_m':v['error_m']} for k,v in poses.items()},'object_pose_writes_after_reset':False,'trace':self.trace}
-        lower_q,lower_err=self.cartesian_path((.34,-.16,.96),(.34,-.16,.82),held,'lower',14,50,frame_cb);poses['lower']={'q':lower_q,'error_m':lower_err};self.move(np.asarray(self.robot.observe().joint_position),open_grip,'release',160,frame_cb)
-        retreat_q,retreat_err=self.solve((.34,-.16,.96),np.asarray(self.robot.observe().joint_position));poses['retreat']={'q':retreat_q,'error_m':retreat_err};self.move(retreat_q,open_grip,'retreat',500,frame_cb)
+        lower_q,lower_err=self.cartesian_path((CARTON[0],CARTON[1],1.10),(CARTON[0],CARTON[1],.82),held,'lower',20,50,frame_cb);poses['lower']={'q':lower_q,'error_m':lower_err};self.move(np.asarray(self.robot.observe().joint_position),open_grip,'release',160,frame_cb)
+        retreat_q,retreat_err=self.solve((CARTON[0],CARTON[1],1.10),np.asarray(self.robot.observe().joint_position));poses['retreat']={'q':retreat_q,'error_m':retreat_err};self.move(retreat_q,open_grip,'retreat',500,frame_cb)
         return {'success':bool(self.robot.verify()['camera_estimate_inside_box'] and self.robot.scorer_state()['inside_box']),'failure_phase':None,'poses':{k:{'error_m':v['error_m']} for k,v in poses.items()},'camera_verification':self.robot.verify(),'scorer_verification':self.robot.scorer_state()['inside_box'],'object_pose_writes_after_reset':False,'trace':self.trace}

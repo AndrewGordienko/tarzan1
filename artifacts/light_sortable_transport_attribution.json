@@ -1,0 +1,368 @@
+{
+  "schema": "light_sortable_transport_attribution_v1",
+  "identical_grasp_setup": true,
+  "friction_changed_for_ladder": false,
+  "lanes": [
+    {
+      "lane": "stationary_hold",
+      "setup_success": true,
+      "support_lip": true,
+      "profile": {
+        "kind": "hold",
+        "steps_per_segment": 600
+      },
+      "summary": {
+        "steps": 600,
+        "retained": true,
+        "final_contact_retained": true,
+        "relative_pose_drift_m": 0.003993786925147413,
+        "initial_z_m": 1.0670744990344396,
+        "final_z_m": 1.0563277202147494,
+        "max_normal_force_n": 2.300076715235844,
+        "max_tangential_force_n": 1.4382629203836446,
+        "max_friction_cone_utilization": 0.9115462205729121,
+        "max_linear_slip_mps": 0.09811681248702724,
+        "jaw_aperture_range_m": [
+          0.04009423407967231,
+          0.040094926481963326
+        ],
+        "max_jaw_actuator_force_n": 8.2867920398417,
+        "max_tcp_acceleration_mps2": 72.87333931563697,
+        "max_tcp_jerk_mps3": 68781.1095506245,
+        "max_angular_velocity_rps": 0.36837797476983336,
+        "collision_impulse_ns": 0.0,
+        "prohibited_contact_steps": 0,
+        "prohibited_contact_counts": {},
+        "contact_steps": 600
+      },
+      "failure": null,
+      "telemetry_rows": 600,
+      "telemetry_artifact": "artifacts/light_sortable_transport_telemetry.jsonl.gz"
+    },
+    {
+      "lane": "stationary_hold_matched_duration",
+      "setup_success": true,
+      "support_lip": true,
+      "profile": {
+        "kind": "hold",
+        "steps_per_segment": 4800
+      },
+      "summary": {
+        "steps": 4800,
+        "retained": false,
+        "final_contact_retained": false,
+        "relative_pose_drift_m": 0.3080748029277947,
+        "initial_z_m": 1.0670744990344396,
+        "final_z_m": 0.7748922445797831,
+        "max_normal_force_n": 2.6340207148959727,
+        "max_tangential_force_n": 2.560672583244092,
+        "max_friction_cone_utilization": 2.5,
+        "max_linear_slip_mps": 2.193574118237905,
+        "jaw_aperture_range_m": [
+          0.03438168378572839,
+          0.040094926481963326
+        ],
+        "max_jaw_actuator_force_n": 8.2867920398417,
+        "max_tcp_acceleration_mps2": 72.87333931563697,
+        "max_tcp_jerk_mps3": 68781.1095506245,
+        "max_angular_velocity_rps": 0.36837797476983336,
+        "collision_impulse_ns": 0.0,
+        "prohibited_contact_steps": 0,
+        "prohibited_contact_counts": {},
+        "contact_steps": 3840
+      },
+      "failure": "transport_retention",
+      "telemetry_rows": 4800,
+      "telemetry_artifact": "artifacts/light_sortable_transport_telemetry.jsonl.gz"
+    },
+    {
+      "lane": "translation_very_low",
+      "setup_success": true,
+      "support_lip": true,
+      "profile": {
+        "kind": "translate",
+        "steps_per_segment": 200
+      },
+      "summary": {
+        "steps": 2000,
+        "retained": true,
+        "final_contact_retained": true,
+        "relative_pose_drift_m": 0.006295918802596732,
+        "initial_z_m": 1.0670744990344396,
+        "final_z_m": 1.0789205115555844,
+        "max_normal_force_n": 2.3001775494888412,
+        "max_tangential_force_n": 1.4383111746592219,
+        "max_friction_cone_utilization": 1.5100294363510867,
+        "max_linear_slip_mps": 0.09060771512928385,
+        "jaw_aperture_range_m": [
+          0.04009415206043072,
+          0.04009491678331804
+        ],
+        "max_jaw_actuator_force_n": 8.278244978590934,
+        "max_tcp_acceleration_mps2": 72.89173528755398,
+        "max_tcp_jerk_mps3": 68782.48628765205,
+        "max_angular_velocity_rps": 0.3740952506015583,
+        "collision_impulse_ns": 0.0,
+        "prohibited_contact_steps": 0,
+        "prohibited_contact_counts": {},
+        "contact_steps": 2000
+      },
+      "failure": null,
+      "telemetry_rows": 2000,
+      "telemetry_artifact": "artifacts/light_sortable_transport_telemetry.jsonl.gz"
+    },
+    {
+      "lane": "translation_low",
+      "setup_success": true,
+      "support_lip": true,
+      "profile": {
+        "kind": "translate",
+        "steps_per_segment": 100
+      },
+      "summary": {
+        "steps": 1000,
+        "retained": true,
+        "final_contact_retained": true,
+        "relative_pose_drift_m": 0.0062005523704242215,
+        "initial_z_m": 1.0670744990344396,
+        "final_z_m": 1.0776547401554515,
+        "max_normal_force_n": 2.4792648824754546,
+        "max_tangential_force_n": 1.4384543355137214,
+        "max_friction_cone_utilization": 1.8749999999999998,
+        "max_linear_slip_mps": 0.11631552461582692,
+        "jaw_aperture_range_m": [
+          0.04008547630109858,
+          0.04009789659994384
+        ],
+        "max_jaw_actuator_force_n": 8.299034776388297,
+        "max_tcp_acceleration_mps2": 72.94366150493019,
+        "max_tcp_jerk_mps3": 68950.23319532865,
+        "max_angular_velocity_rps": 1.0342727747175553,
+        "collision_impulse_ns": 0.0,
+        "prohibited_contact_steps": 0,
+        "prohibited_contact_counts": {},
+        "contact_steps": 1000
+      },
+      "failure": null,
+      "telemetry_rows": 1000,
+      "telemetry_artifact": "artifacts/light_sortable_transport_telemetry.jsonl.gz"
+    },
+    {
+      "lane": "translation_medium",
+      "setup_success": true,
+      "support_lip": true,
+      "profile": {
+        "kind": "translate",
+        "steps_per_segment": 60
+      },
+      "summary": {
+        "steps": 600,
+        "retained": true,
+        "final_contact_retained": true,
+        "relative_pose_drift_m": 0.00416766650290518,
+        "initial_z_m": 1.0670744990344396,
+        "final_z_m": 1.077207178271551,
+        "max_normal_force_n": 2.582602573636823,
+        "max_tangential_force_n": 1.4387887467975704,
+        "max_friction_cone_utilization": 1.875,
+        "max_linear_slip_mps": 0.11202199618725767,
+        "jaw_aperture_range_m": [
+          0.040093073225784245,
+          0.040100569627924486
+        ],
+        "max_jaw_actuator_force_n": 8.295455817906571,
+        "max_tcp_acceleration_mps2": 73.05821977860548,
+        "max_tcp_jerk_mps3": 69122.58726943356,
+        "max_angular_velocity_rps": 1.0288099295046078,
+        "collision_impulse_ns": 0.0,
+        "prohibited_contact_steps": 0,
+        "prohibited_contact_counts": {},
+        "contact_steps": 600
+      },
+      "failure": null,
+      "telemetry_rows": 600,
+      "telemetry_artifact": "artifacts/light_sortable_transport_telemetry.jsonl.gz"
+    },
+    {
+      "lane": "translation_nominal",
+      "setup_success": true,
+      "support_lip": true,
+      "profile": {
+        "kind": "translate",
+        "steps_per_segment": 35
+      },
+      "summary": {
+        "steps": 350,
+        "retained": true,
+        "final_contact_retained": true,
+        "relative_pose_drift_m": 0.0036846300991309673,
+        "initial_z_m": 1.0670744990344396,
+        "final_z_m": 1.0763210550524975,
+        "max_normal_force_n": 2.713980659512066,
+        "max_tangential_force_n": 1.5824652050771741,
+        "max_friction_cone_utilization": 1.875,
+        "max_linear_slip_mps": 0.12547946342020688,
+        "jaw_aperture_range_m": [
+          0.040093636244554386,
+          0.0401105924071276
+        ],
+        "max_jaw_actuator_force_n": 8.304558689625466,
+        "max_tcp_acceleration_mps2": 73.31297404140874,
+        "max_tcp_jerk_mps3": 69113.0101087811,
+        "max_angular_velocity_rps": 1.1803459954296631,
+        "collision_impulse_ns": 0.0,
+        "prohibited_contact_steps": 0,
+        "prohibited_contact_counts": {},
+        "contact_steps": 350
+      },
+      "failure": null,
+      "telemetry_rows": 350,
+      "telemetry_artifact": "artifacts/light_sortable_transport_telemetry.jsonl.gz"
+    },
+    {
+      "lane": "wrist_rotation",
+      "setup_success": true,
+      "support_lip": true,
+      "profile": {
+        "kind": "rotate",
+        "steps_per_segment": 100
+      },
+      "summary": {
+        "steps": 600,
+        "retained": true,
+        "final_contact_retained": true,
+        "relative_pose_drift_m": 0.004179360980282211,
+        "initial_z_m": 1.0670744990344396,
+        "final_z_m": 1.0562845175185864,
+        "max_normal_force_n": 2.3002719692724662,
+        "max_tangential_force_n": 1.4384496700839655,
+        "max_friction_cone_utilization": 0.9111709738759437,
+        "max_linear_slip_mps": 0.09789620269882933,
+        "jaw_aperture_range_m": [
+          0.04009337712221806,
+          0.04009487782005594
+        ],
+        "max_jaw_actuator_force_n": 8.28689616904586,
+        "max_tcp_acceleration_mps2": 72.87358204956446,
+        "max_tcp_jerk_mps3": 68781.12886253609,
+        "max_angular_velocity_rps": 0.4245467696488006,
+        "collision_impulse_ns": 0.0,
+        "prohibited_contact_steps": 0,
+        "prohibited_contact_counts": {},
+        "contact_steps": 600
+      },
+      "failure": null,
+      "telemetry_rows": 600,
+      "telemetry_artifact": "artifacts/light_sortable_transport_telemetry.jsonl.gz"
+    },
+    {
+      "lane": "complete_planned_transfer_very_low",
+      "setup_success": true,
+      "support_lip": true,
+      "profile": {
+        "kind": "planned",
+        "steps_per_segment": 200
+      },
+      "summary": {
+        "steps": 4800,
+        "retained": false,
+        "final_contact_retained": false,
+        "relative_pose_drift_m": 0.2827027956847777,
+        "initial_z_m": 1.0670744990344396,
+        "final_z_m": 0.8048922445797833,
+        "max_normal_force_n": 2.653962865316771,
+        "max_tangential_force_n": 2.157250430540204,
+        "max_friction_cone_utilization": 2.5,
+        "max_linear_slip_mps": 1.930455699682773,
+        "jaw_aperture_range_m": [
+          0.03443723849670546,
+          0.040095015198136415
+        ],
+        "max_jaw_actuator_force_n": 8.278068190631444,
+        "max_tcp_acceleration_mps2": 72.88720435688188,
+        "max_tcp_jerk_mps3": 68782.08549670523,
+        "max_angular_velocity_rps": 0.374100870427839,
+        "collision_impulse_ns": 0.0,
+        "prohibited_contact_steps": 0,
+        "prohibited_contact_counts": {},
+        "contact_steps": 3509
+      },
+      "failure": "transport_retention",
+      "telemetry_rows": 4800,
+      "telemetry_artifact": "artifacts/light_sortable_transport_telemetry.jsonl.gz"
+    },
+    {
+      "lane": "complete_planned_transfer",
+      "setup_success": true,
+      "support_lip": true,
+      "profile": {
+        "kind": "planned",
+        "steps_per_segment": 80
+      },
+      "summary": {
+        "steps": 1920,
+        "retained": false,
+        "final_contact_retained": false,
+        "relative_pose_drift_m": 0.14837501784681348,
+        "initial_z_m": 1.0670744990344396,
+        "final_z_m": 0.9475178847329122,
+        "max_normal_force_n": 3.3376846208034006,
+        "max_tangential_force_n": 2.5239920819121506,
+        "max_friction_cone_utilization": 2.5,
+        "max_linear_slip_mps": 1.569019198067502,
+        "jaw_aperture_range_m": [
+          0.034577060431177815,
+          0.04009842248888456
+        ],
+        "max_jaw_actuator_force_n": 8.299885679543948,
+        "max_tcp_acceleration_mps2": 72.95734813788708,
+        "max_tcp_jerk_mps3": 68786.99025239615,
+        "max_angular_velocity_rps": 1.1953108356280686,
+        "collision_impulse_ns": 0.0,
+        "prohibited_contact_steps": 0,
+        "prohibited_contact_counts": {},
+        "contact_steps": 1858
+      },
+      "failure": "transport_retention",
+      "telemetry_rows": 1920,
+      "telemetry_artifact": "artifacts/light_sortable_transport_telemetry.jsonl.gz"
+    },
+    {
+      "lane": "translation_very_low_no_support_lip",
+      "setup_success": false,
+      "failure": "grasp",
+      "summary": {},
+      "telemetry_rows": 1900,
+      "telemetry_artifact": "artifacts/light_sortable_transport_telemetry.jsonl.gz"
+    }
+  ],
+  "diagnosis": {
+    "short_hold_pass": true,
+    "matched_duration_hold_pass": false,
+    "slow_translation_pass": true,
+    "nominal_translation_pass": true,
+    "wrist_rotation_pass": true,
+    "slow_planned_transfer_pass": false,
+    "planned_transfer_pass": false,
+    "no_lip_grasp_setup_pass": false,
+    "no_lip_slow_pass": null,
+    "support_lip_ablation_result": "setup_failed_without_lip",
+    "full_transfer_first_divergence": {
+      "jaw_aperture_changed_over_10mm": null,
+      "jaw_force_saturated": null,
+      "tool_parcel_contact_lost": {
+        "step": 5197,
+        "time_s": 10.396000000000141,
+        "sustained_steps": 10
+      },
+      "prohibited_contact": null,
+      "parcel_below_retention_height": null
+    },
+    "acceleration_only_explanation_supported": false,
+    "dominant_failure": "static_retention_creep",
+    "allowable_acceleration_fit": null,
+    "allowable_acceleration_fit_reason": "matched_duration_stationary_hold_fails; static retention must pass before fitting a dynamic acceleration bound",
+    "one_arm_acceptance_gate_passed": false
+  },
+  "telemetry_artifact": "artifacts/light_sortable_transport_telemetry.jsonl.gz"
+}
