@@ -35,6 +35,12 @@ def evaluate_dimensions(dimensions_m: tuple[float, float, float], contract: EndE
     feasible = [r for r in rows if r["feasible"]]
     return {"dimensions_m": list(dimensions_m), "axes": rows, "feasible": bool(feasible), "feasible_axes": [r["closing_axis_index"] for r in feasible]}
 
+def select_grasp_axis(dimensions_m: tuple[float, float, float], contract: EndEffectorContract) -> int | None:
+    """Choose the narrowest feasible closing axis, leaving maximum clearance."""
+    result = evaluate_dimensions(dimensions_m, contract)
+    feasible = [r for r in result["axes"] if r["feasible"]]
+    return min(feasible, key=lambda r: r["required_aperture_with_clearance_m"])["closing_axis_index"] if feasible else None
+
 def compatibility_matrix(task_path: str | Path, contract: EndEffectorContract) -> dict:
     task = json.loads(Path(task_path).read_text()); rows = []
     for i, dims in enumerate(task["objects"]["dimensions_m"]):

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from osc.packcell.grasp_feasibility import compatibility_matrix, load_end_effector_contract, evaluate_dimensions
+from osc.packcell.grasp_feasibility import compatibility_matrix, load_end_effector_contract, evaluate_dimensions, select_grasp_axis
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,6 +19,8 @@ def test_matrix_rotates_medium_object_but_rejects_large_object():
     large = evaluate_dimensions((0.25, 0.15, 0.10), c)
     assert medium["feasible_axes"] == [2]
     assert large["feasible"] is False
+    assert select_grasp_axis((0.12, 0.08, 0.06), c) == 2
+    assert select_grasp_axis((0.25, 0.15, 0.10), c) is None
 
 
 def test_confirmation_objects_are_not_read_by_matrix():

@@ -1,0 +1,515 @@
+{
+  "schema": "panda_width_sweep_v1",
+  "controls": [
+    {
+      "grasp_width_m": 0.05,
+      "samples": [
+        {
+          "aperture_joint_m": 0.04,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.0,
+          "symmetry_m": 0.0
+        },
+        {
+          "aperture_joint_m": 0.039,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.0,
+          "symmetry_m": 0.0
+        },
+        {
+          "aperture_joint_m": 0.038,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.01213651810241072,
+          "symmetry_m": 0.01213651810241072
+        },
+        {
+          "aperture_joint_m": 0.037,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.0,
+          "symmetry_m": 0.0
+        },
+        {
+          "aperture_joint_m": 0.036000000000000004,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.0,
+          "symmetry_m": 0.0
+        },
+        {
+          "aperture_joint_m": 0.035,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.0,
+          "symmetry_m": 0.0
+        },
+        {
+          "aperture_joint_m": 0.034,
+          "left_distance_m": 0.008151094921006814,
+          "right_distance_m": 0.008151094921006869,
+          "symmetry_m": 5.551115123125783e-17
+        },
+        {
+          "aperture_joint_m": 0.033,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.0,
+          "symmetry_m": 0.0
+        },
+        {
+          "aperture_joint_m": 0.032,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.0,
+          "symmetry_m": 0.0
+        },
+        {
+          "aperture_joint_m": 0.031,
+          "left_distance_m": 0.0051620275349539245,
+          "right_distance_m": 0.005162027534953973,
+          "symmetry_m": 4.85722573273506e-17
+        },
+        {
+          "aperture_joint_m": 0.03,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.0,
+          "symmetry_m": 0.0
+        },
+        {
+          "aperture_joint_m": 0.029,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.0,
+          "symmetry_m": 0.0
+        },
+        {
+          "aperture_joint_m": 0.028,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.0,
+          "symmetry_m": 0.0
+        },
+        {
+          "aperture_joint_m": 0.027,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.0011766043535501138,
+          "symmetry_m": 0.0011766043535501138
+        },
+        {
+          "aperture_joint_m": 0.026000000000000002,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.000180248558199151,
+          "symmetry_m": 0.000180248558199151
+        },
+        {
+          "aperture_joint_m": 0.025,
+          "left_distance_m": -0.0008161072371518537,
+          "right_distance_m": -0.000816107237151812,
+          "symmetry_m": 4.163336342344337e-17
+        },
+        {
+          "aperture_joint_m": 0.024,
+          "left_distance_m": -0.001812463032502817,
+          "right_distance_m": -0.001812463032502775,
+          "symmetry_m": 4.185020385794047e-17
+        },
+        {
+          "aperture_joint_m": 0.023,
+          "left_distance_m": -0.00280881882785378,
+          "right_distance_m": -0.0028088188278537454,
+          "symmetry_m": 3.469446951953614e-17
+        },
+        {
+          "aperture_joint_m": 0.022,
+          "left_distance_m": -0.0038051746232047427,
+          "right_distance_m": -0.0038051746232047076,
+          "symmetry_m": 3.5128150388530344e-17
+        },
+        {
+          "aperture_joint_m": 0.021,
+          "left_distance_m": -0.004801530418555699,
+          "right_distance_m": -0.004801530418555671,
+          "symmetry_m": 2.7755575615628914e-17
+        },
+        {
+          "aperture_joint_m": 0.02,
+          "left_distance_m": -0.005797886213906662,
+          "right_distance_m": -0.005797886213906633,
+          "symmetry_m": 2.862293735361732e-17
+        },
+        {
+          "aperture_joint_m": 0.019,
+          "left_distance_m": -0.006794242009257626,
+          "right_distance_m": -0.006794242009257598,
+          "symmetry_m": 2.7755575615628914e-17
+        },
+        {
+          "aperture_joint_m": 0.018000000000000002,
+          "left_distance_m": -0.007790597804608589,
+          "right_distance_m": -0.00779059780460856,
+          "symmetry_m": 2.862293735361732e-17
+        },
+        {
+          "aperture_joint_m": 0.017,
+          "left_distance_m": -0.008786953599959553,
+          "right_distance_m": -0.008786953599959523,
+          "symmetry_m": 2.949029909160572e-17
+        },
+        {
+          "aperture_joint_m": 0.016,
+          "left_distance_m": -0.009783309395310516,
+          "right_distance_m": -0.009783309395310491,
+          "symmetry_m": 2.42861286636753e-17
+        },
+        {
+          "aperture_joint_m": 0.015,
+          "left_distance_m": -0.010779665190661477,
+          "right_distance_m": -0.01077966519066146,
+          "symmetry_m": 1.734723475976807e-17
+        },
+        {
+          "aperture_joint_m": 0.013999999999999999,
+          "left_distance_m": -0.011776020986012442,
+          "right_distance_m": -0.011776020986012421,
+          "symmetry_m": 2.0816681711721685e-17
+        },
+        {
+          "aperture_joint_m": 0.013000000000000001,
+          "left_distance_m": -0.012772376781363403,
+          "right_distance_m": -0.012772376781363382,
+          "symmetry_m": 2.0816681711721685e-17
+        },
+        {
+          "aperture_joint_m": 0.012,
+          "left_distance_m": -0.013768732576714363,
+          "right_distance_m": -0.013768732576714349,
+          "symmetry_m": 1.3877787807814457e-17
+        },
+        {
+          "aperture_joint_m": 0.011,
+          "left_distance_m": -0.014765088372065327,
+          "right_distance_m": -0.01476508837206531,
+          "symmetry_m": 1.734723475976807e-17
+        },
+        {
+          "aperture_joint_m": 0.010000000000000002,
+          "left_distance_m": -0.01576144416741629,
+          "right_distance_m": -0.015761444167416275,
+          "symmetry_m": 1.3877787807814457e-17
+        },
+        {
+          "aperture_joint_m": 0.009000000000000001,
+          "left_distance_m": -0.01675779996276725,
+          "right_distance_m": -0.016757799962767238,
+          "symmetry_m": 1.3877787807814457e-17
+        },
+        {
+          "aperture_joint_m": 0.008,
+          "left_distance_m": -0.017754155758118218,
+          "right_distance_m": -0.017754155758118204,
+          "symmetry_m": 1.3877787807814457e-17
+        },
+        {
+          "aperture_joint_m": 0.006999999999999999,
+          "left_distance_m": -0.01875051155346918,
+          "right_distance_m": -0.018750511553469167,
+          "symmetry_m": 1.3877787807814457e-17
+        },
+        {
+          "aperture_joint_m": 0.005999999999999998,
+          "left_distance_m": -0.01974686734882014,
+          "right_distance_m": -0.019746867348820134,
+          "symmetry_m": 6.938893903907228e-18
+        },
+        {
+          "aperture_joint_m": 0.0049999999999999975,
+          "left_distance_m": -0.020743223144171107,
+          "right_distance_m": -0.020743223144171097,
+          "symmetry_m": 1.0408340855860843e-17
+        },
+        {
+          "aperture_joint_m": 0.003999999999999997,
+          "left_distance_m": -0.02173957893952207,
+          "right_distance_m": -0.021739578939522067,
+          "symmetry_m": 3.469446951953614e-18
+        },
+        {
+          "aperture_joint_m": 0.0030000000000000027,
+          "left_distance_m": -0.022735934734873026,
+          "right_distance_m": -0.022735934734873023,
+          "symmetry_m": 3.469446951953614e-18
+        },
+        {
+          "aperture_joint_m": 0.0020000000000000018,
+          "left_distance_m": -0.023732290530223993,
+          "right_distance_m": -0.023732290530223982,
+          "symmetry_m": 1.0408340855860843e-17
+        },
+        {
+          "aperture_joint_m": 0.0010000000000000009,
+          "left_distance_m": -0.024728646325574952,
+          "right_distance_m": -0.024728646325574952,
+          "symmetry_m": 0.0
+        },
+        {
+          "aperture_joint_m": 0.0,
+          "left_distance_m": -0.02572500212092592,
+          "right_distance_m": -0.02572500212092592,
+          "symmetry_m": 0.0
+        }
+      ],
+      "valid_samples": 12,
+      "adjacent_valid_intervals": 7,
+      "promotion_pass": true
+    },
+    {
+      "grasp_width_m": 0.06,
+      "samples": [
+        {
+          "aperture_joint_m": 0.04,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.00912922969311265,
+          "symmetry_m": 0.00912922969311265
+        },
+        {
+          "aperture_joint_m": 0.039,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.0,
+          "symmetry_m": 0.0
+        },
+        {
+          "aperture_joint_m": 0.038,
+          "left_distance_m": 0.007136518102410661,
+          "right_distance_m": 0.0,
+          "symmetry_m": 0.007136518102410661
+        },
+        {
+          "aperture_joint_m": 0.037,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.0,
+          "symmetry_m": 0.0
+        },
+        {
+          "aperture_joint_m": 0.036000000000000004,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.005143806511708797,
+          "symmetry_m": 0.005143806511708797
+        },
+        {
+          "aperture_joint_m": 0.035,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.0,
+          "symmetry_m": 0.0
+        },
+        {
+          "aperture_joint_m": 0.034,
+          "left_distance_m": 0.003151094921006816,
+          "right_distance_m": 0.0,
+          "symmetry_m": 0.003151094921006816
+        },
+        {
+          "aperture_joint_m": 0.033,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.0021547391256559016,
+          "symmetry_m": 0.0021547391256559016
+        },
+        {
+          "aperture_joint_m": 0.032,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.0,
+          "symmetry_m": 0.0
+        },
+        {
+          "aperture_joint_m": 0.031,
+          "left_distance_m": 0.0,
+          "right_distance_m": 0.00016202753495397557,
+          "symmetry_m": 0.00016202753495397557
+        },
+        {
+          "aperture_joint_m": 0.03,
+          "left_distance_m": -0.0008343282603970361,
+          "right_distance_m": -0.0008343282603969875,
+          "symmetry_m": 4.868067754459915e-17
+        },
+        {
+          "aperture_joint_m": 0.029,
+          "left_distance_m": -0.0018306840557479993,
+          "right_distance_m": -0.0018306840557479507,
+          "symmetry_m": 4.85722573273506e-17
+        },
+        {
+          "aperture_joint_m": 0.028,
+          "left_distance_m": -0.002827039851098962,
+          "right_distance_m": -0.002827039851098921,
+          "symmetry_m": 4.119968255444917e-17
+        },
+        {
+          "aperture_joint_m": 0.027,
+          "left_distance_m": -0.0038233956464499255,
+          "right_distance_m": -0.0038233956464498835,
+          "symmetry_m": 4.206704429243757e-17
+        },
+        {
+          "aperture_joint_m": 0.026000000000000002,
+          "left_distance_m": -0.004819751441800881,
+          "right_distance_m": -0.004819751441800847,
+          "symmetry_m": 3.382710778154774e-17
+        },
+        {
+          "aperture_joint_m": 0.025,
+          "left_distance_m": -0.005816107237151852,
+          "right_distance_m": -0.0058161072371518095,
+          "symmetry_m": 4.2500725161431774e-17
+        },
+        {
+          "aperture_joint_m": 0.024,
+          "left_distance_m": -0.006812463032502814,
+          "right_distance_m": -0.0068124630325027725,
+          "symmetry_m": 4.163336342344337e-17
+        },
+        {
+          "aperture_joint_m": 0.023,
+          "left_distance_m": -0.007808818827853778,
+          "right_distance_m": -0.0078088188278537425,
+          "symmetry_m": 3.5561831257524545e-17
+        },
+        {
+          "aperture_joint_m": 0.022,
+          "left_distance_m": -0.008805174623204742,
+          "right_distance_m": -0.008805174623204706,
+          "symmetry_m": 3.642919299551295e-17
+        },
+        {
+          "aperture_joint_m": 0.021,
+          "left_distance_m": -0.009801530418555698,
+          "right_distance_m": -0.009801530418555669,
+          "symmetry_m": 2.949029909160572e-17
+        },
+        {
+          "aperture_joint_m": 0.02,
+          "left_distance_m": -0.010797886213906661,
+          "right_distance_m": -0.010797886213906632,
+          "symmetry_m": 2.949029909160572e-17
+        },
+        {
+          "aperture_joint_m": 0.019,
+          "left_distance_m": -0.011794242009257624,
+          "right_distance_m": -0.011794242009257595,
+          "symmetry_m": 2.949029909160572e-17
+        },
+        {
+          "aperture_joint_m": 0.018000000000000002,
+          "left_distance_m": -0.012790597804608587,
+          "right_distance_m": -0.012790597804608558,
+          "symmetry_m": 2.949029909160572e-17
+        },
+        {
+          "aperture_joint_m": 0.017,
+          "left_distance_m": -0.01378695359995955,
+          "right_distance_m": -0.01378695359995952,
+          "symmetry_m": 2.949029909160572e-17
+        },
+        {
+          "aperture_joint_m": 0.016,
+          "left_distance_m": -0.014783309395310515,
+          "right_distance_m": -0.01478330939531049,
+          "symmetry_m": 2.42861286636753e-17
+        },
+        {
+          "aperture_joint_m": 0.015,
+          "left_distance_m": -0.015779665190661478,
+          "right_distance_m": -0.015779665190661457,
+          "symmetry_m": 2.0816681711721685e-17
+        },
+        {
+          "aperture_joint_m": 0.013999999999999999,
+          "left_distance_m": -0.01677602098601244,
+          "right_distance_m": -0.01677602098601242,
+          "symmetry_m": 2.0816681711721685e-17
+        },
+        {
+          "aperture_joint_m": 0.013000000000000001,
+          "left_distance_m": -0.017772376781363397,
+          "right_distance_m": -0.01777237678136338,
+          "symmetry_m": 1.734723475976807e-17
+        },
+        {
+          "aperture_joint_m": 0.012,
+          "left_distance_m": -0.018768732576714364,
+          "right_distance_m": -0.01876873257671435,
+          "symmetry_m": 1.3877787807814457e-17
+        },
+        {
+          "aperture_joint_m": 0.011,
+          "left_distance_m": -0.019765088372065323,
+          "right_distance_m": -0.01976508837206531,
+          "symmetry_m": 1.3877787807814457e-17
+        },
+        {
+          "aperture_joint_m": 0.010000000000000002,
+          "left_distance_m": -0.02076144416741629,
+          "right_distance_m": -0.02076144416741627,
+          "symmetry_m": 2.0816681711721685e-17
+        },
+        {
+          "aperture_joint_m": 0.009000000000000001,
+          "left_distance_m": -0.021757799962767253,
+          "right_distance_m": -0.021757799962767235,
+          "symmetry_m": 1.734723475976807e-17
+        },
+        {
+          "aperture_joint_m": 0.008,
+          "left_distance_m": -0.022754155758118216,
+          "right_distance_m": -0.0227541557581182,
+          "symmetry_m": 1.734723475976807e-17
+        },
+        {
+          "aperture_joint_m": 0.006999999999999999,
+          "left_distance_m": -0.02375051155346918,
+          "right_distance_m": -0.02375051155346917,
+          "symmetry_m": 6.938893903907228e-18
+        },
+        {
+          "aperture_joint_m": 0.005999999999999998,
+          "left_distance_m": -0.02474686734882014,
+          "right_distance_m": -0.02474686734882013,
+          "symmetry_m": 1.0408340855860843e-17
+        },
+        {
+          "aperture_joint_m": 0.0049999999999999975,
+          "left_distance_m": -0.025743223144171105,
+          "right_distance_m": -0.025743223144171094,
+          "symmetry_m": 1.0408340855860843e-17
+        },
+        {
+          "aperture_joint_m": 0.003999999999999997,
+          "left_distance_m": -0.02673957893952207,
+          "right_distance_m": -0.026739578939522064,
+          "symmetry_m": 6.938893903907228e-18
+        },
+        {
+          "aperture_joint_m": 0.0030000000000000027,
+          "left_distance_m": -0.027735934734873027,
+          "right_distance_m": -0.02773593473487302,
+          "symmetry_m": 6.938893903907228e-18
+        },
+        {
+          "aperture_joint_m": 0.0020000000000000018,
+          "left_distance_m": -0.028732290530223987,
+          "right_distance_m": -0.028732290530223983,
+          "symmetry_m": 3.469446951953614e-18
+        },
+        {
+          "aperture_joint_m": 0.0010000000000000009,
+          "left_distance_m": -0.02972864632557495,
+          "right_distance_m": -0.02972864632557495,
+          "symmetry_m": 0.0
+        },
+        {
+          "aperture_joint_m": 0.0,
+          "left_distance_m": -0.030725002120925916,
+          "right_distance_m": -0.030725002120925916,
+          "symmetry_m": 0.0
+        }
+      ],
+      "valid_samples": 6,
+      "adjacent_valid_intervals": 1,
+      "promotion_pass": true
+    }
+  ],
+  "penetration_limit_m": -0.002,
+  "symmetry_limit_m": 0.001
+}
