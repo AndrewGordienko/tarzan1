@@ -59,6 +59,8 @@ class UR10eScriptedController:
         lift_q,lift_err=self.cartesian_path((.52,0,.78),(.52,0,.96),held,'lift',18,70,frame_cb);poses['lift']={'q':lift_q,'error_m':lift_err};retained=self.robot.scorer_state()['object_position'][2]>.83
         if not retained:return {'success':False,'failure_phase':'lift_retention','poses':{k:{'error_m':v['error_m']} for k,v in poses.items()},'trace':self.trace}
         transport_q,transport_err=self.cartesian_path((.52,0,.96),(.34,-.16,.96),held,'transport',16,80,frame_cb);poses['transport']={'q':transport_q,'error_m':transport_err}
+        if self.robot.scorer_state()['object_position'][2] < .83:
+            return {'success':False,'failure_phase':'transport_retention','poses':{k:{'error_m':v['error_m']} for k,v in poses.items()},'object_pose_writes_after_reset':False,'trace':self.trace}
         lower_q,lower_err=self.cartesian_path((.34,-.16,.96),(.34,-.16,.82),held,'lower',14,50,frame_cb);poses['lower']={'q':lower_q,'error_m':lower_err};self.move(np.asarray(self.robot.observe().joint_position),open_grip,'release',160,frame_cb)
         retreat_q,retreat_err=self.solve((.34,-.16,.96),np.asarray(self.robot.observe().joint_position));poses['retreat']={'q':retreat_q,'error_m':retreat_err};self.move(retreat_q,open_grip,'retreat',500,frame_cb)
         return {'success':bool(self.robot.verify()['camera_estimate_inside_box'] and self.robot.scorer_state()['inside_box']),'failure_phase':None,'poses':{k:{'error_m':v['error_m']} for k,v in poses.items()},'camera_verification':self.robot.verify(),'scorer_verification':self.robot.scorer_state()['inside_box'],'object_pose_writes_after_reset':False,'trace':self.trace}
