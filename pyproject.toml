@@ -29,6 +29,7 @@ osc-pack-mujoco-rearrange = "osc.run_pack_mujoco_rearrange:main"
 osc-web = "osc.web:main"
 osc-packcell-bench = "osc.run_packcell_bench:main"
 osc-packcell-grasp = "osc.run_packcell_grasp:main"
+osc-packcell-geometry = "osc.run_packcell_geometry:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

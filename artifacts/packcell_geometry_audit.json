@@ -1,0 +1,98 @@
+{
+  "seed": 0,
+  "start": {
+    "fixed_to_object": 0.10910323689165136,
+    "moving_to_object": 0.07685393367969812,
+    "fingertip_separation": 0.019224898001312267,
+    "object_center": [
+      0.2,
+      -0.06,
+      0.087
+    ],
+    "object_size": [
+      0.024,
+      0.024,
+      0.024
+    ],
+    "grasp_center": [
+      0.15428633723896645,
+      4.963091164300758e-05,
+      0.21444877993807904
+    ],
+    "fixed": {
+      "id": 28,
+      "name": "geom_28",
+      "body": "gripper",
+      "type": 7,
+      "size": [
+        0.012400003604192158,
+        0.019828796638968305,
+        0.024132920573452607
+      ],
+      "contype": 1,
+      "conaffinity": 1,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ],
+      "world_position": [
+        0.1575564455576472,
+        -0.0003872649274116881,
+        0.22347732851468463
+      ]
+    },
+    "moving": {
+      "id": 30,
+      "name": "geom_30",
+      "body": "gripper",
+      "type": 7,
+      "size": [
+        0.029864171530202318,
+        0.03260693243050255,
+        0.07181142698283914
+      ],
+      "contype": 1,
+      "conaffinity": 1,
+      "friction": [
+        1.0,
+        0.005,
+        0.0001
+      ],
+      "world_position": [
+        0.15101622892028574,
+        0.00048652675069770326,
+        0.20542023136147344
+      ]
+    },
+    "object": {
+      "id": 37,
+      "name": "cube_red",
+      "body": "cube_red",
+      "type": 6,
+      "size": [
+        0.012,
+        0.012,
+        0.012
+      ],
+      "contype": 1,
+      "conaffinity": 1,
+      "friction": [
+        1.0,
+        0.02,
+        0.001
+      ],
+      "world_position": [
+        0.2,
+        -0.06,
+        0.087
+      ]
+    }
+  },
+  "minimum_during_close": {
+    "fixed_to_object": 0.10910323689165136,
+    "moving_to_object": 0.07685393367969812,
+    "fingertip_separation": 0.019224898001312222
+  },
+  "diagnosis": "both_distances_positive"
+}
