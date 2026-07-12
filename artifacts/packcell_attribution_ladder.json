@@ -1,0 +1,42 @@
+{
+  "scopes": {
+    "so101_micro_packcell": {
+      "arm": "SO-101",
+      "cell_scale": "small objects / small box",
+      "status": "research_lane"
+    },
+    "amazon_small_sortable": {
+      "arm": "larger industrial arm (not yet selected)",
+      "cell_scale": "realistic package and box dimensions",
+      "status": "planned_phase_1"
+    }
+  },
+  "lanes": {
+    "free_space_arm": {
+      "status": "not_isolated",
+      "successes": null,
+      "episodes": 0,
+      "reason": "scene_variant_not_implemented"
+    },
+    "pick_only_workcell": {
+      "status": "not_isolated",
+      "successes": null,
+      "episodes": 0,
+      "reason": "scene_variant_not_implemented"
+    },
+    "placement_only_workcell": {
+      "status": "not_isolated",
+      "successes": null,
+      "episodes": 0,
+      "reason": "scene_variant_not_implemented"
+    },
+    "full_workcell": {
+      "status": "evaluated",
+      "successes": 0,
+      "episodes": 360,
+      "reason": "coarse_layout_sweep_zero_valid_layouts"
+    }
+  },
+  "interpretation": "additional isolated controls required before attributing zero to hardware scale",
+  "five_near_miss_full_search": "not_run_until_scene_variants_are_available"
+}
