@@ -1,0 +1,14 @@
+{
+  "scope": "amazon_small_sortable_v1",
+  "status": "frozen_requirement_before_tool_selection",
+  "derived_from": "configs/amazon_small_sortable_v1.json",
+  "required_aperture_m": 0.106,
+  "aperture_calculation": "largest_closing_width 0.100 m + 2 * insertion_clearance 0.003 m",
+  "required_payload_capacity_kg": 8.0,
+  "payload_calculation": "maximum_object_mass 4.0 kg * safety_factor 2.0",
+  "minimum_grip_force_n": null,
+  "force_requirement_note": "must be selected against fragile-object damage limits and validated with contact-force trials",
+  "tool_options": ["wide_parallel_jaw_140mm_class", "hybrid_wide_jaw_plus_suction"],
+  "stock_panda_result": "infeasible_for_largest_development_object",
+  "confirmation_objects_sealed": true
+}
