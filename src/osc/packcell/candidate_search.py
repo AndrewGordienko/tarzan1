@@ -10,7 +10,7 @@ def search(seed=0, layout=None, fast=False):
     # Labels describe physically achievable parallel-jaw orientations; the
     # current SO-101 model exposes position-only site control, so orientation is
     # recorded and scored rather than silently treated as six-DoF control.
-    combos=itertools.product(("major_axis","minor_axis"),(-.006,0,.006),(-.004,0,.004),(-.004,0,.004),range(1 if fast else 4))
+    combos=(("major_axis",0.0,0.0,0.0,0),) if fast else itertools.product(("major_axis","minor_axis"),(-.006,0,.006),(-.004,0,.004),(-.004,0,.004),range(4))
     for yaw,depth,dx,dy,start in combos:
         target=base+np.array([dx,dy,depth]); result=offline_solve(cell,target,False,starts=1)
         prohibited=result["prohibited_contacts"]
