@@ -16,7 +16,15 @@ def offline_solve(cell, target, orientation=False, starts=8):
             jp=np.zeros((3,m.nv)); mujoco.mj_jacSite(m,d,jp,None,sid); J=jp[:,dofs]; err=target-d.site_xpos[sid]; dq=J.T@np.linalg.solve(J@J.T+.03**2*np.eye(3),err)*.7; d.qpos[joints]+=np.clip(dq,-.05,.05); mujoco.mj_forward(m,d)
         err=float(np.linalg.norm(target-d.site_xpos[sid])); sv=np.linalg.svd(J,compute_uv=False)
         margins=np.minimum(d.qpos[joints]-m.jnt_range[jids,0],m.jnt_range[jids,1]-d.qpos[joints])
-        row={"position_error":err,"final_qpos":d.qpos[joints].tolist(),"joint_limit_margin":float(np.min(margins)),"singular_values":sv.tolist(),"collision_count":int(d.ncon),"collision_free":int(d.ncon)==0,"orientation_objective":orientation}
+        contacts=[]; prohibited=[]
+        obj=m.geom("cube_red").id; table=m.geom("table").id; gripper=m.body("gripper").id; moving=m.body("moving_jaw_so101_v1").id
+        finger={i for i in range(m.ngeom) if m.geom_bodyid[i] in {gripper,moving} and i>=29}
+        for c in d.contact:
+            a,b=int(c.geom1),int(c.geom2); pair=(m.geom(a).name or f"geom_{a}",m.geom(b).name or f"geom_{b}")
+            allowed=(table in {a,b}) or (obj in {a,b} and ({a,b}&finger))
+            contacts.append({"pair":pair,"allowed":allowed})
+            if not allowed: prohibited.append(pair)
+        row={"position_error":err,"final_qpos":d.qpos[joints].tolist(),"joint_limit_margin":float(np.min(margins)),"singular_values":sv.tolist(),"collision_count":int(d.ncon),"collision_free":not prohibited,"contacts":contacts,"prohibited_contacts":prohibited,"orientation_objective":orientation}
         if best is None or err<best["position_error"]: best=row
     return best
 

@@ -82,3 +82,11 @@ class OraclePackController:
                 return {"phases":asdict(self.ladder),"steps":steps,"success":False,"failure_phase":"insertion_reach","trace":trace}
         self.ladder.stable_inside_box=self.cell.verify().success
         return {"phases":asdict(self.ladder),"steps":steps,"success":self.ladder.stable_inside_box,"failure_phase":None if self.ladder.stable_inside_box else "grasp_contact","trace":trace}
+
+    def track_joint_target(self, target, steps=120):
+        """Actuator convergence audit; returns planned/actual/clipping/force traces."""
+        target=np.asarray(target,float); rows=[]
+        for _ in range(steps):
+            q=self.cell.controller_state()["joint_position"]; clipped=np.clip(target,self.cell.actuator_ranges()[:,0],self.cell.actuator_ranges()[:,1]); self.cell.step_control(clipped)
+            rows.append({"planned":target.tolist(),"actual":self.cell.controller_state()["joint_position"].tolist(),"tracking_error":(target-self.cell.controller_state()["joint_position"]).tolist(),"clipped":bool(np.any(target!=clipped)),"actuator_force":self.cell.data.qfrc_actuator[:6].tolist()})
+        return rows
