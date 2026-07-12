@@ -5,7 +5,7 @@ from .physical import PackCell
 from .reachability import offline_solve
 
 def search(seed=0, layout=None, fast=False):
-    cell=PackCell(seed, layout=layout); cell.reset(); base=np.asarray(cell.scorer_state()["object_position"])
+    cell=PackCell(seed, layout=layout, render=False); cell.reset(); base=np.asarray(cell.scorer_state()["object_position"])
     candidates=[]
     # Labels describe physically achievable parallel-jaw orientations; the
     # current SO-101 model exposes position-only site control, so orientation is

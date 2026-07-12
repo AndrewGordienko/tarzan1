@@ -5,7 +5,7 @@ from .candidate_search import search
 
 def sweep():
     layouts=[]
-    for h,yaw,x,y in itertools.product((0,.025,.05),(-.25,0,.25),(.18,.22),(-.06,.06)):
+    for h,yaw,x,y in itertools.product((0,.05,.10,.15),(-.25,0,.25),(.18,.22,.26),(-.06,0,.06)):
         layout={"base_height":h,"base_yaw":yaw,"pick_zone":[x,y],"box_sector":"opposite"}
         try:
             # Run the same bounded solver against this physical mount variant.

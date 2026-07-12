@@ -24,13 +24,13 @@ class PackCell:
     this class writes only actuator controls; MuJoCo advances object qpos/qvel.
     """
 
-    def __init__(self, seed: int = 0, width: int = 640, height: int = 480, layout: dict | None = None):
+    def __init__(self, seed: int = 0, width: int = 640, height: int = 480, layout: dict | None = None, render: bool = True):
         try:
             import mujoco
         except ImportError as exc:
             raise RuntimeError("Install osc[embodied] for PackCell") from exc
         self.mujoco = mujoco
-        self.width, self.height, self.seed = width, height, seed; self.layout = layout or {}
+        self.width, self.height, self.seed = width, height, seed; self.layout = layout or {}; self.render_enabled = render
         self.model = self.data = self.renderer = None
         self.object_body = self.object_qadr = None
         self._reset_done = False
@@ -59,7 +59,7 @@ class PackCell:
             generated.unlink(missing_ok=True)
             cal_runtime.unlink(missing_ok=True)
         self.data = m.MjData(self.model)
-        self.renderer = m.Renderer(self.model, height=self.height, width=self.width)
+        self.renderer = m.Renderer(self.model, height=self.height, width=self.width) if self.render_enabled else None
         self.object_body = m.mj_name2id(self.model, m.mjtObj.mjOBJ_BODY, "cube_red")
         jid = m.mj_name2id(self.model, m.mjtObj.mjOBJ_JOINT, "cube_red_free")
         self.object_qadr = int(self.model.jnt_qposadr[jid])
@@ -70,10 +70,11 @@ class PackCell:
         self.data.qpos[self.object_qadr + 3:self.object_qadr + 7] = [1, 0, 0, 0]
         m.mj_forward(self.model, self.data)
         self._reset_done = True
-        return self.agent_observation()
+        return self.agent_observation() if self.renderer is not None else self.controller_state()
 
     def agent_observation(self) -> dict[str, Any]:
         if not self._reset_done: raise RuntimeError("reset first")
+        if self.renderer is None: raise RuntimeError("renderer disabled in headless geometry mode")
         self.renderer.update_scene(self.data, camera="front")
         rgb = self.renderer.render().copy()
         self.renderer.enable_depth_rendering(); depth = self.renderer.render().copy(); self.renderer.disable_depth_rendering()
