@@ -34,6 +34,7 @@ osc-packcell-candidates = "osc.run_packcell_candidates:main"
 osc-packcell-layout = "osc.run_packcell_layout:main"
 osc-packcell-sweep = "osc.run_packcell_sweep:main"
 osc-packcell-attribution = "osc.run_packcell_attribution:main"
+osc-packcell-final-attribution = "osc.run_packcell_final_attribution:run"
 
 [tool.setuptools.packages.find]
 where = ["src"]
