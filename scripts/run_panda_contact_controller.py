@@ -9,19 +9,37 @@ from render_panda_motion_demo import ROOT, make_scene
 
 def run(width_m: float) -> dict:
     scene = ROOT / "assets/industrial/derived/franka_panda_tarzan/contact_controller_scene.xml"
-    make_scene(scene); scene.write_text(scene.read_text().replace('size=".06 .05 .07"', f'size=".03 {width_m / 2:.6f} .035"'))
+    # Keep X/Z dimensions identical to the quasi-static sweep; only the
+    # closing-axis width varies in this controller parity experiment.
+    make_scene(scene); scene.write_text(scene.read_text().replace('size=".06 .05 .07"', f'size=".06 {width_m / 2:.6f} .07"'))
     try:
         m = mujoco.MjModel.from_xml_path(str(scene)); d = mujoco.MjData(m)
         site = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_SITE, "grasp_site"); obj = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, "parcel")
         qj = [int(m.jnt_qposadr[mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, f"joint{i}")]) for i in range(1, 8)]
+        qf = [int(m.jnt_qposadr[mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, n)]) for n in ("finger_joint1", "finger_joint2")]
         qobj = int(m.jnt_qposadr[mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, "parcel_free")])
         left = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, "left_finger"); right = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, "right_finger")
         fingers = {g for g in range(m.ngeom) if int(m.geom_bodyid[g]) in {left, right} and int(m.geom_contype[g]) > 0}
-        d.qpos[:7] = [0, -.5, 0, -2, 0, 1.5, .7]; mujoco.mj_forward(m, d)
+        d.qpos[:7] = [0, -.5, 0, -2, 0, 1.5, .7]
+        # Reset invariant: qpos, controls, velocities and parcel are initialized
+        # before the first integration step.  This is the only parcel write.
+        d.qpos[qf] = .04; d.qvel[:] = 0; d.ctrl[:] = 0; d.ctrl[7] = 255.0; mujoco.mj_forward(m, d)
         # Reset-only object initialization for the centered control.
         d.qpos[qobj:qobj + 3] = d.site_xpos[site]; mujoco.mj_forward(m, d)
         initial = np.asarray(d.geom_xpos[obj]).copy(); records = []; transitions = ["open"]
+        reset_distances = [float(mujoco.mj_geomDistance(m, d, g, obj, 1.0, np.zeros(6))) for g in fingers]
+        reset_contacts = sum(1 for ci in range(d.ncon) if obj in {int(d.contact[ci].geom1), int(d.contact[ci].geom2)} and ({int(d.contact[ci].geom1), int(d.contact[ci].geom2)} & fingers))
+        reset_valid = min(reset_distances) > 0 and reset_contacts == 0
+        parity = None
+        sweep_path = ROOT / "artifacts/panda_compatible_width_sweeps.json"
+        if sweep_path.exists():
+            controls = json.loads(sweep_path.read_text())["controls"]
+            matching = next((sample for control in controls if abs(control["grasp_width_m"] - width_m) < 1e-9 for sample in control["samples"] if abs(sample["aperture_joint_m"] - .04) < 1e-9), None)
+            if matching is not None:
+                parity = {"quasistatic_left_m": matching["left_distance_m"], "quasistatic_right_m": matching["right_distance_m"], "dynamic_min_m": min(reset_distances), "within_1mm": abs(min(reset_distances) - min(matching["left_distance_m"], matching["right_distance_m"])) <= .001}
         bilateral_count = 0; state = "open"; ctrl = 255.0
+        if not reset_valid:
+            return {"width_m": width_m, "state": "reset_invalid", "success": False, "transitions": transitions, "reset_distances_m": reset_distances, "reset_contact_count": reset_contacts, "reset_valid": False, "reset_sweep_parity": parity, "object_pose_writes_after_reset": False, "records": []}
         for step in range(260):
             if step == 50: state = "precontact"; transitions.append(state)
             if step == 70: state = "creep"; transitions.append(state)
@@ -46,11 +64,11 @@ def run(width_m: float) -> dict:
                 elif bilateral_count >= 5:
                     state = "bilateral_contact"; transitions.append(state); hold_ctrl = ctrl; break
         success = state == "bilateral_contact"
-        return {"width_m": width_m, "state": state, "success": success, "transitions": transitions, "actuator_open_command": 255.0, "max_observed_force_n": max((r["normal_force_n"] for r in records), default=0.0), "min_observed_contact_dist_m": min((r["contact_dist_m"] for r in records), default=0.0), "initial_object_position_m": initial.tolist(), "object_pose_writes_after_reset": False, "records": records}
+        return {"width_m": width_m, "state": state, "success": success, "transitions": transitions, "reset_distances_m": reset_distances, "reset_contact_count": reset_contacts, "reset_valid": True, "reset_sweep_parity": parity, "actuator_open_command": 255.0, "max_observed_force_n": max((r["normal_force_n"] for r in records), default=0.0), "min_observed_contact_dist_m": min((r["contact_dist_m"] for r in records), default=0.0), "initial_object_position_m": initial.tolist(), "object_pose_writes_after_reset": False, "records": records}
     finally:
         scene.unlink(missing_ok=True)
 
 if __name__ == "__main__":
     result = {"schema": "panda_contact_controller_v1", "controls": [run(.05), run(.06)], "force_limit_n": 70.0, "penetration_limit_m": -.002, "required_persistent_steps": 5}
     out = ROOT / "artifacts/panda_contact_controller.json"; out.write_text(json.dumps(result, indent=2) + "\n")
-    print(json.dumps({"artifact": str(out), "controls": [{"width_m": x["width_m"], "state": x["state"], "success": x["success"], "transitions": x["transitions"], "max_force_n": x["max_observed_force_n"], "min_contact_dist_m": x["min_observed_contact_dist_m"]} for x in result["controls"]]}, indent=2))
+    print(json.dumps({"artifact": str(out), "controls": [{"width_m": x["width_m"], "state": x["state"], "success": x["success"], "transitions": x["transitions"], "reset_valid": x.get("reset_valid"), "reset_distances_m": x.get("reset_distances_m"), "max_force_n": x.get("max_observed_force_n"), "min_contact_dist_m": x.get("min_observed_contact_dist_m")} for x in result["controls"]]}, indent=2))
