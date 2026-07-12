@@ -1,0 +1,16 @@
+{
+  "scope": "industrial_arm_panda_v1",
+  "asset": {
+    "family": "Panda/Franka-class",
+    "source": "pending pinned Menagerie asset",
+    "asset_sha256": null,
+    "mesh_sha256": null,
+    "provenance_status": "not yet selected; controller work blocked"
+  },
+  "joints": [],
+  "actuators": [],
+  "payload_limit_kg": null,
+  "gripper": {"type": "parallel_jaw", "aperture_m": null, "force_limit_n": null, "grasp_site": "pending_asset_calibration", "finger_collision_geoms": []},
+  "controller_limits": {"position_error_m": 0.002, "clearance_m": 0.003, "force_limit_n": null},
+  "boundary": {"agent_observation": true, "controller_state_read_only": true, "actuator_targets_only": true, "privileged_scorer_separate": true}
+}

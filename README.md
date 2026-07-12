@@ -103,6 +103,9 @@ the planner is connected; forced execution is not counted as planner success.
 
 ### Customer localhost demo
 
+The v0.8 task scope is called **small-sortable ecommerce packing**. “Amazon” is
+an industry archetype only; no Amazon-supplied specification is implied.
+
 Run `./scripts/run_customer_demo.sh` and open `http://localhost:8787`. The
 application calls the real packing compiler and executor for logical runs,
 renders the recorded MuJoCo smoke trajectory, and labels forced and
