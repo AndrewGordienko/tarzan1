@@ -1,0 +1,710 @@
+{
+  "schema": "light_sortable_retention_ladder_v1",
+  "claim_label": "Historical lifted lane: UR10e-class arm + 2F-140-equivalent gripper with custom support fingertips. Corrected bounded-contact lane has not passed.",
+  "transport_trajectory_changed": false,
+  "friction_tuned": false,
+  "checkpoint_durations_s": [
+    0.5,
+    1.0,
+    2.0,
+    5.0,
+    10.0
+  ],
+  "cases": [
+    {
+      "mass_kg": 0.1,
+      "mode": "position_hold",
+      "gravity_enabled": true,
+      "support_lip": true,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 0.1,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 9.81,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 1.481,
+        "target_total_normal_force_n": 2.776875,
+        "target_normal_force_per_side_n": 1.3884375,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "UR10e-class arm + 2F-140-equivalent gripper with custom support fingertips",
+      "checkpoints": {
+        "0.5": false,
+        "1.0": false,
+        "2.0": false,
+        "5.0": false,
+        "10.0": false
+      },
+      "failure_phase": "bilateral_contact_setup",
+      "failure_reason": "penetration_limit",
+      "prediction_observation": "predicted_success_observed_failure"
+    },
+    {
+      "mass_kg": 0.1,
+      "mode": "force_hold",
+      "gravity_enabled": true,
+      "support_lip": true,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 0.1,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 9.81,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 1.481,
+        "target_total_normal_force_n": 2.776875,
+        "target_normal_force_per_side_n": 1.3884375,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "UR10e-class arm + 2F-140-equivalent gripper with custom support fingertips",
+      "checkpoints": {
+        "0.5": false,
+        "1.0": false,
+        "2.0": false,
+        "5.0": false,
+        "10.0": false
+      },
+      "failure_phase": "bilateral_contact_setup",
+      "failure_reason": "penetration_limit",
+      "prediction_observation": "predicted_success_observed_failure"
+    },
+    {
+      "mass_kg": 0.1,
+      "mode": "position_hold",
+      "gravity_enabled": true,
+      "support_lip": false,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 0.1,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 9.81,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 1.481,
+        "target_total_normal_force_n": 2.776875,
+        "target_normal_force_per_side_n": 1.3884375,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "flat-pad ablation",
+      "checkpoints": {
+        "0.5": false,
+        "1.0": false,
+        "2.0": false,
+        "5.0": false,
+        "10.0": false
+      },
+      "failure_phase": "lift",
+      "failure_reason": "contact_not_retained",
+      "prediction_observation": "predicted_success_observed_failure"
+    },
+    {
+      "mass_kg": 0.1,
+      "mode": "force_hold",
+      "gravity_enabled": true,
+      "support_lip": false,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 0.1,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 9.81,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 1.481,
+        "target_total_normal_force_n": 2.776875,
+        "target_normal_force_per_side_n": 1.3884375,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "flat-pad ablation",
+      "checkpoints": {
+        "0.5": false,
+        "1.0": false,
+        "2.0": false,
+        "5.0": false,
+        "10.0": false
+      },
+      "failure_phase": "lift",
+      "failure_reason": "penetration_limit",
+      "prediction_observation": "predicted_success_observed_failure"
+    },
+    {
+      "mass_kg": 0.5,
+      "mode": "position_hold",
+      "gravity_enabled": true,
+      "support_lip": true,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 0.5,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 9.81,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 7.405,
+        "target_total_normal_force_n": 13.884374999999999,
+        "target_normal_force_per_side_n": 6.942187499999999,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "UR10e-class arm + 2F-140-equivalent gripper with custom support fingertips",
+      "checkpoints": {
+        "0.5": false,
+        "1.0": false,
+        "2.0": false,
+        "5.0": false,
+        "10.0": false
+      },
+      "failure_phase": "bilateral_contact_setup",
+      "failure_reason": "penetration_limit",
+      "prediction_observation": "predicted_success_observed_failure"
+    },
+    {
+      "mass_kg": 0.5,
+      "mode": "force_hold",
+      "gravity_enabled": true,
+      "support_lip": true,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 0.5,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 9.81,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 7.405,
+        "target_total_normal_force_n": 13.884374999999999,
+        "target_normal_force_per_side_n": 6.942187499999999,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "UR10e-class arm + 2F-140-equivalent gripper with custom support fingertips",
+      "checkpoints": {
+        "0.5": false,
+        "1.0": false,
+        "2.0": false,
+        "5.0": false,
+        "10.0": false
+      },
+      "failure_phase": "bilateral_contact_setup",
+      "failure_reason": "penetration_limit",
+      "prediction_observation": "predicted_success_observed_failure"
+    },
+    {
+      "mass_kg": 0.5,
+      "mode": "position_hold",
+      "gravity_enabled": true,
+      "support_lip": false,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 0.5,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 9.81,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 7.405,
+        "target_total_normal_force_n": 13.884374999999999,
+        "target_normal_force_per_side_n": 6.942187499999999,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "flat-pad ablation",
+      "checkpoints": {
+        "0.5": false,
+        "1.0": false,
+        "2.0": false,
+        "5.0": false,
+        "10.0": false
+      },
+      "failure_phase": "preload",
+      "failure_reason": "penetration_limit",
+      "prediction_observation": "predicted_success_observed_failure"
+    },
+    {
+      "mass_kg": 0.5,
+      "mode": "force_hold",
+      "gravity_enabled": true,
+      "support_lip": false,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 0.5,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 9.81,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 7.405,
+        "target_total_normal_force_n": 13.884374999999999,
+        "target_normal_force_per_side_n": 6.942187499999999,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "flat-pad ablation",
+      "checkpoints": {
+        "0.5": false,
+        "1.0": false,
+        "2.0": false,
+        "5.0": false,
+        "10.0": false
+      },
+      "failure_phase": "preload",
+      "failure_reason": "penetration_limit",
+      "prediction_observation": "predicted_success_observed_failure"
+    },
+    {
+      "mass_kg": 1.0,
+      "mode": "position_hold",
+      "gravity_enabled": true,
+      "support_lip": true,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 1.0,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 9.81,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 14.81,
+        "target_total_normal_force_n": 27.768749999999997,
+        "target_normal_force_per_side_n": 13.884374999999999,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "UR10e-class arm + 2F-140-equivalent gripper with custom support fingertips",
+      "checkpoints": {
+        "0.5": false,
+        "1.0": false,
+        "2.0": false,
+        "5.0": false,
+        "10.0": false
+      },
+      "failure_phase": "bilateral_contact_setup",
+      "failure_reason": "penetration_limit",
+      "prediction_observation": "predicted_success_observed_failure"
+    },
+    {
+      "mass_kg": 1.0,
+      "mode": "force_hold",
+      "gravity_enabled": true,
+      "support_lip": true,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 1.0,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 9.81,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 14.81,
+        "target_total_normal_force_n": 27.768749999999997,
+        "target_normal_force_per_side_n": 13.884374999999999,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "UR10e-class arm + 2F-140-equivalent gripper with custom support fingertips",
+      "checkpoints": {
+        "0.5": false,
+        "1.0": false,
+        "2.0": false,
+        "5.0": false,
+        "10.0": false
+      },
+      "failure_phase": "bilateral_contact_setup",
+      "failure_reason": "penetration_limit",
+      "prediction_observation": "predicted_success_observed_failure"
+    },
+    {
+      "mass_kg": 1.0,
+      "mode": "position_hold",
+      "gravity_enabled": true,
+      "support_lip": false,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 1.0,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 9.81,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 14.81,
+        "target_total_normal_force_n": 27.768749999999997,
+        "target_normal_force_per_side_n": 13.884374999999999,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "flat-pad ablation",
+      "checkpoints": {
+        "0.5": false,
+        "1.0": false,
+        "2.0": false,
+        "5.0": false,
+        "10.0": false
+      },
+      "failure_phase": "preload",
+      "failure_reason": "penetration_limit",
+      "prediction_observation": "predicted_success_observed_failure"
+    },
+    {
+      "mass_kg": 1.0,
+      "mode": "force_hold",
+      "gravity_enabled": true,
+      "support_lip": false,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 1.0,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 9.81,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 14.81,
+        "target_total_normal_force_n": 27.768749999999997,
+        "target_normal_force_per_side_n": 13.884374999999999,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "flat-pad ablation",
+      "checkpoints": {
+        "0.5": false,
+        "1.0": false,
+        "2.0": false,
+        "5.0": false,
+        "10.0": false
+      },
+      "failure_phase": "preload",
+      "failure_reason": "penetration_limit",
+      "prediction_observation": "predicted_success_observed_failure"
+    },
+    {
+      "mass_kg": 2.0,
+      "mode": "position_hold",
+      "gravity_enabled": true,
+      "support_lip": true,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 2.0,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 9.81,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 29.62,
+        "target_total_normal_force_n": 55.537499999999994,
+        "target_normal_force_per_side_n": 27.768749999999997,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "UR10e-class arm + 2F-140-equivalent gripper with custom support fingertips",
+      "checkpoints": {
+        "0.5": false,
+        "1.0": false,
+        "2.0": false,
+        "5.0": false,
+        "10.0": false
+      },
+      "failure_phase": "bilateral_contact_setup",
+      "failure_reason": "penetration_limit",
+      "prediction_observation": "predicted_success_observed_failure"
+    },
+    {
+      "mass_kg": 2.0,
+      "mode": "force_hold",
+      "gravity_enabled": true,
+      "support_lip": true,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 2.0,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 9.81,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 29.62,
+        "target_total_normal_force_n": 55.537499999999994,
+        "target_normal_force_per_side_n": 27.768749999999997,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "UR10e-class arm + 2F-140-equivalent gripper with custom support fingertips",
+      "checkpoints": {
+        "0.5": false,
+        "1.0": false,
+        "2.0": false,
+        "5.0": false,
+        "10.0": false
+      },
+      "failure_phase": "bilateral_contact_setup",
+      "failure_reason": "penetration_limit",
+      "prediction_observation": "predicted_success_observed_failure"
+    },
+    {
+      "mass_kg": 2.0,
+      "mode": "position_hold",
+      "gravity_enabled": true,
+      "support_lip": false,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 2.0,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 9.81,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 29.62,
+        "target_total_normal_force_n": 55.537499999999994,
+        "target_normal_force_per_side_n": 27.768749999999997,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "flat-pad ablation",
+      "checkpoints": {
+        "0.5": false,
+        "1.0": false,
+        "2.0": false,
+        "5.0": false,
+        "10.0": false
+      },
+      "failure_phase": "preload",
+      "failure_reason": "penetration_limit",
+      "prediction_observation": "predicted_success_observed_failure"
+    },
+    {
+      "mass_kg": 2.0,
+      "mode": "force_hold",
+      "gravity_enabled": true,
+      "support_lip": false,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 2.0,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 9.81,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 29.62,
+        "target_total_normal_force_n": 55.537499999999994,
+        "target_normal_force_per_side_n": 27.768749999999997,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "flat-pad ablation",
+      "checkpoints": {
+        "0.5": false,
+        "1.0": false,
+        "2.0": false,
+        "5.0": false,
+        "10.0": false
+      },
+      "failure_phase": "preload",
+      "failure_reason": "penetration_limit",
+      "prediction_observation": "predicted_success_observed_failure"
+    },
+    {
+      "mass_kg": 0.1,
+      "mode": "position_hold",
+      "gravity_enabled": false,
+      "support_lip": false,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 0.1,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 0.0,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 0.5,
+        "target_total_normal_force_n": 0.9375,
+        "target_normal_force_per_side_n": 0.46875,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "flat-pad ablation",
+      "checkpoints": {
+        "0.5": true,
+        "1.0": true,
+        "2.0": true,
+        "5.0": false,
+        "10.0": false
+      },
+      "achieved_hold_s": 2.276000000000203,
+      "failure_phase": "retention_hold",
+      "failure_reason": "persistent_slip",
+      "max_force_n": 3.9265556297708875,
+      "minimum_distance_m": -0.0005436865746906436,
+      "final_drift_m": 0.020025161099091634,
+      "prediction_observation": "predicted_success_observed_failure"
+    },
+    {
+      "mass_kg": 0.1,
+      "mode": "force_hold",
+      "gravity_enabled": false,
+      "support_lip": false,
+      "configured_friction": {
+        "pad": 2.0,
+        "parcel": 0.8,
+        "effective": 0.8
+      },
+      "budget": {
+        "mass_kg": 0.1,
+        "planned_acceleration_mps2": 5.0,
+        "gravity_mps2": 0.0,
+        "friction_coefficient": 0.8,
+        "safety_factor": 1.5,
+        "required_tangential_support_n": 0.5,
+        "target_total_normal_force_n": 0.9375,
+        "target_normal_force_per_side_n": 0.46875,
+        "maximum_allowed_normal_force_n": 125.0,
+        "available_support_at_limit_n": 100.0,
+        "tool_force_cap_n": 125.0,
+        "fragility_force_ceiling_n": 125.0,
+        "feasible": true,
+        "rejection_reason": null
+      },
+      "custom_fingertip_dependency_label": "flat-pad ablation",
+      "checkpoints": {
+        "0.5": false,
+        "1.0": false,
+        "2.0": false,
+        "5.0": false,
+        "10.0": false
+      },
+      "failure_phase": "lift",
+      "failure_reason": "penetration_limit",
+      "prediction_observation": "predicted_success_observed_failure"
+    }
+  ],
+  "summary": {
+    "cases": 18,
+    "ten_second_passes": 0,
+    "force_hold_ten_second_passes": 0,
+    "promotion_gate_passed": false
+  },
+  "curve_artifact": "artifacts/light_sortable_retention_curves.jsonl.gz"
+}

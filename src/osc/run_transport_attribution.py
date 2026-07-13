@@ -2,16 +2,16 @@ from pathlib import Path
 import gzip, json, math
 import numpy as np
 from collections import Counter
-from osc.packcell.ur10e_adapter import CARTON, UR10eAdapter
+from osc.packcell.ur10e_adapter import CARTON, GRASP_INSERTION, UR10eAdapter
 from osc.packcell.ur10e_scripted import UR10eScriptedController
 
 def prepare(robot,controller):
     robot.reset();q=np.asarray(robot.observe().joint_position);open_grip=(.075,-.075)
-    for phase,target,steps in [('pregrasp',(.52,0,.93),500),('insertion',(.52,0,.78),400)]:q,_=controller.solve(target,q);controller.move(q,open_grip,phase,steps)
+    for phase,target,steps in [('pregrasp',(.52,0,.945),500),('insertion',GRASP_INSERTION,400)]:q,_=controller.solve(target,q);controller.move(q,open_grip,phase,steps)
     held=controller.close_guarded(q)
     if held is None:return None
     controller.move(np.asarray(robot.observe().joint_position),held,'grasp_dwell',200)
-    controller.cartesian_path((.52,0,.78),(.52,0,1.10),held,'lift',24,70)
+    controller.cartesian_path(GRASP_INSERTION,(.52,0,1.10),held,'lift',24,70)
     return held
 
 def summarize(robot,phase):

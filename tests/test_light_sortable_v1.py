@@ -3,6 +3,7 @@ import inspect
 import mujoco
 from osc.packcell.light_sortable_pipeline import compile_item_execution
 from osc.packcell.ur10e_adapter import UR10eAdapter
+from osc.packcell.ur10e_scripted import UR10eScriptedController
 from osc.robot_api import ActuatorCommand
 
 def test_generated_proxy_compiles_and_resolves_contract():
@@ -17,14 +18,18 @@ def test_pipeline_selects_axis_and_planner_placement():
     assert result['status']=='execute'
     assert result['selected_grasp_axis']==2
     assert result['placement']
+    assert result['retention_budget']['feasible']
+    assert 'force_hold' in result['skills']
 
 def test_unsupported_items_abstain():
     assert compile_item_execution((.12,.08,.06),2.1)['reason'].endswith('overweight')
     assert compile_item_execution((.20,.18,.16),1.)['reason'].endswith('aperture')
+    assert compile_item_execution((.12,.08,.06),1.,fragility_force_ceiling_n=1.)['reason'].startswith('retention_incompatible:')
 
 def test_adapter_has_no_post_reset_object_write_in_step():
     source=inspect.getsource(UR10eAdapter.step)
     assert 'qpos' not in source and 'qvel' not in source
+    assert 'data.ctrl' not in inspect.getsource(UR10eScriptedController)
 
 def test_light_sortable_reset_has_no_prohibited_robot_contact():
     robot=UR10eAdapter(telemetry=True);robot.reset()

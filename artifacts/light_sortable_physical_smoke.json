@@ -1,27 +1,27 @@
 {
   "success": false,
-  "failure_phase": "transport_retention",
+  "failure_phase": "contact",
+  "contact_failure": "penetration_limit",
   "poses": {
     "pregrasp": {
-      "error_m": 9.93088610176829e-16
+      "error_m": 3.111354256598799e-15
     },
     "insertion": {
-      "error_m": 4.180736275140901e-13
+      "error_m": 4.934510129961243e-13
     },
     "lift": {
-      "error_m": 3.785044467102162e-15
+      "error_m": 3.730943457311036e-16
     },
     "transport": {
-      "error_m": 1.4823868115664955e-14
+      "error_m": 1.3463418793048977e-12
     },
     "lower": {
-      "error_m": 4.776224098075399e-14
+      "error_m": 4.937088890234492e-14
     },
     "retreat": {
-      "error_m": 5.384433511370175e-11
+      "error_m": 5.417379402710531e-11
     }
   },
-  "object_pose_writes_after_reset": false,
-  "trace_rows": 5251,
+  "trace_rows": 900,
   "trace_artifact": "artifacts/light_sortable_physical_smoke_trace.jsonl.gz"
 }
